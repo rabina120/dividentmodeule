@@ -1,0 +1,150 @@
+﻿@{
+    ViewData["Title"] = "Dakhil Transfer Report";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Dakhil Transfer Report</h6>
+                </div>
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="row">
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select class="form-control form-control-sm" id="CompanyList" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Report Type <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select class="form-control form-control-sm" id="CompanyList" data-bind='value:ReportType, optionsCaption:"---Company---"'>
+                                        <option value="D">Detailed Report</option>
+                                        <option value="S">Summary Report</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Required Report<span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select class="form-control form-control-sm" id="CompanyList" data-bind='value:SelectedReport'>
+                                        <option value="DL">Dakhil List</option>
+                                        <option value="TL">Transfer List</option>
+                                        <option value="DK">Dakhil Kitta Report</option>
+                                        <option value="DH">Dakhil Kharej Book</option>
+                                        <option value="BL">Seller List</option>
+                                        <option value="SL">Buyer List</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Broker Code <span class="mandatory"></span></label>
+                                <div class=" col-sm-12 col-md-12">
+                                    <select class="form-control form-control-sm" id="BrokerList" data-bind='options: BrokerList,optionsText: "BrokerName",optionsValue:"BCode",value:SelectedBroker, optionsCaption:"---Broker---"'>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12" id="date1">
+                                <label class="col-sm-12 col-md-11 col-form-label">From Date <span class="mandatory"></span></label>
+                                <div class="input-group date col-sm-12 col-md-12" >
+                                    <div class="input-group-prepend">
+                                    </div>
+                                    @*<input type="text" data-bind="datePicker: FromDate" class="form-control form-control-sm" placeholder="Select a Date" id="FromDate">*@
+                                    <input type="text" data-bind="value: FromDate" class="form-control form-control-sm " placeholder="Select a Date" id="DailyReportDate">
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12 " id="date2">
+                                <label class="col-sm-12 col-md-12 col-form-label">ToDate <span class="mandatory"></span></label>
+                                <div class=" input-group date col-sm-12 col-md-12 ">
+                                    <div class="input-group-prepend">
+                                    </div>
+                                    <input type="text" data-bind="value: ToDate" class="form-control form-control-sm " placeholder="Select a Date" id="FromDate">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-12 col-form-label">Registration No. From <span class="mandatory"></span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="text" data-bind="value: RegNoFrom" class="form-control form-control-sm" id="RegNoFrom">
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Registration No. To <span class="mandatory"></span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="text" data-bind="value: RegNoTo" class="form-control form-control-sm" id="RegNoTo">
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Share Kitta From<span class="mandatory"></span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="text" data-bind="value: ShareKittaFrom" class="form-control form-control-sm" id="ShareKittaFrom">
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Share Kitta To<span class="mandatory"></span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="text" data-bind="value: ShareKittaTo" class="form-control form-control-sm" id="ShareKittaTo">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Buyer Holder No From<span class="mandatory"></span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="text" data-bind="value: BHolderNoFrom" class="form-control form-control-sm" id="BHolderNoFrom">
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Buyer Holder No To<span class="mandatory"></span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="text" data-bind="value: BHolderNoTo" class="form-control form-control-sm" id="BHolderNoTo">
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Seller Holder No From<span class="mandatory"></span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="text" data-bind="value: SHolderNoFrom" class="form-control form-control-sm" id="SHolderNoFrom">
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Seller Holder No To<span class="mandatory"></span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="text" data-bind="value: SHolderNoTo" class="form-control form-control-sm" id="SHolderNoTo">
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row text-right" style="overflow-y: hidden">
+                            <div class="col-12">
+                                <button id="exel" class="btn btn-primary btn-sm" data-bind="click: GenerateExcelReport">Generate Excel Report</button>
+                                <button id="pdf" class="btn btn-primary btn-sm" data-bind="click: GeneratePdfReport">Generate Pdf Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Footer{
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="/scripts/Reports/DakhilTransferReport.js"></script>
+}
+

@@ -1,0 +1,147 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Reports</li>
+                                <li class="breadcrumb-item active" aria-current="page">Shholder Lock Unlock Report</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+            
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Shholder Lock Unlock Report</h6>
+                </div>
+           
+               <hr class="my-1">
+               <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                       <form>
+
+                           <!--Company-->
+                           <div class="row">
+                               
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-form-label" for="companySelect2">Company <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                       <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                           
+
+                                <br />
+                           
+                            <div class="row">
+                                <!-- Type-->
+                              
+                                  <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                     <label class="col-sm-12 col-md-12 col-form-label" >Holder Type: <span class="mandatory"> *</span></label>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="Lock" name="customRadio" class="custom-control-input" data-bind="checked:SelectedDataType,checkedValue:'Y'">
+                                        <label class="custom-control-label" for="Lock">Lock</label>
+                                    </div>
+                                    <div class="custom-control custom-radio ml-4">
+                                        <input type="radio" id="Unlock" name="customRadio" class="custom-control-input" data-bind=" checked:SelectedDataType,checkedValue:'N'">
+                                        <label class="custom-control-label" for="Unlock">Unlock</label>
+                                    </div>
+                                </div>
+
+                                 <!--posted unposted-->
+                               
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                     <label class="col-sm-12 col-md-12 col-form-label" >Status Type: <span class="mandatory"> *</span></label>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="Posted" name="customRadio1" class="custom-control-input" data-bind="checked:SelectedStatusType,checkedValue:'Posted'">
+                                        <label class="custom-control-label" for="Posted">Posted</label>
+                                    </div>
+                                    <div class="custom-control custom-radio ml-4">
+                                        <input type="radio" id="Unposted" name="customRadio1" class="custom-control-input" data-bind=" checked:SelectedStatusType,checkedValue:'Unposted'">
+                                        <label class="custom-control-label" for="Unposted">Unposted</label>
+                                    </div>
+                                </div>
+                             </div>
+
+                             <!--posted unposted-->
+                          
+                             <br/>
+
+                            <!--Date from to-->
+                            <div class="row">
+                                  <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                    <label class="col-sm-12 col-md-12 col-form-label" for="DateFrom">Date From:</label>
+                                    <div class="input-group date col-sm-12 col-md-10">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" data-bind="value: DateFrom" placeholder="Enter a Date" id="DateFrom">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                    <label class="col-sm-12 col-md-12 col-form-label" for="DateTo">Date To:</label>
+                                    <div class="input-group date col-sm-12 col-md-10">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" data-bind="value: DateTo" placeholder="Enter a Date" id="DateTo">
+                                    </div>
+                                </div>
+                              
+                            </div>
+
+                          
+
+
+                            <!--Holder from to-->
+                            <div class="row">
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" id="HolderNoFrom">Holder No From:</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: HolderNoFrom" placeholder="Enter Holder Number">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" id="HolderNoTo">Holder No To:</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: HolderNoTo" placeholder="Enter Holder Number">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-4 ">
+                            <div class="row col-12 p-4 justify-content-center ">
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" id="ok" class="btn btn-success mr-2 mt-1 col-12 " value="EXCEL" data-bind="click: GenerateReport.bind($data,'E')">
+                                </div>
+                                 <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                            <input type="button" class="btn btn-danger mr-2 mt-1 col-12" id="btnPDF" value="PDF" data-bind="click:GenerateReport.bind($data, 'P') ">
+                        </div>
+                            </div>
+
+                       </form>
+                      </div>          
+                  </div>
+
+            </div>  
+                <!--end of page-->
+        </div>
+    </div>
+</div>
+@section Footer{
+<script src="~/vendor/sweetalert/sweet-alert.js"></script>
+@*<script src="~/scripts/Reports/CertificateSplitReport.js"></script>*@
+<script src="~/scripts/Reports/ShholderLockUnlockReport.js"></script>
+}

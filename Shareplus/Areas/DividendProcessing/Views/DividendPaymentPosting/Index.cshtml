@@ -1,0 +1,184 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
+}
+
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+              <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Dividend Pocessing</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Dividend Payemnt Posting For Physical</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Dividend Payment Posting For Physical</h6>
+                </div>
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                            @*<div class="pull-left">
+                                    <h4 class="text-blue h4">Create User</h4>
+                                </div>*@
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Company <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'></select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Dividend <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="form-control form-control-sm" id="DividendList" data-bind='options: DividendLists,optionsText: "ShowDividendText",optionsValue:"Divcode",value:SelectedDividend, optionsCaption:"Select Dividend"'></select>
+                                    </div>
+                                </div>
+                                <!--Date Selector-->
+                                <div class="form-group row col-xl-2 col-md-6 col-sm-12 col-12" id="simple-date1">
+                                    <label class="col-12 col-form-label" for="DateFrom">From Date</label>
+                                    <div class="input-group date col-sm-12 col-md-10">
+                                        <div class="input-group-prepend"></div>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Select Date" id="dateFrom" data-bind="value: dateFrom">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-2 col-md-6 col-sm-12 col-12" id="simple-date2">
+                                    <label class="col-12 col-form-label" for="DateTo">To Date</label>
+                                    <div class="input-group date col-sm-12 col-md-10">
+                                        <div class="input-group-prepend"></div>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Select Date" id="dateTo" data-bind="value: dateTo">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" style="color:transparent">l</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input type="button" class="btn btn-primary  col" data-bind="click:loadDataTable" value="Refresh">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 p-3">
+                                <table id="tbl_CashDividend" class="table  table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th> <input type="checkbox" data-bind="checked: SelectAll" id="chk" /></th>
+                                           
+                                            <th>Name</th>
+                                            <th>Holder No</th>
+                                            <th>Warrant No</th>
+                                            <th>Warrant Amt</th>
+                                            <th>TaxDAmt</th>
+                                            <th>BTaxAmt</th>
+                                            <th>TotShKitta</th>
+                                            <th>Entry By</th>
+                                            <th>Entry Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach:CashDividendList">
+                                        <tr>
+                                            <td><input type="checkbox" data-bind="checked: Selected" class="case" name="case[]" /></td>
+                                          
+                                            <td data-bind="text: FName() +' '+LName()"></td>
+                                            <td data-bind="text: Shholderno"></td>
+                                            <td data-bind="text: WarrantNo"></td>
+                                            <td data-bind="text: WarrantAmt"></td>
+                                            <td data-bind="text: Taxdamt"></td>
+                                            <td data-bind="text: Bonustax"></td>
+                                            <td data-bind="text: Totshkitta"></td>
+                                            <td data-bind="text: WPaidBy"></td>
+                                            <td data-bind="text: Wissueddt"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </form>
+
+                        <hr class="my-4 ">
+                        <div class="row col-12 ">
+                            <div class="col-xl-4  col-md-4 col-sm-4 col-6 ">
+                                <input type="text" class="form-control form-control-sm mr-2 mt-1 " data-bind="value:PostingRemarks" placeholder="Posting Remarks" maxlength="10" />
+                            </div>
+                           <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                        <div class="input-group date col-sm-12 col-md-10 mt-1">
+                                            <div class="input-group-prepend">
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm"  data-bind="value: PostingDate , text:PostingDate" id="PostingDate">
+                                        </div>
+                                    </div>
+                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-success  col-12" data-bind="click:PostDividendSetUp.bind($data,'A')" value="Authorization">
+                            </div>
+                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-danger  col-12" data-bind="click:PostDividendSetUp.bind($data,'R')" value="Rejection">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Footer{
+    <script language="JavaScript" type="text/javascript">
+
+        function toggle(source) {
+            checkboxes = document.getElementsByName('case[]'); for (var i = 0, n = checkboxes.length;
+                i < n; i++) { checkboxes[i].checked = source.checked; }
+        }
+        $('#tbl_CashDividend').DataTable({
+            responsive: false,
+            searching: false,
+            scrollX: true,
+            scrollY: true,
+            paging: false,
+            ordering: false
+        })
+
+
+
+    </script>
+    <script src="https://unpkg.com/floatthead"></script>
+
+    <script src="~/scripts/DividendProcessing/DividendPaymentPosting.js"></script>
+}
+
+
+
+
+

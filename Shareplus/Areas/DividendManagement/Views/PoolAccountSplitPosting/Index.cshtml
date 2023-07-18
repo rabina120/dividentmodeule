@@ -1,0 +1,177 @@
+﻿@{
+    ViewData["Title"] = "Pool Account Split Postring";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Pool Account Split Posting</h6>
+                </div>
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                        </div>
+                        <div class="col-12 p-2">
+                            <div class="pd-20 card-box mb-30">
+                                <div class="row">
+                                    <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
+                                        <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                        <div class="col-sm-12 col-md-11">
+                                            <select class="form-control form-control-sm" id="CompanyList" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                        <label class="col-sm-12 col-md-11 col-form-label">Dividend <span class="mandatory"> *</span></label>
+                                        <div class="col-sm-12 col-md-11">
+                                            <select class="form-control form-control-sm" id="DividendList"
+                                                    data-bind='
+                                                    options: DividendLists,
+                                                    optionsText: "ShowDividendText",
+                                                    optionsValue:"Divcode",
+                                                    value:SelectedDividend,
+                                                    optionsCaption:"---Dividends---" '>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>S.N.</th>
+                                                    <th>Boid</th>
+                                                    <th>Warrant No.</th>
+                                                    <th>Total Kitta</th>
+                                                    @*<th>Tfrackitta</th>
+                                    <th>Remfrac</th>
+                                    <th>Actual Bonus</th>*@
+                                                    <th>Div Amount</th>
+                                                    <th>Div Tax</th>
+                                                    <th>Bonus Tax</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind='foreach: SplitPostingList'>
+                                                <tr>
+                                                    <td><input type="checkbox" data-bind="checked: Selected" /></td>
+                                                    <td data-bind="text: Boid"></td>
+                                                    <td data-bind="text: Warrantno"></td>
+                                                    <td data-bind="text: totalkitta"></td>
+                                                    @*<td data-bind="text: Tfrackitta"></td>
+                                    <td data-bind="text: Remfrac"></td>
+                                    <td data-bind="text: Actualbonus"></td>*@
+                                                    <td data-bind="text: DivAmount"></td>
+                                                    <td data-bind="text: Divtax"></td>
+                                                    <td data-bind="text: Bonustax"></td>
+                                                    <td><button class="btn btn-primary btn-sm" type="button" data-bind="click: $root.ViewDetails">View Details</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="form-group col-xl-3 col-md-4 col-sm-12 col-12">
+                                        <div class="col-sm-12 col-md-12">
+                                            <input class="form-control " placeholder="Date" type="date" data-bind="value: PostingDate" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-5 col-sm-12 col-12">
+
+                                        <div class="col-sm-12 col-md-12">
+                                            <input placeholder="Remarks" class="form-control " type="text" data-bind="value: Remarks" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xl-3 col-md-4 col-sm-12 col-12">
+                                        <button class="btn btn-primary" type="button" data-bind="click: AuthorizePosting">Authorize</button>
+                                        <button class="btn btn-danger" type="button" data-bind="click: RejectPosting">Reject</button>
+                                    </div>
+                                    <div form-group col-xl-3 col-md-4 col-sm-12 col-12>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal Scrollable -->
+                        <div class="modal fade" id="PostingDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Split Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="col-12">
+                                            <div class="card mb-4">
+                                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                                                </div>
+                                                <div class="table-responsive p-3">
+                                                    <div class="table-responsive p-3">
+                                                        <table id="CertDetTable" class="table  table-bordered" style="">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>S.N.</th>
+                                                                    <th>Boid</th>
+                                                                    @*<th>Warrant No.</th>*@
+                                                                    <th>Total Kitta</th>
+                                                                    @*<th>Tfrackitta</th>
+                                                                    <th>Remfrac</th>
+                                                                    <th>Actual Bonus</th>*@
+                                                                    <th>Div Amount</th>
+                                                                    <th>Div Tax</th>
+                                                                    <th>Bonus Tax</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody data-bind="foreach : SplitDetailsPosting">
+                                                                <tr>
+                                                                    <td data-bind="text: ($index() + 1)"></td>
+                                                                    <td data-bind="text: Boid_new"></td>
+                                                                    @*<td data-bind="text: Warrantno"></td>*@
+                                                                    <td data-bind="text: totalkitta"></td>
+                                                                    @*<td data-bind="text: Tfrackitta"></td>
+        <td data-bind="text: Remfrac"></td>
+        <td data-bind="text: Actualbonus"></td>*@
+                                                                    <td data-bind="text: DivAmount"></td>
+                                                                    <td data-bind="text: Divtax"></td>
+                                                                    <td data-bind="text: Bonustax"></td>
+
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Footer{
+    <script src="~/scripts/DividendManagement/PoolAccountSplitPosting.js"></script>
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+}
+
+

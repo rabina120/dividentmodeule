@@ -1,0 +1,159 @@
+﻿@{
+    ViewData["Title"] = "Holder Management - ShareHolder Information";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+         <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Holder Management</li>
+                                <li class="breadcrumb-item active" aria-current="page">ApplicationForUpdateEntry</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        <!-- Default Basic Forms Start -->
+        <div class="card mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Application For Update Entry</h6>
+            </div>
+
+            <div class="card-body">
+                <div class="pd-20 card-box mb-30">
+
+                    <form>
+                        <div class="row col-12 p-4 justify-content-center ">
+                            <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="AddButton" value="Add" data-bind="click: chooseOptions.bind($data,'A')">
+                            </div>
+                            <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-info mr-2 mt-1 col-12 " id="UpdateButton" value="Edit" data-bind="click: chooseOptions.bind($data,'U')">
+                            </div>
+                            <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-danger mr-2 mt-1 col-12 " id="DeleteButton" value="Delete" data-bind="click: chooseOptions.bind($data,'D')">
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="form-group row col-md-4">
+                                <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Shholder No: <span class="mandatory">*</span></label>
+                                <div class="row col-sm-12 col-md-10 " style="margin-left:2px">
+                                    @* <input data-bind="value:ShholderNo, valueUpdate: 'input', executeOnEnter:GetSholderInformation, event{blur:GetSholderInformation}" class="form-control form-control-sm">*@
+                                    <input class="form-control form-control-sm col-8" disabled="disabled"  onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Share Holder Number" id="ShHolderNo" data-bind="value:ShHolderNo,valueUpdate: 'input',executeOnEnter:GetSholderInformation.bind($data,ShHolderNo), event:{blur:GetSholderInformation.bind($data,ShHolderNo)}" />
+                                    <button id= "btnShHolderList" type="button" disabled="disabled"  class="btn btn-primary col-2 ml-2 mb-2"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Total Kitta</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" disabled="disabled" id="totalKitta" data-bind="value:TotalKitta" type="text" placeholder="Total Kitta">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">ShHolder Name</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" disabled="disabled" id="shHolderName" data-bind="value:ShHolderName" type="text" placeholder="ShHolder Name">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Father's Name</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" disabled="disabled" id="fatherName" data-bind="value:FatherName" type="text" placeholder="Father's Name">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Grand Father's Name</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" disabled="disabled"  id="grandFatherName" data-bind="value:GrandFatherName" type="text" placeholder="Grand Father's Name">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Husband Name</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" disabled="disabled" id="husbandName" data-bind="value:HusbandName" type="text" placeholder="Husband Name">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Address</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" disabled="disabled" id="address" data-bind="value:Address" type="text" placeholder="Address">
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-1" />
+                        
+                        <div class="row">
+                            <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Application No:</label>
+                                <div class="row col-sm-12 col-md-10 " style="margin-left:2px">
+                                    @* <input data-bind="value:ShholderNo, valueUpdate: 'input', executeOnEnter:GetSholderInformation, event{blur:GetSholderInformation}" class="form-control form-control-sm">*@
+                                    <input class="form-control form-control-sm col-8" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Application No" id="ApplicationNo" data-bind="value:ApplicationNo,valueUpdate: 'input',executeOnEnter:GetApplicationInformation.bind($data,ApplicationNo), event:{blur:GetApplicationInformation.bind($data,ApplicationNo)}" />
+                                    <button type="button" id= "btnApplicationList" disabled="disabled"  class="btn btn-primary col-2 ml-2 mb-2"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                             <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12 " id="simple-date1">
+                                        <label class="col-12 col-form-label" for="applicationDate">Application Date</label>
+                                        <div class="input-group date col-sm-12 col-md-10">
+                                            <div class="input-group-prepend">
+
+                                            </div>
+                                            <input type="text" disabled="disabled" class="form-control form-control-sm" placeholder="Select a Date" data-bind="value: ApplicationDate , text:ApplicationDate" id="ApplicationDate">
+                                        </div>
+                                    </div>
+                            <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Action  <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" disabled="disabled" id="Action" data-bind="value:Action" type="text" placeholder="Action">
+                                </div>
+                            </div>
+                        </div>
+
+                          <div class="row col-12 p-4 justify-content-center ">
+
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " disabled="disabled" id="SaveApplication" value="Save" data-bind="click: SaveApplication">
+                                </div>
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-secondary mr-2 mt-1 col-12" id="Refresh" value="Refresh" data-bind="click: Refresh">
+                                </div>
+
+                            </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+@section Footer{
+<script src="~/vendor/sweetalert/sweet-alert.js"></script>
+<script src="~/scripts/HolderManagement/EntryUpdateApplication.js"></script>
+<script>
+        $('#simple-date1 .input-group.date').datepicker({
+        todayHighlight: true,
+        endDate: '+0d',
+        format: 'yyyy-mm-dd',
+    });
+</script>
+}

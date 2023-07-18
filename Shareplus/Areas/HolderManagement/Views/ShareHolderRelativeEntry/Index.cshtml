@@ -1,0 +1,269 @@
+﻿
+@{
+    ViewData["Title"] = "ShareHolder Management - Share Holder Relaive Entry";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">ShareHolder Management</li>
+                                <li class="breadcrumb-item active" aria-current="page">Share Holder Relaive Entry</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Share Holder Relaive Entry</h6>
+                </div>
+
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+
+                        <form>
+                            <div class="row col-12 p-4 justify-content-center ">
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="AddButton" value="Add" data-bind="click: chooseOptions.bind($data,'A')">
+                                </div>
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-info mr-2 mt-1 col-12 " id="UpdateButton" value="Edit" data-bind="click: chooseOptions.bind($data,'U')">
+                                </div>
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-danger mr-2 mt-1 col-12 " id="DeleteButton" value="Delete" data-bind="click: chooseOptions.bind($data,'D')">
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="form-group row col-md-5">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-11">
+                                        <select class="form-control form-control-sm" disabled="disabled" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+                            <div class="row">
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Shholder No: <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Share Holder Number" id="ShHolderNo" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:GetSholderInformation.bind($data,ShholderNo), event:{blur:GetSholderInformation.bind($data,ShholderNo)}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Full Name </label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:FullName" type="text" placeholder="Full Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Nepali Name </label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" oninput="convert_to_unicode(this)" data-bind="value:NpName" type="text" placeholder="Nepali Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Address</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:Address" type="text" placeholder="Address">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Nepali Address</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" oninput="convert_to_unicode(this)" data-bind="value:NpAddress" type="text" placeholder="Nepali Address">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Total Kitta</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled"  data-bind="value:TotalKitta" type="text" placeholder="Total Kitta">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <hr class="my-4">
+                            <div class="row">
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">S.N.</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="S.N." data-bind="value:SN" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label"></label>
+                                    <div class="col-sm-12 col-md-10">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Relative Holder No <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Relative ShareHolder Number" id="rShHolderNo" data-bind="value:rShholderNo,valueUpdate: 'input',executeOnEnter:GetRelativeSholderInformation.bind($data,rShholderNo), event:{blur:GetRelativeSholderInformation.bind($data,rShholderNo)}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Relative Name</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" id="rFullName" data-bind="value:rFullName" type="text" placeholder="Relative Full Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Relative Nepali Name</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" id="rNpName" oninput="convert_to_unicode(this)" data-bind="value:rNpName" type="text" placeholder="Relative Nepali Name">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Relative Father's Name</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" id="rFaName" data-bind="value:rFaName" type="text" placeholder="Relative Father's Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Grand Father's Name</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" id="rGrFaName" data-bind="value:rGrFaName" type="text" placeholder="Relative Grand Father's Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Relative Address</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" id="rAddress" data-bind="value:rAddress" type="text" placeholder="Relative Address">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Relative Nepali Address</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" id="rNpAddress" oninput="convert_to_unicode(this)" data-bind="value:rNpAddress" type="text" placeholder="Relative Nepali Address">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Relative TelNo</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" id="rTelNo" data-bind="value:rTelNo" type="text" placeholder="Relative Telephone No">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row col-12 p-4 justify-content-center ">
+
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="saveShholder" value="Save" data-bind="click: Save">
+                                </div>
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-info mr-2 mt-1 col-12" id="refreshButton" value="Refresh" data-bind="click: refresh">
+                                </div>
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-secondary mr-2 mt-1 col-12 " id="reportButton" value="Report" data-bind="click: report">
+                                </div>
+
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="HoldersList" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Relative List</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12">
+                        <div class="card mb-4">
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                            </div>
+                            <div class="table-responsive p-3">
+                                <div class="table-responsive p-3">
+                                    <table class="table align-items-center table-flush table-hover" id="dataTable">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>SN</th>
+                                                <th>RHolder No</th>
+                                                <th>Name</th>
+                                                <th>Father Name</th>
+                                                <th>Gr.Father Date</th>
+                                                <th>Address</th>
+                                                <th>Telephone</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach : RelativeShareHolderList">
+                                            <tr data-bind="click: FillSNForDetail">
+                                                
+                                                <td>
+                                                    <span data-bind="text: SN"/>
+                                                </td>
+                                                <td>
+                                                    <span data-bind="text: rShHolderNo" />
+                                                </td>
+                                                <td>
+                                                    <span data-bind="text: rFullName" />
+                                                </td>
+                                                <td>
+                                                    <span data-bind="text: rFaName" />
+                                                </td>
+                                                <td>
+                                                    <span data-bind="text: rGrFaName" />
+                                                </td>
+                                                <td>
+                                                    <span data-bind="text: rAddress " />
+                                                </td>
+                                                <td>
+                                                    <span data-bind="text: rTelNo " />
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Footer{
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/scripts/HolderManagement/ShareHolderRelativeEntry.js?v=0.2"></script>
+}

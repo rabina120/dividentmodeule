@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewData["Title"] = "Role Define";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+           
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Role Define</h6>
+                </div>
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="form-group row col-xl-6 col-md-12 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-md-3 col-form-label">Role Name <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" type="text" placeholder="Role Name" data-bind="value: RoleName, valueUpdate: 'input',executeOnEnter:SaveRole" maxlength="50">
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 mt-4">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12" value="Add New Role" data-bind="click: SaveRole">
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+
+        </div>
+    </div>
+</div>
+
+
+@section Footer{
+    <script src="~/scripts/Security/RoleDefine.js?v=0.1"></script>
+  
+}

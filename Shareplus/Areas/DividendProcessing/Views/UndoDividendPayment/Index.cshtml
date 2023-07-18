@@ -1,0 +1,214 @@
+﻿
+@{
+    ViewData["Title"] = "Issue Dividend Entry";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px"> 
+             <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Dividend Processing</li>
+                                <li class="breadcrumb-item active" aria-current="page">Undo For Physical</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Undo Dividend for Physical</h6>
+                </div>
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+
+                        <form>
+                            <div class="row">
+                                <div class="form-group row col-md-3 col-sm-12">
+                                    <label class="col-sm-12 col-md-12 col-form-label" for="companySelect2">Company  <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-md-3 col-sm-12">
+                                    <label class="col-form-label col-12 pt-0">Search By  <span class="mandatory"> *</span></label>
+                                    <div class="row col-12 mt-2">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="customRadio1" value="S" name="radioSearch" data-bind="checked: BasedOn" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio1">Holder No</label>
+                                        </div>
+                                        <div class="custom-control custom-radio ml-2">
+                                            <input type="radio" id="customRadio2" value="W" name="radioSearch" data-bind="checked: BasedOn" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio2">Warrant</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="form-group row col-md-3 col-sm-12">
+                                    <label class="col-form-label col-12 pt-0">Undo Type  <span class="mandatory"> *</span></label>
+                                    <div class="row col-12 mt-2">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="customRadio3" value="Issue" name="radioUndoType" data-bind="checked: UndoType" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio3">Issue</label>
+                                        </div>
+                                        <div class="custom-control custom-radio ml-2">
+                                            <input type="radio" id="customRadio4" value="Payment" name="radioUndoType" data-bind="checked: UndoType" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio4">Payment</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-md-3 col-sm-12">
+                                    <label class="col-sm-12 col-md-12 col-form-label" for="dividendSelect">Dividend  <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <select class="form-control form-control-sm"  id="DividendTable" data-bind='options: DividendLists,optionsText: "ShowDividendText",optionValue:"Divcode",value:SelectedDividend, optionsCaption:"---Dividends---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" id="textBasedOn">Shholder No:  <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" type="text" disabled="disabled" onkeypress="return isNumberKey(event)" id="textBasedOnPlace"  data-bind="value: ShholderNo ,event: { blur: searchData }" placeholder="Enter Respective Number">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Name  </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" data-bind="value: FullName" type="text" disabled placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Address  </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" data-bind="value: Address" type="text" disabled placeholder="Address">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Father's Name  </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" data-bind="value: FaName" type="text" disabled placeholder="Father's Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Grand Father's Name  </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" data-bind="value: GrFaName" type="text" disabled placeholder="Grand Father's Name">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Total Kitta  </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" data-bind="value: TotalKitta" type="text" disabled placeholder="Total Kitta">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">District  </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" data-bind="value: DistCode" type="text" disabled placeholder="District">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">P.O. Box No.  </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" type="text" data-bind="value: PboxNo" disabled placeholder="Post Office Number">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Telephone  </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" type="text" data-bind="value: MobileNo" onkeypress="return isNumberKey(event)" maxlength="10" disabled placeholder="Telephone">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-2">
+                            <div class="row ">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">AGM NO  </label>
+                                    <div class="col-sm-12 col-md-12 ">
+                                        <input class="form-control form-control-sm " type="text" data-bind="value: AgmNo" onkeypress="return isNumberKey(event)" disabled placeholder="AGM No">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">Div Type  </label>
+                                    <div class="col-sm-12 col-md-12 ">
+                                        <input class="form-control form-control-sm " type="text" data-bind="value: divType" disabled placeholder="Div">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label " id="textBasedOn2">Warrant No  </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control  form-control-sm" type="text" data-bind="value: WarrantNo" disabled placeholder="Warrant">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">Dividend  </label>
+                                    <div class="col-sm-12 col-md-12 ">
+                                        <input class="form-control  form-control-sm" type="text" data-bind="value: WarrantAmt" disabled placeholder="Dividend">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">Tax  </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control  form-control-sm" type="text" data-bind="value: TaxDamt" disabled placeholder="Tax">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">BTax Amount  </label>
+                                    <div class="col-sm-12 col-md-12 ">
+                                        <input class="form-control  form-control-sm" type="text" data-bind="value: bonustax" disabled placeholder="BTax Amount">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">BAdj Amount  </label>
+                                    <div class="col-sm-12 col-md-12 ">
+                                        <input class="form-control  form-control-sm" type="text" data-bind="value: bonusadj" disabled placeholder="BAdj Amount">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">Total Payable  </label>
+                                    <div class="col-sm-12 col-md-12 ">
+                                        <input class="form-control  form-control-sm" type="text" data-bind="value: TotalPayable" disabled placeholder="Total Payable">
+                                    </div>
+                                </div>
+                            </div>
+                                <hr class="my-4 ">
+                                <div class="row col-12 p-4 justify-content-center ">
+                                    <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                        <input type="button" id="SaveButton" class="btn btn-success mr-2 mt-1 col-12 " value="Save" data-bind="click: SaveCashDividend">
+                                    </div>
+                                    <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                        <input type="button" id="ClearButton" class="btn btn-info mr-2 mt-1 col-12 " value="Clear" data-bind="click: Refresh">
+                                    </div>
+                                </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Footer{
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="/scripts/DividendProcessing/UndoDividendPayment.js"></script>
+}

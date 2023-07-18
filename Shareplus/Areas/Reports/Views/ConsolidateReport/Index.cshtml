@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+             
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Consolidate Report</h6>
+                </div>
+
+
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+
+                        <form>                       
+
+                            <div class="row">
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="companySelect2">Company <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Data Type <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="form-control form-control-sm" id="DataType" data-bind='options: DataTypeList ,optionsText:"DataTypeName",optionsValue:"DataType",value:SelectedDataType, optionsCaption:"---Data Type---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-4 col-md-3 col-sm-12 col-12 " id="simple-date1">
+                                    <label class="col-sm-12 col-md-12 col-form-label" for="ConsolidateDate">Consolidate Date <span class="mandatory"> *</span></label>
+                                    <div class="input-group date col-sm-12 col-md-10">
+                                        <div class="input-group-prepend">
+
+                                        </div>
+                                        <input type="text" data-bind="value: ConsolidateDate" class="form-control form-control-sm" placeholder="Select a Date" id="wIssued">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12 " id="simple-date1">
+                                    <label class="col-sm-12 col-md-12 col-form-label" for="To">To <span class="mandatory"> </span></label>
+                                    <div class="input-group date col-sm-12 col-md-10">
+                                        <div class="input-group-prepend">
+
+                                        </div>
+                                        <input type="text" data-bind="value: ConsolidateTo" class="form-control form-control-sm" placeholder="Select a Date" id="wIssued">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" id="Holder">Holder No From: <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" type="text"  onkeypress="return isNumberKey(event)" data-bind="value: HolderNoFrom" placeholder="Enter Respective Number">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" id="To">To: <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: HolderNoTo" placeholder="Enter Respective Number">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4 ">
+                            <div class="row col-12 p-4 justify-content-center ">
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" id="ok" class="btn btn-success mr-2 mt-1 col-12 " value="ok" data-bind="click: GenerateReport">
+                                </div>
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" id="Exit" class="btn btn-info mr-2 mt-1 col-12 " value="Exit" data-bind="click: Exit">
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Footer{
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>     
+    <script src="~/scripts/Reports/CertificateConsolidateReport.js"></script>
+}

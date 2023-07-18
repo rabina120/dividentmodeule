@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
+}
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Clear PSL Posting</h6>
+                </div>
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-form-label" for="reportSelect2">Company <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                           <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                    </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                     <label class="col-12 col-form-label" style="color:transparent">l</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="btn btn-primary col" type="button" value="Refresh" data-bind="click: RefreshData" />
+                                    </div>
+                                </div>
+
+
+                            @*<div class="form-group row col-md-6 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"></span></label>
+                                <div class="col-sm-12 col-md-11">
+                                    <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row col-sm-12 col-md-6 justify-content-end">
+                                <div class="mt-lg-5 mt-xl-5 mt-md-5 mt-sm-0 mt-0 ">
+                                    <input class="btn btn-primary " type="button" value="Refresh" data-bind="click: RefreshData" />
+                                </div>
+                            </div>*@
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <table id="tbl_ClearPSLPosting" class="table  table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th> <input type="checkbox" data-bind="checked: SelectAll" id="chk" /></th>
+                                            <th>Clear No</th>
+                                            <th>Holder No</th>
+                                            <th>Name</th>
+                                            <th>Status</th>
+                                            <th>Entry User</th>
+                                            <th>Entry Date</th>
+                                            <th>kitta</th>
+                                            <th>Clear Date</th>
+                                            <th>Remarks</th>
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach:ClearPSLPostingList">
+                                        <tr>
+                                            <td><input type="checkbox" data-bind="checked: Selected" class="case" name="case[]" /></td>
+                                            <td data-bind="text: PSL_CLEAR_NO"></td>
+                                            <td data-bind="text: ShholderNo"></td>
+                                            <td data-bind="text: Name"></td>
+                                            <td data-bind="text: Status"></td>
+                                            <td data-bind="text: EntryUser"></td>
+                                            <td data-bind="text: EntryDate"></td>
+                                            <td data-bind="text: Kitta"></td>
+                                            <td data-bind="text: ClearDate"></td>
+                                            <td data-bind="text: Remark"></td>
+                                            <td><button class="btn btn-info" data-bind="click:GetSingleClearPSLData">View</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <hr class="my-4 ">
+                        <div class="row col-12 ">
+                            <div class="col-xl-4  col-md-4 col-sm-4 col-6 ">
+                                <input type="text" class="form-control form-control-sm mr-2 mt-1 " data-bind="value:PostingRemarks" placeholder="Posting Remarks" />
+                            </div>
+                            <div class="col-xl-4  col-md-4 col-sm-4 col-6 ">
+                                <input type="date" class="form-control form-control-sm mr-2 mt-1 " data-bind="value:PostingDate" />
+                            </div>
+
+                        </div>
+
+                        <div class=" row p-2">
+                            <div class="form-group row col-xl-12 col-md-12 col-sm-12 col-12">
+                                <div class=" col-2 ">
+                                    <input type="button" class="btn btn-success  col-12" data-bind="click:PostPSLClearPosting.bind($data,'A')" value="Authorization">
+                                </div>
+                                <div class="col-2 ">
+                                    <input type="button" class="btn btn-danger  col-12" data-bind="click:PostPSLClearPosting.bind($data,'R')" value="Rejection">
+                                </div>
+                                <div class=" col-2 ">
+                                    <input type="button" class="btn btn-dark  col-12" data-bind="click:PostPSLClearPosting.bind($data,'D')" value="Delete">
+                                </div>
+                                <div class=" col-2 ">
+                                    <input type="button" class="btn btn-light  col-12" data-bind="click:ClearControl" value="ClearControl">
+                                </div>
+                                <div class=" col-2 ">
+                                    <input type="button" class="btn btn-info  col-12" data-bind="click:ViewReport.bind($data,'C')" value="ViewReport">
+                                </div>
+                                <!-- Modal Scrollable -->
+                        <div class="modal fade" id="certificateDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Certificate Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="col-12">
+                                            <div class="card mb-4">
+                                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                                                </div>
+                                                <div class="table-responsive p-3">
+                                                    <div class="table-responsive p-3">
+                                                        <table id="CertDetTable" class="table  table-bordered" style="">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>ShHolderNo</th>
+                                                                    <th>CertNo</th>
+                                                                    <th>SrNoFrom</th>
+                                                                    <th>SrNoTo</th>
+                                                                    <th>SeqNo</th>
+                                                                    <th>PLedgeKitta</th>
+                                                                    <th>ClearRemark</th>                                           
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody data-bind="foreach : CertDetList">
+                                                                <tr>                                                                    
+                                                                    <td data-bind="text: ShholderNo"></td>
+                                                                    <td data-bind="text: CertNo"></td>
+                                                                    <td data-bind="text: SrNoFrom"></td>
+                                                                    <td data-bind="text: SrNoTo"></td>
+                                                                    <td data-bind="text: ($index() + 1)"></td>
+                                                                    <td data-bind="text: PledgeKitta"></td>
+                                                                    <td data-bind="text: ClearRemark"></td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                                       </div>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Footer{
+    <script type="text/javascript">
+        function toggle(source) {
+            checkboxes = document.getElementsByName('case[]');
+            for (var i = 0, n = checkboxes.length; i < n; i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+
+    </script>
+    <script src="~/scripts/Certificate/ClearPSLPosting.js"></script>
+    
+}

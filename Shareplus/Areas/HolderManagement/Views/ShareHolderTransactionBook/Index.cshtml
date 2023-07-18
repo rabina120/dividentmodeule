@@ -1,0 +1,230 @@
+﻿@{
+    ViewData["Title"] = "Shareholder's Transaction Book";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Shareholder's Transaction Book</h6>
+                </div>
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                        </div>
+                        <form>
+                            <div class="col-12 p-2">
+                                <div class="pd-20 card-box mb-30">
+
+                                    <div class="row">
+
+                                        <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11">
+                                                <select class="form-control form-control-sm" id="CompanyList" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Share Holder No <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11">
+                                                <input type="text" class="form-control form-control-sm" data-bind="value: ShareHolderNo@*, valueUpdate: 'keydown'*@" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-xl-6 col-md-6 col-sm-12 col-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Name<span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11">
+                                                <p type="text" class="form-control form-control-sm" data-bind="text: ShareHolderName"></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xl-6 col-md-6 col-sm-12 col-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Address <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11">
+                                                <p type="text" class="form-control form-control-sm" data-bind="text: ShareHolderAddress"></p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="form-group col-xl-3 col-md-3 col-sm-3">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Right Share <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11 tran-view">
+                                                <input type="text" class="form-control form-control-sm" data-bind="value: RightShare" disabled />
+                                                <button class="btn btn-sm btn-primary" data-bind="click: ShowRightShares"><i class="fa fa-eye"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xl-3 col-md-3 col-sm-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Ordinary Share<span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11 tran-view">
+                                                <input type="text" class="form-control form-control-sm" data-bind="value: OrdinaryShare" disabled />
+                                                <button class="btn btn-sm btn-primary" data-bind="click: ShowOrdinaryShares"><i class="fa fa-eye"></i></button>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xl-3 col-md-3 col-sm-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Bonus Share <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11 tran-view">
+                                                <input type="text" class="form-control form-control-sm" data-bind="value: BonusShare" disabled />
+                                                <button class="btn btn-sm btn-primary" data-bind="click: ShowBonusShares"><i class="fa fa-eye"></i></button>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xl-3 col-md-3 col-sm-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Total Share <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11">
+                                                <input type="text" class="form-control form-control-sm" data-bind="value: TotalShare" disabled />
+                                                @*<button class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>*@
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    @* <div class="form-group col-xl-12 col-md-12 col-sm-12 col-12 text-right">
+                                    <button class="btn btn-sm btn-primary" data-bind="click: ShowTransactionBook">Submit</button>
+                                    </div>*@
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between" style="display: flex;">
+                    <h6 class="m-0 font-weight-bold text-primary">Transaction List</h6>
+                    <button class="btn btn-primary btn-sm" data-bind="click: GetPurchaseSalesReport, visible: EnableReport, enable:EnableReport">Purchase/Sales Report</button>
+                </div>
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form-group col-xl-12 col-md-12 col-sm-12 col-12">
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>S.N</th>
+                                        <th>Buyer Name</th>
+                                        <th>Buyer No</th>
+                                        <th>Seller Name</th>
+                                        <th>Seller No</th>
+                                        <th>Registration No</th>
+                                        <th>Certificate No</th>
+                                        <th>Remarks</th>
+                                        <th>Transfer Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach: TransactionList">
+                                    <tr>
+                                        <td data-bind="text: $index() + 1"></td>
+                                        <td data-bind="text: BuyerName"></td>
+                                        <td data-bind="text: BuyerNo"></td>
+                                        <td data-bind="text: SellerName"></td>
+                                        <td data-bind="text: SellernNo"></td>
+                                        <td data-bind="text: RegNo"></td>
+                                        <td data-bind="text: CertNo"></td>
+                                        <td data-bind="text: Remarks"></td>
+                                        <td data-bind="text: TransferDt"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="viewShareDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle" data-bind="text: TypeName() + ' Share List'"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="col-12">
+                                    <div class="table-responsive p-3">
+                                        <div class="table-responsive p-3">
+                                            <table class="table table-responsive">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S.N</th>
+                                                        <th>Certificate No</th>
+                                                        <th>SR No From</th>
+                                                        <th>SR No To</th>
+                                                        <th>Description</th>
+                                                        <th>Certificate Status</th>
+                                                        <th>Total kitta</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody data-bind="foreach: TransactionWithShareType">
+                                                    <tr>
+                                                        <td data-bind="text: $index() + 1"></td>
+                                                        <td data-bind="text: CertNo"></td>
+                                                        <td data-bind="text: srnofrom"></td>
+                                                        <td data-bind="text: srnoto"></td>
+                                                        <td data-bind="text: description"></td>
+                                                        <td data-bind="text: certstatus"></td>
+                                                        <td data-bind="text: shkitta"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="GetPurchaseSalesReport" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" data-bind="text: 'Purchase/Sales Report'"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="form-group col-xl-3 col-md-3 col-sm-3">
+                                        <label class="col-sm-12 col-md-11 col-form-label">Type <span class="mandatory"> *</span></label>
+                                        <div class="col-sm-12 col-md-11">
+                                            <select class="form-control form-control-sm" data-bind='options: PSList,optionsText: "DiplayName",optionsValue:"Value",value:PSReportType, optionsCaption:"---Select---"'>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xl-6 col-md-6 col-sm-6">
+                                        <button class="btn btn-primary btn-sm mt-4" data-bind="click: ExcelReport">Generate Excel Report</button>
+                                        <button class="btn btn-primary btn-sm mt-4" data-bind="click: PDFReport">Generate PDF Report</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Footer{
+    <script src="~/scripts/HolderManagement/ShareholdersTransactionBook.js"></script>
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+}
+

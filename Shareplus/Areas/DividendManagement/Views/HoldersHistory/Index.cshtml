@@ -1,0 +1,269 @@
+﻿@{
+    ViewData["Title"] = "Holder's History";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+                table.dataTable tbody td {
+            white-space: nowrap;
+        }
+    </style>
+}
+
+    <div class="container-fluid">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-200px">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+
+                            <nav aria-label="breadcrumb" role="navigation">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">Cash Dividend Management</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Holder's History</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Holder's History</h6>
+                    </div>
+                    <hr class="my-1" />
+                    <div class="card-body">
+                        <div class="pd-20 card-box mb-30">
+                            <div class="row">
+                                <div class="form-group row col-xl-4 col-md-5 col-sm-12">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-11">
+                                        <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <fieldset class="form-group mt-3 col-6" id="ShareTypeDiv">
+                                    <div class="row col-12">
+                                        <legend class="col-form-label col-4 pt-0">Share Type <span class="mandatory">*</span></legend>
+                                        <div class="row col-12 col-sm-12 pl-4">
+                                            <div class="custom-control custom-radio col-md-5 col-xl-3 col-sm-1">
+                                                <input type="radio" id="customRadio6" name="shareTypeRadio" data-bind="checked: ShareTypeBasedOn" value="P" class="custom-control-input">
+                                                <label class="custom-control-label" for="customRadio6">Physical</label>
+                                            </div>
+                                            <div class="custom-control custom-radio col-md-5 col-xl-3 col-sm-1">
+                                                <input type="radio" id="customRadio7" name="shareTypeRadio" data-bind="checked: ShareTypeBasedOn" value="D" class="custom-control-input">
+                                                <label class="custom-control-label" for="customRadio7">Demate</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="form-group mt-3 col-6" id="BonusType">
+                                    <div class="row col-12">
+                                        <legend class="col-form-label col-4 pt-0">Bonus Type <span class="mandatory">*</span></legend>
+                                        <div class="row col-12 col-sm-12 pl-4">
+                                            <div class="custom-control custom-radio col-md-5 col-xl-3 col-sm-1">
+                                                <input type="radio" id="customRadio1" name="bonusTypeRadio" data-bind="checked: BonusTypeBasedOn" value="2" class="custom-control-input">
+                                                <label class="custom-control-label" for="customRadio1">Bonus</label>
+                                            </div>
+                                            <div class="custom-control custom-radio col-md-5 col-xl-3 col-sm-1">
+                                                <input type="radio" id="customRadio2" name="bonusTypeRadio" data-bind="checked: BonusTypeBasedOn" value="1" class="custom-control-input">
+                                                <label class="custom-control-label" for="customRadio2">Dividend</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class=" row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-sm-12 col-md-12 col-form-label">Owner Type <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <select class="form-control form-control-sm" id="OccupationType" data-bind='options: OccupationList,optionsText: "OccupationName",optionsValue:"OccupationId",value:SelectedOccupation, optionsCaption:"---Occupation---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-sm-12 col-md-12 col-form-label" for="ShHolderNo"><span id="ShHolderNoLabel">Share Holder No :</span><span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input type="text" class="form-control form-control-sm" onkeypress="return isNumberKey(event)" id="ShHolderNo" placeholder="Enter ShHolder No" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:GetSholderInformation" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Name </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" id="Name" disabled="disabled" data-bind="value:Name" type="text" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Kitta </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" id="Kitta" disabled="disabled" data-bind="value:Kitta" type="text" placeholder="Kitta">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Father's Name </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" id="FaName" disabled="disabled" data-bind="value:FaName" type="text" placeholder="Father's Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Grand Father's Name </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" id="GrFaName" disabled="disabled" data-bind="value:GrFaName" type="text" placeholder="Grand Father's Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Address </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" id="Address" disabled="disabled" data-bind="value:Address" type="text" placeholder="Address">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">District </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" id="District" disabled="disabled" data-bind="value:District" type="text" placeholder="District">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Telephone No </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" id="TelNo" disabled="disabled" data-bind="value:TelNo" type="text" placeholder="Telephone No">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Occupation </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" id="Account No" disabled="disabled" data-bind="value:Occupation" type="text" placeholder="Occupation">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Bank Name </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" id="Bank Name" disabled="disabled" data-bind="value:BankName" type="text" placeholder="Bank Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Account No </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" id="Account No" disabled="disabled" data-bind="value:AccountNo" type="text" placeholder="Account No">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" id="table_Bonus">
+                                <div class="col-12 p-3 ">
+                                    <table id="tbl_Holder_History_Bonus" class="table  table-bordered table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>S.No.</th>
+                                                <th>FiscalYear</th>
+                                                <th id="boidB," data-bind="visible:$root.ShareTypeBasedOn() == 'D'">BOID</th>
+                                                <th id="holderNoB" data-bind="visible:$root.ShareTypeBasedOn() == 'P'">HolderNo</th>
+                                                <th>CertNo</th>
+                                                <th>SrnnoFrom</th>
+                                                <th>SrnoTo</th>
+                                                <th>Kitta</th>
+                                                <th>PrevFraction</th>
+                                                <th>ActualBonus</th>
+                                                <th>FractionWithAB</th>
+                                                <th>IssueBonus</th>
+                                                <th>RemFraction</th>
+                                                <th>ApprovedDate</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach:ShHolderHistoryList">
+                                            <tr>
+                                                <td><span data-bind="text: ($index() +1)"></span></td>
+                                                <td data-bind="text: FiscalYr"></td>
+                                                <td data-bind="text: BOID, visible:$root.ShareTypeBasedOn() == 'D'" id="DboidB"></td>
+                                                <td data-bind="text: HolderNo, visible:$root.ShareTypeBasedOn() == 'P'" id="DholderNoB"></td>
+                                                <td data-bind="text: CertNo"></td>
+                                                <td data-bind="text: SrnoFrom"></td>
+                                                <td data-bind="text: SrnoTo"></td>
+                                                <td data-bind="text: Kitta"></td>
+                                                <td data-bind="text: PrevFraction"></td>
+                                                <td data-bind="text: ActualBonus"></td>
+                                                <td data-bind="text: FractionWithAB"></td>
+                                                <td data-bind="text: IssueBonus"></td>
+                                                <td data-bind="text: RemFraction"></td>
+                                                <td data-bind="text: ApprovedDate"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row" id="table_Dividend">
+                                <div class="col-12 p-3 ">
+                                    <table id="tbl_Holder_History_Dividend" class="table  table-bordered table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>S.No.</th>
+                                                <th>FiscalYear</th>
+                                                <th>Status</th>
+                                                <th>WarrantNo</th>
+                                                <th id="holderNoD" data-bind="visible:$root.ShareTypeBasedOn() == 'P'">HolderNo</th>
+                                                <th id="boidD" data-bind="visible:$root.ShareTypeBasedOn() == 'D'">BOID</th>
+                                                <th>Kitta</th>
+                                                <th>DividendAmt</th>
+                                                <th>DivTax</th>
+                                                <th>BonusTax</th>
+                                                <th>BonusAdj</th>
+                                                <th>PreviousAdj</th>
+                                                <th>NetAmount</th>
+                                                <th>IssuedDate</th>
+                                                <th>PaidDate</th>
+                                                <th>CreditedDate</th>
+                                                <th>BankName</th>
+                                                <th>AccountNo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach:ShHolderHistoryList">
+                                            <tr>
+                                                <td><span data-bind="text: ($index() +1)"></span></td>
+                                                <td data-bind="text: FiscalYr"></td>
+                                                <td data-bind="text: Status"></td>
+                                                <td data-bind="text: WarrantNo"></td>
+                                                <td data-bind="text: HolderNo, visible:$root.ShareTypeBasedOn() == 'P'" id="DholderNoD"></td>
+                                                <td data-bind="text: BOID, visible:$root.ShareTypeBasedOn() == 'D'" id="DboidD"></td>
+                                                <td data-bind="text: Kitta"></td>
+                                                <td data-bind="text: DividendAmt"></td>
+                                                <td data-bind="text: DivTax"></td>
+                                                <td data-bind="text: BonusTax"></td>
+                                                <td data-bind="text: BonusAdj"></td>
+                                                <td data-bind="text: PrevAdj"></td>
+                                                <td data-bind="text: PayableAmt"></td>
+                                                <td data-bind="text: IssueDate"></td>
+                                                <td data-bind="text: PaidDate"></td>
+                                                <td data-bind="text: CreditedDt"></td>
+                                                <td data-bind="text: Bankname"></td>
+                                                <td data-bind="text: Bankaccno"></td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @section footer{
+
+        <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+        <script src="~/scripts/DividendManagement/HoldersHistory.js"></script>
+
+    }
+

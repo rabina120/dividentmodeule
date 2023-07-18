@@ -1,0 +1,247 @@
+﻿@{
+    ViewData["Title"] = "Signature Handling - Signature Approved/Unapproved";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+<link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+<style>
+    th {
+        width: none !important;
+    }
+
+    tr {
+        cursor: pointer;
+    }
+    table {
+   max-height: 500px;
+    overflow: scroll;
+}
+</style>
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Signature Handling</li>
+                                <li class="breadcrumb-item active" aria-current="page">Signature Approved/Unapproved</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Signature Approved/Unapproved</h6>
+                </div>
+
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+
+                        <form>
+
+                            <div class="row">
+                                <div class="form-group row col-md-6">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-11">
+                                        <select class="form-control form-control-sm" disabled="disabled" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <fieldset class="form-group col-6 mt-4">
+                                    <legend class="col-form-label col-12 pt-0">
+                                    </legend>
+                                    <div class="row col-12 mt-2">
+
+
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="customRadio1" name="SignatureApprovedUnapproved" data-bind="checked: SignatureApprovedUnapproved, checkedValue :'A'" checked class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio1">Approve Signature</label>
+                                        </div>
+                                        <div class="custom-control custom-radio ml-4">
+
+                                            <input type="radio" id="customRadio2" name="SignatureApprovedUnapproved" data-bind="checked: SignatureApprovedUnapproved, checkedValue:'U'" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio2">Unapprove Signature</label>
+                                        </div>
+
+                                    </div>
+                                </fieldset>
+                            </div>
+
+
+                            <hr class="my-4">
+                            <div class="row" id="ApproveDiv">
+
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Approved By<span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:ApprovedBy" type="text" placeholder="Approved By">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Approved Date<span class="mandatory">*</span></label>
+
+                                    <div class="input-group date col-sm-12 col-md-10 mt-1">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" disabled="disabled" data-bind="value: ApprovedDate , text:ApprovedDate" id="ApprovedDate">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 mt-5 ">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" data-bind="checked:PasswordProtected" id="passwordProtected">
+                                        <label class="custom-control-label" for="passwordProtected">Password Protected ?</label>
+                                    </div>
+                                </div>
+                                <div id="passwordProtectedDiv" class="form-group row col-xl-12 col-md-12 col-sm-12 col-12 ">
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                        <label class="col-12 col-form-label">Password</label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input class="form-control form-control-sm" data-bind="value:Password ,valueUpdate: 'input',executeOnEnter:CheckPassword.bind($data,'P'),
+                                            event:{blur:CheckPassword.bind($data,'P')}" id="Password" type="password" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                        <label class="col-12 col-form-label">Confirm Password</label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input class="form-control form-control-sm" id="ConfirmPassword" data-bind="value:ConfirmPassword,valueUpdate: 'input',executeOnEnter:CheckPassword.bind($data,'C'),
+                                            event:{blur:CheckPassword.bind($data,'C')}" type="password" placeholder="Confirm Password">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-4">
+                                <div class="col-12 p-3  table-responsive" style="max-height: 500px; min-height: 100px">
+                                    <table id="tbl_ShHolderList" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th> <input type="checkbox" data-bind="checked: SelectAll" id="chk" /></th>
+                                                <th>Shholder No</th>
+                                                <th>Holder Name</th>
+                                                <th>Scanned By</th>
+                                                <th>View</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach:ShHolderSignatureList">
+                                            <tr>
+                                                <td><input type="checkbox" data-bind="checked: Selected" class="case" name="case[]" /></td>
+                                                <td data-bind="text: ShHolderNo"></td>
+                                                <td data-bind="text: Name"></td>
+                                                <td data-bind="text: ScannedBy"></td>
+                                                <td ><button class="btn btn-info" data-bind="click: GetShHolderSignature.bind($data, ShHolderNo)">Signature</button></td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="row" id="UnApproveDiv">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">ShHolder No <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter ShHolder Number"
+                                               id="ShHolderNo" data-bind="value:ShHolderNo,valueUpdate: 'input',executeOnEnter:GetShHolderInformation.bind($data,ShHolderNo),
+                                            event:{blur:GetShHolderInformation.bind($data,ShHolderNo)}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Total Kitta </label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:TotalKitta" type="text" placeholder="Total Kitta">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">ShHolder Name</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:ShHolderName" type="text" placeholder="Share Holder Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">ShHolder Address</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:ShHolderAddress" type="text" placeholder="Share Holder Address">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Scanned By</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:ScannedBy" type="text" placeholder="Scanned By">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Approved By</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:UApprovedBy" type="text" placeholder="Approved By">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Approved Date</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:UApprovedDate" type="text" placeholder="Approved Date">
+                                    </div>
+                                </div>
+                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 mt-5 ">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" data-bind="checked:UnapprovePasswordProtected" id="unapprovePasswordProtected">
+                                        <label class="custom-control-label" for="passwordProtected">Password Protected ?</label>
+                                    </div>
+                                </div>
+                                <div id="UnapproveSignatureDiv" class="form-group row col-xl-12 col-md-12 col-sm-12 col-12 justify-content-center">
+                                    <div class=" row justify-content-center">
+                                        <img class="border border-secondary" data-bind="attr: { src: self.Signature()} " height="300px" width="400px">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                
+                            <div class="row col-12 p-4 justify-content-center ">
+
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="Save" value="Approve" data-bind="click: Save">
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Signature Modal Theme -->
+                        <div class="modal fade" id="signatureModalTheme" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">Signature</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body row justify-content-center">
+                                        <img class="border border-secondary" data-bind="attr: { src: self.Signature() }" height="300px" width="400px">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+@section Footer{
+    
+<script src="https://unpkg.com/floatthead"></script>
+<script src="~/vendor/sweetalert/sweet-alert.js"></script>
+<script src="~/scripts/SignatureHandling/SignatureApproveUnapprove.js"></script>
+}

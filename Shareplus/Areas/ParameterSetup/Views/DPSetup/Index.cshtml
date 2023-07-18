@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewData["Title"] = "DP Setup";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+
+}
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            @*<div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Parameter Setup</li>
+                                <li class="breadcrumb-item active" aria-current="page">DP Setup</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>*@
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">DP Setup</h6>
+                </div>
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="row justify-content-center">
+                            <div class="col-3">
+                                <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " value="Add" id="AddButton" data-bind="click: ChooseOptions.bind($data,'A')">
+                            </div>
+                            <div class="col-3 ">
+                                <input type="button" class="btn btn-info mr-2 mt-1 col-12 " value="Edit" id="EditButton" data-bind="click: ChooseOptions.bind($data,'U')">
+                            </div>
+                            @*<div class="col-3 ">
+                                        <input type="button" class="btn btn-danger mr-2 mt-1 col-12 " value="Delete" id="DeleteButton"data-bind="click: ChooseOptions.bind($data,'D')">
+                                </div>*@
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="form-group row col-xl-6 col-md-6 col-sm-12">
+                                <label class="col-sm-12 col-md-12 col-form-label" for="DPCode">DP Code:<span class="mandatory">*</span></label>
+                                <div class="col-sm-12 col-md-10 col-xl-10">
+                                    <input class="form-control form-control-sm" id="DPCode" onkeypress="return isNumberKey(event)" data-bind="value: DPCode,valueUpdate:'input', executeOnEnter:GetDPDetail.bind($data,DPCode),event:{blur:GetDPDetail.bind($data,DPCode)}" type="text" placeholder="Enter dp code" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-12 col-form-label" for="DPName">DP Name: <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-10 col-xl-10">
+                                    <input class="form-control form-control-sm" id="DPName" data-bind="value: DPName" type="text" placeholder="Enter DP Name" maxlength="70">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-6 col-md-6 col-sm-12">
+                                <label class="col-12 col-form-label" for="CDSDPID">CDS DP ID: <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-10 col-xl-10">
+                                    <input class="form-control form-control-sm" id="CDSDPID" onkeypress="return isNumberKey(event)" data-bind="value: CDSDPID" type="text" placeholder="Enter CDS DP ID" maxlength="8">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="DPDetailList" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 75%;">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">DP Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="col-lg-12">
+                                            <!-- Form Basic -->
+                                            <div class="card mb-4">
+
+                                                <div class="card-body">
+                                                    <form>
+                                                        <div class="col-12 p-3" style="overflow-x:auto;">
+                                                            <table id="DP_Detail_table" class="table  table-bordered" style="width:100%">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>DP Code</th>
+                                                                        <th>DP Name</th>
+                                                                        <th>CDS DP Id</th>
+                                                                        @*<th></th>*@
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody data-bind="foreach: DP_Detail_List">
+                                                                    <tr data-bind="click:GetDPDetail.bind($data,DPCode)">
+
+                                                                        <td data-bind="text: DPCode"></td>
+                                                                        <td data-bind="text: DPName"></td>
+                                                                        <td data-bind="text: CDSDPID"></td>
+                                                                        @*<td data-bind="click:GetDPDetail.bind($data,DPCode)">
+                                                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                                                            </td>*@
+
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-4 ">
+                        <div class="row col-12 p-4 justify-content-center ">
+                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="SaveButton" value="Save" disabled="disabled" data-bind="click: SaveDPDetails">
+                            </div>
+                            <div class="col-xl-2 col-md-3  col-sm-4 col-6">
+                                <input type="button" class="btn btn-info mr-2 mt-1 col-12" value="Search" id="SearchButton" disabled="disabled" data-bind="click: LoadDPDetailList">
+                            </div>
+                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-warning  mr-2 mt-1 col-12 " value="Clear" data-bind="click:ClearControl">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Footer{
+    <script src="~/scripts/ParameterSetup/DPSetup.js"></script>
+}
+

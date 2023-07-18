@@ -1,0 +1,214 @@
+﻿
+@{
+    ViewData["Title"] = "Cash Dividend Bulk Insert";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
+}
+
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+             <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Cash Dividend Management</li>
+                                <li class="breadcrumb-item active" aria-current="page">BulkInsert</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Cash Dividend Bulk Insert</h6>
+                </div>
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-form-label" for="reportSelect2">Dividend Type <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-12" style="display: flex">
+                                        <div class="custom-control custom-radio col-md-6 col-xl-6 col-sm-12 col-12">
+                                            <input type="radio" id="customRadio6" name="DivTypeRadio" data-bind="checked: DivBasedOn" value="01" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio6">Dividend For Physical</label>
+                                        </div>
+                                        <div class="custom-control custom-radio col-md-6 col-xl-6 col-sm-12 col-12">
+                                            <input type="radio" id="customRadio7" name="DivTypeRadio" data-bind="checked: DivBasedOn" value="02" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio7">Dividend For Demate</label>
+                                        </div>
+                                        <div class="custom-control custom-radio col-md-6 col-xl-6 col-sm-12 col-12">
+                                            <input type="radio" id="customRadio8" name="DivTypeRadio" data-bind="checked: DivBasedOn" value="03" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio8">Bonus For Physical</label>
+                                        </div>
+                                        <div class="custom-control custom-radio col-md-6 col-xl-6 col-sm-12 col-12">
+                                            <input type="radio" id="customRadio9" name="DivTypeRadio" data-bind="checked: DivBasedOn" value="04" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio9">Bonus For Demate</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-sm-12 col-md-12 col-form-label">Dividend <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="form-control form-control-sm" id="DividendList" data-bind='options: DividendLists,optionsText: "ShowDividendText",optionsValue:"Divcode",value:SelectedDividend, optionsCaption:"---Dividends---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" style="color:transparent">l</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input type="button" name="DummyExcelDownload" value="DummyExcelDownload" id="DummyExcelDownload" class="btn btn-primary col" data-bind="click:DummyDataDownload" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Upload Excel File</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input type="file" id="fileupload" name="files" class="form-control col" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Select Sheet</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="form-control form-control-sm" id="SheetNameList" data-bind='options: SheetLists,optionsText: "SheetName",value:SelectedSheet, optionsCaption:"--Excel Sheet Name--"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" style="color:transparent">l</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input type="button" name="Check" value="Check" id="btnCheckRecords" class="btn btn-primary col" data-bind="click:CheckRecords" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="checktabledividend">
+                                <div class="col-12 p-2">
+                                    <div class="pd-20 card-box mb-30">
+                                        <table class="table">
+                                            <tr>
+                                                <th><small>TOTAL COUNT</small></th>
+                                                <th> <small> <span data-bind="text:TOTALCOUNT" /></small></th>
+
+                                            </tr>
+                                            <tr>
+                                                <th><small>TOTAL KITTA</small></th>
+                                                <th> <small> <span data-bind="text:TOTSHKITTA" /></small></th>
+                                                
+                                            </tr>
+
+                                            <tr>
+                                                <th><small>TOTAL WARRANT AMT</small></th>
+                                                <th> <small> <span data-bind="text:TOTALWARRANTAMT" /></small></th>
+                                                <th><small>TOTAL TAX AMT</small></th>
+                                                <th> <small> <span data-bind="text:TOTALTAXDAMT" /></small></th>
+                                            </tr>
+                                            
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="checktablebonus">
+                                <div class="col-12 p-2">
+                                    <div class="pd-20 card-box mb-30">
+                                        <table class="table">
+                                            <tr>
+                                                <th><small>TOTAL COUNT</small></th>
+                                                <th> <small> <span data-bind="text:TOTALCOUNTBONUS" /></small></th>
+
+                                            </tr>
+                                            <tr>
+                                                <th><small>TOTAL KITTA</small></th>
+                                                <th> <small> <span data-bind="text:TOTALKITTABONUS" /></small></th>
+                                                <th><small>TOTAL FRACTION KITTA</small></th>
+                                                <th><small>  <span data-bind="text:TFRACKITTABONUS" /></small></th>
+                                            </tr>
+
+                                            <tr>
+                                                <th><small>TOTAL</small></th>
+                                                <th> <small> <span data-bind="text:TOTALBONUS" /></small></th>
+                                                <th><small>ACTUAL BONUS</small></th>
+                                                <th> <small> <span data-bind="text:ACTUALBONUSBONUS" /></small></th>
+                                            </tr>
+                                            <tr>
+                                                <th><small>ACTUAL BONUS WITH PREV FRACTION</small></th>
+                                                <th><small>  <span data-bind="text:ACUTALBONUSWITHPREVFRACBONUS" /></small></th>
+                                                <th><small>ISSUE BONUS</small></th>
+                                                <th><small><span data-bind="text: ISSUEBONUSBONUS" /></small></th>
+
+
+                                            </tr>
+                                            <tr>
+                                                <th><small> REM FRAC</small></th>
+                                                <th> <small> <span data-bind="text:REMFRACBONUS" /></small></th>
+                                                <th><small>TOTAL BONUS TAX</small></th>
+                                                <th> <small> <span data-bind="text:BONUSTAXBONUS" /></small></th>
+
+                                            </tr>
+                                            
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4 ">
+                            
+                                <div class="col-12 p-2" id="confirmDiv">
+                                    <div class="pd-20 card-box mb-30">
+                                        <strong>I have checked the records and confirm to submit the file for upload. </strong> <input type="checkbox" id="checkexcel" data-bind="checked: ConfirmSubbmission" />
+                                        <input type="button" name="Upload" value="Upload" id="btnupload" class="btn btn-primary" data-bind="click:UploadRecords" />
+
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Footer{
+
+    <script src="~/scripts/DividendManagement/BulkInsert.js"></script>
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+
+
+}
+
+

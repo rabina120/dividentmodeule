@@ -1,0 +1,249 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                 
+                <div class="card mb-4">
+
+                    <div class="card mb-4">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Create IPF</h6>
+                        </div>
+                        <hr class="my-1">
+                        <div class="card-body">
+                            <div class="pd-20 card-box mb-30">
+                                <div class="clearfix">
+                                </div>
+                                <form>
+                                    <div class="row">
+                                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                            <label class="col-12 col-form-label"> Excel file <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-10">
+                                                <input type="file" id="fileupload" name="files"  accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                            <label class="col-12 col-form-label"> Excel Sheet Name<span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-10">
+                                                <select class="form-control form-control-sm" id="SheetNameList" data-bind='options: SheetLists,optionsText: "SheetName",value:SelectedSheet, optionsCaption:"--Excel Sheet Name--"'>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                            <label class="col-12 col-form-label">Start Row No <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-10">
+                                                <input class="form-control form-control-sm" data-bind="value:startRowNo" onkeypress="return isNumberKey(event)" type="text" placeholder="Start Row No">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                            <label class="col-12 col-form-label">No of Rows<span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-10">
+                                                <input class="form-control form-control-sm" data-bind="value:totRow" onkeypress="return isNumberKey(event)" type="text" placeholder="No of Rows">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pd-20 card-box mb-30">
+                                        <input type="button" name="Upload" value="Upload" id="btnUpload" class="btn btn-primary" data-bind="click:Upload" />
+                                        <button class="btn btn-primary col-2 ml-5" data-bind='click : GenerateDummyExcel'>Dummy Data</button>
+
+                                    </div>
+
+
+                                    <hr class="my-4">
+                                    <div class="col-12 p-3 ">
+                                        <table id="tblUsers" class="table  table-bordered">
+
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        S.No
+                                                    </th>
+                                                    <th>
+                                                        Bo Account No
+                                                    </th>
+                                                    <th>
+                                                        rta_refno
+                                                    </th>
+                                                    <th>
+                                                        ISIN NO
+                                                    </th>
+                                                    <th>
+                                                        Current Qty
+                                                    </th>
+                                                    <th>
+                                                        Frozen Qty
+                                                    </th>
+                                                    <th>
+                                                        Lock in Qty
+                                                    </th>
+                                                    <th>
+                                                        Lock Code
+                                                    </th>
+                                                    <th>
+                                                        Lock in reason
+                                                    </th>
+                                                    <th>
+                                                        lock in expiry DT
+                                                    </th>
+                                                    <th>
+                                                        DB/CR
+                                                    </th>
+                                                    <th>
+                                                        Benefit ISIN
+                                                    </th>
+                                                    <th>
+                                                        Current Qty
+                                                    </th>
+                                                    <th>
+                                                        Frozen Qty
+                                                    </th>
+                                                    <th>
+                                                        Lock In Qty
+                                                    </th>
+                                                    <th>
+                                                        Lock Code1
+                                                    </th>
+                                                    <th>
+                                                        Lock In Reason
+                                                    </th>
+                                                    <th>
+                                                        Lock In Expiry DT
+                                                    </th>
+                                                    <th>
+                                                        DB/CR
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblBody" data-bind="foreach:datas">
+                                                <tr>
+                                                    <td>
+                                                        <span data-bind="text:($index() +1)"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span data-bind="text:BOID"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:rtarefno"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:Isin"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:current_quan"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:froz_quan"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:lock_in_quan"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:lock_code"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:lock_in_reason"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:lock_in_expiry"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:dbcr"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:benefit_isin1"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:current_quan1"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:frozen1"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:lock_in1"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:lock_code1"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:lock_in_reason1"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:expiry1"></span>
+
+                                                    </td>
+                                                    <td>
+                                                        <span data-bind="text:dbcr1"></span>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+
+                                    <div class="row ">
+                                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                            <label class="col-12 col-form-label ">Total Record <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-10 ">
+                                                <input class="form-control form-control-sm " type="text" data-bind="value: TotalRecord" disabled placeholder="Total Record">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                            <label class="col-12 col-form-label ">Total Current Qty <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-10 ">
+                                                <input class="form-control form-control-sm " type="text" data-bind="value: TotalCurrentQty" disabled placeholder="Total Current Qty">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                            <label class="col-12 col-form-label ">Total Freeze Qty <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-10 ">
+                                                <input class="form-control  form-control-sm" type="text" data-bind="value: TotalFreezeQty" disabled placeholder="Total Freeze Qty">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                            <label class="col-12 col-form-label ">Total Lock Qty <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-10 ">
+                                                <input class="form-control  form-control-sm" type="text" data-bind="value: TotalLockQty" disabled placeholder="Total Lock Qty">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                            <input type="button" name="CreateIPF" value="CreateIPF" id="btnCreateIPF" class="btn btn-primary" data-bind="click:CreateIPF" />
+                                        </div>
+                                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                            <input type="button" name="CreateCVF" value="CreateCVF" id="btnCreateCVF" class="btn btn-primary" data-bind="click:CreateCVF" />
+                                        </div>
+                                    </div>
+
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Footer{
+
+    <script src="~/scripts/CDSExportImport/CreateIPF.js"></script>
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+}
+
+
+
+
+
+
+

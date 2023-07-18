@@ -1,0 +1,201 @@
+﻿@{
+    ViewData["Title"] = "Bulk Insert Posting";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Header{
+<link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+<style>
+    th {
+        width: none !important;
+    }
+</style>
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Bulk Insert Posting</h6>
+                </div>
+                <hr class="my-1" />
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="row">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-sm-12 col-form-label" for="reportSelect2">Company <span class="mandatory">*</span></label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-sm-12 col-form-label" for="reportSelect2">Share Type <span class="mandatory">*</span></label>
+                                <div class="col-sm-12 col-md-10" style="display: flex">
+                                    <div class="custom-control custom-radio col-md-6 col-xl-6 col-sm-12">
+                                        <input type="radio" id="customRadio6" name="shareTypeRadio" data-bind="checked: ShareTypeBasedOn" value="P" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio6">Physical</label>
+                                    </div>
+                                    <div class="custom-control custom-radio col-md-6 col-xl-6 col-sm-12">
+                                        <input type="radio" id="customRadio7" name="shareTypeRadio" data-bind="checked: ShareTypeBasedOn" value="D" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio7">Demate</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-sm-12 col-form-label" for="reportSelect2">Bonus Type <span class="mandatory">*</span></label>
+                                <div class="col-sm-12 col-md-10" style="display: flex">
+                                    <div class="custom-control custom-radio col-md-6 col-xl-6 col-sm-12">
+                                        <input type="radio" id="customRadio1" name="bonusTypeRadio" data-bind="checked: BonusTypeBasedOn" value="2" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio1">Bonus</label>
+                                    </div>
+                                    <div class="custom-control custom-radio col-md-6 col-xl-6 col-sm-12">
+                                        <input type="radio" id="customRadio2" name="bonusTypeRadio" data-bind="checked: BonusTypeBasedOn" value="1" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio2">Dividend</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" style="color:transparent">l</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="btn btn-primary col" type="button" value="Search" data-bind="click: LoadDividendLists">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Dividend <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select class="form-control form-control-sm" id="DividendList" data-bind='options: DividendLists,optionsText: "ShowDividendText",value:SelectedDividend, optionsCaption:"---Dividends---"'>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <hr></hr>
+                        <div class="row" id="BonusDiv">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Previous Total Kitta</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="PrevTotKitta" disabled="disabled" data-bind="value:PrevTotKitta" type="text" placeholder="PrevTotKitta">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Previous Fraction</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="PrevFrac" disabled="disabled" data-bind="value:PrevFrac" type="text" placeholder="Previous Fraction">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Total ShKitta</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="TotShKitta" disabled="disabled" data-bind="value:TotShKitta" type="text" placeholder="Total ShKitta">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Actual Bonus</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="ActualBonus" disabled="disabled" data-bind="value:ActualBonus" type="text" placeholder="Actual Bonus">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Bonus With Prev Frac</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="ABWithPFrac" disabled="disabled" data-bind="value:ABWithPFrac" type="text" placeholder="Bonus With Prev Frac">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Issue Bonus</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="IssueBonus" disabled="disabled" data-bind="value:IssueBonus" type="text" placeholder="Issue Bonus">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Remaining Fraction</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="RemFrac" disabled="disabled" data-bind="value:RemFrac" type="text" placeholder="Remaining Fraction">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="DividendDiv">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Warrant Amount</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="WarrantAmount" disabled="disabled" data-bind="value:WarrantAmount" type="text" placeholder="Warrant Amount">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Dividend Tax</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="DividendTax" disabled="disabled" data-bind="value:DividendTax" type="text" placeholder="Dividend Tax">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Bonus Adjust</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="BonusAdj" disabled="disabled" data-bind="value:BonusAdj" type="text" placeholder="Bonus Adjust">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Bonus Tax</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="BonusTax" disabled="disabled" data-bind="value:BonusTax" type="text" placeholder="Bonus Tax">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Previous Adjust</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="PreviousAdjust" disabled="disabled" data-bind="value:PreviousAdjust" type="text" placeholder="Previous Adjust">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Total ShKitta</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="TotalShKitta" disabled="disabled" data-bind="value:TotalShKitta" type="text" placeholder="Total ShKitta">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-sm-12 col-form-label"></label>
+                            <div class="col-sm-12 col-md-10">
+                                <button type="button" class="btn btn-primary btn-sm" disabled="disabled" id="SendToExcel" data-bind="click: SendToExcel">
+                                    Send To Excel
+                                </button>
+                            </div>
+                        </div>
+                        <hr class="my-4 ">
+                        <div class="row col-12 ">
+                          @*  <div class="col-xl-4  col-md-4 col-sm-4 col-6 ">
+                                <input type="text" class="form-control form-control-sm mr-2 mt-1 " data-bind="value:PostingRemarks" placeholder="Posting Remarks" maxlength="10" />
+                            </div>*@
+                           <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                        <div class="input-group date col-sm-12 col-md-10 mt-1">
+                                            <div class="input-group-prepend">
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm"  data-bind="value: PostingDate , text:PostingDate" id="PostingDate">
+                                        </div>
+                                    </div>
+                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-success  col-12" data-bind="click:Save.bind($data,'A')" value="Authorization">
+                            </div>
+                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-danger  col-12" data-bind="click:Save.bind($data,'R')" value="Rejection">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section footer{
+
+<script src="~/vendor/sweetalert/sweet-alert.js"></script>
+<script src="~/scripts/DividendManagement/BulkInsertPosting.js"></script>
+
+    }
+

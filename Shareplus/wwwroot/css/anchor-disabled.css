@@ -1,0 +1,8 @@
+﻿a.anchorDisabled {
+    pointer-events: none;
+    cursor: default;
+}
+a.anchorEnabled {
+    pointer-events: auto;
+    cursor: pointer;
+}

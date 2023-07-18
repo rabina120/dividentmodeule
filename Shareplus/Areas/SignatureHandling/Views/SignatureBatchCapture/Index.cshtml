@@ -1,0 +1,133 @@
+﻿@{
+    ViewData["Title"] = "Signature Handling - Signature Batch Capture/Export";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+<link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+<style>
+    th {
+        width: none !important;
+    }
+</style>
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Signature Batch Capture/Export</li>
+                                <li class="breadcrumb-item active" aria-current="page">Signature Batch Capture/Export</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Signature Batch Capture/Export</h6>
+                </div>
+
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+
+                        <form>
+
+                            <div class="row">
+                                <div class="form-group row col-md-6">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-11">
+                                        <select class="form-control form-control-sm" disabled="disabled" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                 <fieldset class="form-group col-6 mt-4">
+                                    <legend class="col-form-label col-12 pt-0">
+                                        
+                                   </legend>
+                                    <div class="row col-12 mt-2">
+
+
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="customRadio1" name="shareTypeSearch" data-bind="checked: SignatureImportExport, checkedValue :'I'" checked class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio1">Signature Import</label>
+                                        </div>
+                                        <div class="custom-control custom-radio ml-4">
+
+                                            <input type="radio" id="customRadio2" name="shareTypeSearch" data-bind="checked: SignatureImportExport, checkedValue:'E'" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio2">Signature Export</label>
+                                        </div>
+
+                                    </div>
+                                </fieldset>
+                            </div>
+                            
+
+                            <hr class="my-4">
+                            <div class="row">
+                                
+                                
+                            
+
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Start ShHolder No <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm"  disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter ShHolder Number"
+                                               id="StartShHolderNo" data-bind="value:StartShHolderNo" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">End ShHolder No <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter ShHolder Number"
+                                               id="EndShHolderNo" data-bind="value:EndShHolderNo" />
+                                    </div>
+                                </div>
+                                    @*<div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                        <label class="col-12 col-form-label">Capture Date<span class="mandatory">*</span></label>
+                                        <div class="input-group date col-sm-12 col-md-10 mt-1">
+                                            <div class="input-group-prepend">
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" data-bind="value: CaptureDate" id="CaptureDate">
+                                        </div>
+                                    </div>*@
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                        <label class="col-12 col-form-label ">Signature Location<span class="mandatory">*</span></label>
+                                        <div class="col-sm-12 col-md-12 ">
+                                            <input class="form-control form-control-sm "  type="file" multiple accept="image/jpeg, image/png, image/bmp" name="image[]" id="signatureFile">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                        <p id="UploadMessage" class="col-12 col-form-label "><span class="mandatory">Remember To Save The Name Respective To The Holder No. While Uploading The Images and Check the Images are in Correct Format i.e., 
+                                            JPEG/PNG/BMP Type and Size Below 1 MB .
+                                        </span></p>
+                                        
+                                    </div>
+                                    <div class="row col-12 p-4 justify-content-center ">
+
+                                        <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                            <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="Save" value="OK" data-bind="click: Save">
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+@section Footer{
+<script src="~/vendor/sweetalert/sweet-alert.js"></script>
+<script src="~/scripts/SignatureHandling/SignatureBatchCaptureExport.js"></script>
+}

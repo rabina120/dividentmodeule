@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "CDS Company Setup";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">CDSCompanyParameter</h6>
+                </div>
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                        </div>
+                        <form>
+                            <div class="col-12 p-2">
+                                <div class="pd-20 card-box mb-30">
+
+                                    <div class="row">
+                                       
+                                        <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11">
+                                                <select class="form-control form-control-sm" id="CompanyList" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                       
+                                       
+                                       
+                                       
+
+                                        <div class="form-group col-xl-12 col-md-12 col-sm-12 col-12">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                
+                                                    <th>IsinNo</th>
+                                                    <th>ShholderNo</th>
+                                                     <th>Type</th>
+                                                    <th>Description</th>
+                                                   
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    
+                                                    <td><input style="width: 120px" class="form-control form-control-sm medium" type="text" data-bind="value: IsinNo"/></td>
+                                                    <td><input style="width: auto" class="form-control form-control-sm" type="text" data-bind="value: ShholderNo"/></td>
+                                                    <td> <select class="form-control form-control-sm" id="OwnerType" data-bind='options: OwnerTypeList,optionsText: "ShOwnerTypeName",optionsValue:"ShOwnerType",value:SelectedOwnerType, optionsCaption:"---Owner Type---"'>
+                                        </select></td>
+                                                    <td><input style="width: 125px" class="form-control form-control-sm" type="text" data-bind="value: Description"/></td>
+                                            
+                                                    <td>
+                                                        <button class="btn btn-sm btn-primary" data-bind="click: AddPLRL"><i class="fa fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot data-bind="foreach: ParamList">
+                                                <tr>
+                                                  
+                                                    <th  data-bind="text: IsinNo"></th>
+                                                    <th data-bind="text: ShholderNo"></th>
+                                             
+                                                    <th data-bind="text: Type"></th>
+                                                     <th data-bind="text: Description"></th>
+                                                    <td style= "display: flex;">
+                                                        <button class="btn btn-sm btn-primary" data-bind="click: $root.EditCDSCompanyParameter"><i class="fa fa-pen"></i></button>
+                                                        <button class="btn btn-sm btn-danger ml-2" data-bind="click: $root.DeleteCDSCompanyParameter"><i class="fa fa-trash"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group col-xl-12 col-md-12 col-sm-12 col-12 text-right">
+                                            <button class="btn btn-sm btn-primary" data-bind="click: UploadCDSCompanyParameterFinal">Submit</button>
+                                    </div>
+                               </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Footer{
+    <script src="~/scripts/ParameterSetup/CDSCompanyParameter.js"></script>
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+}

@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Holder Management</li>
+                                <li class="breadcrumb-item active" aria-current="page">Share Holder Posting</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Share Holder Information Posting</h6>
+                </div>
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                            @*<div class="pull-left">
+                                    <h4 class="text-blue h4">Create User</h4>
+                                </div>*@
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-form-label" for="reportSelect2">Company <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                       <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-form-label" for="reportSelect2">Record Type <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-12 col-12 " style="display: flex">
+                                        <div class="custom-control custom-radio col-md-6 col-xl-6 col-sm-12 col-12">
+                                            <input type="radio" id="AddRadio" name="customRadio1" class="custom-control-input" data-bind="checked:RecordType,checkedValue:'A'">
+                                            <label class="custom-control-label" for="AddRadio">Added</label>
+                                        </div>
+                                        <div class="custom-control custom-radio col-md-6 col-xl-6 col-sm-12 col-12">
+                                            <input type="radio" id="UpdateRadio" name="customRadio2" class="custom-control-input" data-bind=" checked:RecordType,checkedValue:'U'">
+                                            <label class="custom-control-label" for="UpdateRadio">Updated</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                    <label class="col-sm-12 col-md-12 col-form-label" for="SplitDateFrom">Date From </label>
+                                    <div class="input-group date col-sm-12 col-md-10">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Date From" id="dateFrom" data-bind="value: dateFrom">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                    <label class="col-sm-12 col-md-12 col-form-label" for="SplitDateTo">Date To </label>
+                                    <div class="input-group date col-sm-12 col-md-10">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Date To" id="dateTo" data-bind="value: dateTo">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" style="color:transparent"> l</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input type="button" class="btn btn-primary col" data-bind="click:loadDataTable" value="Refresh">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-12 p-3">
+                                <table id="tbl_Add_Records_Sholder" class="table  table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th> <input type="checkbox" data-bind="checked: SelectAll" id="chk" /></th>
+                                            <th>Approved</th>
+                                            <th>Holder No</th>
+                                            <th>First Name</th>
+                                            <th>Address</th>
+                                            <th>DistCode</th>
+                                            <th>TotalKitta</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach:ShHolderList">
+                                        <tr>
+                                            <td><input type="checkbox" data-bind="checked: Selected" class="case" name="case[]" /></td>
+                                            <td data-bind="text: Approved()"></td>
+                                            <td data-bind="text: ShholderNo()"></td>
+                                            <td data-bind="text: FName() + ' '+ LName()"></td>
+                                            <td data-bind="text: Address()"></td>
+                                            <td data-bind="text: DistCode()"></td>
+                                            <td data-bind="text: TotalKitta()"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+
+                        </form>
+
+                        <hr class="my-4 ">
+                        <div class="row col-12 ">
+                            <div class="col-xl-4  col-md-4 col-sm-6 col-6 ">
+                                <input type="text" class="form-control form-control-sm mr-2 mt-1 " placeholder="Posting Remarks" data-bind="value:PostingRemarks" maxlength="15" />
+                            </div>
+                            <div class="col-xl-2  col-md-2 col-sm-6 col-6 ">
+                                <input type="date" class="form-control form-control-sm mr-2 mt-1 " data-bind="value:PostingDate" />
+                            </div>
+                            <div class="col-xl-2 col-md-2 col-sm-4 col-4 ">
+                                <input type="button" class="btn btn-success  col-12" data-bind="click:PostShholderInfo.bind($data,'A')" value="Authorization">
+                            </div>
+                            <div class="col-xl-2 col-md-2 col-sm-4 col-4 ">
+                                <input type="button" class="btn btn-warning  col-12" data-bind="click:PostShholderInfo.bind($data,'R')" value="Rejection">
+                            </div>
+                            <div class="col-xl-2 col-md-2 col-sm-4 col-4 ">
+                                <input type="button" class="btn btn-danger col-12" id= "btnDelete" data-bind="click:PostShholderInfo.bind($data,'D')" value="Delete">
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Footer{
+    <script language="JavaScript" type="text/javascript">
+
+        function toggle(source) {
+            checkboxes = document.getElementsByName('case[]'); for (var i = 0, n = checkboxes.length;
+                i < n; i++) { checkboxes[i].checked = source.checked; }
+        }
+
+
+    </script>
+    <script src="https://unpkg.com/floatthead"></script>
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/scripts/HolderManagement/ShareHolderPosting.js?v=0.1"></script>
+
+
+}

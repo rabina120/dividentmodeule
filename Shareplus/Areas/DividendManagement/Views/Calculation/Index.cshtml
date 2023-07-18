@@ -1,0 +1,222 @@
+﻿@{
+    ViewData["Title"] = "Calculation Upload";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+@section Header{
+    <link href="/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
+}
+
+    <div class="container-fluid">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-200px">
+
+                <!-- Default Basic Forms Start -->
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Calculation</h6>
+                    </div>
+
+                    <hr class="my-1">
+                    <div class="card-body">
+                        <div class="pd-20 card-box mb-30">
+                            <div class="clearfix">
+                            </div>
+                            <form>
+                                <div class="col-12 p-2">
+                                    <div class="pd-20 card-box mb-30">
+
+                                        <div class="row">
+                                            <div class="form-group col-xl-12 col-md-12 col-sm-12 col-12 text-center">
+                                                @*<button id="Add" class="btn btn-primary" data-bind="click: AddAction">Add</button>*@
+                                                @* <button id="Delete" class="btn btn-danger" data-bind="click: DeleteAction">Delete</button>*@
+                                            </div>
+                                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12" style="margin-left: 12px;margin-top: -42px;">
+                                                <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                                <div class="col-sm-12 col-md-11">
+                                                    <select class="form-control form-control-sm" id="Companysel" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12" style="margin-left: 12px;">
+                                                @*<label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11">
+                                            <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                            </select>
+                                            </div>*@
+                                                <label>
+                                                    <input name="Test" type="radio" value="P"
+                                                       data-bind="checked: radioSelectedOptionValue" />
+                                                    Physical
+                                                </label>
+                                                <label>
+                                                    <input name="Test" type="radio" value="D"
+                                                       data-bind="checked: radioSelectedOptionValue" />
+                                                    Demat
+                                                </label>
+                                            </div>
+
+                                          
+
+
+
+                                            <div>
+                                                <button id="Add" class="btn btn-primary" data-bind="click: Search">Search</button>
+
+                                                <button id="Calc" class="btn btn-danger" data-bind="click: Calculate">Calculate</button>
+
+                                                <button id="Calc" class="btn btn-danger" data-bind="click: ResetForm">Reset</button>
+                                            </div>
+
+
+
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12 col-12">
+                                                <label class="col-sm-12 col-md-11 col-form-label">Dividend<span class="mandatory"></span></label>
+                                                <div class="col-sm-12 col-md-11">
+                                                    <select class="form-control form-control-sm" id="DividendList" data-bind='options: DividendLists,optionsText: "ShowDividendText",optionsValue:"Divcode",value:SelectedDividend, optionsCaption:"---Dividends---"'>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12 col-12">
+                                                <label class="col-sm-12 col-md-11 col-form-label">Bonus<span class="mandatory"></span></label>
+                                                <div class="col-sm-12 col-md-11">
+                                                    <select class="form-control form-control-sm" id="DividendList" data-bind='options: BonusLists,optionsText: "ShowDividendText",optionsValue:"Divcode",value:SelectedBonus, optionsCaption:"---Bonus---"'>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="form-group col-xl-12 col-md-12 col-sm-12 col-12">
+                                                <div class="col-md-4">
+                                                    <button type="button" class="btn btn-primary btn-sm" data-bind='click: DownloadDummyExcel'>Download Dummy Excel</button>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-xl-4 col-md-5 col-sm-12 col-12">
+                                                <div class="col-md-12 custom-file">
+                                                    <input type="file" class="file" id="fileupload" name="files" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" @*data-bind="enable: SelectedDividend()!=undefined"*@ />
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12 col-12">
+
+                                                <div class="col-md-12">
+                                                    <select class="form-control form-control-sm" id="SheetNameList" data-bind='options: SheetLists,optionsText: "SheetName",value:SelectedSheet, optionsCaption:"---Excel Sheet Name---"'>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12 col-12">
+                                                <div class="col-md-12">
+                                                    <button class="btn btn-primary btn-sm" type="button" data-bind="click: UploadExcel">Upload</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xl-12 col-md-12 col-sm-12 col-12">
+                                                <table class="table table-bordered" style="font-size:0.7rem">
+                                                    <thead>
+                                                        <tr id="forTopView">
+                                                            @* <th>S.N</th>*@
+                                                            <th data-bind="visible: VisibleHolderNo()">Holder Number</th>
+                                                            <th data-bind="visible: VisibleBOID()">BOID</th>
+                                                            <th>Holder Name</th>
+                                                            <th>Address</th>
+                                                            <th>Total Kitta</th>
+                                                            <th>Fraction Kitta</th>
+                                                            <th>Total </th>
+
+                                                            
+                                                            <th>Divident Amt </th>
+                                                            <th>Div Tax </th>
+                                                            <th>NetPay </th>
+                                                            <th>Act. Bonus </th>
+                                                            <th>Bonus W Prev Frac</th>
+                                                            <th>Issue Bonus</th>
+                                                            <th>Rem Fraction </th>
+                                                            <th>Bonus Tax </th>
+
+
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            @* <td></td>*@
+                                                            <td data-bind="visible:VisibleHolderNo()"><input style="width: 120px" class="form-control form-control-sm medium" type="text" id="holderno" onkeypress="return isNumberKey(event)" data-bind="value: HolderNo" /></td>
+                                                            <td data-bind="visible:VisibleBOID()"><input style="width: 120px" class="form-control form-control-sm medium" type="text" id="boid" onkeypress="return isNumberKey(event)" data-bind="value: Boid" /></td>
+                                                            <td><input id="forFocusInput" style="width: auto" class="form-control form-control-sm" type="text" data-bind="value: HolderName" /></td>
+                                                            <td><input style="width: 125px" class="form-control form-control-sm text-right" type="text" data-bind="value: Address" /></td>
+                                                            <td><input style="width: 125px" class="form-control form-control-sm text-right" type="text" onkeypress="return isNumberKey(event)" data-bind="value: TotalKitta" /></td>
+                                                            <td><input style="width: 125px" class="form-control form-control-sm text-right" type="text" onkeypress="return isNumberKey(event)" data-bind="value: FractionKitta" /></td>
+                                                            <td><input style="width: 125px" class="form-control form-control-sm text-right" type="text" onkeypress="return isNumberKey(event)" data-bind="value: Total" /></td>
+
+
+                                                            <td><input style="width: 125px" class="form-control form-control-sm text-right" type="text" data-bind="value: ActualDividentAmount" disabled /></td>
+                                                            <td><input style="width: 125px" class="form-control form-control-sm text-right" type="text" data-bind="value: DividendTax" disabled /></td>
+                                                            <td><input style="width: 125px" class="form-control form-control-sm text-right" type="text" data-bind="value: NetPay" disabled /></td>
+                                                            <td><input style="width: 125px" class="form-control form-control-sm text-right" type="text" data-bind="value: ActualBonus" disabled /></td>
+                                                            <td><input style="width: 125px" class="form-control form-control-sm text-right" type="text" data-bind="value: BonusWithPrevFraction" disabled /></td>
+                                                            <td><input style="width: 125px" class="form-control form-control-sm text-right" type="text" data-bind="value: IssueBonus" disabled /></td>
+                                                            <td><input style="width: 125px" class="form-control form-control-sm text-right" type="text" data-bind="value: RemainingFraction" disabled /></td>
+                                                            <td><input style="width: 125px" class="form-control form-control-sm text-right" type="text" data-bind="value: bonustax" disabled /></td>
+
+                                                            <td>
+                                                                <button class="btn btn-sm btn-primary" data-bind="click: AddDiv"><i class="fa fa-plus"></i></button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot data-bind="foreach: DivUploadList">
+                                                        <tr>
+                                                            @* <th data-bind="text: $index() + 1"></th>*@
+                                                            <th data-bind="text: holderNo,visible:$root.VisibleHolderNo()"></th>
+                                                            <th data-bind="text: boid,visible:$root.VisibleBOID()"></th>
+                                                            <th data-bind="text: holderName"></th>
+                                                            <th data-bind="text: address"></th>
+                                                            <th data-bind="text: totalKitta"></th>
+                                                            <th data-bind="text: fractionKitta"></th>
+                                                            <th data-bind="text: total"></th>
+
+                                                            <th data-bind="text: ActualDividentAmount"></th>
+                                                            <th data-bind="text: DividendTax"></th>
+                                                            <th data-bind="text: NetPay"></th>
+                                                            <th data-bind="text: ActualBonus"></th>
+                                                            <th data-bind="text: BonusWithPrevFraction"></th>
+                                                            <th data-bind="text: IssueBonus"></th>
+                                                            <th data-bind="text: RemainingFraction"></th>
+                                                            <th data-bind="text: bonustax"></th>
+
+                                                            <td style="display: flex;">
+                                                                <button class="btn btn-sm btn-primary" data-bind="click: $root.EditDiv"><i class="fa fa-pen"></i></button>
+                                                                @* <button class="btn btn-sm btn-danger ml-2" data-bind="click: $root.DeleteDiv"><i class="fa fa-trash"></i></button>*@
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                            <div class="row">
+                                                <pagination params="value: Pagination"></pagination>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group col-xl-12 col-md-12 col-sm-12 col-12 text-right">
+                                           @* <button class="btn btn-sm btn-primary" data-bind="click: Save">Submit</button>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section footer{
+    <script src="/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="/scripts/DividendManagement/Calculation.js"></script>
+}

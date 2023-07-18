@@ -1,0 +1,243 @@
+﻿
+@{
+    ViewData["Title"] = "BO to BO Transfer";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
+}
+
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">BO To BO Transfer</h6>
+                </div>
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button class="btn btn-primary mr-2 mt-1 col-3" id="addBtn" data-bind="click: AddBOIDTransfer">Add</button>
+                                <button class="btn btn-success mr-2 mt-1 col-3" id="updateBtn" data-bind="click: UpdateBOIDTransfer">Update</button>
+                                <button class="btn btn-warning mr-2 mt-1 col-3" id="deleteBtn" data-bind="click: DeleteBOIDTransfer">Delete</button>
+                            </div>
+                        </div>
+                        <form>
+                            <div class="col-12 p-2">
+                                <div class="pd-20 card-box mb-30">
+                                    <div class="row">
+                                        <div class="form-group col-xl-4 col-md-5 col-sm-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11">
+                                                <select class="form-control form-control-sm" id="CompanyList" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xl-4 col-md-5 col-sm-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Transfer Type <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11">
+                                                <select class="form-control form-control-sm" id="" data-bind='options: TransferTypes,optionsText: "TypeName",optionsValue:"Type",value:TransferType, optionsCaption:"---Transfer-Types---"'>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-5 col-md-5 col-sm-12">
+                                        <label class="col-sm-12 col-md-11 col-form-label">BOID Search<span class="mandatory"> *</span></label>
+                                        <div class="col-sm-12 col-md-11" style="display: flex;">
+                                            <input type="text" class="form-control form-control-sm" placeholder="Enter BOID" data-bind="value: BoidKeyword" />
+                                            <button class="btn btn-sm btn-primary ml-2" data-bind="click: SearchBoid">Search</button>
+                                        </div>
+                                        @*<div class="col-sm-12 col-md-11 mt-2">
+                <select class="form-control form-control-sm" id="" data-bind='options: BOIDList,optionsText: "BOID",optionsValue:"BOID",value:TransferType'>
+                </select>
+            </div>*@
+                                    </div>
+                                    <div class="form-group row col-xl-5 col-md-12 col-sm-12">
+                                        <label class="col-sm-12 col-md-11 col-form-label">New BOID <span class="mandatory"> *</span></label>
+                                        <div class="col-sm-12 col-md-11">
+                                            <input type="text" class="form-control form-control-sm" data-bind="value: NewBOID, event: ChangeNewBoID" />
+                                        </div>
+                                    </div>
+                                    <div class="row" data-bind="visible: TransferType() == 'DT' || TransferType() == 'BE'">
+                                        <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Full Name <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11">
+                                                <input type="text" class="form-control form-control-sm" data-bind="value: NewName" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Father Name <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11">
+                                                <input type="text" class="form-control form-control-sm" data-bind="value: NewFName" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Grand Father Name <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11">
+                                                <input type="text" class="form-control form-control-sm" data-bind="value: NewGFName" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">Address <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-11">
+                                                <input type="text" class="form-control form-control-sm" data-bind="value: NewAddress" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <table class="table table-responsive">
+                                            <thead>
+                                                <tr>
+                                                    <th>S.N.</th>
+                                                    <th>Full Name </th>
+                                                    <th>Father Name </th>
+                                                    <th>Grandfather Name</th>
+                                                    <th>Address</th>
+                                                    <th>Bank Name</th>
+                                                    <th>Bank Account</th>
+                                                    <th>Net Pay</th>
+                                                    <th>Warrent Number</th>
+                                                    <th>Warrent Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach: HolderInfoObj">
+                                                <tr>
+                                                    <td data-bind="text: ($index()+1)"></td>
+                                                    <td data-bind="text: fullname"></td>
+                                                    <td data-bind="text: faname"></td>
+                                                    <td data-bind="text: grfaname"></td>
+                                                    <td data-bind="text: address"></td>
+                                                    <td data-bind="text: bankname"></td>
+                                                    <td data-bind="text: bankaccno"></td>
+                                                    <td data-bind="text: NetPay"></td>
+                                                    <td data-bind="text: warrantno"></td>
+                                                    <td data-bind="text: warrantamt"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <!--<div class="row" data-bind="with: HolderInfoObj">-->
+                                    @*<div class="col-md-12" data-bind="with: HolderInfo">*@
+                                    <!--<div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+        <label class="col-sm-12 col-md-11 col-form-label">Full Name <span class="mandatory"></span></label>
+        <div class="col-sm-12 col-md-11">
+            <div class="" data-bind="text: fullname"></div>
+        </div>
+    </div>
+    <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+        <label class="col-sm-12 col-md-11 col-form-label">Father Name <span class="mandatory"></span></label>
+        <div class="col-sm-12 col-md-11">
+            <div class="" data-bind="text: faname"></div>
+        </div>
+    </div>
+    <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+        <label class="col-sm-12 col-md-11 col-form-label">Grandfather Name <span class="mandatory"></span></label>
+        <div class="col-sm-12 col-md-11">
+            <div class="" data-bind="text: grfaname"></div>
+        </div>
+    </div>
+    <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+        <label class="col-sm-12 col-md-11 col-form-label">Address <span class="mandatory"></span></label>
+        <div class="col-sm-12 col-md-11">
+            <div class="" data-bind="text: address"></div>
+        </div>
+    </div>
+    <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+        <label class="col-sm-12 col-md-11 col-form-label">Bank Name<span class="mandatory"></span></label>
+        <div class="col-sm-12 col-md-11">
+            <div class="" data-bind="text: bankname"></div>
+        </div>
+    </div>
+    <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+        <label class="col-sm-12 col-md-11 col-form-label">Bank Account<span class="mandatory"></span></label>
+        <div class="col-sm-12 col-md-11">
+            <div class="" data-bind="text: bankaccno"></div>
+        </div>
+    </div>
+    <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+        <label class="col-sm-12 col-md-11 col-form-label">Net Pay<span class="mandatory"></span></label>
+        <div class="col-sm-12 col-md-11">
+            <div class="" data-bind="text: NetPay"></div>
+        </div>
+    </div>
+    <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+        <label class="col-sm-12 col-md-11 col-form-label">Warrent Number <span class="mandatory"></span></label>
+        <div class="col-sm-12 col-md-11">
+            <div class="" data-bind="text: warrantno"></div>
+        </div>
+    </div>
+    <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+        <label class="col-sm-12 col-md-11 col-form-label">Warrent Amount <span class="mandatory"></span></label>
+        <div class="col-sm-12 col-md-11">
+            <div class="" data-bind="text: warrantamt"></div>
+        </div>
+    </div>
+    <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+        <label class="col-sm-12 col-md-11 col-form-label">Taxed Amount <span class="mandatory"></span></label>
+        <div class="col-sm-12 col-md-11">
+            <div class="" data-bind="text: taxdamt"></div>
+        </div>
+    </div>
+    <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+        <label class="col-sm-12 col-md-11 col-form-label">Bonsus Tax <span class="mandatory"></span></label>
+        <div class="col-sm-12 col-md-11">
+            <div class="" data-bind="text: bonustax"></div>
+        </div>
+    </div>
+    <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+        <label class="col-sm-12 col-md-11 col-form-label">Bonsus Adjustment <span class="mandatory"></span></label>
+        <div class="col-sm-12 col-md-11">
+            <div class="" data-bind="text: bonusadj"></div>
+        </div>
+    </div>
+    <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+        <label class="col-sm-12 col-md-11 col-form-label">Previous Adjustment <span class="mandatory"></span></label>
+        <div class="col-sm-12 col-md-11">
+            <div class="" data-bind="text: prevadj"></div>
+        </div>
+    </div>-->
+                                    @*</div>*@
+
+                                    <!--</div>-->
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <button type="button" class="btn btn-primary mr-2 mt-1 col-3" data-bind="click: SaveBOIDChange">Submit</button>
+                                            <button type="button" class="btn btn-danger mr-2 mt-1 col-3" data-bind="click: ClearAll">Clear</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4 ">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Footer{
+
+    <script src="~/scripts/DividendManagement/BoToBoTransfer.js"></script>
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+
+
+}

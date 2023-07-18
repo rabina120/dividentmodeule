@@ -1,0 +1,223 @@
+﻿@{
+    ViewData["Title"] = "CDS - Reversal Entry";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Header{
+<link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+<style>
+    th {
+        width: none !important;
+    }
+</style>
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    CDS Module
+                                </li>
+                                <li class="breadcrumb-item">
+                                    Reversal Entry
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Reversal Entry</h6>
+                </div>
+                <hr class="my-1" />
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group row col-xl-4 col-md-5 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-11">
+                                    <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Shholder No <span class="mandatory">*</span></label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Share Holder Number" id="ShholderNo" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:GetSholderInformation.bind($data,ShholderNo,'From'), event:{blur:GetSholderInformation.bind($data,ShholderNo,'From')}" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-5 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="HOLDERNAME">Holder Name </label>
+                                <div class="col-sm-12 col-md-11">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" id="Holder Name" placeholder="Holder Name" data-bind="value:HOLDERNAME" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="TotalKitta">Total kitta </label>
+                                <div class="col-sm-12 col-md-11">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" id="TotalKitta" placeholder="Total Kitta" data-bind="value:TotalKitta" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="DIV_DRN">
+
+
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">DRN No <span class="mandatory">*</span></label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter DRN Number" id="DRNNo" data-bind="value:DRNNO" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-2 col-md-5 col-sm-12">
+                                <label class="col-12 col-form-label"></label>
+
+                                <div class="col-sm-12 col-md-12 col-xl-12 mt-4">
+                                    <button class="btn btn-info" id="DRNDataButton" disabled="disabled" data-bind="click: GetDrnData">View Data</button>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <hr class="my-3" />
+                        <div class="col-12 p-3">
+                            <table id="tbl_Certificate_List" class="table  table-bordered ">
+                                <thead>
+                                    <tr>
+                                        <th> <input type="checkbox" data-bind="checked: SelectAll" id="chk" /></th>
+                                        <th>CertNo</th>
+                                        <th>ShKitta</th>
+                                        <th>SrNoFrom</th>
+                                        <th>SrNoTo</th>
+                                        <th>AccountNo</th>
+                                        <th>Posted Date</th>
+                                        <th>Reg No</th>
+                                        <th>ISIN No</th>
+                                        <th>DemateHolderNo</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:CertificateList">
+                                    <tr>
+                                        <td><input type="checkbox" data-bind="checked: Selected" class="case" name="case[]" /></td>
+                                        <td data-bind="text: tcertno"></td>
+                                        <td data-bind="text: tshkitta"></td>
+                                        <td data-bind="text: tsrnofrom"></td>
+                                        <td data-bind="text: tsrnoto"></td>
+                                        <td data-bind="text: tbo_acct_no"></td>
+                                        <td data-bind="text: tapp_date"></td>
+                                        <td data-bind="text: tregno"></td>
+                                        <td data-bind="text: tisin_no"></td>
+                                        <td data-bind="text: tshholderNo"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <hr class="my-4 ">
+                        <div class="row col-12 ">
+                            <div class="col-xl-6  col-md-6 col-sm-6 col-6 mt-1">
+                                <input type="text" class="form-control form-control-sm mr-2 mt-1 " placeholder="Entry Remarks" data-bind="value: PostingRemarks" maxlength="100" />
+                            </div>
+
+                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-success mr-2 mt-1 col-12" id="Save" disabled="disabled" value="Save" data-bind="click:SaveReversal.bind($data,'S')">
+                            </div>
+                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-info mr-2 mt-1 col-12" id="Report" value="Report" data-toggle="modal" data-target="#reportModal">
+                            </div>
+                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-secondary mr-2 mt-1 col-12" id="Cancel" value="Cancel" data-bind="click:ClearControl">
+                            </div>
+
+                        </div>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="col-12">
+                                            <div class="card col-12">
+                                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                                    <h6 class="m-0 font-weight-bold text-primary">Generate Report</h6>
+                                                </div>
+                                                <hr class="my-1">
+                                                <div class="card-body">
+                                                    <div class ="row">
+                                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                                        <label class="col-12 col-form-label">Date From<span class="mandatory">*</span></label>
+                                                        <div class="input-group date col-sm-12 col-md-10 mt-1">
+                                                            <div class="input-group-prepend">
+                                                            </div>
+                                                            <input type="text" class="form-control form-control-sm"  data-bind="value: DateFrom" id="dateFrom">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12 " id="simple-date2">
+                                                        <label class="col-12 col-form-label">Date To<span class="mandatory">*</span></label>
+                                                        <div class="input-group date col-sm-12 col-md-10 mt-1">
+                                                            <div class="input-group-prepend">
+                                                            </div>
+                                                            <input type="text" class="form-control form-control-sm"  data-bind="value: DateTo" id="dateTo">
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" data-bind="click : GenerateReport">Report</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section footer{
+<script type="text/javascript">
+    function toggle(source) {
+        checkboxes = document.getElementsByName('case[]');
+        for (var i = 0, n = checkboxes.length; i < n; i++) {
+            checkboxes[i].checked = source.checked;
+        }
+    }
+
+</script>
+<script src="https://unpkg.com/floatthead"></script>
+<script src="~/vendor/sweetalert/sweet-alert.js"></script>
+<script src="~/scripts/CDSModule/ReversalEntry.js"></script>
+
+}
+

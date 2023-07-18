@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            @*<div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Parameter Setup</li>
+                                <li class="breadcrumb-item active" aria-current="page">Payment Setup</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>*@
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Payment Setup</h6>
+                </div>
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="row justify-content-center">
+                            <div class="col-3">
+                                <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " id="AddButton" value="Add" data-bind="click: ChooseOptions.bind($data,'A')">
+                            </div>
+                            <div class="col-3 ">
+                                <input type="button" class="btn btn-info mr-2 mt-1 col-12 " id="UpdateButton" value="Edit" data-bind="click: ChooseOptions.bind($data,'U')">
+                            </div>
+
+                        </div>
+                        <br />
+
+                        <div class="row">
+
+
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" for="PaymentCode">
+                                    Payment Center
+                                    Code:
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="PaymentCode" onkeypress="return isNumberKey(event)" data-bind="value: PCode,valueUpdate: 'input',executeOnEnter:GetPaymentDetails.bind($data,PCode), event:{blur:GetPaymentDetails.bind($data,PCode)}" type="text" placeholder="Enter Payment Center Code">
+
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" for="PName">Payment Names: <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="PName" data-bind="value: PName" type="text" placeholder="Enter Payment Name">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" for="PAddress">
+                                    Payment Address: <span class="mandatory">*</span>
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="PAddress" data-bind="value: PAddress" type="text" placeholder="Enter Payment Address">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" for="PNepName">
+                                    Payment Nepali Name:
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="PNepName" oninput="convert_to_unicode(this)" data-bind="value: PNepName" type="text" placeholder="Enter Payment Nepali Name">
+                                </div>
+                            </div>
+
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" for="PNepAdd">
+                                    Payment Nepali Address:
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="PNepAdd" oninput="convert_to_unicode(this)" data-bind="value: PNepAdd" type="text" placeholder="Enter Payment Nepali Address">
+                                </div>
+                            </div>
+
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" for="TelNo">
+                                    Telephone No:
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="TelNo" maxlength="10" onkeypress="return isNumberKey(event)" data-bind="value: TelNo" type="text" placeholder="Enter Payment Nepali Address">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <hr class="my-4 ">
+                        <div class="row col-12 p-4 justify-content-center ">
+                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="SaveButton" value="Save" data-bind="click: SavePaymentDetails">
+                            </div>
+                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-primary   mr-2 mt-1 col-12 " value="Report">
+                            </div>
+                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-warning  mr-2 mt-1 col-12 " value="Clear" data-bind="click : ClearControl">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Footer{
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/scripts/ParameterSetup/PaymentSetup.js"></script>
+}

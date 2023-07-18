@@ -1,0 +1,206 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+
+
+    <div class="container-fluid">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-200px">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <nav aria-label="breadcrumb" role="navigation">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">Certificate</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Certificate Distribution Entry</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+
+                        <div class="card mb-4">
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">Certificate Distribution Entry</h6>
+                            </div>
+                            <hr class="my-1">
+                            <div class="card-body">
+                                <div class="pd-20 card-box mb-30">
+                                    <div class="row col-12 p-4 justify-content-center ">
+                                        <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                            <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="Add" value="Add" data-bind="click:ChooseOptions.bind($data,'A')">
+                                        </div>
+                                        <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                            <input type="button" class="btn btn-danger mr-2 mt-1 col-12 " id="Delete" value="Delete" data-bind="click:ChooseOptions.bind($data, 'D')">
+                                        </div>
+
+
+                                    </div>
+                                    <div class="clearfix">
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="form-group row col-xl-4 col-md-6 col-sm-12">
+                                            <label class="col-12 col-form-label">Company Code: <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-12">
+                                                <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                   
+
+                                </div>
+                                <div class="row">
+
+                                     
+
+                                        <div class="form-group row col-xl-2 col-md-6 col-sm-12 ">
+                                            <label class="col-sm-12 col-md-11 col-form-label">
+                                                Holder No:<span class="mandatory">*</span>
+                                            </label>
+                                            <div class="col-sm-12 col-md-12">
+                                                @*<input class="form-control form-control-sm" id="txtShareHolderNo" type="text" disabled placeholder="Enter ShareHolder No" data-bind='value:ShareHolderNo'>*@
+                                                <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" type="text" disabled="disabled"  placeholder="Enter Holder No" id="ShholderNo" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:GetSholderInformation.bind($data,ShholderNo), event:{blur:GetSholderInformation.bind($data,ShholderNo)}" />
+                                            </div>
+                                        </div>
+                                    
+
+
+                                    <div class="form-group row col-xl-4 col-md-6 col-sm-12">
+                                        <label class="col-sm-4 col-md-4 col-form-label">
+                                            Name
+                                        </label>
+
+                                        <div class="col-sm-12 col-md-11">
+                                            <input class="form-control form-control-sm" id="txtname" type="text" disabled="disabled" placeholder="Name" data-bind="value: Name">
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div class="form-group row col-xl-4 col-md-6 col-sm-12">
+                                        <label class="col-sm-4 col-md-4 col-form-label">
+                                            Address
+                                        </label>
+                                        <div class="col-sm-12 col-md-11">
+                                            <input class="form-control form-control-sm" id="Address" type="text" disabled="disabled" placeholder="Address" data-bind='value:Address'>
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                    <div class="form-group row col-xl-2 col-md-6 col-sm-12">
+                                        <label class="col-sm-8 col-md-12 col-form-label">
+                                            Total Kitta
+
+                                        </label>
+                                        <div class="col-sm-12 col-md-11">
+                                            <input class="form-control form-control-sm" id="TotalKitta" type="text" disabled="disabled" placeholder="Kitta" data-bind='value:TotalKitta'>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="row">
+                                    <div class="form-group row col-xl-4 col-md-6 col-sm-12"  id="simple-data1" >
+                                        <label class="col-sm-8 col-md-12 col-form-label">
+                                            Distributed date<span class="mandatory">*</span>
+                                        </label>
+                                        <div class="col-sm-12 col-md-11 input-group date">
+                                            <input class="form-control form-control-sm" id="DistDate" type="text" disabled="disabled" placeholder="Enter Distributed Date " data-bind="value:DistDate">
+                                        </div>
+
+
+
+                                    </div>
+
+
+                                   
+
+
+                                </div>
+
+
+                                <div class="table-responsive">
+                                    <table id="Distribution_Certificate" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" data-bind="checked: SelectAll" class="case" name="case[]" />
+                                                </td>
+                                                <th>SrNo</th>
+                                                <th>CertNo</th>
+                                             
+                                                <th>SrNo From</th>
+                                                <th>SrNo To</th>
+                                                <th>Kitta</th>
+                                                <th>Distributed Date</th>
+                                                <th>Distributed ?</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="certificatelistData" data-bind="foreach: DISTRIBUTIONTRANSFERLIST">
+                                            <tr>
+                                                <td><input type="checkbox" data-bind="checked: Selected" class="case" name="case[]" /></td>
+                                                <td><span data-bind="text: ($index() + 1)"> </span> </td>
+                                                <td data-bind="text: CertNo"></td>
+                                                <td data-bind="text: SrNoFrom"></td>
+                                                <td data-bind="text: SrNoTo"></td>
+                                                <td data-bind="text: ShKitta"></td>
+                                                <td data-bind="text: CertDistDt"></td>
+                                                <td data-bind="text: DistCert"></td>
+
+
+
+
+
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="row col-12 p-4 justify-content-center ">
+                                    <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                        <input type="button" class="btn btn-success mr-2 mt-1 col-12" id="Save" value="Save" data-bind="click:SaveDistributionEntry.bind($data,'S')">
+                                    </div>
+                                    <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                        <input type="button" class="btn btn-secondary mr-2 mt-1 col-12" id="Cancel" value="Cancel" data-bind="click:ClearControl">
+                                    </div>
+
+
+                                </div>
+
+
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @section Footer{
+        <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+        <script src="~/scripts/Certificate/CertificateDistributionEntry.js"></script>
+
+    }
+

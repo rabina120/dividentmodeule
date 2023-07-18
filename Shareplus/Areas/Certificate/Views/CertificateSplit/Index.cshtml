@@ -1,0 +1,283 @@
+﻿
+@{
+    ViewData["Title"] = "Certificate Split";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
+}
+
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    CDS Module
+                                </li>
+                                <li class="breadcrumb-item">
+                                    Certificate Split
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Certificate Split</h6>
+                </div>
+                <hr class="my-1" />
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+
+                        </div>
+                        <div class="row col-12 p-4 justify-content-center">
+                            <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " id="Add" value="Add" data-bind="click:ChooseOption.bind($data, 'A')">
+                            </div>
+                            <div class="col-xl-1 col-md-1 col-sm-1 col-6 ">
+                            </div>
+                            <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-danger mr-2 mt-1 col-12" id="Delete" value="Delete" data-bind="click:ChooseOption.bind($data, 'D') ">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group row col-xl-4 col-md-5 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-11">
+                                    <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="Certificate">Certificate No:<span class="mandatory">*</span></label>
+                                <div class="col-sm-12 col-md-11">
+                                    <input type="text" class="form-control form-control-sm" onkeypress="return isNumberKey(event)" id="Certificate" disabled="disabled" data-bind="value:Certificate,valueUpdate: 'input',executeOnEnter:GetCertificateInformation, event:{blur:GetCertificateInformation}" placeholder="Enter Certificate" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-5 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="SKitta">Share Kitta</label>
+                                <div class="col-sm-12 col-md-11">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" id="SKitta" onkeypress="return isNumberKey(event)" placeholder="Kitta" data-bind="value:SKitta" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-5 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="ShHolderNo">Holder No</label>
+                                <div class="col-sm-12 col-md-11">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" id="ShHolderNo" placeholder="Holder No" data-bind="value:ShHolderNo" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="StartSNo">Start Serial No</label>
+                                <div class="col-sm-12 col-md-11">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" id="StartSNo" placeholder="Start Serial No" data-bind="value:StartSNo" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-5 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="EndSNo">End Serial No</label>
+                                <div class="col-sm-12 col-md-11">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" id="EndSNo" placeholder="End Serial No" data-bind="value:EndSNo" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="ShareCategory">Share Category</label>
+                                <div class="col-sm-12 col-md-11">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" id="ShareCategory" data-bind="value:ShareCategory " placeholder="Share Category " />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-5 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="TShareAmt">Total Share Amount</label>
+                                <div class="col-sm-12 col-md-11">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" id="TShareAmt" data-bind="value:TShareAmt " placeholder="Share Amount" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-5 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="PAmount"> Paid Amount</label>
+                                <div class="col-sm-12 col-md-11">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" id="PAmount" data-bind="value:PAmount" placeholder="Paid Amount" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="ShOwerType">ShOwner Type</label>
+                                <div class="col-sm-12 col-md-11">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" id="ShOwerType" data-bind="value:ShOwerType" placeholder="Owner Type" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-5 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="NpName">
+                                    नेपाली नाम
+                                </label>
+                                <div class="col-sm-12 col-md-11">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" id="NpName" placeholder="नेपाली नाम" data-bind="value:NpName" />
+                                </div>
+                            </div>
+                            <div class="form-group mt-4 pt-3 col-xl-4 col-md-4 col-sm-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" disabled="disabled" class="custom-control-input" data-bind="checked: DupliNo" id="CheckDuplicate">
+                                    <label class="custom-control-label" for="CheckDuplicate">Is Dublicate Certificate ? </label>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <hr class="my-2" />
+                        <div class="row">
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12" id="simple-date1">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="SplitDate">Split Date<span class="mandatory">*</span></label>
+                                <div class="col-sm-12 col-md-11">
+                                    <div class="input-group date col-sm-12 col-md-10">
+                                        <div class="input-group-prepend">
+
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" disabled="disabled" id="SplitDate" data-bind="value:SplitDate" placeholder="Enter Split Date " />
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-8 col-md-8 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="Remarks">
+                                    Remarks<span class="mandatory">*</span>
+                                </label>
+                                <div class="col-sm-12 col-md-11">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" id="Remarks" placeholder="Enter Remarks" data-bind="value:Remarks">
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-1" />
+                        <div class="col-12 p-3" style="overflow-x:auto;">
+                            <table id="Tbl_Certifciate" class="table  table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>S.N</th>
+                                        <th>Kitta To Be Splitted</th>
+                                        <th>Certifiate No.</th>
+                                        <th>Start Serial No.</th>
+                                        <th>End Serial No.</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:CertificateSplitList">
+                                    <tr>
+                                        <td data-bind="text: No"></td>
+                                        <td data-bind="text:ShKitta"></td>
+                                        <td data-bind="text:CertNo"></td>
+                                        <td data-bind="text:SrNoFrom"></td>
+                                        <td data-bind="text:SrNoTo"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr class="my-1" />
+
+                        <div class="row">
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-group row col-xl-3 col-md-3 col-sm-6">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="KittaToBeSplit">
+                                    Kitta To Be Split<span class="mandatory">*</span>
+                                </label>
+                                <div class="col-sm-12 col-12">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" id="KittaToBeSplit" placeholder="Enter Kitta To Be Split" data-bind="value:KittaToBeSplit,executeOnEnter:CheckKittaSplitted, event:{blur:CheckKittaSplitted}" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-3 col-sm-6">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="CertificateNo">Certificate No<span class="mandatory">*</span></label>
+                                <div class="col-sm-12 col-12">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" id="CertificateNo" data-bind="value:CertificateNo" placeholder="Enter Certificate Number " />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-3 col-sm-6">
+                                <label class="col-sm-12 col-md-11 col-form-label"></label>
+                                <div class="col-xl-12 col-sm-12 mt-3">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12" id="Split" disabled="disabled" value="Split" data-bind="click: AddSplitCertificateToSplit">
+                                </div>
+                            </div>
+
+                           
+                        </div>
+                        <div class="row">
+                            <div class="form-group row col-xl-3 col-md-3 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="SSrNo">
+                                    Start Sr.No<span class="mandatory">*</span>
+                                </label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" id="SSrNoFrom" placeholder="Enter Start Sr No" data-bind="value:SSrNoFrom" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row col-xl-3 col-md-3 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label" for="SSrNo">
+                                    End Sr.No<span class="mandatory">*</span>
+                                </label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" id="SSrNoTo" placeholder="Enter End Sr No" data-bind="value:SSrNoTo,valueUpdate: 'input',executeOnEnter:AddSplitCertificateToSplit, event:{blur:AddSplitCertificateToSplit}" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row col-xl-3 col-md-3 col-sm-12">
+                                <label class="col-sm-12 col-md-12 col-form-label" for="TotalSplitted">
+                                    Total Splited<span class="mandatory">*</span>
+                                </label>
+                                <div class="col-sm-12 col-12">
+                                    <input type="text" class="form-control form-control-sm" onkeypress="return isNumberKey(event)" disabled="disabled" id="TotalSplitted" placeholder="Enter Total Splitted" data-bind="value:TotalSplitted" />
+                                </div>
+                            </div>
+                       
+
+
+                            </div>
+
+                            <hr class="my-4 ">
+                            <div class="row col-12 p-4 justify-content-center ">
+
+
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12" id="Save" disabled="disabled" value="Save" data-bind="click: SaveCertificateSplit">
+                                </div>
+
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-secondary mr-2 mt-1 col-12" id="Cancel" value="Cancel" data-bind="click: ClearControl">
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section footer{
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/scripts/Certificate/CertificateSplit.js"></script>
+
+}
+
+
+

@@ -1,0 +1,251 @@
+﻿@{
+    ViewData["Title"] = "CDS - Bulk Entry";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Header{
+    <link href="/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
+}
+
+    <div class="container-fluid">
+        <div class="pd-ltr-20 xs-pd-20-10">
+            <div class="min-height-200px">
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+
+                            <nav aria-label="breadcrumb" role="navigation">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">CDS Module</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Bulk CA Entry</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Bulk Entry</h6>
+                    </div>
+                    <hr class="my-1" />
+                    <div class="card-body">
+                        <div class="pd-20 card-box mb-30">
+                            <div class="clearfix">
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-sm-12 col-md-12 col-form-label">Company <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                @*<div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                            <label class="col-12 col-form-label">Upload from <span class="mandatory">*</span></label>
+                            <div class="custom-control custom-radio ml-2">
+                            <input type="radio" id="Excel" name="customRadio" class="custom-control-input" data-bind="checked:UploadFrom,checkedValue:'E'">
+                            <label class="custom-control-label" for="Excel">Excel</label>
+                            </div>
+                            <div class="custom-control custom-radio ml-4">
+                            <input type="radio" id="System" name="customRadio" class="custom-control-input" data-bind=" checked:UploadFrom,checkedValue:'S'">
+                            <label class="custom-control-label" for="System">System</label>
+                            </div>
+                            </div>*@
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-sm-12 col-md-12 col-form-label">Cert Details <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <select class="form-control form-control-sm" id="CertDetails" data-bind='options: CertDetailList,optionsText: "CDDescription",optionsValue:"CDCert_Id",value:SelectedCertDetail, optionsCaption:"---Cert Details---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-sm-12 col-md-12 col-form-label">Owner Type <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <select class="form-control form-control-sm" id="OwnerType" data-bind='options: OwnerTypeList,optionsText: "ShOwnerTypeName",optionsValue:"ShOwnerType",value:SelectedOwnerType, optionsCaption:"---Owner Type---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-md-2 col-sm-4 col-4 ">
+                                    <input type="button" class="btn btn-success  col-12" style="margin-top: 30px;" data-bind="click:OpenPopup" value="Browse Details">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Excel file <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input type="file" id="fileupload" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" name="files" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Excel Sheet Name<span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <select class="form-control form-control-sm" id="SheetNameList" data-bind='options: SheetLists,optionsText: "SheetName",value:SelectedSheet, optionsCaption:"--Excel Sheet Name--"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Start Row No</label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" data-bind="value:StartRow" id="StartRow" onkeypress="return isNumberKey(event)" type="text" placeholder="Start Row No">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">End Row No</label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" data-bind="value:EndRow" id="EndRow" onkeypress="return isNumberKey(event)" type="text" placeholder="End Row No">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                    <label class="col-12 col-form-label" for="dateOfBirth">Transaction Date <span class="mandatory">*</span></label>
+                                    <div class="input-group date col-sm-12 col-md-10">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" disabled="disabled" data-bind="value: TransactionDate , text:TransactionDate" id="TransactionDate">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Total Kitta</label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:TotalKitta" onkeypress="return isNumberKey(event)" type="text" placeholder="Total Kitta">
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-2 col-md-2 col-sm-4 col-4 ">
+                                    <label class="col-12 col-form-label"></label>
+                                    <input type="button" class="btn btn-info col-12 mt-2" id="UploadExcel" data-bind="click:UploadExcel" value="Upload Excel">
+                                </div>
+                                <div class="col-xl-2 col-md-2 col-sm-4 col-4">
+                                    <label class="col-12 col-form-label"></label>
+
+                                    <input type="button" name="DummyExcelDownload" value="DummyExcelDownload" id="DummyExcelDownload" class="btn btn-primary" data-bind="click:DummyDataDownload" />
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 p-3">
+                                    <table id="tbl_Excel_Data" class="table  table-bordered ">
+                                        <thead>
+                                            <tr>
+
+                                                <th>S.N.</th>
+                                                <th>ShHolderNo</th>
+                                                <th>ShHolderName</th>
+                                                <th>CertNo</th>
+                                                <th>SrNoFrom</th>
+                                                <th>SrNoTo</th>
+                                                <th>Kitta</th>
+                                                <th>BOID</th>
+                                                <th>DPCode</th>
+                                                <th>DP_ID_CDS</th>
+                                                <th>ISIN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach:ExcelDataList">
+                                            <tr>
+
+                                                <td><span data-bind="text: ($index() +1)"></span></td>
+                                                <td data-bind="text: ShHolderNo"></td>
+                                                <td data-bind="text: HolderName"></td>
+                                                <td data-bind="text: CertNo"></td>
+                                                <td data-bind="text: SrNoFrom"></td>
+                                                <td data-bind="text: SrNoTo"></td>
+                                                <td data-bind="text: Kitta"></td>
+                                                <td data-bind="text: BOID"></td>
+                                                <td data-bind="text: DPCode"></td>
+                                                <td data-bind="text: DPID"></td>
+                                                <td data-bind="text: ISIN_NO"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row col-12 ">
+
+
+                                    <div class="col-xl-2 col-md-2 col-sm-4 col-4 ">
+                                        <input type="button" class="btn btn-info col-12" data-bind="click:Save" value="Save">
+                                    </div>
+                                    <div class="col-xl-2 col-md-2 col-sm-4 col-4 ">
+                                        <input type="button" class="btn btn-info col-12" data-bind="click:Refresh" value="Refresh">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="DetailsPopup" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 90%;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">BOID Transfer Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="row" style="margin-left:500px">
+                    <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                        <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " id="btnExcel" value="Excel" data-bind="click:GenerateReport.bind($data, 'E')">
+                    </div>
+                    <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                        <input type="button" class="btn btn-danger mr-2 mt-1 col-12" id="btnPDF" value="PDF" data-bind="click:GenerateReport.bind($data, 'P') ">
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12">
+                        <table id="tbl_Details" class="table  table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Cert No</th>
+                                    <th>Holder Number</th>
+                                    <th>Holder Name</th>
+                                    <th>SR No From</th>
+                                    <th>SR No To</th>
+                                    <th>Kitta</th>
+                                    <th>BOID</th>
+                                    <th>DP ID</th>
+                                    <th>ISIN</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            @* <tbody data-bind="foreach:Details">
+                        <tr>
+                        <td data-bind="text: HolderName"></td>
+                        <td data-bind="text: CertId"></td>
+                        <td data-bind="text: CertNo"></td>
+                        <td data-bind="text: CompCode"></td>
+                        <td data-bind="text: Kitta"></td>
+                        <td data-bind="text: Description"></td>
+                        </tr>
+                        </tbody>*@
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section footer{
+    <script src="/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="/scripts/CDSModule/BulkCAEntry.js"></script>
+}
+

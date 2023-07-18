@@ -1,0 +1,141 @@
+﻿
+@{
+    ViewData["Title"] = "User Rights";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">User management</li>
+                                <li class="breadcrumb-item active" aria-current="page">User Rights</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">User Rights</h6>
+                </div>
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                            @*<div class="pull-left">
+                                    <h4 class="text-blue h4">User Rights</h4>
+                                </div>*@
+                        </div>
+                        <form>
+
+                            <div class="row">
+                                <div class="form-group row col-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-md-3 col-form-label" for="userSelect2">Role</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="select2-single-placeholder form-control userSelect2" name="state"
+                                                id="userSelect2" data-bind='options:RoleList, optionsText:"RoleName",
+                                                optionsValue: "RoleId", value: SelectedRole, optionsCaption:"---Role---"'>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <div class="row col-12  justify-content-center">
+                                <div class="row">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-6" value="PDF" data-bind="click: ShowPDFReport">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-6" value="Excel" data-bind="click: ShowExcelReport">
+                                </div>
+
+                            </div>
+                                </div>
+                            </div>
+                            <hr class="my-1">
+                            <div class="row p-3">
+                                <div class="form-group row col-sm-12 col-md-4 col-lg-4 col-xl-4 border-right border-left mr-1">
+                                    <div class="col-12">
+                                        <h3>Primary Navigation</h3>
+                                       
+                                        <div data-bind="foreach: ParentMenuList">
+                                            <div class="custom-control custom-checkbox mb-1">
+                                                <input type="checkbox" class="custom-control-input" value="" data-bind="checkedValue: menuId, checked: SelectedParentMenu, attr: {'id': menuId}">
+                                                <label class="custom-control-label" data-bind="attr: { 'for': menuId }">
+                                                    <span data-bind="text: menuText"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-sm-12 col-md-4 col-lg-4 col-xl-4 border-right border-left mr-1 menu-child">
+                                    <div class="col-12">
+                                        <h3>Checker</h3>
+                                       
+                                        <div data-bind="foreach: ChildMenuListForChecker">
+                                            <div class="custom-control custom-checkbox mb-1">
+                                                <input type="checkbox" class="custom-control-input" data-bind="checked: SelectedChildrenMenu,checkedValue:menuId, attr: {'id': menuId}">
+                                                <label class="custom-control-label" data-bind="attr: { 'for': menuId }">
+                                                    <span data-bind="text: menuText"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-sm-12 col-md-4 col-lg-4 col-xl-4 border-right border-left mr-1 menu-child">
+                                    <div class="col-12">
+                                        <h3>Maker</h3>
+                                        
+                                        <div data-bind="foreach: ChildMenuListForMaker">
+                                            <div class="custom-control custom-checkbox mb-1">
+                                                <input type="checkbox" class="custom-control-input" data-bind="checked: SelectedChildrenMenu,checkedValue:menuId, attr: {'id': menuId}">
+                                                <label class="custom-control-label" data-bind="attr: { 'for': menuId }">
+                                                    <span data-bind="text: menuText"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row col-12 p-4 justify-content-center">
+                                @*<div class="col-xl-2 col-md-3 col-sm-4 col-12">
+                                        <button type="button" class="btn btn-success mr-2 mt-1 col-12" data-bind="click: AddRights">Add</button>
+                                    </div>*@
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-12">
+                                    <button type="button" class="btn btn-info mr-2 mt-1 col-12" data-bind="click: UpdateRights">Add / Update</button>
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+
+        </div>
+    </div>
+</div>
+@section Footer{
+    <script>
+        $(document).ready(function () {
+
+            // Select2 Single  with Placeholder for User
+
+            // Select2 Single  with Placeholder for Companny
+            //$('.companySelect2').select2({
+            //    placeholder: "Select Company",
+            //    allowClear: true
+            //});
+
+        });
+    </script>
+    <script asp-append-version="true" src="~/scripts/Security/UserRights.js?v=0.1"></script>
+}
+

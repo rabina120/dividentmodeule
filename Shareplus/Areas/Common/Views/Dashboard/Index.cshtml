@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #table_div tbody tr td {
+        text-align: center !important;
+    }
+    .card {
+        background: #FFF;
+        box-shadow: none !important;
+        border: 1px solid #efeded;
+        padding: 15px;
+    }
+</style>
+
+
+<h3>Dashboard</h3>
+<div class="card">
+    <div class="row">
+        <canvas id="myChart" style="width:100%;max-width:400px"></canvas>
+        <canvas id="myChart2" style="width:100%;max-width:400px"></canvas>
+    </div>
+</div>
+@section Footer{
+    <script src="~/js/Chart.js">
+</script>
+<script src="~/scripts/Common/DashBoard.js"></script>
+}
+
+
+

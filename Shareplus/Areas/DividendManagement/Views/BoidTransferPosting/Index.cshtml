@@ -1,0 +1,162 @@
+﻿@{
+    ViewData["Title"] = "BO to BO Transfer Posting";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
+}
+
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">BO To BO Transfer Posting</h6>
+                </div>
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                        </div>
+                        <div class="col-12 p-2">
+                            <div class="pd-20 card-box mb-30">
+                                <div class="row">
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                        <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <select class="form-control form-control-sm" id="CompanyList" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                        <label class="col-sm-12 col-md-11 col-form-label">Transfer Type <span class="mandatory"> *</span></label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <select class="form-control form-control-sm" id=""
+                                                    data-bind='
+                                                    options: TransferTypes,
+                                                    optionsText: "TypeName",
+                                                    optionsValue:"Type",
+                                                    value:TransferType,
+                                                    optionsCaption:"---Transfer-Types---",
+                                                    event: {change: ChangeTransferType}'>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <table id="tbl_Add_Holder_List" class="table  table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th> <input type="checkbox" data-bind="checked: SelectAll" id="chk" /></th>
+                                                    <th>ID</th>
+                                                    <th>Old BOID</th>
+                                                    <th>New BOID</th>
+                                                    <th>Changed By</th>
+                                                    <th>ChangeDate</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody data-bind="foreach:HolderChangePostingList">
+                                                <tr>
+                                                    <td><input type="checkbox" data-bind="checked: Selected" class="case" name="case[]" /></td>
+                                                    <td data-bind="text: Id"></td>
+                                                    <td data-bind="text: Boid_old"></td>
+                                                    <td data-bind="text: Boid_new"></td>
+                                                    <td data-bind="text: ChangedBy"></td>
+                                                    <td data-bind="text: change_date"></td>
+                                                    <td><button class="btn btn-primary btn-sm" type="button" data-bind="click: $root.GetDetails">View Details</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row col-12 mt-3">
+                                    <div class="col-xl-4  col-md-4 col-sm-6 col-6 ">
+                                        <input type="text" class="form-control form-control-sm mr-2 mt-1 " placeholder="Posting Remarks" data-bind="value:PostingRemarks" maxlength="15" />
+                                    </div>
+                                    <div class="col-xl-2  col-md-2 col-sm-6 col-6 ">
+                                        <input type="date" class="form-control form-control-sm mr-2 mt-1" data-bind="value:PostingDate" />
+                                    </div>
+                                    <div class="col-xl-2 col-md-2 col-sm-4 col-4 ">
+                                        <input type="button" class="btn btn-success  col-12" data-bind="click:VerifyHolder" value="Authorization">
+                                    </div>
+                                    <div class="col-xl-2 col-md-2 col-sm-4 col-4 ">
+                                        <input type="button" class="btn btn-warning  col-12" data-bind="click:RejectHolder" value="Rejection">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="BoidDetails" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 90%;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">BOID Transfer Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-lg-12">
+                                <table id="tbl_Add_Holder_List" class="table  table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Old BOID</th>
+                                            
+                                            <th>Warrant No</th>
+                                            <th>Old Name</th>
+                                            <th>Old FatherName</th>
+                                            <th>Old GrandFatherName</th>
+                                            
+                                            <th>Name</th>
+                                            <th>FatherName</th>
+                                            <th>GrandFatherName</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach:BoidTransferDetails">
+                                        <tr>
+                                            <td data-bind="text: Boid_new"></td>
+                                            <td data-bind="text: Warrantno"></td>
+                                            <td data-bind="text: name_old"></td>
+                                            <td data-bind="text: faname_old"></td>
+                                            <td data-bind="text: grfaname_old"></td>
+                                            
+                                            <td data-bind="text: name"></td>
+                                            <td data-bind="text: faname"></td>
+                                            <td data-bind="text: grfaname"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Footer{
+    <script src="~/scripts/DividendManagement/BoToBoTransferPosting.js"></script>
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+}

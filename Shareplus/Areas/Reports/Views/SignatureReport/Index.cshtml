@@ -1,0 +1,130 @@
+﻿@{
+    ViewData["Title"] = "Signature Handling - Signature Report";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+<link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Signature Handling</li>
+                                <li class="breadcrumb-item active" aria-current="page">Signature Report</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Signature Report</h6>
+                </div>
+
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+
+                        <form>
+
+                            <div class="row">
+                                <div class="form-group row col-md-4">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-11">
+                                        <select class="form-control form-control-sm" disabled="disabled" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <fieldset class="form-group col-8 mt-4">
+                                    <legend class="col-form-label col-12 pt-0">
+                                    </legend>
+                                    <div class="row col-12 mt-2">
+
+
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="customRadio1" name="SignatureApprovedUnapproved" data-bind="checked: SignatureApprovedUnapproved, checkedValue :'A'" checked class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio1">Approved Signature</label>
+                                        </div>
+                                        <div class="custom-control custom-radio ml-4">
+
+                                            <input type="radio" id="customRadio2" name="SignatureApprovedUnapproved" data-bind="checked: SignatureApprovedUnapproved, checkedValue:'U'" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio2">Unapproved Signature</label>
+                                        </div>
+                                        <div class="custom-control custom-radio ml-4">
+
+                                            <input type="radio" id="customRadio3" name="SignatureApprovedUnapproved" data-bind="checked: SignatureApprovedUnapproved, checkedValue:'C'" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio3">Uncaptured Signature</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+
+                            <hr class="my-4">
+                            <div class="row" id="DetailsDiv">
+
+                                
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Date From</label>
+
+                                    <div class="input-group date col-sm-12 col-md-10 mt-1">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" data-bind="value: DateFrom , text:DateTo" id="DateFrom">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date2">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Date To</label>
+
+                                    <div class="input-group date col-sm-12 col-md-10 mt-1">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm"  data-bind="value: DateTo , text:DateTo" id="DateTo">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Holder From</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm"  data-bind="value:HolderFrom" type="text" placeholder="Holder From">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Holder To</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm"  data-bind="value:HolderTo" type="text" placeholder="Holder To">
+                                    </div>
+                                </div>
+                               
+
+                            </div>
+                           
+                                
+                            <div class="row col-12 p-4 justify-content-center ">
+
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-info mr-2 mt-1 col-12 " id="Report" value="Report" data-bind="click: Report">
+                                </div>
+                            </div>
+                        </form>
+                       
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+@section Footer{
+<script src="~/vendor/sweetalert/sweet-alert.js"></script>
+<script src="~/scripts/SignatureHandling/SignatureReport.js"></script>
+}

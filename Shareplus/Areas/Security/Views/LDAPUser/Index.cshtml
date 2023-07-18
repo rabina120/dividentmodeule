@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewData["Title"] = "Create User";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">User Management</li>
+                                <li class="breadcrumb-item active" aria-current="page">Create User</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Create User</h6>
+                </div>
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                            @*<div class="pull-left">
+                                    <h4 class="text-blue h4">Create User</h4>
+                                </div>*@
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="form-group row col-xl-6 col-md-12 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-md-3 col-form-label">Username <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" type="text" placeholder="Username" data-bind="value: UserName, valueUpdate: 'input'" maxlength="50">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-6 col-md-12 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-md-12 col-form-label">User ID <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" placeholder="User ID" type="text" data-bind="value: UserID, valueUpdate: 'input'">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-12 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-md-12 col-form-label">Password <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" placeholder="*********" type="password" data-bind="value: Password, valueUpdate: 'input'">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-6 col-md-12 col-sm-12 col-12" id="user_role_div">
+                                    <label class="col-sm-12 col-md-3 col-form-label" for="userRoleSelect2">User Role <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="select2-single-placeholder form-control form-control-sm userSelect2" name="state"
+                                                id="userSelect2" data-bind='options:RoleList, optionsText:"RoleName",
+                                                optionsValue: "RoleId", value: SelectedRole, optionsCaption:"---Role---"'>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12" id="simple-date1">
+                                    <label class="col-12 col-form-label" for="dateValidUpto">Valid Upto<span class="mandatory"> *</span></label>
+                                    <div class="input-group date col-sm-12 col-md-10">
+                                        <div class="input-group-prepend">
+
+                                        </div>
+                                        <input type="text" data-bind="value: Validdate" class="form-control form-control-sm" placeholder="Select a Date" id="ValidDate">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr class="my-4">
+                            <div class="row col-12 p-4 justify-content-center">
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12" value="Add New User" data-bind="click: Save">
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+
+        </div>
+    </div>
+</div>
+
+
+@section Footer{
+    <script src="~/scripts/Security/CreateUserLDAP.js?v=0.1"></script>
+    <script>
+        $(document).ready(function () {
+            $('#simple-date1 .input-group.date').datepicker({
+                format: 'mm/dd/yyyy',
+                todayBtn: 'linked',
+                todayHighlight: true,
+                autoclose: true,
+            });
+        });
+    </script>
+}

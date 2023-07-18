@@ -1,0 +1,59 @@
+﻿<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon Icon -->
+    @*<link rel="shortcut icon" type="image/x-icon" href="~/favicon-96x96.png">*@
+    <title>Shareplus - @ViewData["Title"]</title>
+    <link href="~/vendor/fontawesome-free/css/all.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/ruang-admin.css" rel="stylesheet" />
+    <link href="~/lib/toastr/toastr.css" rel="stylesheet" />
+    <link href="~/css/loader-style.css" rel="stylesheet" />
+    <style>
+        .card {
+            border-radius: 2.375rem;
+        }
+
+        .mandatory {
+            color: red !important;
+        }
+    </style>
+</head>
+    <body class="bg-gradient-login" oncontextmenu="return false">
+        <!-- LOADER -->
+        <div class="preloader">
+            <div class="lds-ellipsis">
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+        </div>
+        <!-- Login Content -->
+        <div class="container-login">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+            }
+
+            @RenderBody()
+        </div>
+
+
+        <script src="~/vendor/jquery/jquery.js"></script>
+        <script src="~/js/loader-js.js"></script>
+        <script src="~/vendor/bootstrap/js/bootstrap.js"></script>
+        <script src="~/vendor/jquery-easing/jquery.easing.js"></script>
+        <script src="~/js/ruang-admin.js"></script>
+        <script src="~/lib/toastr/toastr.min.js"></script>
+        <script src="~/lib/Custom/js/Common.js"></script>
+        <script src="~/lib/Custom/js/Validation.js"></script>
+
+        @RenderSection("Footer", false)
+    </body>
+</html>

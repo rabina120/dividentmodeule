@@ -1,0 +1,269 @@
+﻿
+@{
+    ViewData["Title"] = "De-Materialize Posting";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
+}
+
+
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+             <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">CDS Module</li>
+                                <li class="breadcrumb-item active" aria-current="page">Dematerialize Certificate Posting</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">De-Materialize Posting</h6>
+                </div>
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                            @*<div class="pull-left">
+                                    <h4 class="text-blue h4">Create User</h4>
+                                </div>*@
+                        </div>
+                        <div class="row">
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12">
+                                <label class="col-sm-12 col-md-10 col-form-label">Company <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"Select Company"'></select>
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" for="ISINNO">
+                                    ISIN No<span class="mandatory">*</span>
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select class="form-control form-control-sm" id="ISINNO" data-bind='options: ISINNOList,optionsText:"ISIN_NO" ,value:SelectedISINNO, optionsCaption:"Select ISIN NO"'>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--Date Selector-->
+                            <div class="form-group row col-xl-2 col-md-6 col-sm-12" id="simple-date1">
+                                <label class="col-12 col-form-label" for="DateFrom">From Date</label>
+                                <div class="input-group date col-sm-12 col-md-10">
+                                    <div class="input-group-prepend"></div>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Select Date" id="dateFrom" data-bind="value: dateFrom">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-2 col-md-6 col-sm-12" id="simple-date2">
+                                <label class="col-12 col-form-label" for="DateTo">To Date</label>
+                                <div class="input-group date col-sm-12 col-md-10">
+                                    <div class="input-group-prepend"></div>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Select Date" id="dateTo" data-bind="value: dateTo">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" for="RegNoFrom">
+                                    Reg No From
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Reg No From" id="RegNoFrom" data-bind="value: RegNoFrom" maxlength="10" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" for="RegNoTo">
+                                    Reg No To
+                                </label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Reg No To" id="RegNoTo" data-bind="value: RegNoTo" maxlength="10" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label"></label>
+                                <div class="form-group col-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" data-bind="checked: CheckCA" id="Check">
+                                        <label class="custom-control-label" for="Check">Check if CA</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label"></label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="btn btn-primary" type="button" value="Search" data-bind="click: RefreshData">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <table id="tbl_DeMaterialize" class="table  table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th> <input type="checkbox" data-bind="checked: SelectAll" id="chk" /></th>
+                                            <th>DemateRegno</th>
+                                            <th >Name</th>
+                                            <th>Trans Date</th>
+                                            <th>Reg No</th>
+                                            <th>Entry User</th>
+                                            <th>Entry Date</th>
+                                            <th>Remarks</th>
+
+                                            <th>Details</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach:DeMaterializeList">
+                                        <tr>
+                                            <td><input type="checkbox" data-bind="checked: Selected" class="case" name="case[]" /></td>
+                                            <td data-bind="text: DemateRegno"></td>
+                                            <td data-bind="text: FName() +' '+LName()"></td>
+                                            <td data-bind="text: TransDate"></td>
+                                            <td data-bind="text: RegNo"></td>
+                                           <td data-bind="text: EntryUser"></td>
+                                            <td data-bind="text: EntryDate"></td>
+                                            <td data-bind="text: Remarks"></td>
+
+                                            <td><button class="btn btn-info" data-bind="click:GetSingleDematerializeData">View</button></td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <hr class="my-4 ">
+                        <div class="row col-12 ">
+                            <div class="col-xl-4  col-md-4 col-sm-4 col-6 ">
+                                <input type="text" class="form-control form-control-sm mr-2 mt-1 " data-bind="value:PostingRemarks" placeholder="Posting Remarks" maxlength="10" />
+                            </div>
+                            <div class="col-xl-4  col-md-4 col-sm-4 col-6 ">
+                                <input type="date" class="form-control form-control-sm mr-2 mt-1 " data-bind="value:PostingDate" />
+                            </div>
+
+                        </div>
+
+                        <div class=" row p-2">
+                            <div class="form-group row col-xl-12 col-md-12 col-sm-12 col-12">
+                                <div class=" col-3 ">
+                                    <input type="button" class="btn btn-success  col-12" data-bind="click:PostDeMaterializeEntry.bind($data,'A')" value="Authorization">
+                                </div>
+                                <div class="col-3 ">
+                                    <input type="button" class="btn btn-danger  col-12" data-bind="click:PostDeMaterializeEntry.bind($data,'R')" value="Rejection">
+                                </div>
+                                <div class=" col-3 ">
+                                    <input type="button" class="btn btn-dark  col-12" data-bind="click:PostDeMaterializeEntry.bind($data,'D')" value="Delete">
+                                </div>
+                                <div class=" col-3 ">
+                                    <input type="button" class="btn btn-light  col-12" data-bind="click:ClearControl" value="ClearControl">
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- Modal Scrollable -->
+                        <div class="modal fade" id="certificateDetailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Certificate Details</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="col-12">
+                                            <div class="card mb-4">
+                                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                                                </div>
+                                                <div class="table-responsive p-3">
+                                                    <div class="table-responsive p-3">
+                                                        <table id="CertDetTable" class="table  table-bordered" style="">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>S.N.</th>
+                                                                    <th>DemateRegNo</th>
+                                                                    <th>RegNo</th>
+                                                                    <th>SeqNo</th>
+                                                                    <th>DrnNo</th>
+                                                                    <th>ShHolderNo</th>
+                                                                    <th>CertNo</th>
+                                                                    <th>SrNoFrom</th>
+                                                                    <th>SrNoTo</th>
+                                                                    <th>ShKitta</th>
+                                                                    <th>DP</th>
+                                                                    <th>BankAccNo</th>
+                                                                    
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody data-bind="foreach : CertDetList">
+                                                                <tr>
+                                                                    <td data-bind="text: ($index() + 1)"></td>
+                                                                    <td data-bind="text: DemateRegno"></td>
+                                                                    <td data-bind="text: RegNo"></td>
+                                                                    <td data-bind="text: SeqNo"></td>
+                                                                    <td data-bind="text: DrnNo"></td>
+                                                                    <td data-bind="text: ShholderNo"></td>
+                                                                    <td data-bind="text: CertNo"></td>
+                                                                    <td data-bind="text: SrNoFrom"></td>
+                                                                    <td data-bind="text: SrNoTo"></td>
+                                                                    <td data-bind="text: ShKitta"></td>
+                                                                    <td data-bind="text: Dp_Code"></td>
+                                                                    <td data-bind="text: BoAccountNo"></td>
+                                                                   
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                                       </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Footer{
+    <script type="text/javascript">
+        function toggle(source) {
+            checkboxes = document.getElementsByName('case[]');
+            for (var i = 0, n = checkboxes.length; i < n; i++) {
+                checkboxes[i].checked = source.checked;
+            }
+        }
+
+    </script>
+    <script src="https://unpkg.com/floatthead"></script>
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/scripts/CDSModule/DeMaterializePosting.js"></script>
+
+}

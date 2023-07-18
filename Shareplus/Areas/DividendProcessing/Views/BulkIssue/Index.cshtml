@@ -1,0 +1,152 @@
+﻿@{
+    ViewData["Title"] = "Cash Dividend Bulk Insert";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@section Header{
+<link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+<style>
+    th {
+        width: none !important;
+    }
+</style>
+}
+
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Bulk Issue</h6>
+                </div>
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-sm-12 col-md-6 col-form-label" for="companySelect2">Company <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-form-label" for="reportS">Bulk Upload Type <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-12" style="display: flex">
+                                        <div class="custom-control custom-checkbox col-md-6 col-xl-6 col-sm-6 col-12">
+                                            <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" data-bind="checked: isIssue" id="Issue">
+                                                <label class="custom-control-label" for="Issue">Divident Issue</label>
+                                            </div>  
+                                            <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" data-bind="checked: isPay" id="Payment">
+                                                <label class="custom-control-label" for="Payment">Divident Payment</label>
+                                            </div>
+                                        </div>
+                                            
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-form-label" for="reportSelect2">Dividend Type <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-12" style="display: flex">
+                                        <div class="custom-control custom-radio col-md-6 col-xl-6 col-sm-12 col-12">
+                                            <input type="radio" id="customRadio6" name="DivTypeRadio" data-bind="checked: DivBasedOn" value="01" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio6">Dividend For Physical</label>
+                                        </div>
+                                        <div class="custom-control custom-radio col-md-6 col-xl-6 col-sm-12 col-12">
+                                            <input type="radio" id="customRadio7" name="DivTypeRadio" data-bind="checked: DivBasedOn" value="02" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio7">Dividend For Demate</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-sm-12 col-md-10 col-form-label">Dividend <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-11">
+                                        <select class="form-control form-control-sm userSelect2" id="DividendList" data-bind='options: DividendLists,optionsText: "ShowDividendText",optionsValue:"Divcode",value:SelectedDividend, optionsCaption:"---Dividends---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" style="color:transparent">l</label>
+                                    <input type="button" name="DummyExcelDownload" value="DummyExcelDownload" id="DummyExcelDownload" class="btn btn-primary col" data-bind="click:DummyDataDownload" />
+                                </div>
+                            </div>
+                            <div class="row" id="uploadExcelDiv">
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12">
+                                    <label class="col-12 col-form-label">Upload Excel File</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input type="file" id="fileupload" name="files" class="form-control" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-12 col-form-label">Select Sheet</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="form-control form-control-sm" id="SheetNameList" data-bind='options: SheetLists,optionsText: "SheetName",value:SelectedSheet, optionsCaption:"---Excel Sheet Name---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-12 col-form-label" style="color:transparent">l</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input type="button" value="Upload" id="btnUploadExcel" class="btn btn-primary col" data-bind="click:UploadExcel" />
+                                    </div>
+                                </div>
+
+                            </div>
+                              
+                            <div class="col-12 p-2" id="uploadExcelRecordsDiv">
+                                <p>The Total Number of uplodaded records is : <span data-bind="text: TotalUploadedRecords"></span></p>
+                            </div>
+                            <hr class="my-4 ">
+                            <div class="row col-12" id="BulkIssuePayDiv">
+                                <div class="col-xl-4  col-md-4 col-sm-4 col-6 ">
+                                    <input type="text" class="form-control form-control-sm mr-2 mt-1 " data-bind="value:PostingRemarks" placeholder="Issue Remarks" />
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                    <div class="input-group date col-sm-12 col-md-10 mt-1">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" data-bind="value: PostingDate , text:PostingDate" id="PostingDate">
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success  col-12" data-bind="click:PostIssue" value="Issue">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Footer{
+<script src="~/vendor/sweetalert/sweet-alert.js"></script>
+<script>
+
+    function toggle(source) {
+        checkboxes = document.getElementsByName('case[]'); for (var i = 0, n = checkboxes.length;
+            i < n; i++) { checkboxes[i].checked = source.checked; }
+    }
+</script>
+
+<script src="~/scripts/DividendProcessing/BulkIssue.js"></script>
+
+}
+
+

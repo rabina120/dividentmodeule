@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="PCS">
+    
+    <title>Shareplus - @ViewData["Title"]</title>
+    <!-- Favicon Icon -->
+    @*<link rel="shortcut icon" type="image/x-icon" href="~/favicon-96x96.png">*@
+
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/ruang-admin.min.css" rel="stylesheet" />
+    <link href="~/lib/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="~/lib/Custom/css/jAlert.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="~/vendor/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="~/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/vendor/datatables/buttons.dataTables.min.css" rel="stylesheet" />
+    <link href="~/css/loader-style.css" rel="stylesheet" />
+    <link href="~/css/anchor-disabled.css" rel="stylesheet" />
+    <link href="~/vendor/fontawesome-free/css/fontawesome.min.css" rel="stylesheet">
+
+
+    @RenderSection("Header", false)
+    <style>
+        body {
+            color: black !important;
+        }
+
+        .mandatory {
+            color: red;
+        }
+
+        table.dataTable td {
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        table.dataTable th {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .card {
+            max-height: 70vh !important;
+            overflow-y: auto !important;
+        }
+        table.dataTable tbody th, table.dataTable tbody td {
+    padding: 4px ; /* e.g. change 8x to 4px here */
+}
+    </style>
+
+</head>
+<body id="page-top" oncontextmenu="return false">
+
+    <!-- LOADER -->
+    <div class="preloader">
+        <div class="lds-ellipsis">
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+    </div>
+    <!-- END LOADER -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@Url.Action("Index", "Dashboard", new { Area = "Common" })">
+                <div class="sidebar-brand-icon">
+                    <img id="LogoImage" class="" src="~/img/logo.jpg" />
+                    @*<img src="data:image/jpeg;base64,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">*@
+
+                </div>
+                <div class="sidebar-brand-text mx-3">
+                    @*<img width="100px" height="40px" src="~/img/Shareplusgif.gif" />*@
+                </div>
+            </a>
+            @*<hr class="sidebar-divider my-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index", "Dashboard", new { Area = "Common" })">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                    </a>
+                    </li>*@
+
+            @*<div class="sidebar-heading">
+                Features
+                </div>*@
+
+            <span class="menuList"></span>
+
+
+        </ul>
+        <!-- Sidebar -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <!-- TopBar -->
+                <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+                    <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <div class="row ml-auto mt-auto"><p class="mt-1 d-none d-lg-inline text-white large font-weight-bolder" style=" font-size: 30px;" id="CompanyNameShow"></p></div>
+                   @* <div class="form-group row col-4 align-items-right justify-content-end">
+                                
+                                <div class="col-sm-12 col-md-11">
+                                    <select class="form-control form-control-sm" id="SearchHolder" data-bind='options: HolderSearch,optionsText: "HolderText",optionsValue:"HolderNo",value:SelectedHolder, optionsCaption:"Search Holder"'>
+                                    </select>
+                                </div>
+                            </div>*@
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                @*<img class="img-profile rounded-circle" src="~/img/Icon.png" style="max-width: 60px">*@
+                                <img class="img-profile rounded-circle" src="~/img/profilePhoto2.jpg" style="max-width: 60px">
+                                <span class="ml-2 d-none d-lg-inline text-white small">@ViewBag.UserName </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <div class="arrow-up"></div>
+                                @*<a class="dropdown-item" href="#">
+                                        <i class="fa fa-user-o"></i> Profile
+                                    </a>*@
+                                <a class="dropdown-item password" href="@Url.Action("Index", "ChangePassword", new { Area = "Security" })">
+                                    <i class="fa fa-unlock-alt"></i> Change Password
+                                </a>
+                                <a class="dropdown-item company" data-toggle="modal" onclick='loadCompanyTable()' href="#" data-target="#modalCompany" id="#modalCompany" style="color: #3a3b45 !important">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Connect Company
+                                </a>
+                                <a class="dropdown-item company" onclick='DisconnectCompany()' id ="DisconnectCompany"style="color: #3a3b45 !important">
+                                    <i class="fa fa-eject fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i>
+                                    DisConnect Company
+                                </a>
+                                @*<a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                    </a>*@
+                                @*<div class="dropdown-divider"></div>*@
+                                <a class="dropdown-item" onclick="Logout()" >
+                                    <i class="fa fa-sign-out"></i> Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- Topbar -->
+                <!-- Container Fluid-->
+                <div class="container-fluid" id="container-wrapper">
+                    @RenderBody()
+                    <input type="hidden" value="@ViewBag.Company" id="comp" />
+                </div>
+                <!---Container Fluid-->
+            </div>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white" style="position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 5px;
+    box-shadow: none;
+    border: 1px solid #f1f1f1;">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> - Designed & Developed by
+                            <b><a href="https://pcs.com.np/" target="_blank">PCS</a></b>
+                        </span>
+                    </div>
+                </div>
+            </footer>
+            <!-- Footer -->
+            <!-- Modal Center -->
+            <div class="modal fade" id="modalCompany" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 60%;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Company List</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-12 p-3">
+                                <table id="DT_load_COMPANY" class="table  table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none">Company Code </th>
+                                            <th>Company Name</th>
+                                            <th>Company Address</th>
+                                            <th style="display:none">Max Kitta </th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <!-- Scroll to top -->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!--AntiForgeryToken-->
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+    <script src="~/vendor/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="~/js/loader-js.js" type="text/javascript"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/vendor/jquery-easing/jquery.easing.min.js" type="text/javascript"></script>
+    <script src="~/js/ruang-admin.js" type="text/javascript"></script>
+
+    <script src="~/vendor/select2/dist/js/select2.min.js" type="text/javascript"></script>
+    <script src="~/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+   
+    @*<script src="~/vendor/chart.js/Chart.js"></script>*@
+    @*<script src="~/js/chart-area-demo.js"></script>*@
+    <script src="~/jAlert.min.js" type="text/javascript"></script>
+    <script src="~/lib/knockout-3.5.1.js" type="text/javascript"></script>
+    <script src="~/lib/Custom/js/knockout-bindings.js" type="text/javascript"></script>
+    <script src="~/lib/Custom/js/knockout.validation.min.js" type="text/javascript"></script>
+    <script src="~/lib/toastr/toastr.min.js" type="text/javascript"></script>
+    <script src="~/lib/Custom/js/knockout-components.js"></script>
+    <script src="~/lib/Custom/js/Common.js?v=0.1"></script>
+    <script>
+        @*  if (localStorage.getItem("company-code")) {
+            getMenu()
+            } else {
+            alert('error', 'Please Choose Company')
+            } *@
+          getMenu()
+
+    </script>
+
+    <script src="~/lib/Custom/js/Validation.js" type="text/javascript"></script>
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.buttons.min.js"></script>
+    <script src="~/vendor/datatables/jszip.min.js"></script>
+    <script src="~/vendor/datatables/buttons.html5.min.js"></script>
+    <script src="~/vendor/datatables/pdfmake/pdfmake.min.js"></script>
+    <script src="~/vendor/datatables/pdfmake/vfs_fonts.js"></script>
+    <script src="~/lib/Custom/js/Validate.js"></script>
+    <script src="~/scripts/Common/Company.js?v=0.1"></script>
+    <script src="~/lib/Custom/js/Common.js?v=0.1" asp-append-version="true"></script>
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/lib/Custom/js/Convert.js"></script>
+    @*<script src="~/scripts/Common/HolderSearch.js"></script>*@
+    <script src="~/lib/jquery-migrate-1.4.1.js"></script>
+    <script>var _imin, _isec, _MIN = 0, IDLE_TIME = 0;
+
+        _imin = 14; // IDLE time in minutes
+        _isec = 60;
+
+        // On Mouse Move
+        document.addEventListener('mousemove', function () {
+            _MIN = 0;
+            IDLE_TIME = 0;
+        });
+
+        // On Click
+        document.addEventListener('click', function () {
+            _MIN = 0;
+            IDLE_TIME = 0;
+        });
+
+        // On Key Press
+        document.addEventListener('keypress', function () {
+            _MIN = 0;
+            IDLE_TIME = 0;
+        });
+
+        window.setInterval('getIdleTime()', 1000);
+
+        function getIdleTime() {
+            var _minute, _sec, _nmin, _nsec;
+
+            IDLE_TIME++;
+
+            if ((_isec - IDLE_TIME) == 0) {
+                _MIN++;
+                IDLE_TIME = 0;
+            }
+
+            _minute = _imin - _MIN;
+            _sec = _isec - IDLE_TIME;
+
+            _nmin = (_minute.toString().length == 1) ? '0' + _minute : _minute;
+            _nsec = (_sec.toString().length == 1) ? '0' + _sec : _sec;
+
+            // Now Redirect Page
+            // After complete the time
+            if (_minute == 1 && _sec == 01) {
+                swal({
+                    title: "Idle Status",
+                    text: "Idle Stauts Detected For Too Long !!!\n Logging Out In 1 minute !!!",
+                    icon: "warning",
+                    buttons: ["Stay Logged In", "Log Out"],
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            Logout()
+                            window.location.href = "/Security/Login/Logout";
+                        }
+
+                    })
+            }
+            if (_minute == 0 && _sec == 1) {
+                Logout()
+                window.location.href = "/Security/Login/Logout";
+            }
+        }
+        getIdleTime()
+</script>
+    @*<script src="~/lib/Custom/js/IdleTime.js"></script>*@
+    @RenderSection("Footer", false)
+
+
+
+</body>
+</html>

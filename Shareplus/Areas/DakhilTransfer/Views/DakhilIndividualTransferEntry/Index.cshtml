@@ -1,0 +1,267 @@
+﻿@{
+    ViewData["Title"] = "Dakhil Transfer - Individual Transfer";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+<link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+<style>
+    th {
+        width: none !important;
+    }
+</style>
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Individual Dakhil Transaction</li>
+                                <li class="breadcrumb-item active" aria-current="page">Individual Dakhil Transaction</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Individual Dakhil Transaction</h6>
+                </div>
+
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+
+                        <form>
+                            <div class="row col-12 p-4 justify-content-center ">
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="AddButton" value="Add" data-bind="click: chooseOptions.bind($data,'A')">
+                                </div>
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-info mr-2 mt-1 col-12 " id="UpdateButton" value="Edit" data-bind="click: chooseOptions.bind($data,'U')">
+                                </div>
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-danger mr-2 mt-1 col-12 " id="DeleteButton" value="Delete" data-bind="click: chooseOptions.bind($data,'D')">
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="form-group row col-md-5">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-11">
+                                        <select class="form-control form-control-sm" disabled="disabled" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+                            <div class="row">
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Certificate No <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Certificate Number"
+                                               id="CertificateNo" data-bind="value:CertificateNo,valueUpdate: 'input',executeOnEnter:GetCertificateInformation.bind($data,CertificateNo),
+                                            event:{blur:GetCertificateInformation.bind($data,CertificateNo)}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Start Serial No </label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:StartSrNo" type="text" placeholder="Start Serial No">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Share Kitta </label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:ShKitta" type="text" placeholder="Share Kitta">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">ShareHolder No </label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:ShHolderNo" type="text" placeholder="ShareHolder No">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Total Share Amount </label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:TotalShareAmount" type="text" placeholder="Total Share Amount">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">End Serial No</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:EndSrNo" type="text" placeholder="End Serial No">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Share Category</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:ShareCategory" type="text" placeholder="Share Category">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Paid Amount</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:PaidAmount" type="text" placeholder="Paid Amount">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">ShOwner Type</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:ShOwnerType" type="text" placeholder="Share Owner Type">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">ShHolder Name</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:ShHolderName" type="text" placeholder="Share Holder Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12 mt-5 ">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" disabled="disabled" data-bind="checked:isDuplicate" id="isDuplicate">
+                                        <label class="custom-control-label" for="isDuplicate">Is Duplicate Certificate?</label>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12 mt-5">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" data-bind="checked:confirmDakhilEntry" id="confirmDakhilEntry">
+                                        <label class="custom-control-label" for="confirmDakhilEntry">Confrim Entry For Dakhil Registration ?</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="RegistrationDiv">
+                                <hr class="my-4">
+                            <div class="row">
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Letter <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" id="Letter" data-bind="value:Letter" type="text" placeholder="Letter">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <div id= "registrationNoDiv">
+                                        <label class="col-12 col-form-label">Registration No:</label>
+                                        <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Registration Number"
+                                        id="CertificateNo" data-bind="value:RegistrationNo" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <div id="tranNoDiv">
+                                        <label class="col-12 col-form-label">Tran No</label>
+                                        <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" id="TranNo" data-bind="value:TranNo" type="text" placeholder="Tran No">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Dakhil Date <span class="mandatory">*</span></label>
+
+                                    <div class="input-group date col-sm-12 col-md-10 mt-1">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" disabled="disabled" data-bind="value: DakhilDate , text:DakhilDate" id="DakhilDate">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="Broker">Broker <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                                <select class="form-control form-control-sm" id="BrokerList" disabled="disabled" data-bind='options: BrokerList,optionsText: "BrokerName",optionsValue:"BCode",value:SelectedBroker, optionsCaption:"---Broker---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="TradeType">TradeType <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="form-control form-control-sm" id="TradeTypeList" disabled="disabled" data-bind='options: TradeTypeList,optionsText: "TradeTypeName",optionsValue:"TradeTypeId",value:SelectedTradeType, optionsCaption:"---TradeType---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Dakhil Charge <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" id="DakhilCharge" data-bind="value:DakhilCharge" type="text" placeholder="Dakhil Charge">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Remarks <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" maxlength="25" id="Remarks" data-bind="value:Remarks" type="text" placeholder="Remarks">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12 ml-2 mt-4">
+                                    <label class="col-12 col-form-label"></label>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" disabled class="custom-control-input" data-bind="checked:ExistingShareHolder" id="existingShareHolder">
+                                        <label class="custom-control-label" for="existingShareHolder">Existing Share Holder</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            </div>
+                            
+                            <div id="BuyerDiv">
+                                <hr class="my-4">
+                                <div class="row">
+                                    <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                        <label class="col-12 col-form-label">Buyer Holder No <span class="mandatory">*</span></label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Buyer Holder Number"
+                                                   id="BuyerHolderNo" data-bind="value:BuyerHolderNo ,valueUpdate: 'input',executeOnEnter:GetBuyerInformation.bind($data,BuyerHolderNo),
+                                            event:{blur:GetBuyerInformation.bind($data,BuyerHolderNo)}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                        <label class="col-12 col-form-label">BuyerName </label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input class="form-control form-control-sm" disabled="disabled" data-bind="value:BuyerName" type="text" placeholder="BuyerName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                                        <label class="col-12 col-form-label">Buyer Address</label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input class="form-control form-control-sm" disabled="disabled" data-bind="value:BuyerAddress" type="text" placeholder="Buyer Address">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row col-12 p-4 justify-content-center ">
+
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="Save" value="Save" data-bind="click: Save">
+                                </div>
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-info mr-2 mt-1 col-12" id="Refresh" value="Refresh" data-bind="click: refresh">
+                                </div>
+
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+@section Footer{
+<script src="~/vendor/sweetalert/sweet-alert.js"></script>
+<script src="~/scripts/DakhilTransfer/IndividualDakhilTransfer.js"></script>
+}

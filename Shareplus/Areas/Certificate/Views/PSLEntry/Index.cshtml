@@ -1,0 +1,511 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
+}
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+           
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">PSL Entry</h6>
+                </div>
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+
+                        <form>
+                            <div class="row col-12 p-4 justify-content-center">
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " id="Add" value="Add" data-bind="click:ChooseOption.bind($data, 'A')">
+                                </div>
+
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-danger mr-2 mt-1 col-12" id="Delete" value="Delete" data-bind="click:ChooseOption.bind($data, 'D') ">
+                                </div>
+                               
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Company <span class="mandatory"> </span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                                        @*<div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">PSLNo <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" data-bind="value: PSLNo" type="text" placeholder="PSL No">
+                                    </div>
+                                </div>*@
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-md-11 col-form-label" for="ShholderNo">Shareholder No:<span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input type="text" class="form-control form-control-sm" onkeypress="return isNumberKey(event)" id="ShholderNo" disabled="disabled" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:GetCertificateInformation, event:{blur:GetCertificateInformation}" placeholder="Enter ShholderNo" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+
+                                    <button type="button" class="btn btn-primary mr-2 mt-1 col-6 " id="SearchButton" data-toggle="modal" data-target="#searchQueryModalTheme" style="margin-bottom: -75px;">
+                                        Search
+                                    </button>
+
+                                    @*<input type="button" name="Search" value="Search" id="btnSearch" class="btn btn-primary" data-bind="click:Search" />*@
+                                    @*<input type="button" data-toggle="modal" data-bind="click:ViewDetail" data-target="#viewdetail" id="#viewdetail" value="ViewDetail" class="btn btn-primary btn-md" name="case[]" />*@
+
+
+                                </div>
+                            </div>
+                            @*<div class="row">
+                                <div class="col-12">
+                                    <table id="tblSearch" class="table  table-bordered">
+
+                                        <thead class="header">
+                                            <tr>
+                                                <th>PSLNo</th>
+                                                <th>SHolderno</th>
+                                                <th>Name</th>
+                                                <th>Transdt</th>
+                                                <th>remark</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: PaymentDetails">
+                                            <tr class="Preview">
+                                                <td data-bind="text: PSLNo"></td>
+                                                <td data-bind="text: ShholderNo"></td>
+                                                <td data-bind="text: FName() +' '+LName()"></td>
+                                                <td data-bind="text: TranDt"></td>
+                                                <td data-bind="text: remark"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>*@
+                            <div class="row">
+
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Holder Name <span class="mandatory"> </span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" data-bind="value: FullName" type="text" disabled placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Address <span class="mandatory"> </span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" data-bind="value: Address" type="text" disabled placeholder="Address">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Father's Name <span class="mandatory"> </span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" data-bind="value: FaName" type="text" disabled placeholder="Father's Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Grand Father's Name <span class="mandatory"> </span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" data-bind="value: GrFaName" type="text" disabled placeholder="Grand Father's Name">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Total Kitta <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" data-bind="value: Totalkitta" type="text" disabled placeholder="Total Kitta">
+                                    </div>
+                                </div>
+
+                                @*<div class="form-group col-md-3 col-sm-12 pt-4">
+                                    <button type="button" class="btn btn-primary mt-3" data-toggle="modal" style="display:none" id="showCertificate" data-bind="click :LoadCertDet">Show Certificate</button>
+                                </div>*@
+                                
+                            </div>
+                            <div class="row">
+                                @*<div class="col-2">
+                                        <table id="tbl_PSLEntryCertificate" class="table  table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th> <input type="checkbox" data-bind="checked: SelectAll" id="chk" /></th>
+                                                    <th>CertNo</th>
+
+                                            </thead>
+                                            <tbody data-bind="foreach:PSLEntryCertificateList">
+                                                <tr>
+                                                    <td><input type="checkbox" data-bind="checked: Selected" class="case" name="case[]" /></td>
+                                                    <td data-bind="text: CertNo"></td>
+
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>*@
+                                <div class="col-12">
+                                    <table id="tbl_PSLEntryCertificate1" class="table  table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th> <input type="checkbox" data-bind="checked: SelectAll" id="chk" /></th>
+                                                <th>Cert No</th>
+                                                <th>Status</th>
+                                                <th>From</th>
+                                                <th>To</th>
+                                                @*<th>HNo</th>*@
+                                                <th>ShownerType</th>
+                                                <th>Kitta</th>
+
+
+                                        </thead>
+                                        <tbody data-bind="foreach:PSLEntryCertificate">
+                                            <tr>
+                                                @*<td><input type="checkbox" data-bind="checked: Selected" class="case" name="case[]" /></td>*@
+                                                <td class="checkboxselect" style="display: block">
+                                                    <input type="checkbox" class="case" name="case[]" data-bind="event:{change:checkValidation} ,checked: Selected" />
+                                                </td>
+                                                <td data-bind="text: CertNo"></td>
+                                                <td data-bind="text: CertStatus"></td>
+                                                <td data-bind="text: SrNoFrom"></td>
+                                                <td data-bind="text: SrNoTo"></td>
+                                                @*<td data-bind="text: ShholderNo"></td>*@
+                                                <td data-bind="text: ShOwnerType"></td>
+                                                <td data-bind="text: ShKitta"></td>
+
+
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+
+
+                                                <td>
+                                                    Total
+                                                </td>
+                                            <td data-bind="text: total">
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+
+                                    </table>
+                                    
+                                    @*<div class="form-group col-md-3 col-sm-12 pt-4">
+                                        <button type="button" class="btn btn-primary mr-2 mt-1 col-6" id="Remove" data-bind="click :Remove">Remove</button>
+                                    </div>*@
+                                </div>
+
+                            </div>
+                            <br />
+
+                            <hr class="my-1">
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Status Type <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-11">
+                                        <select class="form-control form-control-sm" id="ShareType" data-bind='options:ShareTypeList ,optionsText:"ShareTypeName",optionsValue:"ShareType",value:SelectedShareType, optionsCaption:"--Status Type---"'>
+                                        
+                                         
+                                        </select>
+                                    </div>
+                                    @*<div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Status Type <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-11">
+                                        <select class="form-control form-control-sm" id="ShareType" data-bind='click :Status'>
+                                        </select>
+                                     
+                                    </div>*@
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Charge <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" data-bind="value: Charge" type="text" placeholder="Charge">
+                                    </div>
+                                </div>
+                                @*<div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12" id="simple-date1">
+
+                                    <label class="col-12 col-form-label">Effective Date <span class="mandatory"></span></label>
+                                    <div class="input-group date col-sm-12 col-md-10">
+                                        <div class="col-sm-12 col-md-10">
+                                            <input type="date" class="form-control form-control-sm mr-2 mt-1 " data-bind="value:EffectiveDate" />
+                                        </div>
+                                    </div>
+                                </div>*@
+
+                                <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12" id="simple-date1">
+                                    <label class="col-12 col-form-label" for="WPaid">Effective Date<span class="mandatory"></span></label>
+                                    <div class="input-group date col-sm-12 col-md-10">
+                                        <div class="input-group-prepend">
+
+                                        </div>
+                                        <input type="text" data-bind="value: EffectiveDate" class="form-control form-control-sm" placeholder="Select a Date" id="Effective">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">PSL At <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        @*<input class="form-control form-control-sm" data-bind="value: Code" type="text" placeholder="Code">*@
+                                        @*<select class="form-control form-control-sm" id="PledgeAt" data-bind='options:PledgeAtList ,optionsText:"PledgeAtName",optionsValue:"PledgeAt",value:SelectedPledgeAt, optionsCaption:"--PledgeAt---"'>*@
+
+                                        <select class="form-control form-control-sm" id="PledgeAt" data-bind='options: PledgeAtList,optionsText: "PledgeAtName",optionsValue:"Pcode",value:SelectedPledgeAt, optionsCaption:"---PSL At ---"'>
+                                        </select>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="row">
+                                  @*  <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                        <label class="col-12 col-form-label">ChalaniNo <span class="mandatory"></span></label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input class="form-control form-control-sm" data-bind="value: ChalaniNo" type="text" placeholder="ChalaniNo">
+                                        </div>
+                                    </div>*@
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                        <label class="col-12 col-form-label">Total PSL kitta <span class="mandatory"></span></label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input class="form-control form-control-sm" data-bind="value: total" type="text" disabled placeholder="Total PSL kitta">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                        <label class="col-12 col-form-label">PSL Amount<span class="mandatory"></span></label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input class="form-control form-control-sm" data-bind="value: PledgeAmount" type="text" placeholder="PSL Amount">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                        <label class="col-12 col-form-label">Remark<span class="mandatory"></span></label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input class="form-control form-control-sm" data-bind="value: Remark" type="text" placeholder="Remark">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-4 ">
+                                <div class="row col-12 p-4 justify-content-center ">
+
+
+                                    <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                        <input type="button" class="btn btn-success mr-2 mt-1 col-12" id="Save" disabled="disabled" value="Save" data-bind="click: SavePSLEntry">
+                                    </div>
+
+                                    <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                        <input type="button" class="btn btn-secondary mr-2 mt-1 col-12" id="Cancel" value="Cancel" data-bind="click: ClearControl">
+                                    </div>
+                                </div>
+</form>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+            <!-- Search Query Modal Theme -->
+            <!-- Modal -->
+            <div class="modal fade" id="searchQueryModalTheme" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="col-12">
+                                <div class="card col-12">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Search ShareHolder</h6>
+                                    </div>
+                                    <hr class="my-1">
+                                    <div class="card-body">
+
+                                        <div class="form-group row col-12">
+                                            <label class="col-5 col-form-label">First Name</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <input class="form-control form-control-sm" type="text" placeholder="Enter First Name" data-bind="value: FName">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row col-12">
+                                            <label class="col-5 col-form-label">Last Name</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <input class="form-control form-control-sm" type="text" placeholder="Enter Last Name" data-bind="value: LName">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row col-12">
+                                            <label class="col-5 col-form-label">Father's Name</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <input class="form-control form-control-sm" type="text" placeholder="Enter Father's Name" data-bind="value: FaName">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row col-12">
+                                            <label class="col-5 col-form-label">GrandFather's Name</label>
+                                            <div class="col-sm-6 col-md-6">
+                                                <input class="form-control form-control-sm" type="text" placeholder="Enter GrandFather's Name" data-bind="value: GrFaName">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-bind="click : SearchShHolder">Search Holder</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Modal Scrollable -->
+            <div class="modal fade" id="certificateModalTheme" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalScrollableTitle">Certificate Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <!--<div class="modal-body">-->
+                            @*<div class="col-12">
+                                <div class="card mb-4">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                                    </div>
+                                    <div class="col-2">
+                                        <table id="tbl_PSLEntryCertificate" class="table  table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th> <input type="checkbox" data-bind="checked: SelectAll" id="chk" /></th>
+                                                    <th>CertNo</th>
+
+                                            </thead>
+                                            <tbody data-bind="foreach:PSLEntryCertificateList">
+                                                <tr>
+                                                    <td><input type="checkbox" data-bind="checked: Selected" class="case" name="case[]" /></td>
+                                                    <td data-bind="text: CertNo"></td>
+
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                </div>
+                            </div>*@
+                        <!--</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-outline-primary" data-bind="click: Insert">Insert</button>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+
+
+            @* Modal For the List of Holders *@
+            <div class="modal fade" id="HoldersList" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalScrollableTitle">Share Holder List</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-12">
+                                <div class="card mb-4">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                                    </div>
+                                    <div class="table-responsive p-3">
+                                        <div class="table-responsive p-3">
+                                            <table class="table align-items-center table-flush table-hover" id="dataTable">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>S.N.</th>
+                                                        <th>ShholderNo</th>
+                                                        <th>FName</th>
+                                                        <th>LName</th>                                                        
+                                                        <th>PSLNo</th>
+                                                       @* <th>TransDt</th>
+                                                        <th>Remark</th>  *@ 
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody data-bind="foreach : ShHolderList">
+                                                    <tr data-bind="click:GetSholderInformation">
+                                                        <td>
+                                                            <span data-bind="text: ($index() + 1)" />
+                                                        </td>
+                                                        <td>
+                                                            <span data-bind="text: ShholderNo" />
+                                                        </td>
+                                                        <td>
+                                                            <span data-bind="text:FName" />
+                                                        </td>
+                                                        <td>
+                                                            <span data-bind="text:LName" />
+                                                        </td>
+
+                                                        <td>
+                                                            <span data-bind="text: PSLNo " />
+                                                        </td>
+
+                                                       @* <td>
+                                                            <span data-bind="text: TranDt " />
+                                                        </td>
+                                                        <td>
+
+                                                            <span data-bind="text: Remark " />
+                                                        </td>*@
+
+                                                        <td>
+                                                            <i class="fas fa-check"> </i>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section footer{
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/scripts/Certificate/PSLEntry.js"></script>
+
+
+}
+
+
+
+ 

@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Reports - Daily Report";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+           
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Daily Report</h6>
+                </div>
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30 ">
+                        <div class="row ">
+                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12" id="simple-date1">
+                                <label class="col-12 col-form-label" for="DailyReportDate">ReportDate <span class="mandatory"> *</span></label>
+                                <div class="input-group date col-sm-12 col-md-10">
+                                    <div class="input-group-prepend">
+
+                                    </div>
+                                    <input type="text" data-bind="value: DailyReportDate" class="form-control form-control-sm" placeholder="Select a Date" id="DailyReportDate">
+                                </div>
+                            </div>
+                            <div class="mt-4 col-2 ml-auto mr-3" style="float: right !important">
+                                <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " id="OK" value="Report" data-bind="click: GenerateReport">
+                            </div>
+
+
+                        </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Footer{
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/scripts/Reports/DailyReport.js"></script>
+}

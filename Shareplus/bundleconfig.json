@@ -1,0 +1,30 @@
+[
+  {
+    "outputFileName": "wwwroot/bundle/site.min.css",
+    "inputFiles": [
+      "wwwroot/vendor/fontawesome-free/css/all.css",
+      "wwwroot/vendor/bootstrap/css/bootstrap.css",
+      "wwwroot/css/ruang-admin.css",
+      "wwwroot/lib/toastr/toastr.css",
+      "wwwroot/css/loader-style.css"
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/bundle/site.min.js",
+    "inputFiles": [
+    
+      "wwwroot/lib/custom/js/common.js"
+      
+    ],
+
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  }
+]

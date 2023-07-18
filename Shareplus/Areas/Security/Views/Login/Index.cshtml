@@ -1,0 +1,109 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Areas/Views/Shared/_LayoutLogin.cshtml";
+
+}
+
+
+<div class="row justify-content-center">
+    <div class="col-xl-4 col-lg-6 col-md-6">
+        <div class="card shadow-sm my-5 border-radius-none" style="margin-top: 8rem !important;">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="login-form">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Shareplus Login</h1>
+                            </div>
+
+                            @*@Html.ActionLink("Change My Password","Index", "ChangePassword", new { area = "Common" })*@
+                            <form class="user" id="Submit">
+
+                                @Html.AntiForgeryToken()
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="UserName"
+                                           placeholder="User ID" name="UserName">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="Password" id="Password" placeholder="Password">
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block" type="submit">Login</button>
+                                </div>
+
+                            </form>
+
+
+                            <div class="text-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" id="SecurityDatabaseModal" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Enter Server Credential</h5>
+
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12">
+                        <!-- Form Basic -->
+                        <div class="card mb-4">
+
+                            <div class="card-body">
+                                <form id="ServerSubmit">
+                                    <div class="form-group row" style="margin-left: 1px;">
+                                        <input type="password" class="form-control col-7" id="ServerName" placeholder="Server IP" name="SServerName">
+                                        <input type="password" class="form-control col-4" id="ServerNamePort" placeholder="Port" name="SServerNamePort" style="margin-left: 5%;">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" id="DatabaseName"
+                                               placeholder="Database Name" name="DatabaseName">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" id="SUserName"
+                                               placeholder="User Name" name="SUserName">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" name="Password" id="SPassword" placeholder="Password">
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="isLDAP" onclick="EnableLDAP();">
+                                        <label class="form-check-label" for="isLADP">Use Active Directory Sign In</label>
+                                    </div>
+                                    <div id="LDAPDiv" >
+                                        <div class="form-group">
+                                        <input type="password" class="form-control" name="LDAPServer" id="LDAPServer" placeholder="AD Server Address">
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary btn-block" type="submit">Save Credentials</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Footer{
+<script src="~/vendor/sweetalert/sweet-alert.js"></script>
+<script src="/scripts/Security/UserLogin.js"></script>
+
+}

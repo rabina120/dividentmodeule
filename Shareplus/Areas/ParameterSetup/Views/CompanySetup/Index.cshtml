@@ -1,0 +1,253 @@
+﻿
+@{
+    ViewData["Title"] = "Company Setup";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            @*<div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Parameter Setup</li>
+                                <li class="breadcrumb-item active" aria-current="page">Company Setup</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>*@
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Company Setup</h6>
+                </div>
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30 ">
+                        <div class="row justify-content-center">
+                            <div class="col-3">
+                                <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " id="AddButton" value="Add" data-bind="click: ChooseOptions.bind($data,'A')">
+                            </div>
+                            <div class="col-3 ">
+                                <input type="button" class="btn btn-info mr-2 mt-1 col-12 " id="UpdateButton" value="Edit" data-bind="click: ChooseOptions.bind($data,'U')">
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+
+                        <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label" for=" compcode">Company Code: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" id="compcode"  maxlength="3" onkeypress="return isNumberKey(event)" data-bind="value: Compcode,valueUpdate: 'input',executeOnEnter:GetCompanyDetails.bind($data,Compcode), event:{blur:GetCompanyDetails.bind($data,Compcode)}" type="text" placeholder="Enter Company Code">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Company English Name: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm"  maxlength="15" data-bind="value: CompEngName" type="text" placeholder="Enter Company English Name">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Company English Address1: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm"  maxlength="10" data-bind="value: ComEngAd1" type="text" placeholder="Enter Company English Address">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Company English Address 2: </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm"  maxlength="10" data-bind="value: CompEngAd2" type="text" placeholder="Enter Company English Address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+
+                        <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Company Nepali Name: </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm"  maxlength="10" data-bind="value: CompNpName" type="text" placeholder="Enter Company English Name">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Company Nepali Address1: </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" maxlength="10" data-bind="value: CompNpAd1" type="text" placeholder="Enter Company Nepali Address">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Company Nepali Address 2: </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" maxlength="10"  data-bind="value: CompNpAd2" type="text" placeholder="Enter Company Nepali Address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+
+                        <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Telephone No: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm"  maxlength="10" onkeypress="return isNumberKey(event)" data-bind="value: TelNo" type="text" placeholder="Enter Telehone No">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Post Box No: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" maxlength="7" data-bind="value: PostBox" type="text" placeholder="Enter Post Box No">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Email Address : </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" data-bind="value: Email" type="email" maxlength="25" placeholder="Enter Email Address" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+
+
+                        <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Maximum Kitta: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" data-bind="value: MaxKitta"  maxlength="9" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Maximum Kitta">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Per Share Value: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" data-bind="value: PerShare" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Per Share Value">
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <hr class="my-4 ">
+
+                    <div class="row">
+
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">First Call Value: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" data-bind="value: FirstCallValue" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter First Call Value">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">First Call Date: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" data-bind="value: FirstCallDate" type="date" placeholder="Enter First Call Date">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Second Call Value: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" data-bind="value: SecondCalValue" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Second Call Value">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Second Call Date: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" data-bind="value: SecondCallDate" type="date" placeholder="Enter Second Call Date">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Third Call Value: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" data-bind="value: ThirdCallValue" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Third Call Value">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Third Call Date: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" data-bind="value: ThirdCallDate" type="date" placeholder="Enter Third Call Date">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Software Installed Date: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" data-bind="value: SoftwareDate" type="date" placeholder="Enter Software Installed Date">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Software Installed No: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" data-bind="value: SoftwareNo" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Software Installed No">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Agent Name: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" data-bind="value: AgentName" type="text" placeholder="Enter Agent Name">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">
+                                Signature Directory:
+                            </label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" data-bind="value: SignatureDirect" type="text" placeholder="Enter Signature Directory">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Sold Software Code: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" data-bind="value: SoldCode" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Sold Software Code">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Current AGM No: </label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" data-bind="value: AGMNo" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Current AGM No">
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4 ">
+                    <div class="row col-12 p-4 justify-content-center ">
+                        <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                            <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="SaveButton" value="Save" data-bind="click: SaveCompanyDetails">
+                        </div>
+                        <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                            <input type="button" class="btn btn-warning  mr-2 mt-1 col-12 " value="Clear" data-bind="click: ClearControl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Footer{
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/scripts/ParameterSetup/CompanySetup.js"></script>
+}

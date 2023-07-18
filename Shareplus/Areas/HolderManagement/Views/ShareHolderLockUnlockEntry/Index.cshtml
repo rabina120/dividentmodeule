@@ -1,0 +1,314 @@
+﻿
+@{
+    ViewData["Title"] = "ShareHolder Management - Holder Lock/Unlock Entry";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
+    <style>
+    .btn-success {
+    color: #fff;
+    background-color: #66bb6a;
+    border-color: #66bb6a;
+    -webkit-box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2)!important;
+    box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2)!important;
+    border-radius: 1.25rem!important;
+}
+</style>
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">ShareHolder Management</li>
+                                <li class="breadcrumb-item active" aria-current="page">Holder Lock/Unlock Entry</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Holder Lock/Unlock Entry</h6>
+                </div>
+
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+
+                        <form>
+                            <fieldset class="form-group col-12">
+
+                                <div class="form-group row ml-2">
+                                    <legend class="col-form-label col-2 pt-0">Selecting  Holder:</legend>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="AddRadio" name="customRadio1" class="custom-control-input" data-bind="checked:RecordType,checkedValue:'L'">
+                                        <label class="custom-control-label" for="AddRadio">Lock</label>
+                                    </div>
+                                    <div class="custom-control custom-radio ml-4">
+                                        <input type="radio" id="UpdateRadio" name="customRadio2" class="custom-control-input" data-bind=" checked:RecordType,checkedValue:'U'">
+                                        <label class="custom-control-label" for="UpdateRadio">Unlock</label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="row col-12 p-4 justify-content-center ">
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="AddButton" value="Add" data-bind="click: chooseOptions.bind($data,'A')">
+                                </div>
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="UpdateButton" value="Edit" data-bind="click: chooseOptions.bind($data,'U')">
+                                </div>
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="DeleteButton" value="Delete" data-bind="click: chooseOptions.bind($data,'D')">
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="form-group row col-md-5">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-11">
+                                        <select class="form-control form-control-sm" disabled="disabled" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+                            <div class="row">
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Shholder No: <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Share Holder Number" id="ShHolderNo" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:GetSholderInformation.bind($data,ShholderNo), event:{blur:GetSholderInformation.bind($data,ShholderNo)}" />
+                                    </div>
+
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Total Kitta</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:TotalKitta" type="text" placeholder="Total Kitta">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">English Name</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:FullName" type="text" placeholder="English Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Owner Type</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:ShOwnerType" type="text" placeholder="Owner Type">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Nepali Name</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:NpName" type="text" placeholder="Nepali Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">OwnerSub Type</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:ShOwnerSubType" type="text" placeholder="Owner Sub Type">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Father Name</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:FaName" type="text" placeholder="Father Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Grand Father Name</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:GrFaName" type="text" placeholder="Grand Father Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Address</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:Address" type="text" placeholder="Address">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">District</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:DistCode" type="text" placeholder="District">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Telephone No</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:TelNo" type="text" placeholder="Telephone No">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">PO Box No</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" data-bind="value:PoBoxNo" type="text" placeholder="PO Box No">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="my-4">
+                            <div class="row">
+                                <div id = "hideDivLockId" class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" >Lock Id</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="LockId" data-bind="value:LockId" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 " id="simple-date1">
+                                    <label class="col-12 col-form-label" for="dateOfBirth">Lock Date</label>
+                                    <div class="input-group date col-sm-12 col-md-10">
+                                        <div class="input-group-prepend">
+
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" disabled="disabled" data-bind="value: LockDate , text:LockDate" id="lockDate">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-9 col-md-9 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Lock Remarks</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" disabled="disabled" id="remarks" maxlength="100" data-bind="value:Remarks" type="text" placeholder="Lock Remarks">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="ifUnlock">
+                                <hr class="my-4">
+                                <div class="row">
+                                    <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 " id="simple-date2">
+                                        <label class="col-12 col-form-label" for="dateOfBirth">Unlock Date</label>
+                                        <div class="input-group date col-sm-12 col-md-10">
+                                            <div class="input-group-prepend">
+
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" disabled="disabled" data-bind="value: UnlockDate , text:UnlockDate" id="unlockDate">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-9 col-md-9 col-sm-12 col-12">
+                                        <label class="col-12 col-form-label">Unlock Remarks</label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input class="form-control form-control-sm" disabled="disabled" id="unlockremarks" maxlength="100" data-bind="value:UnlockRemarks" type="text" placeholder="Unlock Remarks">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row col-12 p-4 justify-content-center ">
+
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="saveShholder" value="Save" data-bind="click: Save">
+                                </div>
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12" id="refreshButton" value="Refresh" data-bind="click: refresh">
+                                </div>
+                               
+
+                            </div>
+
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="HoldersList" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Share Holder List</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12">
+                        <div class="card mb-4">
+                            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                            </div>
+                            <div class="table-responsive p-3">
+                                <div class="table-responsive p-3">
+                                    <table class="table align-items-center table-flush table-hover" id="dataTable">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>S.N.</th>
+                                                <th>Lock Id</th>
+                                                <th>Shholder No</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Lock Date</th>
+                                                <th>Remarks</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach : ShHolderLockUnlockList">
+                                            <tr data-bind="click: GetSholderLockUnlockInformation">
+                                                <td>
+                                                    <span data-bind="text: ($index() + 1)" />
+                                                </td>
+                                                <td>
+                                                    <span data-bind="text: slu_lock_id" />
+                                                </td>
+                                                <td>
+                                                    <span data-bind="text: slu_ShholderNo" />
+                                                </td>
+                                                <td>
+                                                    <span data-bind="text: slu_fname" />
+                                                </td>
+                                                <td>
+                                                    <span data-bind="text: slu_lname" />
+                                                </td>
+                                                <td>
+                                                    <span data-bind="text: slu_lock_dt" />
+                                                </td>
+                                                <td>
+                                                    <span data-bind="text: slu_lock_remarks " />
+                                                </td>
+                                                <td>
+                                                    <i class="fas fa-check"> </i>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Footer{
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script >
+    $('#hideDivLockId').hide()</script>
+    <script src="~/scripts/HolderManagement/ShareHolderLockUnlockEntry.js?v=0.1"></script>
+}

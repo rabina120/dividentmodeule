@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+color   th {
+            width: none !important;
+        }
+    </style>
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Holder Management</li>
+                                <li class="breadcrumb-item active" aria-current="page">Holder Merge Posting</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Holder Merge Posting</h6>
+                </div>
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="clearfix">
+                            @*<div class="pull-left">
+                                    <h4 class="text-blue h4">Create User</h4>
+                                </div>*@
+                        </div>
+                        <form>
+                            <div class="col-12 p-3">
+                                <!--DateSelectoR FromDate To Date-->
+                                <div class="row" >
+                                    
+				                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                        <label class="col-sm-12 col-md-12 col-form-label" for="SplitDateFrom">Date From </label>
+                                        <div class="input-group date col-sm-12 col-md-12">
+                                            <div class="input-group-prepend">
+                                            </div>
+                                           <input type="text" class="form-control form-control-sm" placeholder="Date From" id="dateFrom" data-bind="value: dateFrom">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                        <label class="col-sm-12 col-md-12 col-form-label" for="SplitDateTo">Date To </label>
+                                        <div class="input-group date col-sm-12 col-md-10">
+                                            <div class="input-group-prepend">
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" placeholder="Date To" id="dateTo" data-bind="value: dateTo">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                        <label class="col-12 col-form-label" style="color : transparent">l</label>
+                                        <div class="col-sm-12 col-md-10">
+                                           <input type="button" class="btn btn-primary  col" data-bind="click:loadDataTable" value="Refresh">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <table id="tbl_Add_Records_Sholder" class="table  table-bordered ">
+                                    <thead>
+                                        <tr>
+                                            <th> <input type="checkbox" data-bind="checked: SelectAll" id="chk" /></th>
+                                            <th>MergeId</th>
+                                            <th>HolderNoFrom</th>
+                                            <th>HolderNoTo</th>
+                                            <th>HolderNameFrom</th>
+                                            <th>HolderNameTo</th>
+                                            <th>MergeDate</th>
+                                            <th>MergeBy</th>
+                                            <th>Remarks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach:HolderMergeDataList">
+                                        <tr>
+                                            <td><input type="checkbox" data-bind="checked: Selected" class="case" name="case[]" /></td>
+                                            <td data-bind="text: merge_id"></td>
+                                            <td data-bind="text: holdernofrom"></td>
+                                            <td data-bind="text: holdernoto"></td>
+                                            <td data-bind="text: holdernofromname"></td>
+                                            <td data-bind="text: holdernotoname"></td>
+                                            <td data-bind="text: mergedate"></td>
+                                            <td data-bind="text: merge_by"></td>
+                                            <td data-bind="text: merge_remarks"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </form>
+
+                        <hr class="my-4 ">
+                        <div class="row col-12 ">
+                            <div class="col-xl-3  col-md-6 col-sm-6 col-6 ">
+                                <input type="text" class="form-control form-control-sm mr-2 mt-1 " placeholder="Posting Remarks" data-bind="value: PostingRemarks" maxlength="100" />
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
+
+                                <div class="input-group date col-sm-12 col-md-10 mt-1">
+                                    <div class="input-group-prepend">
+
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm" disabled="disabled" data-bind="value: PostingDate , text:PostingDate" id="postingDate">
+                                </div>
+                            </div>
+
+                            <div class="col-xl-2 col-md-2 col-sm-4 col-4 ">
+                                <input type="button" class="btn btn-success  col-12" data-bind="click:PostShholderInfo.bind($data,'A')" value="Authorization">
+                            </div>
+                            <div class="col-xl-2 col-md-2 col-sm-4 col-4 ">
+                                <input type="button" class="btn btn-warning  col-12" data-bind="click:PostShholderInfo.bind($data,'R')" value="Rejection">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Footer{
+    <script language="JavaScript" type="text/javascript">
+
+        function toggle(source) {
+            checkboxes = document.getElementsByName('case[]'); for (var i = 0, n = checkboxes.length;
+                i < n; i++) { checkboxes[i].checked = source.checked; }
+        }
+
+    </script>
+    <script src="https://unpkg.com/floatthead"></script>
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/scripts/holderManagement/HolderMergePosting.js"></script>
+
+
+}

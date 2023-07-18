@@ -1,0 +1,296 @@
+﻿
+@{
+    ViewData["Title"] = "Certificate List";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Certificate</li>
+                                <li class="breadcrumb-item active" aria-current="page">Certificate List</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+                <div >
+
+                    <div class="card mb-4">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Certificate List</h6>
+                        </div>
+                        <hr class="my-1">
+                        <div class="card-body">
+                            <div class="pd-20 card-box mb-30">
+                                <div class="clearfix">
+                                </div>
+                                <div class="row">
+                                    <div class="form-group row col-xl-5 col-md-5 col-sm-12">
+                                        <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                        <div class="col-sm-12 col-md-11">
+                                            <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                                <label class="col-12 col-form-label">Order By </label>
+                                                <div class="col-sm-12 col-md-12">
+                                                    <select class="form-control form-control-sm" id="OrderBy" data-bind='options: OrderByList ,optionsText:"OrderByName",optionsValue:"OrderBy",value:SelectedOrderBy, optionsCaption:"--Order By--"'>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            @*<label class="col-12 col-form-label" for="RegNo">Order By</label>
+                <input type="radio" value="C" name="OrderBy" data-bind="checked:OrderBy" />Cert No
+                <input type="radio" value="H" name="OrderBy" data-bind="checked:OrderBy" />H.No
+                <input type="radio" value="S" name="OrderBy" data-bind="checked:OrderBy" />Serial No*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="row col-12 col-sm-12 pl-3">
+                                        <div class="custom-control custom-radio col-md-5 col-xl-4 col-sm-1">                                    
+                                              <input type="radio" value="DC" name="ListCertificate" data-bind="checked:ListCertificateRadio, event:{ change: ToggleCerificateMode }" />Duplicate Certificates
+                                            </div>
+                                             <div class="custom-control custom-radio col-md-5 col-xl-3 col-sm-1">                                               
+                                                 <input type="radio" value="AC" name="ListCertificate" data-bind="checked:ListCertificateRadio, event:{ change: ToggleCerificateMode }" />&nbsp;All Certificates
+                                            </div>
+                                             <div class="custom-control custom-radio col-md-5 col-xl-5 col-sm-1">
+                                                 <input type="radio" value="DUCL" name="ListCertificate" data-bind="checked:ListCertificateRadio, event:{ change: ToggleCerificateMode }" />&nbsp;Distributed/Undistributed Certificate List
+                                            </div>
+                                      </div>
+                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div id="hideDC" style="display: none;">
+                                        <div class="row">
+                                            <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                                <label class="col-12 col-form-label"> <span class="mandatory"> </span></label>
+                                                <div class="col-sm-12 col-md-10">
+
+                                                    <input type="button" id="DisplayDuplicateCerticateLists" class="btn btn-success mr-2 mt-1 col-12 " value="Export As Excel" data-bind="click:DisplayDuplicateCerticateLists">
+
+                                                </div>
+                                                
+                                            </div>
+                                           <div class="form-group row col-xl-6 col-md-6 col-sm-12">
+                                           <label class="col-12 col-form-label">List Type <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-10">
+                                                <select class="form-control form-control-sm" id="ListType" data-bind='options: ListTypeList,optionsText: "ListTypeName", optionsValue:"ListType",value:SelectedListType, optionsCaption:"---List Type---"'>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div id="hideAC" style="display: none;">
+                                                    <div class="form-group row col-xl-6 col-md-6 col-sm-12">
+                                                           <label class="col-12 col-form-label">ShareOwner Type <span class="mandatory"> *</span></label>
+                                                           <div class="col-sm-12 col-md-10">
+                                                                <select class="form-control form-control-sm" id="ShareOwnerType" data-bind='options: ShownerTypesList,optionsText: "shOwnerTypeName", optionsValue:"shOwnerType",value:SelectedShownerType, optionsCaption:"---ShOwner Type---"'>
+                                                                </select>
+                                                           </div>
+                                                    </div>
+
+                                                      <div class="row">
+                                                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                                                    <label class="col-12 col-form-label" for="HNoFrom">Holder No From <span class="mandatory"> </span></label>
+                                                                     <div class="col-sm-12 col-md-10">
+                                                                        <input class="form-control form-control-sm" type="text" placeholder="Enter Holder No From" id="HNoFrom" data-bind="value: HNoFrom" />
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                                                    <label class="col-12 col-form-label" for="HNoTo">Holder No To <span class="mandatory"> </span></label>
+                                                                    <div class="col-sm-12 col-md-10">
+                                                                        <input class="form-control form-control-sm" type="text" placeholder="Enter Holder NoTo" id="HNoTo" data-bind="value: HNoTo" />
+                                                                    </div>
+                                                                </div>
+                                                             </div>
+                                                      <div class="row">
+                                                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                                                    <label class="col-12 col-form-label" for="CNoFrom">Certificate From <span class="mandatory"> </span></label>
+                                                                    <div class="col-sm-12 col-md-10">
+                                                                        <input class="form-control form-control-sm" type="text" placeholder="Enter CNoFrom" id="CNoFrom" data-bind="value: CNoFrom" />
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                                                    <label class="col-12 col-form-label" for="CNoTo">Certificate To <span class="mandatory"> </span></label>
+                                                                    <div class="col-sm-12 col-md-10">
+                                                                        <input class="form-control form-control-sm" type="text" placeholder="Enter CNoTo" id="CNoTo" data-bind="value: CNoTo" />
+                                                                    </div>
+                                                                </div>
+                                                             </div>
+                                                     <div class="row">
+                                                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                                                    <label class="col-12 col-form-label" for="ShareKittaFrom">Share Kitta From <span class="mandatory"> </span></label>
+                                                                    <div class="col-sm-12 col-md-10">
+                                                                        <input class="form-control form-control-sm" type="text" placeholder="Enter Share Kitta From" id="ShareKittaFrom" data-bind="value: ShareKittaFrom" />
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                                                    <label class="col-12 col-form-label" for="ShareKittaTo">Share Kitta To <span class="mandatory"> </span></label>
+                                                                    <div class="col-sm-12 col-md-10">
+                                                                        <input class="form-control form-control-sm"  type="text" placeholder="Enter Share Kitta To" id="ShareKittaTo" data-bind="value: ShareKittaTo" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                      <div class="row">
+                                                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                                                    <label class="col-12 col-form-label" for="SerialNoFrom">Serial No From <span class="mandatory"> </span></label>
+                                                                    <div class="col-sm-12 col-md-10">
+                                                                        <input class="form-control form-control-sm" type="text" placeholder="Enter Serial No From" id="SerialNoFrom" data-bind="value: SerialNoFrom" />
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                                                    <label class="col-12 col-form-label" for="SerialNoTo">Serial No To <span class="mandatory"> </span></label>
+                                                                    <div class="col-sm-12 col-md-10">
+                                                                        <input class="form-control form-control-sm" type="text" placeholder="Enter Serial No To" id="SerialNoTo" data-bind="value: SerialNoTo" />
+
+                                                                    </div>
+                                                                </div>
+                                                       </div>                                     
+
+                                                     <div class="row">
+                                                         <div class="form-group row col-xl-7 col-md-7 col-sm-12 col-12">
+                                                             <label class="col-12 col-form-label"> <span class="mandatory"> </span></label>
+                                                             <div class="col-sm-6 col-md-5 col-6">
+
+                                                                 <input type="button" id="ALLCerticateLists" class="btn btn-success col-12 " value="To Excel" data-bind="click:GetALLCerticateLists">
+
+                                                             </div>
+                                                             <div class="col-sm-6 col-md-5 col-6">
+
+                                                                 <input type="button" id="ALLCerticateListsPdf" class="btn btn-primary col-12 " value="To PDF" data-bind="click:GetALLCerticateListsPdf">
+
+                                                             </div>
+                                                         </div>                                                                         
+                                                      </div>                                 
+                                      
+                                    </div>
+                                    <div id="hideDUCL" style="display: none;">
+                                        <form class="">
+                                              
+                                              <div class="row">
+                                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-3" id="simple-date1">
+                                                    <label class="col-12 col-form-label" for="RegNo">From Date <span class="mandatory">*</span></label>
+                                                    <div class="col-sm-12 col-md-10 input-group date">
+                                                        <div class="input-group-prepend m-0 p-0">
+                                                        <input class="form-control form-control-sm" type="text" placeholder="Enter From Date" id="RegNo" data-bind="value: FromDate" />
+                                                        </div>
+                                                    </div>
+                                                  </div>
+                                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-3" id="simple-date2">
+                                                        <label class="col-12 col-form-label" for="DRNNo">To Date <span class="mandatory">*</span></label>
+                                                        <div class="col-sm-12 col-md-10 input-group date">
+                                                            <div class="input-group-prepend m-0 p-0">
+                                                            <input class="form-control form-control-sm"   type="text" placeholder="Enter To Date" id="DRNNo" data-bind="value: ToDate" />
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                               
+                                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-3">
+                                                    <label class="col-12 col-form-label" for="RegNo">H.No From <span class="mandatory"></span></label>
+                                                    <div class="col-sm-12 col-md-10">
+                                                        <input class="form-control form-control-sm" type="text" placeholder="Enter HNoFrom" id="RegNo" data-bind="value: HNoFrom" />
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-3">
+                                                    <label class="col-12 col-form-label" for="DRNNo">H.No To <span class="mandatory"></span></label>
+                                                    <div class="col-sm-12 col-md-10">
+                                                        <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter HNoTo" id="DRNNo" data-bind="value: HNoTo" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-3">
+                                                    <label class="col-12 col-form-label" for="RegNo">C.No From <span class="mandatory"></span></label>
+                                                    <div class="col-sm-12 col-md-10">
+                                                        <input class="form-control form-control-sm" type="text" placeholder="Enter CNoFrom" id="RegNo" data-bind="value: CNoFrom" />
+
+                                                    </div>
+                                                </div>
+                                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-3">
+                                                    <label class="col-12 col-form-label" for="DRNNo">C.No To <span class="mandatory"></span></label>
+                                                    <div class="col-sm-12 col-md-10">
+                                                        <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter CNoTo" id="DRNNo" data-bind="value: CNoTo" />
+                                                    </div>
+                                                </div>
+                                          
+                                                       <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-3">
+                                                            <label class="col-12 col-form-label" for="RegNo">Share Type <span class="mandatory"></span></label>
+                                                            <div class="col-sm-12 col-md-10">
+                                                                <select class="form-control form-control-sm" id="ShareType" data-bind='options: ShareTypes,optionsText: "description", optionsValue:"certId",value:SelectedShareType, optionsCaption:"---Share Type---"'>
+                                                                </select>
+                                                            
+                                                             </div>
+
+                                                         </div>
+                                                     <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-3">
+                                                        <label class="col-12 col-form-label">Data Type <span class="mandatory"></span></label>
+                                                        <div class="col-sm-12 col-md-10">
+                                                            <select class="form-control form-control-sm" id="DataType" data-bind='options: DataTypeList ,optionsText:"DataTypeName",optionsValue:"DataType",value:SelectedDataType, optionsCaption:"---Data Type---"'>
+                                                            </select>
+                                                        </div>
+                                                    </div>  
+                                           </div>                                     
+                                        
+                                        </form>
+
+
+                                         
+
+                                        <div class=" row col-12">
+                                              
+                                                    <div class=" row col-xl-6 col-md-6 col-sm-6 col-6 ">
+                                                        <label class="col-12 col-form-label">Distributed Certificate <span class="mandatory"></span></label>
+                                                        <div class="row col-6">
+                                                            <input type="button" id="DistributedCertificatesList" class="btn btn-success  mt-1 col-6 " value="To Excel" data-bind="click:DistributedCertificatesList.bind($data,'D')">
+                                                           </div>
+                                                            <div class="row col-6">
+                                                            <input type="button" id="DistributedCertificatesList" class="btn btn-info  mt-1 col-6 " value="To PDF" data-bind="click:DistributedCertificatesListPdf.bind($data,'D')">
+                                                        </div>
+                                                        </div>
+                                                    <div class="row col-xl-6 col-md-6 col-sm-6 col-6 ">
+                                                        <label class="col-12 col-form-label">UnDistributed Certificate <span class="mandatory"></span></label>
+                                                        <div class="row col-6">
+                                                            <input type="button" id="UnDistributedCertificatesList" class="btn btn-success  mt-1 col-6 " value="To Excel" data-bind="click:DistributedCertificatesList.bind($data,'U')">
+                                                            </div>
+                                                            <div class="row col-6">
+                                                            <input type="button" id="UnDistributedCertificatesList" class="btn btn-info  mt-1 col-6 " value="To PDF" data-bind="click:DistributedCertificatesListPdf.bind($data,'U')">
+                                                        </div>
+                                                        </div>                            
+                                                
+                                     
+                                       
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Footer{
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/scripts/Certificate/CertificateList.js"></script>
+
+}
+

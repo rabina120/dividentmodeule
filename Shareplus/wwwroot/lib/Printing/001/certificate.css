@@ -1,0 +1,133 @@
+body {
+background-image: url("bg.png");
+background-size: 1380px 786px;
+background-repeat: no-repeat;
+
+}
+/* common css */
+.p {
+    position: absolute;
+    font-family:'Courier New', Courier, monospace;
+}
+.certificate {
+    /* position: absolute; */
+}
+.certificate1 {
+    position: relative;
+}
+@page {
+    size: 14.5in 8in; 
+    margin: 0;
+  }
+  @media print {
+    html, body {
+      width: 14.5in; 
+      height: 8in; 
+      
+    }
+    /* ... the rest of the rules ... */
+  }
+  
+/* leftside css */
+.certno-l {
+    
+  left: 96px;
+  top: 200px;
+}
+.srnofrom-l {
+    
+  left: 96px;
+  top: 252px;
+}
+.srnoto-l {
+    
+  left: 264px;
+  top: 252px;
+}
+.name-l {
+    
+  left: 144px;
+  top: 306px;
+  max-width: 240px;
+}
+.add-l {
+    
+  left: 154px;
+  top: 360px;
+  max-width: 240px;
+}
+.date-l {
+    
+  left: 96px;
+  top: 416px;
+}
+.holderno-l {
+    
+  left: 96px;
+  top: 522px;
+}
+
+/* right side css */
+.certno-r {
+    
+    left: 1200px;
+    top: 100px;
+    max-width: 120px;
+  }
+  .shkitta-r {
+    
+    left: 1152px;
+    top: 142px;
+    max-width: 96px;
+  }
+  .add-r {
+      
+    left: 490px;
+    top: 315px;
+    max-width: 786px;
+  }
+  .name-r {
+      
+    left: 510px;
+    top: 355px;
+    max-width: 786px;
+  }
+  
+  .srnofrom-r {
+      
+    left: 786px;
+    top: 390px;
+    max-width: 528px;
+  }
+  .srnoto-r {
+      
+    left: 552px;
+    top: 430px;
+    max-width: 432px;
+  }
+  .amount-r {
+      
+    left: 1130px;
+    top: 429px;
+    max-width: 276px;
+  }
+  .shkitta1-r {
+    
+    left: 580px;
+    top: 466px;
+    max-width: 200px;
+  }
+  .amount1-r {
+      
+    left: 1095px;
+    top: 465px;
+    max-width: 200px;
+  }
+  .date-r {
+      
+    left: 528px;
+    top: 696px;
+    max-width: 144px;
+  }
+
+  

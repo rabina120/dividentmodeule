@@ -1,0 +1,91 @@
+@{
+    ViewData["Title"] = "User Management - User Report";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+             <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">User Management</li>
+                                <li class="breadcrumb-item active" aria-current="page">UserReport</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">User Report</h6>
+                </div>
+
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+
+                        <form>
+                            <div class="row">
+                                <div class="row col-12">
+                                    <div class="form-group row col-3 col-md-3 col-sm-12 col-12" id="userSelectDiv">
+                                        <label class="col-sm-12 col-md-12 col-form-label" for="userSelect2">User <span class="mandatory"> *</span></label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <select class="select2-single-placeholder form-control userSelect2" name="state"
+                                                    id="userSelect2" data-bind='options:UserList, optionsText:"UserName",
+                                                optionsValue: "UserName", value: SelectedUser, optionsCaption:"---User---"'>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                        <label class="col-sm-12 col-md-11 col-form-label">Log From</label>
+
+                                        <div class="input-group date col-sm-12 col-md-10 mt-1">
+                                            <div class="input-group-prepend">
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" data-bind="value: FromDate , text:FromDate" id="fromDate">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date2">
+                                        <label class="col-sm-12 col-md-11 col-form-label">Log To</label>
+
+                                        <div class="input-group date col-sm-12 col-md-10 mt-1">
+                                            <div class="input-group-prepend">
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm" data-bind="value: ToDate , text:ToDate" id="toDate">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                        <label class="col-sm-12 col-md-11 col-form-label"></label>
+
+                                        <input type="button" class="btn btn-info mr-2 mt-1 col-6 mt-3" id="Report" value="PDF" data-bind="click: Report.bind($data,'R')">
+                                        <input type="button" class="btn btn-info mr-2 mt-1 col-6 mt-3 ml-2" id="Excel" value="Excel" data-bind="click: Report.bind($data,'E')">
+                                    </div>
+
+                                </div>
+                                
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+</div>
+@section Footer{
+<script src="~/vendor/sweetalert/sweet-alert.js"></script>
+<script src="/scripts/Security/UserReport.js"></script>
+<script>
+    
+</script>
+}

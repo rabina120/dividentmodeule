@@ -1,0 +1,504 @@
+﻿
+@{
+    ViewData["Title"] = "Holder Management - Update ShareHolder";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .btn-success {
+    color: #fff;
+    background-color: #66bb6a;
+    border-color: #66bb6a;
+    -webkit-box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2)!important;
+    box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2)!important;
+    border-radius: 1.25rem!important;
+}
+</style>
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+             <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Holder Management</li>
+                                <li class="breadcrumb-item active" aria-current="page">UpdateShareHolder</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Update Share Holder </h6>
+                </div>
+
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+
+                        <form>
+                            <div class="row">
+                                <div class="form-group row col-md-5">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                    <div class="col-sm-12 col-md-11">
+                                        <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-3 col-sm-12 pt-4">
+                                    <button type="button" class="btn btn-primary mt-3" data-toggle="modal" id="showCertificate" data-bind="click :LoadCertDet">Show Certificate</button>
+                                </div>
+
+                                <div class="form-group col-md-3 col-sm-12 pt-4">
+                                    <button type="button" class="btn btn-primary mt-3" name="" id="showSignature" data-toggle="modal" data-bind="click :GetSignature">
+                                        Show
+                                        Signature
+                                    </button>
+                                </div>
+
+                            </div>
+                            <div class = "row">
+                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Application No: <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        @* <input data-bind="value:ShholderNo, valueUpdate: 'input', executeOnEnter:GetSholderInformation, event{blur:GetSholderInformation}" class="form-control form-control-sm">*@
+                                        <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Application No" id="ApplicationNo" data-bind="value:ApplicationNo,valueUpdate: 'input',executeOnEnter:GetApplicationNo.bind($data,ApplicationNo), event:{blur:GetApplicationNo.bind($data,ApplicationNo)}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Holder No:</label>
+                                    <div class="col-sm-12 col-md-10">
+                                        @* <input data-bind="value:ShholderNo, valueUpdate: 'input', executeOnEnter:GetSholderInformation, event{blur:GetSholderInformation}" class="form-control form-control-sm">*@
+                                        <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Share Holder Number" disabled="disabled" id="ShHolderNo" data-bind="value:ShholderNo" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="shownerTypeSelect2">
+                                        Holder Type <span class="mandatory">*</span>
+                                    </label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="form-control form-control-sm" id="shOwnerType"
+                                                data-bind='options:ShOwnerTypes, optionsText:"ShOwnerTypeName",
+                                                optionsValue: "ShOwnerType", value: SelectedShOwnerType,
+                                                optionsCaption:"Holder Type"'>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="subShownerTypeSelect2">
+                                        Holder Sub Type
+                                        Type <span class="mandatory">*</span>
+                                    </label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="form-control form-control-sm" id="subShownerType"
+                                                data-bind='options: ShOwnerSubTypes,optionsText: "ShOwnerSubTypeName",
+                                                optionsValue:"ShOwnerSubType",value:SelectedShOwnerSubType,
+                                                optionsCaption:"Sub Holder Type"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="titleSelect2">Title <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="select2-single-placeholder form-control form-control-sm titleSelect2" id="title" name="state" data-bind='options: HolderTitle,optionsText: "HolderTitleName",
+                                                                    optionsValue:"HolderTitleName",value:SelectedHolderTitle,
+                                                                    optionsCaption:"---Holder Title---"'>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">First Name <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" id="firstName" data-bind="value:FName" type="text" placeholder="Enter First Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Last Name <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" id="lastName" type="text" data-bind="value:LName" placeholder="Enter Middle/Last Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="nepaliTitleSelect2">
+                                        Nepali Title <span class="mandatory">*</span>
+                                    </label>
+                                    <div class="col-sm-12 col-md-10">
+
+                                        <select class="select2-single-placeholder form-control form-control-sm titleSelect2" name="state" id="nepTitle" data-bind='options: HolderNepaliTitle,optionsText: "HolderNepaliTitleName",
+                                                                    optionsValue:"HolderNepaliName",value:SelectedHolderNepaliTitle,
+                                                                    optionsCaption:"---Holder Nepali Title---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">नाम <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" id="nepName" oninput="convert_to_unicode(this)" data-bind="value:NpName" type="text" placeholder="पुरा नाम लेख्नुहोस">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-2">
+                            <div class="row">
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12" style="margin-right: -40px;">
+                                    <label class=" col-12 col-form-label ">Address(Block No/Tole/City) <span class="mandatory">*</span> </label>
+                                    <div class="col-sm-12 col-md-11 ">
+                                        <input class="form-control form-control-sm " type="text" id="fullAddress" data-bind="value:Address" placeholder="Full Address ">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">ठेगाना <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-11 ">
+                                        <input class="form-control form-control-sm " type="text" id="nepAddress" oninput="convert_to_unicode(this)" data-bind="value:NpAdd" placeholder="पुरा ठेगाना लेख्नुहोस ">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">Address 1 </label>
+                                    <div class="col-sm-12 col-md-10 ">
+                                        <input class="form-control form-control-sm" type="text" data-bind="value:Address1" id="address1" placeholder="Address 1 ">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">Address 2 </label>
+                                    <div class="col-sm-12 col-md-10 ">
+                                        <input class="form-control form-control-sm " type="text" data-bind="value:Address2" id="address2" placeholder="Address 2 ">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">P.O. Box No. </label>
+                                    <div class="col-sm-12 col-md-10 ">
+                                        <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" id="pBoxNo" type="text" data-bind="value:PboxNo" placeholder="Post Office Box No ">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label " for="districtCodeSelect2 ">
+                                        District Code <span class="mandatory">*</span>
+                                    </label>
+                                    <div class="col-sm-12 col-md-10 ">
+                                        <select class="select2-single-placeholder form-control form-control-sm districtCodeSelect2 " name="state " id="districtCodeSelect2" data-bind='options:Districts, optionsText:"DistCodeName",optionsValue: "DistCode", value: SelectedDistrict, optionsCaption:"---District---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">Citizenship No <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10 ">
+                                        <input class="form-control form-control-sm" type="text" id="citizenshipNo" data-bind="value:CitizenshipNo" placeholder="Enter Citizenship No. ">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">Email Address </label>
+                                    <div class="col-sm-12 col-md-10 ">
+                                        <input class="form-control form-control-sm " type="email" id="email" data-bind="value:EmailAdd" placeholder="Enter Email Address ">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">Telephone No </label>
+                                    <div class="col-sm-12 col-md-10 ">
+                                        <input class="form-control form-control-sm " type="text" id="telNo" onkeypress="return isNumberKey(event)" data-bind="value:TelNo" placeholder="Enter Telephone No. ">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">Mobile No </label>
+                                    <div class="col-sm-12 col-md-10 ">
+                                        <input class="form-control form-control-sm " type="text" id="mobileNo" onkeypress="return isNumberKey(event)" data-bind="value:MobileNo" placeholder="Enter Mobile No. ">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row ">
+
+                                <div class="form-group row col-xl-6 col-md-12 col-sm-12 col-12 " style="margin-right: -40px;">
+                                    <label class="col-12 col-form-label ">Bank Name </label>
+                                    <div class="col-sm-12 col-md-11 ">
+                                        <input class="form-control form-control-sm " type="text" id="bankName" data-bind="value:BankName" placeholder="Enter Bank Name ">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-12 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">Bank Account Number </label>
+                                    <div class="col-sm-12 col-md-11 ">
+                                        <input class="form-control form-control-sm " type="text" id="accNo" data-bind="value:AccountNo" placeholder="Enter Bank Account Number " maxlength="18">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4 ">
+                            <div class="row ">
+                                <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">Father's Name <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10 ">
+                                        <input class="form-control form-control-sm " type="text" id="faName" data-bind="value:FaName" placeholder="Father's Full Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">Grand Father's Name <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10 ">
+                                        <input class="form-control form-control-sm " type="text" id="grFaName" data-bind="value:GrFaName" placeholder="Grand Father's Full Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 ">
+                                    <label class="col-12 col-form-label ">Spouse Name </label>
+                                    <div class="col-sm-12 col-md-10 ">
+                                        <input class="form-control form-control-sm " type="text" id="husbandName" data-bind="value:HusbandName" placeholder="Enter Spouse's Name ">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="occupationSelect2">Occupation <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <select class="form-control form-control-sm" name="state" id="occupation" data-bind='options:Occupations, optionsText:"OccupationN",optionsValue: "OccupationId", value: SelectedOccupation, optionsCaption:"---Occupation---"'>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr class="my-4 ">
+                            <div class="row ">
+                                <div class="form-group col-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" data-bind="checked:Nomiee" id="checkNominee">
+                                        <label class="custom-control-label" for="checkNominee">Nominee</label>
+                                    </div>
+
+                                </div>
+                                <div id="ifNominee" class="row col-12">
+                                    <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 ">
+                                        <label class="col-12 col-form-label ">Nominees's Name <span class="mandatory">*</span></label>
+                                        <div class="col-sm-12 col-md-10 ">
+                                            <input class="form-control form-control-sm" id="nomineeName" type="text" data-bind="value:NomineeName" placeholder="Nominees's Full Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 ">
+                                        <label class="col-12 col-form-label ">Relation <span class="mandatory">*</span></label>
+                                        <div class="col-sm-12 col-md-10 ">
+                                            <input class="form-control form-control-sm " id="nomineeRelation" type="text" data-bind="value:Relation" placeholder="State Relationship">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr class="my-4 ">
+
+                            <div class="row ">
+                                <div class="form-group col-12">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" data-bind="checked: Minor" id="checkMinor">
+                                        <label class="custom-control-label" for="checkMinor">Minor </label>
+                                    </div>
+
+                                </div>
+                                <div id="ifMinor" class="row col-12">
+                                    <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 ">
+                                        <label class="col-12 col-form-label ">Guardian's Name <span class="mandatory">*</span></label>
+                                        <div class="col-sm-12 col-md-10 ">
+                                            <input class="form-control form-control-sm " type="text" id="gEnName" data-bind="value: GEnName" placeholder="Guardian's Full Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 ">
+                                        <label class="col-12 col-form-label ">Relation <span class="mandatory">*</span></label>
+                                        <div class="col-sm-12 col-md-10 ">
+                                            <input class="form-control form-control-sm " type="text" id="gRelation" placeholder="State Relationship" data-bind="value: GRelation">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 " id="simple-date1">
+                                        <label class="col-12 col-form-label" for="dateOfBirth">DOB <span class="mandatory">*</span></label>
+                                        <div class="input-group date col-sm-12 col-md-10">
+                                            <div class="input-group-prepend">
+
+                                            </div>
+                                            <input type="date" class="form-control form-control-sm" placeholder="Select a Date" data-bind="value: DOB , text:DOB" id="dateOfBirth">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr class="my-4 ">
+                            <div class="row col-12 p-4 justify-content-center ">
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="saveShholder" value="Save" data-bind="click: SaveShHolder">
+                                </div>
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-secondary mr-2 mt-1 col-12" id="refresh" value="Refresh" data-bind="click: refresh">
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Default Basic Forms End -->
+            <!-- Search Query Modal Theme -->
+            <!-- Modal Scrollable -->
+            <div class="modal fade" id="certificateModalTheme" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalScrollableTitle">Certificate Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-12">
+                                <div class="card mb-4">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                                    </div>
+                                    <div class="table-responsive p-3">
+                                        <div class="table-responsive p-3">
+
+                                            <table id="CertDetTable" class="table  table-bordered" style="">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S.N.</th>
+                                                        <th>Compcode</th>
+                                                        <th>CertNo</th>
+                                                        <th>Kitta</th>
+                                                        <th>From</th>
+                                                        <th>To</th>
+                                                        <th>Status</th>
+                                                        <th>Remarks</th>
+                                                        <th>EffectiveDate</th>
+                                                        <th>EntryBy</th>
+                                                        <th>ShareType</th>
+                                                        <th>IssueDate</th>
+                                                        <th>PSLNO</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody data-bind="foreach : CertDetList">
+                                                    <tr>
+                                                        <td data-bind="text: ($index() + 1)"></td>
+                                                        <td data-bind="text: compcode"></td>
+                                                        <td data-bind="text: CertNo"></td>
+                                                        <td data-bind="text: ShKitta"></td>
+                                                        <td data-bind="text: SrNoFrom"></td>
+                                                        <td data-bind="text: SrNoTo"></td>
+                                                        <td data-bind="text: CertStatusText"></td>
+                                                        <td data-bind="text: Remarks"></td>
+                                                        <td data-bind="text: TranDt"></td>
+                                                        <td data-bind="text: entryuser"></td>
+                                                        <td data-bind="text: share_type"></td>
+                                                        <td data-bind="text: issuse_dt"></td>
+                                                        <td data-bind="text: pslno"></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                           </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Signature Modal Theme -->
+            <div class="modal fade" id="signatureModalTheme" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Signature</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row justify-content-center">
+                            <img class="border border-secondary" data-bind="attr: { src: self.Signature() }" height="300px" width="400px">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @* Modal For the List of Holders *@
+            <div class="modal fade" id="HoldersList" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalScrollableTitle">Share Holder List</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-12">
+                                <div class="card mb-4">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+
+                                    </div>
+                                    <div class="table-responsive p-3">
+                                        <div class="table-responsive p-3">
+                                            <table class="table align-items-center table-flush table-hover" id="dataTable">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>S.N.</th>
+                                                        <th>Shholder No</th>
+                                                        <th>First Name</th>
+                                                        <th>Father Name</th>
+                                                        <th>Grand Father Name</th>
+                                                        <th>Address</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody data-bind="foreach : ShHolderList">
+                                                    <tr data-bind="click: GetSholderInformation">
+                                                        <td>
+                                                            <span data-bind="text: ($index() + 1)" />
+                                                        </td>
+                                                        <td>
+                                                            <span data-bind="text: ShholderNo" />
+                                                        </td>
+                                                        <td>
+                                                            <span data-bind="text:FName() + ' ' + LName()" />
+                                                        </td>
+                                                        <td>
+                                                            <span data-bind="text:FaName" />
+                                                        </td>
+                                                        <td>
+                                                            <span data-bind="text:GrFaName" />
+                                                        </td>
+                                                        <td>
+                                                            <span data-bind="text: Address " />
+                                                        </td>
+                                                        <td>
+                                                            <i class="fas fa-check"> </i>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+@section Footer{
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/scripts/HolderManagement/UpdateShareHolder.js"></script>
+}

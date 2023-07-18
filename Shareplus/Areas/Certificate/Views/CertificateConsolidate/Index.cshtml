@@ -1,0 +1,263 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
+}
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            @*<div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Certificate </li>
+                                <li class="breadcrumb-item active" aria-current="page">Certificate Consolidate</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>*@
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Certificate Consolidate</h6>
+                </div>
+
+           
+
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+
+                        <form>
+                            <div class="row col-12 p-4 justify-content-center">
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " id="Add" value="Add" data-bind="click:ChooseOption.bind($data, 'A')">
+                                </div>
+                                <div class="col-xl-1 col-md-1 col-sm-1 col-6 ">
+                                </div>
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-danger mr-2 mt-1 col-12" id="Delete" value="Delete" data-bind="click:ChooseOption.bind($data, 'D') ">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-11">
+                                        <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr class="my-1">
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-md-11 col-form-label" for="ShholderNo">ShholderNo:<span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input type="text" class="form-control form-control-sm" onkeypress="return isNumberKey(event)" id="ShholderNo" disabled="disabled" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:GetCertificateInformation, event:{blur:GetCertificateInformation}" placeholder="Enter ShholderNo" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">English Name <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" data-bind="value: FullName" type="text" disabled placeholder="Name">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Father's Name <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" data-bind="value: FaName" type="text" disabled placeholder="Father's Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Grand Father's Name <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" data-bind="value: GrFaName" type="text" disabled placeholder="Grand Father's Name">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">District <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" data-bind="value: DistCode" type="text" disabled placeholder="District">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">P.O. Box No. <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" type="text" data-bind="value: PboxNo" disabled placeholder="Post Office Number">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Total Kitta <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" data-bind="value: TotalKitta" type="text" disabled placeholder="Total Kitta">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Certificate No <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input type="text" class="form-control form-control-sm" onkeypress="return isNumberKey(event)" id="CertificateNo" disabled="disabled" data-bind="value:CertificateNo,valueUpdate: 'input',executeOnEnter:GetCertificateDetails, event:{blur:GetCertificateDetails}" placeholder="Enter CertificateNo" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Start Sr.No. <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input type="text" class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" id="SSrNoFrom" placeholder="Enter Start Sr No" data-bind="value:SrNoFrom" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">End Sr.No <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input type="text" class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" id="SSrNoTo" placeholder="Enter End Sr No" data-bind="value:SrNoTo" />
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="SKitta">Share Kitta<span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input type="text" class="form-control form-control-sm" disabled="disabled" id="SKitta" onkeypress="return isNumberKey(event)" placeholder="Enter Share Kitta" data-bind="value:ShKitta " />
+                                    </div>
+                                </div>
+                            </div>
+
+</div>
+                    <div class="row">
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Total Kitta <span class="mandatory"></span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" data-bind="value: ShKitta" type="text" disabled placeholder="Total Kitta">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            @*<label class="col-12 col-form-label">ShareType <span class="mandatory"> *</span></label>*@
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" display="none" data-bind="value: ShareType" type="hidden" disabled placeholder="Total ShareType">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            @*<label class="col-12 col-form-label">ShOwnerType <span class="mandatory"> *</span></label>*@
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" data-bind="value: ShOwnerType" type="hidden" disabled placeholder="Total ShOwnerType">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-10">
+                            <input type="button" name="Add" value="Add" id="btnAdd" class="btn btn-primary" data-bind="click:Add" />
+
+                        </div>
+                    </div>
+                    <hr class="my-1" />
+                    <div class="col-12 p-3" style="overflow-x:auto;">
+                        <table id="Tbl_Certifciate" class="table  table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>S.N</th>
+                                    <th>Certifiate No.</th>
+                                    <th>Share kitta No.</th>
+                                    <th>Start Serial No.</th>
+                                    <th>End Serial No.</th>
+                                    <th>Total Kitta.</th>
+
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:CertificateConsolidateList">
+                                <tr>
+                                    <td data-bind="text: No"></td>
+                                    <td data-bind="text:CertNo"></td>
+                                    <td data-bind="text:ShKitta"></td>
+
+                                    <td data-bind="text:SrNoFrom"></td>
+                                    <td data-bind="text:SrNoTo"></td>
+                                    <td data-bind="text:ShKitta"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr class="my-2" />
+                    <div class="row">
+
+                        <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12" id="simple-date1">
+                            <label class="col-12 col-form-label" for="WPaid">Consolidate Date<span class="mandatory"></span></label>
+                            <div class="input-group date col-sm-12 col-md-10">
+                                <div class="input-group-prepend">
+
+                                </div>
+                                <input type="text" data-bind="value: SplitDate" class="form-control form-control-sm" placeholder="Select a Date" id="ConsolidateDate">
+                            </div>
+                        </div>
+                         
+                        @*<div class="form-group row col-xl-4 col-md-6 col-sm-12" id="simple-date1">
+            <label class="col-sm-12 col-md-11 col-form-label" for="SplitDate">Consolidate Date<span class="mandatory">*</span></label>
+            <div class="col-sm-12 col-md-11">
+                <div class="input-group date col-sm-12 col-md-10">
+                    <div class="input-group-prepend">
+
+                    </div>
+                    <input type="text" class="form-control form-control-sm" id="SplitDate" data-bind="value:SplitDate" placeholder="Enter Consolidate Date " />
+                </div>
+
+            </div>
+        </div>*@
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label">Remark<span class="mandatory"> </span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" data-bind="value: remarks" type="text" placeholder="Remark">
+                            </div>
+                        </div>
+                        @*<div class="form-group row col-4 ">
+            <label class="col-12 col-form-label ">Remarks <span class="mandatory"> *</span></label>
+            <div class="col-sm-12 col-md-10 ">
+                <textarea class="form-control  form-control-sm" id="remarks" data-bind="value: remarks" type="text" placeholder="Enter Remarks" maxlength="50"></textarea>
+            </div>
+
+        </div>*@
+                    </div>
+
+                    <hr class="my-4 ">
+                    <div class="row col-12 p-4 justify-content-center ">
+
+
+                        <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                            <input type="button" class="btn btn-success mr-2 mt-1 col-12" id="Save" disabled="disabled" value="Save" data-bind="click: SaveCertificateConsolidate">
+                        </div>
+
+                        <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                            <input type="button" class="btn btn-secondary mr-2 mt-1 col-12" id="Cancel" value="Cancel" data-bind="click: ClearControl">
+                        </div>
+                    </div>
+
+
+                </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+ 
+@section footer{
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    
+    <script src="~/scripts/Certificate/CertificateConsolidate.js"></script>
+}

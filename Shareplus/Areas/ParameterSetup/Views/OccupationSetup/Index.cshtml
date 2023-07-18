@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+@section Header{
+
+
+}
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            @*<div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">Parameter Setup</li>
+                                <li class="breadcrumb-item active" aria-current="page">Occupation Setup</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>*@
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Occupation Setup</h6>
+                </div>
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="row justify-content-center">
+                            <div class="col-3">
+                                <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " value="Add" id="AddButton" data-bind="click: ChooseOptions.bind($data,'A')">
+                            </div>
+                            <div class="col-3">
+                                <input type="button" class="btn btn-info mr-2 mt-1 col-12 " value="Edit" id="UpdateButton" data-bind="click: ChooseOptions.bind($data,'U')">
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+
+
+                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label" for="OccId">Occupation ID: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" id="OccId" onkeypress="return isNumberKey(event)" data-bind="value: OccupationID,valueUpdate: 'input',executeOnEnter:GetOccupationDetails.bind($data,OccupationID), event:{blur:GetOccupationDetails.bind($data,OccupationID)}" type="text" placeholder="Enter Occupation ID">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label" for="OccName">Occupation Name: <span class="mandatory"> *</span></label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control form-control-sm" id="OccName" data-bind="value: OccupationName" type="text" placeholder="Enter Occupation Name">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-form-label" for="shownerTypeSelect2">
+                                Showner
+                                Type <span class="mandatory">*</span>
+                            </label>
+                            <div class="col-sm-12 col-md-10">
+                                <select class="form-control form-control-sm" id="shOwnerType"
+                                        data-bind='options:ShOwnerTypes, optionsText:"ShOwnerTypeAndName",
+                                                optionsValue: "ShOwnerType", value: SelectedShOwnerType,
+                                                optionsCaption:"---ShOwner Type---"'>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade" id="ModalOccupationInformation" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 75%;">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Occupation List</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-lg-12">
+                                        <!-- Form Basic -->
+                                        <div class="card mb-4">
+
+                                            <div class="card-body">
+                                                <form>
+                                                    <div class="col-12 p-3" style="overflow-x:auto;">
+                                                        <table id="DT_Occupation" class="table  table-bordered" style="width:100%">
+                                                            <thead>
+                                                                <tr>
+
+                                                                    <th>Occupation ID</th>
+                                                                    <th>Occupation Name</th>
+                                                                    <th>ShOwnerType</th>
+                                                                    <th class="no-sort"></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody data-bind="foreach: OccupationList">
+                                                                <tr>
+
+                                                                    <td data-bind="text: OccupationID"></td>
+                                                                    <td data-bind="text: OccupationName"></td>
+                                                                    <td data-bind="text: ShOwnerType"></td>
+                                                                    <td data-bind="click: GetOccupationDetails.bind($data,OccupationID)">
+                                                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4 ">
+                    <div class="row col-12 p-4 justify-content-center ">
+                        <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                            <input type="button" class="btn btn-success mr-2 mt-1 col-12 " value="Save" data-bind="click: SaveOccupationDetails">
+                        </div>
+                        
+
+                        <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                            <input type="button" class="btn btn-warning  mr-2 mt-1 col-12 " value="Clear" data-bind="click: ClearControl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Footer{
+    <script src="~/scripts/ParameterSetup/OccupationSetup.js"></script>
+}
+
+
+

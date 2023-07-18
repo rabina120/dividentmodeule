@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewData["Title"] = "Broker Setup";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Broker Setup</h6>
+                </div>
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">                       
+                          <div class="row col-12 p-4 justify-content-center">
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " value="Add" id="AddButton" data-bind="click: ChooseOptions.bind($data,'A')">
+                                </div>
+
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-danger mr-2 mt-1 col-12" value="Edit" id="EditButton" data-bind="click: ChooseOptions.bind($data,'U')">
+                                </div>
+                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12" value="Delete" id="DeleteButton" data-bind="click: ChooseOptions.bind($data,'D')">
+                                </div>
+
+                            </div>
+                         
+                            <br />
+                            <div class="row">
+
+
+                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="BrokerId">Broker Code: <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" id="BrokerId" onkeypress="return isNumberKey(event)" data-bind="value: BrokerId, executeOnEnter: GetBrokerDetails.bind($data, BrokerId), event :{blur:  GetBrokerDetails.bind($data, BrokerId)}" type="text" placeholder="Enter Broker Code ID">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="BrokerName">Broker Name: <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" id="BrokerName" data-bind="value: BrokerName" type="text" placeholder="Enter Broker Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="BrokerAdd">Broker Address: <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" id="BrokerAdd" data-bind="value: BrokerAdd" type="text" placeholder="Enter Broker Address ">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="BrokerNpName">Broker Nepali Name: </label>
+                                    <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="BrokerNpName" oninput="convert_to_unicode(this)"  data-bind="value: BrokerNpName" type="text" placeholder="Enter Broker Nepali Name">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="BrokerNpAdd">Broker Nepali Address: </label>
+                                    <div class="col-sm-12 col-md-10">
+                                    <input class="form-control form-control-sm" id="BrokerNpAdd" oninput="convert_to_unicode(this)" data-bind="value: BrokerNpAdd" type="text" placeholder="Enter Broker Nepali Address">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="BrokerCont">Broker Contact Person: </label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" id="BrokerCont" onkeypress="return isNumberKey(event)" data-bind="value: BrokerCont" type="text" placeholder="Enter Broker Contact Person">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="BrokerTelNo">Broker Telephone No: <span class="mandatory"></span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" id="BrokerTelNo" onkeypress="return isNumberKey(event)" data-bind="value: BrokerTelNo" type="text" placeholder="Enter Broker Telephobe No">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <hr class="my-4 ">
+                            <div class="row col-12 p-4 justify-content-center ">
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " value="Save" data-bind="click: SaveBrokerDetails">
+                                </div>
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-primary   mr-2 mt-1 col-12 " value="Report">
+                                </div>
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-warning  mr-2 mt-1 col-12 " value="Clear" data-bind="click: ClearControl">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Footer{
+    <script src="~/scripts/ParameterSetup/BrokerSetup.js"></script>
+}
+
