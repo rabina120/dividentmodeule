@@ -155,7 +155,7 @@ namespace CDSMODULE.Areas.DividendProcessing.Controllers
                         }
                         else
                         {
-                            if (!currentOLEDBVersion.Contains(12)) throw new Exception(ATTMessages.EXCEL_UPLOAD.XLSX_NOT_SUPPORTED);
+                            //if (!currentOLEDBVersion.Contains(12)) throw new Exception(ATTMessages.EXCEL_UPLOAD.XLSX_NOT_SUPPORTED);
                             workbook = new XSSFWorkbook(stream); //This will read 2007 Excel format  
                             int name = workbook.NumberOfSheets;
                             List<string> sheetName = new List<string>();
