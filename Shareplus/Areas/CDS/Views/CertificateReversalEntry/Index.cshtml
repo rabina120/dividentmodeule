@@ -44,9 +44,9 @@
                         </div>
 
                         <div class="row">
-                            <div class="form-group row col-xl-4 col-md-5 col-sm-12">
-                                <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
-                                <div class="col-sm-12 col-md-11">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Company <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-12">
                                     <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                     </select>
                                 </div>
@@ -56,21 +56,21 @@
                         <div class="row">
 
 
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Shholder No <span class="mandatory">*</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Share Holder Number" id="ShholderNo" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:GetSholderInformation.bind($data,ShholderNo,'From'), event:{blur:GetSholderInformation.bind($data,ShholderNo,'From')}" />
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-4 col-md-5 col-sm-12">
-                                <label class="col-sm-12 col-md-11 col-form-label" for="HOLDERNAME">Holder Name </label>
-                                <div class="col-sm-12 col-md-11">
+                            <div class="form-group row col-xl-3 col-md-5 col-sm-12">
+                                <label class="col-sm-12 col-md-12 col-form-label" for="HOLDERNAME">Holder Name </label>
+                                <div class="col-sm-12 col-md-12">
                                     <input type="text" class="form-control form-control-sm" disabled="disabled" id="Holder Name" placeholder="Holder Name" data-bind="value:HOLDERNAME" />
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12">
-                                <label class="col-sm-12 col-md-11 col-form-label" for="TotalKitta">Total kitta </label>
-                                <div class="col-sm-12 col-md-11">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                <label class="col-sm-12 col-md-12 col-form-label" for="TotalKitta">Total kitta </label>
+                                <div class="col-sm-12 col-md-12">
                                     <input type="text" class="form-control form-control-sm" disabled="disabled" id="TotalKitta" placeholder="Total Kitta" data-bind="value:TotalKitta" />
                                 </div>
                             </div>
@@ -78,9 +78,9 @@
                         <div class="row" id="DIV_DRN">
 
 
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-2 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">DRN No <span class="mandatory">*</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter DRN Number" id="DRNNo" data-bind="value:DRNNO" />
                                 </div>
                             </div>

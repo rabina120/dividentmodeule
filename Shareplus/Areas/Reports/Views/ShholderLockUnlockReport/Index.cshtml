@@ -36,7 +36,7 @@
                                
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-sm-12 col-form-label" for="companySelect2">Company <span class="mandatory">*</span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                        <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                         </select>
                                     </div>
@@ -85,7 +85,7 @@
                             <div class="row">
                                   <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
                                     <label class="col-sm-12 col-md-12 col-form-label" for="DateFrom">Date From:</label>
-                                    <div class="input-group date col-sm-12 col-md-10">
+                                    <div class="input-group date col-sm-12 col-md-12">
                                         <div class="input-group-prepend">
                                         </div>
                                         <input type="text" class="form-control form-control-sm" data-bind="value: DateFrom" placeholder="Enter a Date" id="DateFrom">
@@ -93,10 +93,22 @@
                                 </div>
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
                                     <label class="col-sm-12 col-md-12 col-form-label" for="DateTo">Date To:</label>
-                                    <div class="input-group date col-sm-12 col-md-10">
+                                    <div class="input-group date col-sm-12 col-md-12">
                                         <div class="input-group-prepend">
                                         </div>
                                         <input type="text" class="form-control form-control-sm" data-bind="value: DateTo" placeholder="Enter a Date" id="DateTo">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" id="HolderNoFrom">Holder No From:</label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: HolderNoFrom" placeholder="Enter Holder Number">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" id="HolderNoTo">Holder No To:</label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: HolderNoTo" placeholder="Enter Holder Number">
                                     </div>
                                 </div>
                               
@@ -106,20 +118,7 @@
 
 
                             <!--Holder from to-->
-                            <div class="row">
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                    <label class="col-12 col-form-label" id="HolderNoFrom">Holder No From:</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: HolderNoFrom" placeholder="Enter Holder Number">
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                    <label class="col-12 col-form-label" id="HolderNoTo">Holder No To:</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: HolderNoTo" placeholder="Enter Holder Number">
-                                    </div>
-                                </div>
-                            </div>
+                           
 
                             <hr class="my-4 ">
                             <div class="row col-12 p-4 justify-content-center ">

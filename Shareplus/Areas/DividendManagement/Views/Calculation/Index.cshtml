@@ -32,23 +32,18 @@
 
                                         <div class="row">
                                             <div class="form-group col-xl-12 col-md-12 col-sm-12 col-12 text-center">
-                                                @*<button id="Add" class="btn btn-primary" data-bind="click: AddAction">Add</button>*@
-                                                @* <button id="Delete" class="btn btn-danger" data-bind="click: DeleteAction">Delete</button>*@
+                                                
                                             </div>
-                                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12" style="margin-left: 12px;margin-top: -42px;">
+                                        <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                                 <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
-                                                <div class="col-sm-12 col-md-11">
+                                                <div class="col-sm-12 col-md-12">
                                                     <select class="form-control form-control-sm" id="Companysel" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                                     </select>
                                                 </div>
                                             </div>
 
                                             <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12" style="margin-left: 12px;">
-                                                @*<label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
-                                            <div class="col-sm-12 col-md-11">
-                                            <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
-                                            </select>
-                                            </div>*@
+                                                
                                                 <label>
                                                     <input name="Test" type="radio" value="P"
                                                        data-bind="checked: radioSelectedOptionValue" />
@@ -72,25 +67,28 @@
 
                                                 <button id="Calc" class="btn btn-danger" data-bind="click: ResetForm">Reset</button>
                                             </div>
+                                           </div>
 
-
-
-                                            <div class="form-group col-xl-4 col-md-4 col-sm-12 col-12">
+                                            <div class="row">
+                                            <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                                 <label class="col-sm-12 col-md-11 col-form-label">Dividend<span class="mandatory"></span></label>
-                                                <div class="col-sm-12 col-md-11">
+                                                <div class="col-sm-12 col-md-12">
                                                     <select class="form-control form-control-sm" id="DividendList" data-bind='options: DividendLists,optionsText: "ShowDividendText",optionsValue:"Divcode",value:SelectedDividend, optionsCaption:"---Dividends---"'>
                                                     </select>
                                                 </div>
                                             </div>
 
 
-                                            <div class="form-group col-xl-4 col-md-4 col-sm-12 col-12">
+                                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
                                                 <label class="col-sm-12 col-md-11 col-form-label">Bonus<span class="mandatory"></span></label>
-                                                <div class="col-sm-12 col-md-11">
+                                                <div class="col-sm-12 col-md-12">
                                                     <select class="form-control form-control-sm" id="DividendList" data-bind='options: BonusLists,optionsText: "ShowDividendText",optionsValue:"Divcode",value:SelectedBonus, optionsCaption:"---Bonus---"'>
                                                     </select>
                                                 </div>
                                             </div>
+                                            </div>
+                                            
+
 
 
 
@@ -214,7 +212,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 
     @section footer{
     <script src="/vendor/sweetalert/sweet-alert.js"></script>

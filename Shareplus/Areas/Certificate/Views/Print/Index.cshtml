@@ -30,40 +30,34 @@
                                 <div class="clearfix">
                                 </div>
                                 <div class="row">
-                                    <div class="form-group row col-xl-5 col-md-5 col-sm-12">
+                                    <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
-                                        <div class="col-sm-12 col-md-11">
+                                        <div class="col-sm-12 col-md-12">
                                             <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group row col-xl-4 col-md-2 col-sm-12">
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">Holder No: <span class="mandatory"> *</span></label>
-                                        <div class="col-sm-12 col-md-11">
+                                        <div class="col-sm-12 col-md-12">
                                             <input onkeypress="return isNumberKey(event)" onkeydown="return isCopy(event)" type="text" placeholder="Holder No" class="form-control form-control-sm" id="shholderno" data-bind="value:Shholderno,valueUpdate: 'input',executeOnEnter:GetHolderInformation.bind($data,Shholderno), event:{blur:GetHolderInformation.bind($data,Shholderno)}">
                                         </div>
                                     </div>
-
-
-                                    <div class="form-group row col-xl-4 col-md-5 col-sm-12">
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">Name</label>
-                                        <div class="col-sm-12 col-md-11">
+                                        <div class="col-sm-12 col-md-12">
                                             <input class="form-control form-control-sm" id="txtHName" type="text" disabled placeholder="Name" data-bind='value:Name'>
                                         </div>
                                     </div>
-
-
-                                    <div class="form-group row col-xl-4 col-md-5 col-sm-12">
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">Address</label>
-                                        <div class="col-sm-12 col-md-11">
+                                        <div class="col-sm-12 col-md-12">
                                             <input class="form-control form-control-sm" id="txtAddress" type="text" disabled placeholder="Address" data-bind='value:Address'>
                                         </div>
                                     </div>
 
-
                                 </div>
+                               
                                 <hr class="my-4 ">
                                 <div class="table-responsive">
                                     <label class="col-sm-12 col-md-11 col-form-label">Certificate List</label>

@@ -53,9 +53,10 @@
 
 
                             <div class="row">
-                                <div class="form-group row col-md-5">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    
                                     <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
-                                    <div class="col-sm-12 col-md-11">
+                                    <div class="col-sm-12 col-md-12">
                                         <select class="form-control form-control-sm" disabled="disabled" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                         </select>
                                     </div>
@@ -64,39 +65,41 @@
 
                             <hr class="my-4">
                             <div class="row">
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Shholder No: <span class="mandatory">*</span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Share Holder Number" id="ShHolderNo" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:GetSholderInformation.bind($data,ShholderNo), event:{blur:GetSholderInformation.bind($data,ShholderNo)}" />
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Full Name </label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" disabled="disabled" data-bind="value:FullName" type="text" placeholder="Full Name">
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Nepali Name </label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" disabled="disabled" oninput="convert_to_unicode(this)" data-bind="value:NpName" type="text" placeholder="Nepali Name">
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Address</label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" disabled="disabled" data-bind="value:Address" type="text" placeholder="Address">
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                             </div>
+                             <div class="row">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Nepali Address</label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" disabled="disabled" oninput="convert_to_unicode(this)" data-bind="value:NpAddress" type="text" placeholder="Nepali Address">
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Total Kitta</label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" disabled="disabled"  data-bind="value:TotalKitta" type="text" placeholder="Total Kitta">
                                     </div>
                                 </div>
@@ -105,67 +108,69 @@
 
                             <hr class="my-4">
                             <div class="row">
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">S.N.</label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="S.N." data-bind="value:SN" />
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                    <label class="col-12 col-form-label"></label>
-                                    <div class="col-sm-12 col-md-10">
-                                    </div>
                                 </div>
-
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <div class="row">
+                               @* <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label"></label>
+                                    <div class="col-sm-12 col-md-12">
+                                    </div>
+                                </div>*@
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Relative Holder No <span class="mandatory">*</span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Relative ShareHolder Number" id="rShHolderNo" data-bind="value:rShholderNo,valueUpdate: 'input',executeOnEnter:GetRelativeSholderInformation.bind($data,rShholderNo), event:{blur:GetRelativeSholderInformation.bind($data,rShholderNo)}" />
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Relative Name</label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" disabled="disabled" id="rFullName" data-bind="value:rFullName" type="text" placeholder="Relative Full Name">
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Relative Nepali Name</label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" disabled="disabled" id="rNpName" oninput="convert_to_unicode(this)" data-bind="value:rNpName" type="text" placeholder="Relative Nepali Name">
                                     </div>
                                 </div>
-
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                    <label class="col-12 col-form-label">Relative Father's Name</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm" disabled="disabled" id="rFaName" data-bind="value:rFaName" type="text" placeholder="Relative Father's Name">
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                    <label class="col-12 col-form-label">Grand Father's Name</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm" disabled="disabled" id="rGrFaName" data-bind="value:rGrFaName" type="text" placeholder="Relative Grand Father's Name">
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                    <label class="col-12 col-form-label">Relative Address</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm" disabled="disabled" id="rAddress" data-bind="value:rAddress" type="text" placeholder="Relative Address">
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                    <label class="col-12 col-form-label">Relative Nepali Address</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm" disabled="disabled" id="rNpAddress" oninput="convert_to_unicode(this)" data-bind="value:rNpAddress" type="text" placeholder="Relative Nepali Address">
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Relative TelNo</label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" disabled="disabled" id="rTelNo" data-bind="value:rTelNo" type="text" placeholder="Relative Telephone No">
                                     </div>
                                 </div>
+
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Relative Father's Name</label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" disabled="disabled" id="rFaName" data-bind="value:rFaName" type="text" placeholder="Relative Father's Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Grand Father's Name</label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" disabled="disabled" id="rGrFaName" data-bind="value:rGrFaName" type="text" placeholder="Relative Grand Father's Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Relative Address</label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" disabled="disabled" id="rAddress" data-bind="value:rAddress" type="text" placeholder="Relative Address">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">Relative Nepali Address</label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" disabled="disabled" id="rNpAddress" oninput="convert_to_unicode(this)" data-bind="value:rNpAddress" type="text" placeholder="Relative Nepali Address">
+                                    </div>
+                                </div>
+                              
                             </div>
 
                             <div class="row col-12 p-4 justify-content-center ">

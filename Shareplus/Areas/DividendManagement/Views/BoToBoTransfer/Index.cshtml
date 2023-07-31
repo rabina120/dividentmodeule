@@ -40,38 +40,36 @@
                             <div class="col-12 p-2">
                                 <div class="pd-20 card-box mb-30">
                                     <div class="row">
-                                        <div class="form-group col-xl-4 col-md-5 col-sm-12">
+                                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                             <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
-                                            <div class="col-sm-12 col-md-11">
+                                            <div class="col-sm-12 col-md-12">
                                                 <select class="form-control form-control-sm" id="CompanyList" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group col-xl-4 col-md-5 col-sm-12">
+                                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                             <label class="col-sm-12 col-md-11 col-form-label">Transfer Type <span class="mandatory"> *</span></label>
-                                            <div class="col-sm-12 col-md-11">
+                                            <div class="col-sm-12 col-md-12">
                                                 <select class="form-control form-control-sm" id="" data-bind='options: TransferTypes,optionsText: "TypeName",optionsValue:"Type",value:TransferType, optionsCaption:"---Transfer-Types---"'>
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row col-xl-5 col-md-5 col-sm-12">
+                                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">BOID Search<span class="mandatory"> *</span></label>
-                                        <div class="col-sm-12 col-md-11" style="display: flex;">
+                                        <div class="col-sm-12 col-md-12" style="display: flex;">
                                             <input type="text" class="form-control form-control-sm" placeholder="Enter BOID" data-bind="value: BoidKeyword" />
                                             <button class="btn btn-sm btn-primary ml-2" data-bind="click: SearchBoid">Search</button>
                                         </div>
-                                        @*<div class="col-sm-12 col-md-11 mt-2">
-                <select class="form-control form-control-sm" id="" data-bind='options: BOIDList,optionsText: "BOID",optionsValue:"BOID",value:TransferType'>
-                </select>
-            </div>*@
                                     </div>
-                                    <div class="form-group row col-xl-5 col-md-12 col-sm-12">
-                                        <label class="col-sm-12 col-md-11 col-form-label">New BOID <span class="mandatory"> *</span></label>
-                                        <div class="col-sm-12 col-md-11">
-                                            <input type="text" class="form-control form-control-sm" data-bind="value: NewBOID, event: ChangeNewBoID" />
+                                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                            <label class="col-sm-12 col-md-11 col-form-label">New BOID <span class="mandatory"> *</span></label>
+                                            <div class="col-sm-12 col-md-12">
+                                                <input type="text" class="form-control form-control-sm" data-bind="value: NewBOID, event: ChangeNewBoID" />
+                                            </div>
                                         </div>
+               
                                     </div>
+                                   
                                     <div class="row" data-bind="visible: TransferType() == 'DT' || TransferType() == 'BE'">
                                         <div class="form-group col-xl-4 col-md-4 col-sm-12">
                                             <label class="col-sm-12 col-md-11 col-form-label">Full Name <span class="mandatory"> *</span></label>
