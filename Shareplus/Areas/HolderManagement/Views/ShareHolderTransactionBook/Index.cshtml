@@ -24,67 +24,63 @@
 
                                     <div class="row">
 
-                                        <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                        <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                             <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
-                                            <div class="col-sm-12 col-md-11">
+                                            <div class="col-sm-12 col-md-12">
                                                 <select class="form-control form-control-sm" id="CompanyList" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                                 </select>
                                             </div>
                                         </div>
-
-                                    </div>
-                                    <div class="row">
-
-                                        <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                        <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                             <label class="col-sm-12 col-md-11 col-form-label">Share Holder No <span class="mandatory"> *</span></label>
-                                            <div class="col-sm-12 col-md-11">
+                                            <div class="col-sm-12 col-md-12">
                                                 <input type="text" class="form-control form-control-sm" data-bind="value: ShareHolderNo@*, valueUpdate: 'keydown'*@" />
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-xl-6 col-md-6 col-sm-12 col-12">
+                                        <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                             <label class="col-sm-12 col-md-11 col-form-label">Name<span class="mandatory"> *</span></label>
-                                            <div class="col-sm-12 col-md-11">
+                                            <div class="col-sm-12 col-md-12">
                                                 <p type="text" class="form-control form-control-sm" data-bind="text: ShareHolderName"></p>
                                             </div>
                                         </div>
-                                        <div class="form-group col-xl-6 col-md-6 col-sm-12 col-12">
+                                        <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                             <label class="col-sm-12 col-md-11 col-form-label">Address <span class="mandatory"> *</span></label>
-                                            <div class="col-sm-12 col-md-11">
+                                            <div class="col-sm-12 col-md-12">
                                                 <p type="text" class="form-control form-control-sm" data-bind="text: ShareHolderAddress"></p>
                                             </div>
                                         </div>
 
                                     </div>
+                                   
+                                    
                                     <div class="row">
 
-                                        <div class="form-group col-xl-3 col-md-3 col-sm-3">
+                                        <div class="form-group  col-xl-3 col-md-6 col-sm-12 col-12">
                                             <label class="col-sm-12 col-md-11 col-form-label">Right Share <span class="mandatory"> *</span></label>
-                                            <div class="col-sm-12 col-md-11 tran-view">
+                                            <div class="col-sm-12 col-md-12 tran-view">
                                                 <input type="text" class="form-control form-control-sm" data-bind="value: RightShare" disabled />
                                                 <button class="btn btn-sm btn-primary" data-bind="click: ShowRightShares"><i class="fa fa-eye"></i></button>
                                             </div>
                                         </div>
-                                        <div class="form-group col-xl-3 col-md-3 col-sm-12">
+                                        <div class="form-group  col-xl-3 col-md-6 col-sm-12 col-12">
                                             <label class="col-sm-12 col-md-11 col-form-label">Ordinary Share<span class="mandatory"> *</span></label>
-                                            <div class="col-sm-12 col-md-11 tran-view">
+                                            <div class="col-sm-12 col-md-12 tran-view">
                                                 <input type="text" class="form-control form-control-sm" data-bind="value: OrdinaryShare" disabled />
                                                 <button class="btn btn-sm btn-primary" data-bind="click: ShowOrdinaryShares"><i class="fa fa-eye"></i></button>
 
                                             </div>
                                         </div>
-                                        <div class="form-group col-xl-3 col-md-3 col-sm-12">
+                                        <div class="form-group  col-xl-3 col-md-6 col-sm-12 col-12">
                                             <label class="col-sm-12 col-md-11 col-form-label">Bonus Share <span class="mandatory"> *</span></label>
-                                            <div class="col-sm-12 col-md-11 tran-view">
+                                            <div class="col-sm-12 col-md-12 tran-view">
                                                 <input type="text" class="form-control form-control-sm" data-bind="value: BonusShare" disabled />
                                                 <button class="btn btn-sm btn-primary" data-bind="click: ShowBonusShares"><i class="fa fa-eye"></i></button>
 
                                             </div>
                                         </div>
-                                        <div class="form-group col-xl-3 col-md-3 col-sm-12">
+                                        <div class="form-group  col-xl-3 col-md-6 col-sm-12 col-12">
                                             <label class="col-sm-12 col-md-11 col-form-label">Total Share <span class="mandatory"> *</span></label>
-                                            <div class="col-sm-12 col-md-11">
+                                            <div class="col-sm-12 col-md-12">
                                                 <input type="text" class="form-control form-control-sm" data-bind="value: TotalShare" disabled />
                                                 @*<button class="btn btn-sm btn-primary"><i class="fa fa-eye"></i></button>*@
                                             </div>
