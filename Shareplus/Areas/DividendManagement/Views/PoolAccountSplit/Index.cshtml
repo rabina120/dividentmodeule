@@ -39,17 +39,17 @@
                                 <div class="pd-20 card-box mb-30">
 
                                     <div class="row">
-                                        <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                        <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                             <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
-                                            <div class="col-sm-12 col-md-11">
+                                            <div class="col-sm-12 col-md-12">
                                                 <select class="form-control form-control-sm" id="CompanyList" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                                 </select>
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                        <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                             <label class="col-sm-12 col-md-11 col-form-label">Dividend <span class="mandatory"> *</span></label>
-                                            <div class="col-sm-12 col-md-11">
+                                            <div class="col-sm-12 col-md-12">
                                                 <select class="form-control form-control-sm" id="DividendList"
                                                         data-bind='
                                                         options: DividendLists,
@@ -60,13 +60,13 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                        <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                             <label class="col-sm-12 col-md-11 col-form-label">BOID <span class="mandatory"> *</span></label>
-                                            <div class="col-sm-12 col-md-11">
+                                            <div class="col-sm-12 col-md-12">
                                                 <input type="text" class="form-control form-control-sm" data-bind="value: BOID" />
                                             </div>
                                         </div>
-                                        <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12 text-left">
+                                        <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12 text-left" style="margin-top:10px;">
                                             <div class="col-sm-12 col-md-12 mt-4">
                                                 <button type="button" class="btn btn-primary" data-bind="click: BOIDChange,enable: Action() != undefined">Search</button>
                                             </div>

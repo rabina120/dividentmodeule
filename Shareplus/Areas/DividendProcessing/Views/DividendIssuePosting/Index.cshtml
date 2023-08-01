@@ -47,37 +47,39 @@
                         </div>
                         <form>
                             <div class="row">
-                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Company <span class="mandatory"> *</span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"Selelct Company"'></select>
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Dividend <span class="mandatory"> *</span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <select class="form-control form-control-sm" id="DividendList" data-bind='options: DividendLists,optionsText: "ShowDividendText",optionsValue:"Divcode",value:SelectedDividend, optionsCaption:"Select Dividend"'></select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12" id="simple-date1">
+                                    <label class="col-12 col-form-label" for="DateFrom">From Date</label>
+                                    <div class="input-group date col-sm-12 col-md-12">
+                                        <div class="input-group-prepend"></div>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Select Date" id="dateFrom" data-bind="value: dateFrom">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12" id="simple-date2">
+                                    <label class="col-12 col-form-label" for="DateTo">To Date</label>
+                                    <div class="input-group date col-sm-12 col-md-12">
+                                        <div class="input-group-prepend"></div>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Select Date" id="dateTo" data-bind="value: dateTo">
                                     </div>
                                 </div>
                                 
                             </div>
                             <div class="row">
                                 <!--Date Selector-->
-                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12" id="simple-date1">
-                                    <label class="col-12 col-form-label" for="DateFrom">From Date</label>
-                                    <div class="input-group date col-sm-12 col-md-10">
-                                        <div class="input-group-prepend"></div>
-                                        <input type="text" class="form-control form-control-sm" placeholder="Select Date" id="dateFrom" data-bind="value: dateFrom">
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12" id="simple-date2">
-                                    <label class="col-12 col-form-label" for="DateTo">To Date</label>
-                                    <div class="input-group date col-sm-12 col-md-10">
-                                        <div class="input-group-prepend"></div>
-                                        <input type="text" class="form-control form-control-sm" placeholder="Select Date" id="dateTo" data-bind="value: dateTo">
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                
+                               
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12" style="margin-left:925px;">
                                     <label class="col-12 col-form-label" style="color:transparent">l</label>
                                     <div class="col-sm-12 col-md-10">
                                         <input type="button" class="btn btn-primary  col" data-bind="click:loadDataTable" value="Refresh">
