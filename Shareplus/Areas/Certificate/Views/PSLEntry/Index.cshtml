@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Company <span class="mandatory"> </span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                         </select>
                                     </div>
@@ -52,7 +52,7 @@
                                 </div>*@
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-sm-12 col-md-11 col-form-label" for="ShholderNo">Shareholder No:<span class="mandatory"></span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input type="text" class="form-control form-control-sm" onkeypress="return isNumberKey(event)" id="ShholderNo" disabled="disabled" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:GetCertificateInformation, event:{blur:GetCertificateInformation}" placeholder="Enter ShholderNo" />
                                     </div>
                                 </div>
@@ -98,25 +98,25 @@
 
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Holder Name <span class="mandatory"> </span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" data-bind="value: FullName" type="text" disabled placeholder="Name">
                                     </div>
                                 </div>
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Address <span class="mandatory"> </span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" data-bind="value: Address" type="text" disabled placeholder="Address">
                                     </div>
                                 </div>
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Father's Name <span class="mandatory"> </span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" data-bind="value: FaName" type="text" disabled placeholder="Father's Name">
                                     </div>
                                 </div>
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Grand Father's Name <span class="mandatory"> </span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" data-bind="value: GrFaName" type="text" disabled placeholder="Grand Father's Name">
                                     </div>
                                 </div>
@@ -126,7 +126,7 @@
 
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Total Kitta <span class="mandatory"></span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" data-bind="value: Totalkitta" type="text" disabled placeholder="Total Kitta">
                                     </div>
                                 </div>
@@ -218,7 +218,7 @@
                             <div class="row">
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-sm-12 col-md-11 col-form-label">Status Type <span class="mandatory"></span></label>
-                                    <div class="col-sm-12 col-md-11">
+                                    <div class="col-sm-12 col-md-12">
                                         <select class="form-control form-control-sm" id="ShareType" data-bind='options:ShareTypeList ,optionsText:"ShareTypeName",optionsValue:"ShareType",value:SelectedShareType, optionsCaption:"--Status Type---"'>
                                         
                                          
@@ -234,7 +234,7 @@
                                 </div>
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">Charge <span class="mandatory"></span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" data-bind="value: Charge" type="text" placeholder="Charge">
                                     </div>
                                 </div>
@@ -250,7 +250,7 @@
 
                                 <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12" id="simple-date1">
                                     <label class="col-12 col-form-label" for="WPaid">Effective Date<span class="mandatory"></span></label>
-                                    <div class="input-group date col-sm-12 col-md-10">
+                                    <div class="input-group date col-sm-12 col-md-12">
                                         <div class="input-group-prepend">
 
                                         </div>
@@ -259,7 +259,7 @@
                                 </div>
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">PSL At <span class="mandatory"></span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         @*<input class="form-control form-control-sm" data-bind="value: Code" type="text" placeholder="Code">*@
                                         @*<select class="form-control form-control-sm" id="PledgeAt" data-bind='options:PledgeAtList ,optionsText:"PledgeAtName",optionsValue:"PledgeAt",value:SelectedPledgeAt, optionsCaption:"--PledgeAt---"'>*@
 
@@ -279,19 +279,19 @@
                                     </div>*@
                                     <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                         <label class="col-12 col-form-label">Total PSL kitta <span class="mandatory"></span></label>
-                                        <div class="col-sm-12 col-md-10">
+                                        <div class="col-sm-12 col-md-12">
                                             <input class="form-control form-control-sm" data-bind="value: total" type="text" disabled placeholder="Total PSL kitta">
                                         </div>
                                     </div>
                                     <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                         <label class="col-12 col-form-label">PSL Amount<span class="mandatory"></span></label>
-                                        <div class="col-sm-12 col-md-10">
+                                        <div class="col-sm-12 col-md-12">
                                             <input class="form-control form-control-sm" data-bind="value: PledgeAmount" type="text" placeholder="PSL Amount">
                                         </div>
                                     </div>
                                     <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                         <label class="col-12 col-form-label">Remark<span class="mandatory"></span></label>
-                                        <div class="col-sm-12 col-md-10">
+                                        <div class="col-sm-12 col-md-12">
                                             <input class="form-control form-control-sm" data-bind="value: Remark" type="text" placeholder="Remark">
                                         </div>
                                     </div>
