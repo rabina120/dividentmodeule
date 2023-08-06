@@ -227,6 +227,7 @@ var DematRematReport = function () {
                         return new ParaComp(item)
                     });
                     self.CompanyDetails(mappedTasks);
+
                     if(!Validate.empty(localStorage.getItem('company-code'))){self.SelectedCompany(self.CompanyDetails().find(x => x.CompCode() == companyCode).CompCode());}
                     // $("#Company").attr("disabled", true);
                 } else {
@@ -358,7 +359,7 @@ var DematRematReport = function () {
             Openloader()
             var ReportData = {
                 "CompCode": self.SelectedCompany(),
-                "CompEnName": self.CompanyDetails().find(x => x.compCode = self.SelectedCompany()).CompEnName(),
+                "CompEnName": self.CompanyDetails().find(x => x.CompCode() == self.SelectedCompany()).CompEnName(),
                 "ReportType": self.SelectedReportType(),
                 "DataType": self.SelectedDataType(),
                 "OrderBy": self.SelectedOrderBy(),

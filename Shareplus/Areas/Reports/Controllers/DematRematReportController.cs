@@ -1,6 +1,4 @@
-﻿
-
-using CDSMODULE.Helper;
+﻿using CDSMODULE.Helper;
 using Entity.Common;
 using Entity.Reports;
 using Interface.Common;
@@ -12,7 +10,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Reports;
 using System;
-using System.Reflection.Emit;
 
 
 namespace CDSMODULE.Areas.Reports.Controllers
