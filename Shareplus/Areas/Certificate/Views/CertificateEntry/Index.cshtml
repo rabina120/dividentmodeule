@@ -53,14 +53,14 @@
 
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-sm-12 col-md-10 col-form-label">Company <span class="mandatory"> *</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Shholder No: <span class="mandatory">*</span></label>
-                                <div class="col-sm-9 col-md-10">
+                                <div class="col-sm-9 col-md-12">
                                     <input class="form-control form-control-sm" disabled onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Share Holder Number" id="ShHolderNo" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:GetSholderInformation.bind($data,ShholderNo), event:{blur:GetSholderInformation.bind($data,ShholderNo)}" />
                                 </div>
                                
@@ -73,25 +73,25 @@
                         <div class="row">
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Name</label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="Name" data-bind="value:Name" type="text" disabled>
                                 </div>
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Father's Name</label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="FaName" type="text" data-bind="value:FaName" disabled>
                                 </div>
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Grand Father's Name</label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="GrFaName" data-bind="value:GrFaName" type="text" disabled>
                                 </div>
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Address</label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="Address" type="text" data-bind="value:Address" disabled>
                                 </div>
                             </div>
@@ -99,25 +99,25 @@
                         <div class="row">
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Telephone No </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="TelNo" data-bind="value:TelNo" type="text" disabled>
                                 </div>
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Occupation </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="Occupation" type="text" data-bind="value:Occupation" disabled>
                                 </div>
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Minor</label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="Minor" data-bind="value:Minor" type="text" disabled>
                                 </div>
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Total Kitta </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="TotalKitta" type="text" data-bind="value:TotalKitta" disabled>
                                 </div>
                             </div>
@@ -126,7 +126,7 @@
                         <div class="row">
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Certificate No: <span class="mandatory">*</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" disabled onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Certificate Number" id="CertificateNo" data-bind="value:CertificateNo" />
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                                 <label class="col-12 col-form-label" for="shareType">
                                     Share Type <span class="mandatory">*</span>
                                 </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <select class="form-control form-control-sm" id="shareType"
                                             data-bind='options:ShareTypeList, optionsText:"ShareTypeNameAndValue",
                                                 optionsValue: "ShareTypeValue", value: SelectedShareType,
@@ -146,13 +146,13 @@
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Share Kitta <span class="mandatory">*</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="ShareKitta" placeholder= "Enter Share Kitta" type="text" data-bind="value:ShareKitta" disabled>
                                 </div>
                             </div>
                              <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12" id="simple-date1">
                                 <label class="col-12 col-form-label" for="DailyReportDate">Certificate Issued Date <span class="mandatory"> *</span></label>
-                                <div class="input-group date col-sm-12 col-md-10">
+                                <div class="input-group date col-sm-12 col-md-12">
                                     <div class="input-group-prepend">
 
                                     </div>
@@ -171,7 +171,7 @@
                                 <label class="col-12 col-form-label" for="CertificateStatusSelect">
                                     Certificate Type <span class="mandatory">*</span>
                                 </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <select class="form-control form-control-sm" id="CertificateStatusSelect"
                                             data-bind='options:CertificateTypeList, optionsText:"CertificateTypeNameAndValue",
                                                 optionsValue: "CertificateTypeValue", value: SelectedCertificateType,
@@ -181,13 +181,13 @@
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Starting Serial No <span class="mandatory">*</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="StartSerialNo" type="text" placeholder= "Enter Start Serial No"  data-bind="value:StartSerialNo" disabled>
                                 </div>
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Ending Serial No <span class="mandatory">*</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="EndSerialNo" type="text" placeholder= "Enter End Serial No"  data-bind="value:EndSerialNo" disabled>
                                 </div>
                             </div>
@@ -195,7 +195,7 @@
                                 <label class="col-12 col-form-label" for="ShOwnerType">
                                     ShOwner Type <span class="mandatory">*</span>
                                 </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <select class="form-control form-control-sm" id="ShOwnerType"
                                             data-bind='options:ShOwnerTypeList, optionsText:"ShOwnerTypeAndName",
                                                 optionsValue: "ShOwnerTypeValue", value: SelectedShOwnerType,

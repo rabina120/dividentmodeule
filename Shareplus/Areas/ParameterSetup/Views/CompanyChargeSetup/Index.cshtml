@@ -41,36 +41,29 @@
                                 </div>*@
                         </div>
                         <br />
-                        <div class="row">
-                            
-				               
-                            <div class="form-group row col-md-7 col-sm-12">
-                                <label class="col-sm-12 col-md-3 col-form-label" for="companySelect2">Company</label>
-                                <div class="col-sm-12 col-md-11">
+                        <div class="row">                           				               
+                            <div class="form-group  col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                <label class="col-12 col-form-label" for="companySelect2">Company</label>
+                                <div class="col-sm-12 col-md-12">
                                     <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany,event:{blur:GetCompanyChargeDetails.bind(CompCode)}, optionsCaption:"---Company---"'>
                                     </select>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="row">
-
-
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group  col-xl-3 col-md-6 col-sm-12 col-122">
                                 <label class="col-12 col-form-label" for="ChargeCode">Charge Code: <span class="mandatory"> *</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="ChargeCode" onkeypress="return isNumberKey(event)" data-bind="value: ChargeCode, valueUpdate:'input', exceuteOnEnter:GetCompanyCharge.bind($data,ChargeCode),event:{blur:GetCompanyCharge.bind($data,ChargeCode)}" type="text" placeholder="Enter Charge Code">
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group  col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="ChargeType">Charge Type: <span class="mandatory"> *</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="ChargeType" data-bind="value: ChargeType" type="text" placeholder="Enter Charge Type">
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="Charge">Charge: <span class="mandatory"> *</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="Charge" onkeypress="return isNumberKey(event)" data-bind="value: Charge" type="text" placeholder="Enter Charge">
                                 </div>
                             </div>

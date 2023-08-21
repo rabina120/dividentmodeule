@@ -178,6 +178,7 @@ var ShareHolderRelativeEntry = function () {
                             $('input:hidden[name="__RequestVerificationToken"]').val());
                     },
                     datatype: "json",
+                    
                     success: function (result) {
                         if (result.isSuccess) {
 
@@ -199,6 +200,10 @@ var ShareHolderRelativeEntry = function () {
                                         'SelectedAction': optionAUD
                                     },
                                     datatype: "json",
+                                    beforeSend: function (xhr) {
+                                        xhr.setRequestHeader("XSRF-TOKEN",
+                                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                                    },
                                     success: function (result) {
                                         self.SN(result.responseData);
                                         $('#rShHolderNo').attr('disabled', false)

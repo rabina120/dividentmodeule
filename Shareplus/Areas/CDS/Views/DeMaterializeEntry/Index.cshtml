@@ -56,53 +56,49 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group row col-xl-4 col-md-5 col-sm-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
-                                <div class="col-sm-12 col-md-11">
+                                <div class="col-sm-12 col-md-12">
                                     <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="ISINNO">ISIN No: <span class="mandatory">*</span></label>
-                                <div class="col-sm-12 col-md-11">
+                                <div class="col-sm-12 col-md-12">
                                     <select class="form-control form-control-sm" id="ISINNO" disabled="disabled" data-bind='options: ParaCompChildList,optionsText: "PCISIN_NO",optionsValue:"PCISIN_NO",value:SelectedISINNO, optionsCaption:"---ISIN NO---"'>
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="CDSNO">
                                     CDS H Number
                                 </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" maxlength="3" placeholder="Enter CDS H Number" id="CDSNO" data-bind="value: CDSNO" maxlength="10" />
                                 </div>
                             </div>
-
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="description">
                                     Description
                                 </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" type="text" disabled="disabled" placeholder="Enter Description" id="description" data-bind="value: Description" />
                                 </div>
                             </div>
-
-
                         </div>
+                        
                         <div class="row">
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="Rec">Rec ID</label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" type="text" disabled="disabled" placeholder="Enter Rec ID" id="Rec" data-bind="value: RecID" />
 
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="holderNo">Share Holder No <span class="mandatory">*</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" maxlength="10" placeholder="Enter ShareHolder No" id="holderNo" data-bind="value: ShareHolderNo,event :{blur: SearchData}" />
                                 </div>
                             </div>
@@ -119,25 +115,33 @@
                         </div>
 
                         <div class="row">
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="HolderName">
                                     Holder Name
                                 </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Holder Name" id="HolderName" data-bind="value:HolderName" />
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="Address">Address</label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" type="text" disabled="disabled" placeholder="Enter Address" maxlength="20" id="Address" data-bind="value: Address" />
 
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="FatherName">Father Name</label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="Enter Father Name" id="FatherName" data-bind="value: FatherName" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" for="GFatherName">
+                                    Grand Father Name
+                                </label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="Enter Grand Father Name" id="GFatherName" data-bind="value:GFatherName" />
                                 </div>
                             </div>
 
@@ -145,23 +149,16 @@
 
                         </div>
                         <div class="row">
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
-                                <label class="col-12 col-form-label" for="GFatherName">
-                                    Grand Father Name
-                                </label>
-                                <div class="col-sm-12 col-md-10">
-                                    <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="Enter Grand Father Name" id="GFatherName" data-bind="value:GFatherName" />
-                                </div>
-                            </div>
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                           
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="TotalKitta">
                                     Total Kitta
                                 </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="Enter Total Kitta " id="TotalKitta" data-bind="value:TotalKitta" />
                                 </div>
                             </div>
-                            <div class="form-group row ml-2">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Demate Type <span class="mandatory">*</span></label>
 
                                 <div class="custom-control custom-radio">
@@ -173,26 +170,20 @@
                                     <label class="custom-control-label" for="CA">Bonus CA</label>
                                 </div>
                             </div>
+                          
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="CertDetails">Cert Details </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <select class="form-control form-control-sm" disabled="disabled" id="BonusIssueSelect" data-bind='options: TBLCertificateDetailList,optionsText: "TBLCDDescription",optionsValue:"TBLCDCert_Id",value:SelectedBonusIssue, optionsCaption:"---Cert Detail---"'>
+                                        </select>
 
-                        </div>
-                        <div class="row">
-
-
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
-                                <label class="col-12 col-form-label" for="CertDetails">Cert Details </label>
-                                <div class="col-sm-12 col-md-10">
-                                    <select class="form-control form-control-sm" disabled="disabled" id="BonusIssueSelect" data-bind='options: TBLCertificateDetailList,optionsText: "TBLCDDescription",optionsValue:"TBLCDCert_Id",value:SelectedBonusIssue, optionsCaption:"---Cert Detail---"'>
-                                    </select>
-
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="col-2 mt-4">
-                                <input type="button" class="btn btn-primary mr-2 mt-1 col-12" disabled="disabled" id="GetCertificate" value="Get Certificates" data-bind="click:GetCertificateList">
-                            </div>
-
+                                <div class="col-2 mt-4">
+                                    <input type="button" class="btn btn-primary mr-2 mt-1 col-12" disabled="disabled" id="GetCertificate" value="Get Certificates" data-bind="click:GetCertificateList">
+                                </div>
                         </div>
-
+                       
                         <hr class="my-4 ">
 
 
@@ -228,61 +219,49 @@
                         <hr class="my-4 ">
 
                         <div class="row">
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="RegNo">Reg No </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" type="text" disabled="disabled" placeholder="Enter Reg No" id="RegNo" data-bind="value: RegNo" />
 
                                 </div>
                             </div>
-
-
-
-
-
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="DRNNo">DRN No <span class="mandatory">*</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter DRN No" id="DRNNo" data-bind="value: DRNNo" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" for="DemateReqFrom">Demate Req From <span class="mandatory">*</span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select class="form-control form-control-sm" disabled="disabled" id="DPList" data-bind='options: DPList,optionsText: "DisplayDP",optionsValue:"DP_CODE",value:SelectedDP, optionsCaption:"---DP List---"'>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12" id="simple-date1">
+                                <label class="col-12 col-form-label" for="DemateReqDate">Demate Request Date  <span class="mandatory"> *</span></label>
+                                <div class="input-group date col-sm-12 col-md-12">
+                                    <div class="input-group-prepend">
+                                    </div>
+                                    <input type="text" disabled="disabled" data-bind="value: DemateReqDate" class="form-control form-control-sm" placeholder="Select a Date" id="DemateReqDate">
                                 </div>
                             </div>
                         </div>
 
 
-                        <div class="row">
-
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
-                                <label class="col-12 col-form-label" for="DemateReqFrom">Demate Req From <span class="mandatory">*</span></label>
-                                <div class="col-sm-12 col-md-11">
-                                    <select class="form-control form-control-sm" disabled="disabled" id="DPList" data-bind='options: DPList,optionsText: "DisplayDP",optionsValue:"DP_CODE",value:SelectedDP, optionsCaption:"---DP List---"'>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12" id="simple-date1">
-                                <label class="col-12 col-form-label" for="DemateReqDate">Demate Request Date  <span class="mandatory"> *</span></label>
-                                <div class="input-group date col-sm-12 col-md-10">
-                                    <div class="input-group-prepend">
-
-                                    </div>
-                                    <input type="text" disabled="disabled" data-bind="value: DemateReqDate" class="form-control form-control-sm" placeholder="Select a Date" id="DemateReqDate">
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12" id="simple-date2">
+                        <div class="row">                        
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12" id="simple-date2">
                                 <label class="col-12 col-form-label" for="EntryDate">Entry Date</label>
-                                <div class="input-group date col-sm-12 col-md-10">
+                                <div class="input-group date col-sm-12 col-md-12">
                                     <div class="input-group-prepend">
 
                                     </div>
                                     <input type="text" disabled="disabled" data-bind="value: EntryDate" class="form-control form-control-sm" placeholder="Select a Date" id="EntryDate">
                                 </div>
                             </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="BoAccountNo">BO Account No<span class="mandatory">*</span></label>
                                 <div class="col-5">
                                     <input class="form-control form-control-sm" id="BoAccountNoFirst" type="text" disabled="disabled" onkeypress="return isNumberKey(event)" maxlength="8" placeholder="BOID" data-bind='value: BoAccountNoFirst'>
@@ -291,19 +270,23 @@
                                     <input class="form-control form-control-sm" id="BoAccountNoLast" type="text" disabled="disabled" onkeypress="return isNumberKey(event)" maxlength="8" placeholder="Enter BOID" data-bind='value: BoAccountNoLast,event:{blur: MakeBOID}'>
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="TotalDemateKitta">Total Demate Kitta</label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" type="text" disabled="disabled" placeholder="Enter Total Demate Kitta" id="TotalDemateKitta" data-bind="value: TotalDemateKitta" />
 
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="Remarks">Remarks</label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="Enter Remarks" id="Remarks" data-bind="value: Remarks" />
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row">
+                          
                         </div>
 
 

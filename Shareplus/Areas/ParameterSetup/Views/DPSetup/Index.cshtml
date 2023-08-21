@@ -44,22 +44,22 @@
                         </div>
                         <br />
                         <div class="row">
-                            <div class="form-group row col-xl-6 col-md-6 col-sm-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-sm-12 col-md-12 col-form-label" for="DPCode">DP Code:<span class="mandatory">*</span></label>
-                                <div class="col-sm-12 col-md-10 col-xl-10">
+                                <div class="col-sm-12 col-md-10 col-xl-12">
                                     <input class="form-control form-control-sm" id="DPCode" onkeypress="return isNumberKey(event)" data-bind="value: DPCode,valueUpdate:'input', executeOnEnter:GetDPDetail.bind($data,DPCode),event:{blur:GetDPDetail.bind($data,DPCode)}" type="text" placeholder="Enter dp code" />
                                 </div>
                             </div>
 
-                            <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-sm-12 col-md-12 col-form-label" for="DPName">DP Name: <span class="mandatory"> *</span></label>
-                                <div class="col-sm-12 col-md-10 col-xl-10">
+                                <div class="col-sm-12 col-md-10 col-xl-12">
                                     <input class="form-control form-control-sm" id="DPName" data-bind="value: DPName" type="text" placeholder="Enter DP Name" maxlength="70">
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-6 col-md-6 col-sm-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="CDSDPID">CDS DP ID: <span class="mandatory"> *</span></label>
-                                <div class="col-sm-12 col-md-10 col-xl-10">
+                                <div class="col-sm-12 col-md-10 col-xl-12">
                                     <input class="form-control form-control-sm" id="CDSDPID" onkeypress="return isNumberKey(event)" data-bind="value: CDSDPID" type="text" placeholder="Enter CDS DP ID" maxlength="8">
                                 </div>
                             </div>

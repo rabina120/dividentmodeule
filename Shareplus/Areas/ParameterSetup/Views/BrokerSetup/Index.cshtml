@@ -34,56 +34,53 @@
                             <div class="row">
 
 
-                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group row col-xl-3 col-md-4 col-sm-12 col-12">
                                     <label class="col-12 col-form-label" for="BrokerId">Broker Code: <span class="mandatory"></span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" id="BrokerId" onkeypress="return isNumberKey(event)" data-bind="value: BrokerId, executeOnEnter: GetBrokerDetails.bind($data, BrokerId), event :{blur:  GetBrokerDetails.bind($data, BrokerId)}" type="text" placeholder="Enter Broker Code ID">
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-4 col-sm-12 col-12">
                                     <label class="col-12 col-form-label" for="BrokerName">Broker Name: <span class="mandatory"></span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" id="BrokerName" data-bind="value: BrokerName" type="text" placeholder="Enter Broker Name">
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-4 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label" for="BrokerNpName">Broker Nepali Name: </label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <input class="form-control form-control-sm" id="BrokerNpName" oninput="convert_to_unicode(this)" data-bind="value: BrokerNpName" type="text" placeholder="Enter Broker Nepali Name">
+                                    </div>
+                                </div>
+                            
+
+                            <div class="row">
+                                <div class="form-group row col-xl-3 col-md-4 col-sm-12 col-12">
                                     <label class="col-12 col-form-label" for="BrokerAdd">Broker Address: <span class="mandatory"></span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" id="BrokerAdd" data-bind="value: BrokerAdd" type="text" placeholder="Enter Broker Address ">
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-
-                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
-                                    <label class="col-12 col-form-label" for="BrokerNpName">Broker Nepali Name: </label>
-                                    <div class="col-sm-12 col-md-10">
-                                    <input class="form-control form-control-sm" id="BrokerNpName" oninput="convert_to_unicode(this)"  data-bind="value: BrokerNpName" type="text" placeholder="Enter Broker Nepali Name">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-4 col-sm-12 col-12">
                                     <label class="col-12 col-form-label" for="BrokerNpAdd">Broker Nepali Address: </label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="BrokerNpAdd" oninput="convert_to_unicode(this)" data-bind="value: BrokerNpAdd" type="text" placeholder="Enter Broker Nepali Address">
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-4 col-sm-12 col-12">
                                     <label class="col-12 col-form-label" for="BrokerCont">Broker Contact Person: </label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" id="BrokerCont" onkeypress="return isNumberKey(event)" data-bind="value: BrokerCont" type="text" placeholder="Enter Broker Contact Person">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group row col-xl-4 col-md-4 col-sm-12 col-12">
+                                <div class="form-group row col-xl-3 col-md-4 col-sm-12 col-12">
                                     <label class="col-12 col-form-label" for="BrokerTelNo">Broker Telephone No: <span class="mandatory"></span></label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" id="BrokerTelNo" onkeypress="return isNumberKey(event)" data-bind="value: BrokerTelNo" type="text" placeholder="Enter Broker Telephobe No">
                                     </div>
                                 </div>
                             </div>
+                           
 
 
 

@@ -30,44 +30,43 @@
                                 <div class="clearfix">
                                 </div>
                                 <div class="row">
-                                    <div class="form-group row col-xl-5 col-md-5 col-sm-12">
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
-                                        <div class="col-sm-12 col-md-11">
+                                        <div class="col-sm-12 col-md-12">
                                             <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group row col-xl-4 col-md-4 col-sm-12">
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">Certificate No: <span class="mandatory"> *</span></label>
-                                        <div class="col-sm-12 col-md-11">
+                                        <div class="col-sm-12 col-md-12">
                                             <input onkeypress="return isNumberKey(event)" onkeydown="return isCopy(event)" type="text" placeholder="Enter Certificate No" class="form-control form-control-sm" id="CertNo" data-bind="value:CertNo,valueUpdate: 'input',executeOnEnter:GetCertInformation.bind($data,CertNo), event:{blur:GetCertInformation.bind($data,CertNo)}">
                                         </div>
                                     </div>
                                 </div>
+                             
                                 <div class="row">
-                                    <div class="form-group row col-xl-2 col-md-4 col-sm-6">
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">Holder No:</label>
-                                        <div class="col-sm-12 col-md-11">
+                                        <div class="col-sm-12 col-md-12">
                                             <input class="form-control form-control-sm" id="txtShareHolderNo" type="text" disabled placeholder="Holder No" data-bind='value:ShareHolderNo'>
                                         </div>
                                     </div>
-                                     <div class="form-group row col-xl-4 col-md-8 col-sm-12">
+                                     <div class="form-group row col-xl-3 col-md-6 col-sm-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">Holder Name</label>
-                                        <div class="col-sm-12 col-md-11">
+                                        <div class="col-sm-12 col-md-12">
                                             <input class="form-control form-control-sm" id="txtHName" type="text" disabled placeholder="Name" data-bind='value:HolderName'>
                                         </div>
                                     </div>
-                                     <div class="form-group row col-xl-2 col-md-4 col-sm-12">
+                                     <div class="form-group row col-xl-3 col-md-6 col-sm-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">Total Kitta</label>
-                                        <div class="col-sm-12 col-md-11">
+                                        <div class="col-sm-12 col-md-12">
                                             <input class="form-control form-control-sm" id="txtPkitta" type="text" disabled placeholder="Total kitta" data-bind='value:PKitta'>
                                         </div>
                                     </div>
-                                    <div class="form-group row col-xl-4 col-md-8 col-sm-12">
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">Address</label>
-                                        <div class="col-sm-12 col-md-11">
+                                        <div class="col-sm-12 col-md-12">
                                             <input class="form-control form-control-sm" id="txtAddress" type="text" disabled placeholder="Address" data-bind='value:Address'>
                                         </div>
                                     </div>
@@ -76,48 +75,46 @@
                                 </div>
 
                                 <div class="row">
-                                     
-                                        <div class="form-group row col-xl-2 col-md-8 col-sm-12" >
+
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">SrNo From: </label>
-                                        <div class="col-sm-12 col-md-11">
+                                        <div class="col-sm-12 col-md-12">
                                             <input class="form-control form-control-sm" id="txtStartSrNo" type="text" disabled placeholder="Start Serial No" data-bind='value:StartSerialNo'>
                                         </div>
                                     </div>
-                                    <div  class="form-group row col-xl-2 col-md-8 col-sm-12" >
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">SrNo To: </label>
-                                        <div class="col-sm-12 col-md-11">
+                                        <div class="col-sm-12 col-md-12">
                                             <input class="form-control form-control-sm" id="txtEndSrNo" type="text" disabled placeholder="End Serial No" data-bind='value:EndSeriaLNo'>
                                         </div>
                                     </div>
                                    
-                                     <div class="form-group row col-xl-3 col-md-4 col-sm-12">
+                                     <div class="form-group row col-xl-3 col-md-6 col-sm-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">Certificate Status</label>
-                                        <div class="col-sm-12 col-md-11">
+                                        <div class="col-sm-12 col-md-12">
                                             <input class="form-control form-control-sm" id="txtPStatus" type="text" disabled placeholder="Certificate Status" data-bind='value:PStatus'>
                                         </div>
                                     </div>
-                                    <div class="form-group row col-xl-2 col-md-4 col-sm-12">
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">Share Type </label>
-                                        <div class="col-sm-12 col-md-11">
+                                        <div class="col-sm-12 col-md-12">
                                             <input class="form-control form-control-sm" id="txtSCategory" type="text" disabled placeholder="Share type" data-bind='value:ShareCategory'>
                                         </div>
                                     </div>
-                                    <div class="form-group row col-xl-3 col-md-4 col-sm-12">
+                                    
+                                   
+                                </div>
+                                <div class="row">
+                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12">
                                         <label class="col-sm-12 col-md-11 col-form-label">ShareOwner Type </label>
-                                        <div class="col-sm-12 col-md-11">
-                                            <input class="form-control form-control-sm" id="ShareOwnerType" disabled="disabled" placeholder="ShareOwnerType"  data-bind='value:SelectedShownerType'/>
-                                            
+                                        <div class="col-sm-12 col-md-12">
+                                            <input class="form-control form-control-sm" id="ShareOwnerType" disabled="disabled" placeholder="ShareOwnerType" data-bind='value:SelectedShownerType' />
+
                                         </div>
                                     </div>
                                    
                                 </div>
-                                <div class="row">
-                                   
-                                   
-                                </div>
-                                <div class="row">
-                                    
-                                </div>
+                                
                                 <hr class="my-4 ">
                                 <div class="table-responsive">
                                     <table id="Dakhiltransfer" class="table table-striped table-bordered" style="width:100%">

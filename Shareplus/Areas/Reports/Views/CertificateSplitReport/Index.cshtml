@@ -34,9 +34,9 @@
                         <form>
 
                             <div class="row">
-                                <div class="form-group row col-md-6 col-sm-12">
+                                <div class="form-group row  col-xl-3 col-md-6 col-sm-12 col-12 ">
                                     <label class="col-sm-12 col-md-4 col-form-label" for="companySelect2">Company <span class="mandatory"> *</span></label>
-                                    <div class="col-sm-12 col-md-11">
+                                    <div class="col-sm-12 col-md-12">
                                         <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                         </select>
                                     </div>
@@ -71,37 +71,33 @@
                                 </div>*@
                             </div>
 
-
                             <div class="row">
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12 " id="simple-date1">
+
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
                                     <label class="col-sm-12 col-md-12 col-form-label" for="SplitDateFrom">Split Date From: <span class="mandatory"> *</span></label>
-                                    <div class="input-group date col-sm-12 col-md-10">
+                                    <div class="input-group date col-sm-12 col-md-12">
                                         <div class="input-group-prepend">
                                         </div>
                                         <input type="text" data-bind="value: SplitDateFrom" class="form-control form-control-sm" placeholder="Enter a Date" id="SDateFrom">
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
                                     <label class="col-sm-12 col-md-12 col-form-label" for="SplitDateTo">Split Date To: <span class="mandatory"> *</span></label>
-                                    <div class="input-group date col-sm-12 col-md-10">
+                                    <div class="input-group date col-sm-12 col-md-12">
                                         <div class="input-group-prepend">
                                         </div>
                                         <input type="text" data-bind="value: SplitDateTo" class="form-control form-control-sm" placeholder="Enter a Date" id="SDateTo">
                                     </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                </div>                                                        
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label" id="CNofrom">Certificate No From:</label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: CertNoFrom" placeholder="Enter Certificate Number">
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label" id="To">Certificate No To:</label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: CertNoTo" placeholder="Enter Certificate Number">
                                     </div>
                                 </div>
@@ -109,15 +105,15 @@
 
 
                             <div class="row">
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label" id="Holder">Holder No From:</label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: HolderNoFrom" placeholder="Enter Holder Number">
                                     </div>
                                 </div>
-                                <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label" id="To">Holder No To:</label>
-                                    <div class="col-sm-12 col-md-10">
+                                    <div class="col-sm-12 col-md-12">
                                         <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: HolderNoTo" placeholder="Enter Holder Number">
                                     </div>
                                 </div>

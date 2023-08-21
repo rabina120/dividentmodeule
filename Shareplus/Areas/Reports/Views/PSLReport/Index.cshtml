@@ -31,7 +31,7 @@
                         <div class="row">
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-sm-12 col-form-label" for="reportSelect2">Report Type <span class="mandatory">*</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <select class="form-control form-control-sm" name="state" id="reportSelect2" data-bind='options: ReportType,optionsText: "DataTypeName",optionsValue:"DataType",value:SelectedReportType, optionsCaption:"Select"'>
 
                                     </select>
@@ -39,21 +39,21 @@
                             </div>
                              <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="companySelect2">Company <span class="mandatory"> *</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"Select"'>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-sm-12 col-md-11 col-form-label">Tran Type (PSL) </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <select class="form-control form-control-sm" id="ShareType" data-bind='options:TranTypeList ,optionsText:"TranTypeName",optionsValue:"TranType",value:SelectedTranType, optionsCaption:"Select", event: {change: selectedValueChanged}'>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12" id="pslType" hidden >
                                 <label class="col-12 col-form-label">Pledge At </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <select class="form-control form-control-sm" id="PledgeAt" data-bind='options: PledgeAtList,optionsText: "PledgeAtName",optionsValue:"Pcode",value:SelectedPledgeAt, optionsCaption:"Select"'>
                                     </select>
                                 </div>
@@ -63,7 +63,7 @@
                         <div class="row">
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12" id="simple-date1">
                                 <label class="col-sm-12 col-md-11 col-form-label">App Status <span class="mandatory">*</span></label>
-                                <div class="input-group col-sm-12 col-md-10">
+                                <div class="input-group col-sm-12 col-md-12">
                                      <select class="form-control form-control-sm" id="DataType2" data-bind='options: AppStatus,optionsText:"DataTypeName",optionsValue:"DataType",value:SelectedAppStatus, optionsCaption:"Select"'>
                                     </select>   
 
@@ -71,14 +71,14 @@
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" id="To">Share Type <span class="mandatory">*</span> </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <select class="form-control form-control-sm" id="DataType4" data-bind='options: ShOwnerType ,optionsText:"DataTypeName",optionsValue:"DataType",value:SelectedShOwnerType, optionsCaption:"Select"'>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12" id="simple-date1">
                                 <label class="col-sm-12 col-md-11 col-form-label">Order By <span class="mandatory">*</span></label>
-                                <div class="input-group col-sm-12 col-md-10"> 
+                                <div class="input-group col-sm-12 col-md-12"> 
                                      <select class="form-control form-control-sm" id="DataType3" data-bind='options: OrderBy ,optionsText:"DataTypeName",optionsValue:"DataType",value:SelectedOrderBy, optionsCaption:"Select"'>
                                     </select>
                                 </div>
@@ -90,26 +90,26 @@
                         <div class="row">
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" id="CNofrom">Certificate no from: </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" type="text"  onkeypress="return isNumberKey(event)" data-bind="value: CertNoFrom" placeholder="From Number">
                                 </div>
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" id="To">Certificate no to: </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: CertNoTo" placeholder="To Number">
                                 </div>
                             </div> 
 
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" id="Holder">Holder no from:</label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" type="text"  onkeypress="return isNumberKey(event)" data-bind="value: HolderNoFrom" placeholder="From Number">
                                 </div>
                             </div>
                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" id="To">Holder no to: </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: HolderNoTo" placeholder="To Number">
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                             
                             <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 " id="simple-date1">
                                 <label class="col-sm-12 col-md-12 col-form-label" for="SplitDateFrom">PSL date from: </label>
-                                <div class="input-group date col-sm-12 col-md-10">
+                                <div class="input-group date col-sm-12 col-md-12">
                                     <div class="input-group-prepend">
                                     </div>
                                     <input type="text" data-bind="value: PSLDateFrom" class="form-control form-control-sm" placeholder="Start Date" id="SDateFrom">
@@ -128,7 +128,7 @@
                             </div>
                             <div class="form-group row col-xl-3 col-md-4 col-sm-12 col-12 " id="simple-date1">
                                 <label class="col-sm-12 col-md-12 col-form-label" for="SplitDateTo">PSL date to: </label>
-                                <div class="input-group date col-sm-12 col-md-10">
+                                <div class="input-group date col-sm-12 col-md-12">
                                     <div class="input-group-prepend">
 
                                     </div>

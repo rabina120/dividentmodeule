@@ -3,322 +3,314 @@
     Layout = "~/Areas/Views/Shared/_Layout.cshtml";
 }
 @section Header{
-<link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
-<style>
-    th {
-        width: none !important;
-    }
-</style>
+    <link href="~/vendor/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <style>
+        th {
+            width: none !important;
+        }
+    </style>
 }
-
 <div class="container-fluid">
     <div class="pd-ltr-20 xs-pd-20-10">
         <div class="min-height-200px">
-                <div class="card mb-4">
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Clear PSL Entry</h6>
-                    </div>
-                    <hr class="my-1">
-                    <div class="card-body">
-                        <div class="pd-20 card-box mb-30">
-                            <div class="row col-12 p-4 justify-content-center ">
-                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
-                                    <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " id="Add" value="Add" data-bind="click:ChooseOption.bind($data, 'A')">
-                                </div>
-                               
-                               
-                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
-                                    <input type="button" class="btn btn-danger mr-2 mt-1 col-12" id="Delete" value="Delete" data-bind="click:ChooseOption.bind($data, 'D') ">
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Clear PSL Entry</h6>
+                </div>
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="row col-12 p-4 justify-content-center ">
+                            <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " id="Add" value="Add" data-bind="click:ChooseOption.bind($data, 'A')">
+                            </div>
+                            <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-danger mr-2 mt-1 col-12" id="Delete" value="Delete" data-bind="click:ChooseOption.bind($data, 'D') ">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-12 col-form-label" for="companySelect2">Company <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group row col-md-6 col-sm-12">
-                                    <label class="col-sm-12 col-md-4 col-form-label" for="companySelect2">Company <span class="mandatory"> *</span></label>
-                                    <div class="col-sm-12 col-md-11">
-                                        <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-5 col-md-6 col-sm-12 ">
-                                    <label class="col-sm-4 col-md-4 col-form-label">
-                                        HolderNo:<span class="mandatory">*</span>
-                                    </label>
-                                    <div class="col-sm-12 col-md-11">
-                                        @*<input class="form-control form-control-sm" id="txtShareHolderNo" type="text" disabled placeholder="Enter ShareHolder No" data-bind='value:ShareHolderNo'>*@
-                                        <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" type="text" disabled="disabled" placeholder="Enter ShareHolder No" id="ShholderNo" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:SearchPSL.bind($data,ShholderNo), event:{blur:SearchPSL.bind($data,ShholderNo)}" />
-                                    </div>
-                                    <div class="col-sm-1">
-                                        <button type="button" class="btn btn-primary" id="search" value="search" data-toggle="modal" data-target="#shholderSearch" data-bind="click: SearchPSL">Search</button>
-                                    </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                <label class="col-sm-12 col-md-12 col-form-label"> HolderNo:<span class="mandatory">*</span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" type="text" disabled="disabled" placeholder="Enter ShareHolder No" id="ShholderNo" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:SearchPSL.bind($data,ShholderNo), event:{blur:SearchPSL.bind($data,ShholderNo)}" />
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group row col-xl-4 col-md-6 col-sm-12">
-                                    <label class="col-sm-4 col-md-4 col-form-label">
-                                        PSLNo:
-                                    </label>
-                                    <div class="col-sm-12 col-md-11">
-                                        <input class="form-control form-control-sm" id="txtname" type="text" disabled="disabled" placeholder="PSL No" data-bind="value: PSLNo">
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-4 col-md-6 col-sm-12">
-                                    <label class="col-sm-4 col-md-4 col-form-label">
-                                        Name
-                                    </label>
-                                    <div class="col-sm-12 col-md-11">
-                                        <input class="form-control form-control-sm" id="txtname" type="text" disabled="disabled" placeholder="Name" data-bind="value: Name">
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-4 col-md-6 col-sm-12">
-                                    <label class="col-sm-4 col-md-4 col-form-label">
-                                        Address
-                                    </label>
-                                    <div class="col-sm-12 col-md-11">
-                                        <input class="form-control form-control-sm" id="Address" type="text" disabled="disabled" placeholder="Address" data-bind='value:Address'>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
-                                    <label class="col-12 col-form-label" for="FatherName">
-                                        Father's Name
-                                    </label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="Father's' Name" id="FatherName" data-bind="value:FaName" />
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
-                                    <label class="col-12 col-form-label" for="Address">
-                                        Grand Father's Name
-                                    </label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm" type="text" disabled="disabled" placeholder="Grand Father's Name'" id="GranName" data-bind="value: GrFaName" />
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
-                                    <label class="col-12 col-form-label" for="Kitta">Kitta</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="Kitta" id="Kitta" data-bind="value: TotalKitta" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal fade" id="shholderSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-xl" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form class="col-12">
-                                                <div class="card col-12">
-                                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                                        <h6 class="m-0 font-weight-bold text-primary">Search ShareHolder</h6>
-                                                    </div>
-                                                    <hr class="my-1">
-                                                    <div class="card-body">
-                                                        <div class="table-responsive p-3">
-                                                            <div class="table-responsive p-3">
-                                                                <table class="table align-items-center table-flush table-hover" id="dataTable">
-                                                                    <thead class="thead-light">
-                                                                        <tr>
-                                                                            <th>PSLNo</th>
-                                                                            <th>HolderNo</th>
-                                                                            <th>FirstName</th>
-                                                                            <th>LastName</th>
-                                                                            <th>TranDate</th>
-                                                                            <th>Remark</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody data-bind="foreach : ShholderPSLList">
-                                                                        <tr data-bind="click: GetPSLInformation">
-                                                                            <td data-bind="text: PSLNo"></td>
-                                                                            <td data-bind="text: ShholderNo"></td>
-                                                                            <td data-bind="text: FName"></td>
-                                                                            <td data-bind="text: LName"></td>
-                                                                            <td data-bind="text: TranDt"></td>
-                                                                            <td data-bind="text: remark"></td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table id="PSL_Certificate" class="table table-striped table-bordered" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" data-bind="checked: SelectAll" id="chk" />
-                                            </td>
-                                            
-                                            <th>CertNo</th>
-                                            <th>PSLNo</th>
-                                            <th>SeqNo</th>
-                                            <th>SrNoFrom</th>
-                                            <th>SrNoTo</th>
-                                            <th>HolderNo</th>
-                                            <th>OwnerType</th>
-                                            <th>Pledgekitta</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="certificatelistData" data-bind="foreach: ShholderTransferList">
-                                        <tr>
-                                            
-                                            <td class="checkboxselect" style="display: block">
-                                                    <input type="checkbox" class="case" name="case[]" data-bind="event:{change:checkValidation}, checked: Selected" />
-                                                </td>
-                                            <td data-bind="text: CertNo"></td>
-                                            <td data-bind="text: PSLNo"></td>
-                                            <td data-bind="text: ($index() + 1)"></td>
-                                            <td data-bind="text: SrNoFrom"></td>
-                                            <td data-bind="text: SrNoTo"></td>
-                                            <td data-bind="text: ShholderNo"></td>
-                                            <td data-bind="text: ShOwnerType "></td>
-                                            <td data-bind="text: PledgeKitta"></td>
-                                        </tr>
-                                    </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Total</td>
-                                            <td data-bind="text: total">
-                                            </td>
-                                        </tr>
-                                    
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <div class="row">
-                                <div class="form-group row col-xl-4 col-md-6 col-sm-12">
-                                    <label class="col-sm-4 col-md-4 col-form-label">
-                                        Status
-                                    </label>
-                                    <div class="col-sm-12 col-md-11">
-                                        <input class="form-control form-control-sm" id="SType" type="text" disabled="disabled" placeholder="StatusType" data-bind='value:TranType'>
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-4 col-md-6 col-sm-12">
-                                    <label class="col-sm-4 col-md-4 col-form-label">
-                                        PSLNo:
-                                    </label>
-                                    <div class="col-sm-12 col-md-11">
-                                        <input class="form-control form-control-sm" id="CPSLNO" type="text" disabled="disabled" placeholder="ClearPSLNo" data-bind='value: PSLNo'>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group row col-xl-4 col-md-3 col-sm-12 col-12 " id="simple-date1">
-                                    <label class="col-sm-12 col-md-12 col-form-label" for="EffectiveDate">Effective Date: </label>
-                                    <div class="input-group date col-sm-12 col-md-10">
-                                        <div class="input-group-prepend">
-                                        </div>
-                                        <input type="text" data-bind="value: TranDate" class="form-control form-control-sm" placeholder="Effective Date" id="EffDate">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group row col-xl-4 col-md-4 col-sm-6 col-6">
-                                    <label class="col-10 col-form-label" for="PledgeAt">
-                                        Pledge At
-                                    </label>
-                                    <div class="col-sm-10 col-md-10">
-                                        <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="Pledge At" id="PledgeAt" data-bind="value:PledgeCenter" />
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="row">
-                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
-                                    <label class="col-12 col-form-label" for="Chalani">
-                                        Chalani No.
-                                    </label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="Chalani No" id="ChalaniNo" data-bind="value:ChalaniNo" />
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
-                                    <label class="col-12 col-form-label" for="PKitta">Total Pledge Kitta</label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="PKitta" id="PKitta" data-bind="value: total" />
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
-                                    <label class="col-12 col-form-label" for="PAmount">
-                                        Pledge Amount
-                                    </label>
-                                    <div class="col-sm-12 col-md-10">
-                                        <input class="form-control form-control-sm" type="text" disabled="disabled" placeholder="PledgeAmount" id="PAmount" data-bind="value: PledgeAmount" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group row col-xl-4 col-md-6 col-sm-12">
-                                    <label class="col-sm-4 col-md-4 col-form-label">
-                                        Charge
-                                    </label>
-                                    <div class="col-sm-12 col-md-11">
-                                        <input class="form-control form-control-sm" id="Charge" type="text" d placeholder="Charge" data-bind='value:Charge'>
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12 mt-5 ">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input"  data-bind="checked:Issuedup" id="Issuedup">
-                                        <label class="custom-control-label" for="Issuedup">Is Duplicate Issue?</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row col-xl-3 col-md-3 col-sm-12 " id="simple-date1">
-                                    <label class="col-12 col-form-label" for="ClearDate">ClearDate<span class="mandatory"></span></label>
-                                    <div class="input-group date col-sm-12 col-md-10">
-                                        <div class="input-group-prepend">
-
-                                        </div>
-                                        <input type="text" data-bind="value: ClearedDt" class="form-control form-control-sm" placeholder="Select a Date" id="ClearedDt">
-                                    </div>
-                                </div>
-
-                                
-                                <div class="form-group row col-xl-4 col-md-6 col-sm-12">
-                                    <label class="col-sm-4 col-md-4 col-form-label">
-                                        Remarks
-                                    </label>
-                                    <div class="col-sm-12 col-md-11">
-                                        <input class="form-control form-control-sm" id="ClRemarks" type="text"  placeholder="Clear Remarks" data-bind='value:ClearRemark'>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row col-12 p-4 justify-content-center ">
-                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
-                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12" id="Save" value="Save" data-bind="click:SavePSLClearEntry.bind($data,'S')">
-                                </div>
-                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
-                                    <input type="button" class="btn btn-secondary mr-2 mt-1 col-12" id="Cancel" value="Cancel" data-bind="click:ClearControl">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                <label class="col-sm-12 col-md-12 col-form-label">   <span class="mandatory " style="color:transparent;">l </span></label>
+                                <div class="col-sm-12 col-md-6">
+                                    <button type="button" class="btn btn-primary" id="search" value="search" data-toggle="modal" data-target="#shholderSearch" data-bind="click: SearchPSL">Search</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-sm-4 col-md-4 col-form-label">
+                                PSLNo:
+                            </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" id="txtname" type="text" disabled="disabled" placeholder="PSL No" data-bind="value: PSLNo">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-sm-4 col-md-4 col-form-label">
+                                Name
+                            </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" id="txtname" type="text" disabled="disabled" placeholder="Name" data-bind="value: Name">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-sm-4 col-md-4 col-form-label">
+                                Address
+                            </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" id="Address" type="text" disabled="disabled" placeholder="Address" data-bind='value:Address'>
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                            <label class="col-12 col-md-12 col-form-label" for="Kitta">Kitta</label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="Kitta" id="Kitta" data-bind="value: TotalKitta" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                            <label class="col-12 col-md-12 col-form-label" for="Address">
+                                Grand Father's Name
+                            </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" type="text" disabled="disabled" placeholder="Grand Father's Name'" id="GranName" data-bind="value: GrFaName" />
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-12 col-md-12 col-form-label" for="FatherName">
+                                Father's Name
+                            </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="Father's' Name" id="FatherName" data-bind="value:FaName" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="modal fade" id="shholderSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="col-12">
+                                            <div class="card col-12">
+                                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                                    <h6 class="m-0 font-weight-bold text-primary">Search ShareHolder</h6>
+                                                </div>
+                                                <hr class="my-1">
+                                                <div class="card-body">
+                                                    <div class="table-responsive p-3">
+                                                        <div class="table-responsive p-3">
+                                                            <table class="table align-items-center table-flush table-hover" id="dataTable">
+                                                                <thead class="thead-light">
+                                                                    <tr>
+                                                                        <th>PSLNo</th>
+                                                                        <th>HolderNo</th>
+                                                                        <th>FirstName</th>
+                                                                        <th>LastName</th>
+                                                                        <th>TranDate</th>
+                                                                        <th>Remark</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody data-bind="foreach : ShholderPSLList">
+                                                                    <tr data-bind="click: GetPSLInformation">
+                                                                        <td data-bind="text: PSLNo"></td>
+                                                                        <td data-bind="text: ShholderNo"></td>
+                                                                        <td data-bind="text: FName"></td>
+                                                                        <td data-bind="text: LName"></td>
+                                                                        <td data-bind="text: TranDt"></td>
+                                                                        <td data-bind="text: remark"></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table id="PSL_Certificate" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" data-bind="checked: SelectAll" id="chk" />
+                                        </td>
+                                        <th>CertNo</th>
+                                        <th>PSLNo</th>
+                                        <th>SeqNo</th>
+                                        <th>SrNoFrom</th>
+                                        <th>SrNoTo</th>
+                                        <th>HolderNo</th>
+                                        <th>OwnerType</th>
+                                        <th>Pledgekitta</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="certificatelistData" data-bind="foreach: ShholderTransferList">
+                                    <tr>
+                                        <td class="checkboxselect" style="display: block">
+                                            <input type="checkbox" class="case" name="case[]" data-bind="event:{change:checkValidation}, checked: Selected" />
+                                        </td>
+                                        <td data-bind="text: CertNo"></td>
+                                        <td data-bind="text: PSLNo"></td>
+                                        <td data-bind="text: ($index() + 1)"></td>
+                                        <td data-bind="text: SrNoFrom"></td>
+                                        <td data-bind="text: SrNoTo"></td>
+                                        <td data-bind="text: ShholderNo"></td>
+                                        <td data-bind="text: ShOwnerType "></td>
+                                        <td data-bind="text: PledgeKitta"></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total</td>
+                                        <td data-bind="text: total">
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-sm-12 col-md-12 col-form-label">
+                                Status
+                            </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" id="SType" type="text" disabled="disabled" placeholder="StatusType" data-bind='value:TranType'>
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-sm-12 col-md-12 col-form-label">
+                                PSLNo:
+                            </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" id="CPSLNO" type="text" disabled="disabled" placeholder="ClearPSLNo" data-bind='value: PSLNo'>
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                            <label class="col-sm-12 col-md-12 col-form-label" for="EffectiveDate">Effective Date: </label>
+                            <div class="input-group date col-sm-12 col-md-12">
+                                <div class="input-group-prepend">
+                                </div>
+                                <input type="text" data-bind="value: TranDate" class="form-control form-control-sm" placeholder="Effective Date" id="EffDate">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-sm-12 col-md-12 col-form-label" for="PledgeAt">
+                                Pledge At
+                            </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="Pledge At" id="PledgeAt" data-bind="value:PledgeCenter" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-sm-12 col-md-12 col-form-label" for="Chalani">
+                                Chalani No.
+                            </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="Chalani No" id="ChalaniNo" data-bind="value:ChalaniNo" />
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-sm-12 col-md-12 col-form-label" for="PKitta">Total Pledge Kitta</label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" disabled="disabled" type="text" placeholder="PKitta" id="PKitta" data-bind="value: total" />
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-sm-12 col-md-12 col-form-label" for="PAmount">
+                                Pledge Amount
+                            </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" type="text" disabled="disabled" placeholder="PledgeAmount" id="PAmount" data-bind="value: PledgeAmount" />
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-sm-12 col-md-12 col-form-label">
+                                Charge
+                            </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" id="Charge" type="text" d placeholder="Charge" data-bind='value:Charge'>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 mt-5 ">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" data-bind="checked:Issuedup" id="Issuedup">
+                                <label class="custom-control-label" for="Issuedup">Is Duplicate Issue?</label>
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12" id="simple-date1">
+                            <label class="col-12 col-form-label" for="ClearDate">ClearDate<span class="mandatory"></span></label>
+                            <div class="input-group date col-sm-12 col-md-12">
+                                <div class="input-group-prepend">
+                                </div>
+                                <input type="text" data-bind="value: ClearedDt" class="form-control form-control-sm" placeholder="Select a Date" id="ClearedDt">
+                            </div>
+                        </div>
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                            <label class="col-sm-12 col-md-12 col-form-label">
+                                Remarks
+                            </label>
+                            <div class="col-sm-12 col-md-12">
+                                <input class="form-control form-control-sm" id="ClRemarks" type="text" placeholder="Clear Remarks" data-bind='value:ClearRemark'>
+                            </div>
+                        </div>
+                    </div>
+                   
+                        <div class="row" style="justify-content:center;">
+                           
+                        
+                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                <input type="button" class="btn btn-success mr-2 mt-1 col-12" id="Save" value="Save" data-bind="click:SavePSLClearEntry.bind($data,'S')">
+                            </div>
+                        <div class="col-xl-2 col-md-3 col-sm-4 col-6">
+                                <input type="button" " class="btn btn-secondary mr-2 mt-1 col-12" id="Cancel" value="Cancel" data-bind="click:ClearControl">
+                            </div>
+                        </div>
+                    
+                    
                 </div>
-            
+            </div>
         </div>
     </div>
 </div>
 @section Footer{
-<script src="~/vendor/sweetalert/sweet-alert.js"></script>
-<script src="~/scripts/Certificate/ClearPSLEntry.js"></script>
-
-    }
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/scripts/Certificate/ClearPSLEntry.js"></script>
+}

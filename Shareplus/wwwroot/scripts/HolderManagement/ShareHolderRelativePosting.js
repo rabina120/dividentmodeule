@@ -76,7 +76,7 @@ var ShareHolderPosting = function () {
     self.PostingDate(formatDate(new Date))
     //load Holder List waiting for Posting
 
-    loadDataTable = function () {
+    self.loadDataTable = function () {
         if (self.ValidateCompany()) {
 
             Openloader()
@@ -132,6 +132,40 @@ var ShareHolderPosting = function () {
     }
 
     /*loadDataTable();*/
+    self.LoadCompany = function () {
+
+        var companyCode = localStorage.getItem('company-code')
+        $.ajax({
+            type: "post",
+            url: '/Common/Company/GetCompanyDetails',
+
+            datatype: "json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (result) {
+                $("#modalCompany").modal('hide');
+                if (result.isSuccess) {
+                    var mappedTasks = $.map(result.responseData, function (item) {
+                        return new ParaComp(item)
+                    });
+                    self.CompanyDetails(mappedTasks);
+                    if (!Validate.empty(localStorage.getItem('company-code'))) { self.SelectedCompany(self.CompanyDetails().find(x => x.CompCode() == companyCode).CompCode()); }
+                    // $("#Company").attr("disabled", true);
+                } else {
+                    alert('warning', result.message)
+                }
+            },
+            error: function (error) {
+                alert('error', error.message)
+            }
+        })
+
+
+    }
+    self.LoadCompany();
+
 
     self.SelectAll = ko.computed({
         read: () => !self.ShHolderList().find(x => !x.Selected()),

@@ -46,27 +46,24 @@
                     <div class="row">
 
 
-                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                             <label class="col-12 col-form-label" for="OccId">Occupation ID: <span class="mandatory"> *</span></label>
-                            <div class="col-sm-12 col-md-10">
+                            <div class="col-sm-12 col-md-12">
                                 <input class="form-control form-control-sm" id="OccId" onkeypress="return isNumberKey(event)" data-bind="value: OccupationID,valueUpdate: 'input',executeOnEnter:GetOccupationDetails.bind($data,OccupationID), event:{blur:GetOccupationDetails.bind($data,OccupationID)}" type="text" placeholder="Enter Occupation ID">
                             </div>
                         </div>
-                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                             <label class="col-12 col-form-label" for="OccName">Occupation Name: <span class="mandatory"> *</span></label>
-                            <div class="col-sm-12 col-md-10">
+                            <div class="col-sm-12 col-md-12">
                                 <input class="form-control form-control-sm" id="OccName" data-bind="value: OccupationName" type="text" placeholder="Enter Occupation Name">
                             </div>
                         </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                        <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                             <label class="col-12 col-form-label" for="shownerTypeSelect2">
                                 Showner
                                 Type <span class="mandatory">*</span>
                             </label>
-                            <div class="col-sm-12 col-md-10">
+                            <div class="col-sm-12 col-md-12">
                                 <select class="form-control form-control-sm" id="shOwnerType"
                                         data-bind='options:ShOwnerTypes, optionsText:"ShOwnerTypeAndName",
                                                 optionsValue: "ShOwnerType", value: SelectedShOwnerType,
@@ -74,6 +71,10 @@
                                 </select>
                             </div>
                         </div>
+
+                    </div>
+                    <div class="row">
+                       
                     </div>
 
 

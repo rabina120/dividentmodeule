@@ -46,57 +46,55 @@
                         <div class="row">
 
 
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="PaymentCode">
                                     Payment Center
                                     Code:
                                 </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="PaymentCode" onkeypress="return isNumberKey(event)" data-bind="value: PCode,valueUpdate: 'input',executeOnEnter:GetPaymentDetails.bind($data,PCode), event:{blur:GetPaymentDetails.bind($data,PCode)}" type="text" placeholder="Enter Payment Center Code">
 
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="PName">Payment Names: <span class="mandatory"> *</span></label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="PName" data-bind="value: PName" type="text" placeholder="Enter Payment Name">
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
-                                <label class="col-12 col-form-label" for="PAddress">
-                                    Payment Address: <span class="mandatory">*</span>
-                                </label>
-                                <div class="col-sm-12 col-md-10">
-                                    <input class="form-control form-control-sm" id="PAddress" data-bind="value: PAddress" type="text" placeholder="Enter Payment Address">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-
-
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="PNepName">
                                     Payment Nepali Name:
                                 </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="PNepName" oninput="convert_to_unicode(this)" data-bind="value: PNepName" type="text" placeholder="Enter Payment Nepali Name">
                                 </div>
                             </div>
-
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                          
+                        </div>
+                        <div class="row">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" for="PAddress">
+                                    Payment Address: <span class="mandatory">*</span>
+                                </label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input class="form-control form-control-sm" id="PAddress" data-bind="value: PAddress" type="text" placeholder="Enter Payment Address">
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="PNepAdd">
                                     Payment Nepali Address:
                                 </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="PNepAdd" oninput="convert_to_unicode(this)" data-bind="value: PNepAdd" type="text" placeholder="Enter Payment Nepali Address">
                                 </div>
                             </div>
 
-                            <div class="form-group row col-xl-4 col-md-6 col-sm-12 col-12">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label" for="TelNo">
                                     Telephone No:
                                 </label>
-                                <div class="col-sm-12 col-md-10">
+                                <div class="col-sm-12 col-md-12">
                                     <input class="form-control form-control-sm" id="TelNo" maxlength="10" onkeypress="return isNumberKey(event)" data-bind="value: TelNo" type="text" placeholder="Enter Payment Nepali Address">
                                 </div>
                             </div>

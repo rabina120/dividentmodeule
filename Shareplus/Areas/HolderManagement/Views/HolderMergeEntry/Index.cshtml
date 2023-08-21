@@ -32,37 +32,30 @@
 
 
                             <div class="row">
-                                <div class="form-group row col-md-5">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
-                                    <div class="col-sm-12 col-md-11">
+                                    <div class="col-sm-12 col-md-12">
                                         <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="row col-12">
-                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="mergeNoDiv">
-                                        <label class="col-sm-12 col-md-11 col-form-label">Merge No</label>
-                                        <div class="row">
-                                            <input type="text" class=" col-xl-7 col-md-9 col-sm-12 com-12 form-control form-control-sm ml-4 mt-1 " disabled="disabled" placeholder="Merge No" onkeypress="return isNumberKey(event)" data-bind="value:MergeNo" id="mergeNo" />
-                                            <button class="btn btn-primary col-2 ml-1" disabled="disabled" data-bind="click: ShowMergeDataModal" id="mergeNoButton"><i class="fa fa-search"></i></button>
+                                </div>                                                                   
+                                    <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
+                                        <label class="col-sm-12 col-md-12 col-form-label">Merge Date</label>
 
-                                        </div>
-                                    </div>
-                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date1">
-                                        <label class="col-sm-12 col-md-11 col-form-label">Merge Date</label>
-
-                                        <div class="input-group date col-sm-12 col-md-10 mt-1">
+                                        <div class="input-group date col-sm-12 col-md-12 mt-1">
                                             <div class="input-group-prepend">
 
                                             </div>
                                             <input type="text" class="form-control form-control-sm" disabled="disabled" data-bind="value: MergeDate , text:MergeDate" id="mergeDate">
                                         </div>
                                     </div>
-                                    <div class="col-xl-6  col-md-6 col-sm-6 col-6 ">
+                                <div class=" form-group col-xl-3 col-md-6 col-sm-12 col-12 ">
                                         <label class="col-sm-12 col-md-11 col-form-label">Remarks <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-12">
 
                                         <input type="text" class="form-control form-control-sm ml-2 mt-1 " disabled="disabled" placeholder="Remarks" data-bind="value:MergeRemarks" id="remarks" maxlength="100" />
                                     </div>
+                                </div>
                                 </div>
 
                             </div>
@@ -72,95 +65,123 @@
                                 <h5>
                                     Holder Number From
                                 </h5>
-                                <hr class="my-1 ">
-                                <div class="row ">
-                                    <div class="row col-xl-9 col-md-12 col-sm-12">
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">Shholder No <span class="mandatory">*</span></label>
-                                            <div class="col-sm-12 col-md-10">
-                                                @* <input data-bind="value:ShholderNo, valueUpdate: 'input', executeOnEnter:GetSholderInformation, event{blur:GetSholderInformation}" class="form-control form-control-sm">*@
-                                                <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Share Holder Number" id="ShholderNo" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:GetSholderInformation.bind($data,ShholderNo,'From'), event:{blur:GetSholderInformation.bind($data,ShholderNo,'From')}" />
+                                <hr class="my-1 ">                                          
+                                <div class="row">
+                                    <div class="col-xl-9 col-md-9 col-sm-12">
+                                        <div class="row col-12">
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                <label class="col-sm-12 col-md-12 col-form-label">Shareholder No <span class="mandatory">*</span></label>
+                                                <div class="col-sm-12 col-md-12">
+                                                    <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Shareholder Number" id="ShholderNo" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:GetSholderInformation.bind($data,ShholderNo,'From'), event:{blur:GetSholderInformation.bind($data,ShholderNo,'From')}" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                <label class="col-12 col-form-label">Total Kitta </label>
+                                                <div class="col-sm-12 col-md-12">
+                                                    <input class="form-control form-control-sm" id="totalKitta" disabled="disabled" data-bind="value:TotalKitta" type="text" placeholder="Total Kitta">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                <label class="col-12 col-form-label">Full Name </label>
+                                                <div class="col-sm-12 col-md-12">
+                                                    <input class="form-control form-control-sm" id="fullName" disabled="disabled" data-bind="value:FullName" type="text" placeholder="Full Name">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">Total Kitta </label>
-                                            <div class="col-sm-12 col-md-10">
-                                                <input class="form-control form-control-sm" id="totalKitta" disabled="disabled" data-bind="value:TotalKitta" type="text" placeholder="Total Kitta">
+
+                                        <div class="row col-12">
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                <label class="col-12 col-form-label">Nepali Name </label>
+                                                <div class="col-sm-12 col-md-12">
+                                                    <input class="form-control form-control-sm" id="nepaliName" disabled="disabled" data-bind="value:NpName" type="text" placeholder="Nepali Name">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                <label class="col-12 col-form-label">Owner Type</label>
+                                                <div class="col-sm-12 col-md-12">
+                                                    <input class="form-control form-control-sm" id="ownerType" disabled="disabled" data-bind="value:OwnerType" type="text" placeholder="Owner Type">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                <label class="col-12 col-form-label">Owner Sub Type</label>
+                                                <div class="col-sm-12 col-md-12">
+                                                    <input class="form-control form-control-sm" id="ownerSubType" disabled="disabled" data-bind="value:OwnerSubType" type="text" placeholder="Owner Sub Type">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">Full Name </label>
-                                            <div class="col-sm-12 col-md-10">
-                                                <input class="form-control form-control-sm" id="fullName" disabled="disabled" data-bind="value:FullName" type="text" placeholder="Full Name">
+
+                                        <div class="row col-12">
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                <label class="col-12 col-form-label">Father Name </label>
+                                                <div class="col-sm-12 col-md-12">
+                                                    <input class="form-control form-control-sm" id="fatherName" disabled="disabled" data-bind="value:FaName" type="text" placeholder="Father Name">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                <label class="col-12 col-form-label">Grand Father Name</label>
+                                                <div class="col-sm-12 col-md-12">
+                                                    <input class="form-control form-control-sm" id="grandFatherName" disabled="disabled" data-bind="value:GrFaName" type="text" placeholder="Grand Father Name">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                <label class="col-12 col-form-label">District</label>
+                                                <div class="col-sm-12 col-md-12">
+                                                    <input class="form-control form-control-sm" id="district" disabled="disabled" data-bind="value:District" type="text" placeholder="District">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">Owner Type</label>
-                                            <div class="col-sm-12 col-md-10">
-                                                <input class="form-control form-control-sm" id="ownerType" disabled="disabled" data-bind="value:OwnerType" type="text" placeholder="Owner Type">
+
+                                        <div class="row col-12">
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                <label class="col-12 col-form-label">Address</label>
+                                                <div class="col-sm-12 col-md-12">
+                                                    <input class="form-control form-control-sm" id="address" disabled="disabled" data-bind="value:Address" type="text" placeholder="Address">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">Nepali Name </label>
-                                            <div class="col-sm-12 col-md-10">
-                                                <input class="form-control form-control-sm" id="nepaliName" disabled="disabled" data-bind="value:NpName" type="text" placeholder="Nepali Name">
+
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                <label class="col-12 col-form-label">Telephone No </label>
+                                                <div class="col-sm-12 col-md-12">
+                                                    <input class="form-control form-control-sm" id="telNo" disabled="disabled" data-bind="value:TelNo" type="text" placeholder="Telephone No">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">OwnerSub Type</label>
-                                            <div class="col-sm-12 col-md-10">
-                                                <input class="form-control form-control-sm" id="ownerSubType" disabled="disabled" data-bind="value:OwnerSubType" type="text" placeholder="OwnerSub Type">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">Father Name </label>
-                                            <div class="col-sm-12 col-md-10">
-                                                <input class="form-control form-control-sm" id="fatherName" disabled="disabled" data-bind="value:FaName" type="text" placeholder="Father Name">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">Grand Father Name</label>
-                                            <div class="col-sm-12 col-md-10">
-                                                <input class="form-control form-control-sm" id="grandFatherName" disabled="disabled" data-bind="value:GrFaName" type="text" placeholder="Grand Father Name">
+
+                                            <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                                <label class="col-12 col-form-label">P.O. Box No.</label>
+                                                <div class="col-sm-12 col-md-12">
+                                                    <input class="form-control form-control-sm" id="poboxNo" disabled="disabled" data-bind="value:PboxNo" type="text" placeholder="P.O. Box No">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-3 col-md-12 col-sm-12">
-                                        <div class="col-xl-10  ml-4 mt-3">
-                                            <button class="btn btn-info" disabled="disabled" data-bind="click: GetSignature.bind($data,'From')" id="shHolderFromSignature">Get Signature</button>
-
+                                    <div class="col-xl-3 col-md-3 col-sm-12" style="margin-top:20px;">
+                                        
+                                        <div class=" row col-xl-10 ml-4 mt-3">
+                                           
+                                            <button class="btn btn-info" disabled="disabled" data-bind="click: GetSignature.bind($data,'From')" id="shHolderFromSignature" >Get Signature</button>
                                         </div>
                                         <div class="col-xl-12 mt-4" id="signatureFromDiv">
                                             <img data-bind="click: ShowSignatureModal.bind($data, 'From'), attr: { src: self.Signature() }" height="200px" width="300px" class="img-fluid rounded border border-secondary" style="cursor:pointer" alt="Holder From Image">
                                         </div>
                                     </div>
-
-                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                        <label class="col-12 col-form-label">Address </label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <input class="form-control form-control-sm" id="address" disabled="disabled" data-bind="value:Address" type="text" placeholder="Address">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                        <label class="col-12 col-form-label">District</label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <input class="form-control form-control-sm" id="district" disabled="disabled" data-bind="value:District" type="text" placeholder="District">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                        <label class="col-12 col-form-label">Telephone No </label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <input class="form-control form-control-sm" id="telNo" disabled="disabled" data-bind="value:TelNo" type="text" placeholder="Telephone No">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                        <label class="col-12 col-form-label">P.O. Box No.</label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <input class="form-control form-control-sm" id="poboxNo" disabled="disabled" data-bind="value:PboxNo" type="text" placeholder="P.O. Box No">
-                                        </div>
-                                    </div>
                                 </div>
+
+                               
+
+                                   
+
+                                 
+                                   
+                                    
+                                   
+                               
                             </fieldset>
                             <hr class="my-1" />
 
@@ -169,94 +190,113 @@
                                     Holder Number To
                                 </h5>
                                 <hr class="my-1 ">
-                                <div class="row ">
-                                    <div class="row col-xl-9 col-md-12 col-sm-12">
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">Shholder No <span class="mandatory">*</span></label>
-                                            <div class="col-sm-12 col-md-10">
-                                                @* <input data-bind="value:ShholderNo, valueUpdate: 'input', executeOnEnter:GetSholderInformation, event{blur:GetSholderInformation}" class="form-control form-control-sm">*@
-                                                <input class="form-control form-control-sm" onkeypress="return isNumberKey(event)" type="text" disabled="disabled" placeholder="Enter Share Holder Number" id="ShholderNoTo" data-bind="value:ShholderNoTo,valueUpdate: 'input',executeOnEnter:GetSholderInformation.bind($data,ShholderNoTo,'To'), event:{blur:GetSholderInformation.bind($data,ShholderNoTo,'To')}" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">Total Kitta </label>
-                                            <div class="col-sm-12 col-md-10">
-                                                <input class="form-control form-control-sm" id="totalKittaTo" disabled="disabled" data-bind="value:TotalKittaTo" type="text" placeholder="Total Kitta">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">Full Name </label>
-                                            <div class="col-sm-12 col-md-10">
-                                                <input class="form-control form-control-sm" id="fullNameTo" disabled="disabled" data-bind="value:FullNameTo" type="text" placeholder="Full Name">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">Owner Type</label>
-                                            <div class="col-sm-12 col-md-10">
-                                                <input class="form-control form-control-sm" id="ownerTypeTo" disabled="disabled" data-bind="value:OwnerTypeTo" type="text" placeholder="Owner Type">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">Nepali Name </label>
-                                            <div class="col-sm-12 col-md-10">
-                                                <input class="form-control form-control-sm" id="nepaliNameTo" disabled="disabled" data-bind="value:NpNameTo" type="text" placeholder="Nepali Name">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">OwnerSub Type</label>
-                                            <div class="col-sm-12 col-md-10">
-                                                <input class="form-control form-control-sm" id="ownerTypeTo" disabled="disabled" data-bind="value:OwnerTypeTo" type="text" placeholder="OwnerSub Type">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">Father Name </label>
-                                            <div class="col-sm-12 col-md-10">
-                                                <input class="form-control form-control-sm" id="fatherNameTo" disabled="disabled" data-bind="value:FaNameTo" type="text" placeholder="Father Name">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
-                                            <label class="col-12 col-form-label">Grand Father Name</label>
-                                            <div class="col-sm-12 col-md-10">
-                                                <input class="form-control form-control-sm" id="grandFatherNameTo" disabled="disabled" data-bind="value:GrFaNameTo" type="text" placeholder="Grand Father Name">
-                                            </div>
+                        <div class="row">
+                            <div class="col-xl-9 col-md-9 col-sm-12">
+                                <div class="row col-12">
+                                    <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                        <label class="col-sm-12 col-md-12 col-form-label">Shareholder No <span class="mandatory">*</span></label>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input class="form-control form-control-sm" disabled="disabled" onkeypress="return isNumberKey(event)" type="text" placeholder="Enter Shareholder Number" id="ShholderNo" data-bind="value:ShholderNo,valueUpdate: 'input',executeOnEnter:GetSholderInformation.bind($data,ShholderNo,'From'), event:{blur:GetSholderInformation.bind($data,ShholderNo,'From')}" />
                                         </div>
                                     </div>
 
-                                    <div class="col-xl-3 col-md-12 col-sm-12">
-                                        <div class="col-xl-10  ml-4 mt-3">
-                                            <button class="btn btn-info" disabled="disabled" id="shHolderToSignature" data-bind="click: GetSignature.bind($data,'To')">Get Signature</button>
-
-                                        </div>
-                                        <div class="col-xl-12 mt-4" id="signatureToDiv">
-                                            <img data-bind="click:ShowSignatureModal.bind($data, 'To') ,attr: { src: self.SignatureTo() }" height="200px" width="300px" class="img-fluid rounded border border-secondary" style="cursor:pointer" alt="Holder To Image">
+                                    <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                        <label class="col-12 col-form-label">Total Kitta </label>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input class="form-control form-control-sm" id="totalKitta" disabled="disabled" data-bind="value:TotalKitta" type="text" placeholder="Total Kitta">
                                         </div>
                                     </div>
 
-                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                        <label class="col-12 col-form-label">Address </label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <input class="form-control form-control-sm" id="addressTo" disabled="disabled" data-bind="value:AddressTo" type="text" placeholder="Address">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                        <label class="col-12 col-form-label">District</label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <input class="form-control form-control-sm" id="districtTo" disabled="disabled" data-bind="value:DistrictTo" type="text" placeholder="District">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                        <label class="col-12 col-form-label">Telephone No </label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <input class="form-control form-control-sm" id="telNoTo" disabled="disabled" data-bind="value:TelNoTo" type="text" placeholder="Telephone No">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                        <label class="col-12 col-form-label">P.O. Box No.</label>
-                                        <div class="col-sm-12 col-md-10">
-                                            <input class="form-control form-control-sm" id="poboxNoTo" disabled="disabled" data-bind="value:PboxNoTo" type="text" placeholder="P.O. Box No">
+                                    <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                        <label class="col-12 col-form-label">Full Name </label>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input class="form-control form-control-sm" id="fullName" disabled="disabled" data-bind="value:FullName" type="text" placeholder="Full Name">
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row col-12">
+                                    <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                        <label class="col-12 col-form-label">Nepali Name </label>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input class="form-control form-control-sm" id="nepaliName" disabled="disabled" data-bind="value:NpName" type="text" placeholder="Nepali Name">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                        <label class="col-12 col-form-label">Owner Type</label>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input class="form-control form-control-sm" id="ownerType" disabled="disabled" data-bind="value:OwnerType" type="text" placeholder="Owner Type">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                        <label class="col-12 col-form-label">Owner Sub Type</label>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input class="form-control form-control-sm" id="ownerSubType" disabled="disabled" data-bind="value:OwnerSubType" type="text" placeholder="Owner Sub Type">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row col-12">
+                                    <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                        <label class="col-12 col-form-label">Father Name </label>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input class="form-control form-control-sm" id="fatherName" disabled="disabled" data-bind="value:FaName" type="text" placeholder="Father Name">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                        <label class="col-12 col-form-label">Grand Father Name</label>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input class="form-control form-control-sm" id="grandFatherName" disabled="disabled" data-bind="value:GrFaName" type="text" placeholder="Grand Father Name">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                        <label class="col-12 col-form-label">District</label>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input class="form-control form-control-sm" id="district" disabled="disabled" data-bind="value:District" type="text" placeholder="District">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row col-12">
+                                    <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                        <label class="col-12 col-form-label">Address</label>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input class="form-control form-control-sm" id="address" disabled="disabled" data-bind="value:Address" type="text" placeholder="Address">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                        <label class="col-12 col-form-label">Telephone No </label>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input class="form-control form-control-sm" id="telNo" disabled="disabled" data-bind="value:TelNo" type="text" placeholder="Telephone No">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-4 col-md-4 col-sm-12">
+                                        <label class="col-12 col-form-label">P.O. Box No.</label>
+                                        <div class="col-sm-12 col-md-12">
+                                            <input class="form-control form-control-sm" id="poboxNo" disabled="disabled" data-bind="value:PboxNo" type="text" placeholder="P.O. Box No">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-md-3 col-sm-12" style="margin-top:20px;">
+
+                                <div class=" row col-xl-10 ml-4 mt-3">
+
+                                    <button class="btn btn-info" disabled="disabled" data-bind="click: GetSignature.bind($data,'From')" id="shHolderFromSignature">Get Signature</button>
+                                </div>
+                                <div class="col-xl-12 mt-4" id="signatureFromDiv">
+                                    <img data-bind="click: ShowSignatureModal.bind($data, 'From'), attr: { src: self.Signature() }" height="200px" width="300px" class="img-fluid rounded border border-secondary" style="cursor:pointer" alt="Holder From Image">
+                                </div>
+                            </div>
+                        </div>
+
                             </fieldset>
 
                             <hr class="my-4 ">
@@ -272,8 +312,9 @@
 
                             </div>
 
-
+                          
                         </form>
+                        
 
                     </div>
                 </div>
