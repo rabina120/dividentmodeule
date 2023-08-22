@@ -115,9 +115,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            
-                            
-                            
                             <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 " id="simple-date1">
                                 <label class="col-sm-12 col-md-12 col-form-label" for="SplitDateFrom">PSL date from: </label>
                                 <div class="input-group date col-sm-12 col-md-12">
@@ -137,14 +134,25 @@
                             </div>
                         </div>
                         
-                        <hr class="my-4 ">
-                        <div class="row col-12 p-4 justify-content-center ">
-                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
-                                <input type="button" id="ok" class="btn btn-success mr-2 mt-1 col-12 " value="Excel Report" data-bind="click: GenerateData">
+                        <hr class="my-1">
+                        <div class="row ">
+                            <div class="form-group row col-xl-3 col-md-4 col-sm-12 col-12 ">
+                                <label class="col-sm-12 col-md-12 col-form-label" >Excel Report</label>
+                                <div class="input-group date col-sm-12 col-md-12">
+                                    <div class="input-group-prepend">
+                                    </div>
+                                    <input type="button" id="ok" class="btn btn-success mr-2 mt-1 col-12 " value="Downlaod" data-bind="click: GenerateData">
+                                </div>
                             </div>
-                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
-                                <input type="button" id="Exit" class="btn btn-info mr-2 mt-1 col-12 " value="Pdf Report" data-bind="click: GenerateDataPdf">
+                            <div class="form-group row col-xl-3 col-md-4 col-sm-12 col-12 ">
+                                <label class="col-sm-12 col-md-12 col-form-label" >Pdf Report</label>
+                                <div class="input-group date col-sm-12 col-md-12">
+                                    <div class="input-group-prepend">
+                                    </div>
+                                    <input type="button" id="Exit" class="btn btn-info mr-2 mt-1 col-12 " value="View" data-bind="click: GenerateDataPdf">
+                                </div>
                             </div>
+                            
                         </div>
                     </form>
                 </div>
