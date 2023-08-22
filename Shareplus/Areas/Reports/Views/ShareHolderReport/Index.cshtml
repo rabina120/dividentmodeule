@@ -15,145 +15,152 @@
     <div class="container-fluid">
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="min-height-200px">
-
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <nav aria-label="breadcrumb" role="navigation">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">Reports</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Shareholder Report</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
                 <!-- Default Basic Forms Start -->
                 <div class="card mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-primary">ShareHolder Report</h6>
                     </div>
-                    <hr class="my-1">
                     <div class="card-body">
                         <div class="pd-20 card-box mb-30">
-
                             <div class="row">
                                 <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                        <label class="col-sm-12 col-md-12 col-form-label">Company <span class="mandatory"> *</span></label>
-                                        <div class="col-sm-12 col-md-12">
-                                            <select class="form-control form-control-sm" id="CompanyList" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
-                                            </select>
-                                        </div>
+                                    <label class="col-form-label">Company <span class="mandatory"> *</span></label>
+                                    <div class="input-group">
+                                        <select class="form-control form-control-sm" id="CompanyList" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        </select>
                                     </div>
+                                </div>
                                 <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                    <label class="col-sm-12 col-md-12 col-form-label" for="ReportListSelect2">Report Of <span class="mandatory">*</span></label>
-                                    <div class="col-sm-12 col-md-12">
+                                    <label class="col-form-label" for="ReportListSelect2">Report Of <span class="mandatory">*</span></label>
+                                    <div class="input-group">
                                         <select class="form-control form-control-sm" id="ReportListSelect2" data-bind='options: ReportList,optionsText: "ReportName",optionsValue:"ReportID",value:SelectedReport, optionsCaption:"---Report Type---"'>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                    <label class="col-sm-12 col-md-12 col-form-label" for="DetailsSelect2">With <span class="mandatory">*</span></label>
-                                    <div class="col-sm-12 col-md-12 ">
+                                    <label class="col-form-label" for="DetailsSelect2">With <span class="mandatory">*</span></label>
+                                    <div class="input-group">
                                         <select class="form-control form-control-sm" id="DetailsSelect2" data-bind='options: Details,optionsText: "DetailsName",optionsValue:"DetailsID",value:SelectedDetails, optionsCaption:"---With---"'>
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                    <label class="col-sm-12 col-md-12 col-form-label" for="OrderBySelect2">Order By <span class="mandatory">*</span></label>
-                                    <div class="col-sm-12 col-md-12 ">
+                                    <label class="col-form-label" for="OrderBySelect2">Order By <span class="mandatory">*</span></label>
+                                    <div class="input-group">
                                         <select class="form-control form-control-sm" id="OrderBySelect2" data-bind='options: OrderByList,optionsText: "OrderByName",optionsValue:"OrderByID",value:SelectedOrderBy , optionsCaption:"---Order By---"'>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-                       
-
-                            
-                            <hr class="my-2"></hr>
-                            <div class="row mt-4">
+                            <div class="row">
                                 <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                    <div class="col-12 ">
+                                    <label class="col-form-label">Holder No Form</label>
+                                    <div class="input-group">
                                         <input class="form-control form-control-sm " onkeypress="return isNumberKey(event)" type="text" id="shareHolderNoFrom" placeholder="Share Holder No From" data-bind="value: ShareHolderNoFrom">
                                     </div>
                                 </div>
                                 <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                    <div class="col-12 ">
+                                    <label class="col-form-label">Holder No To</label>
+                                    <div class="input-group">
                                         <input class="form-control form-control-sm " onkeypress="return isNumberKey(event)" type="text" id="shareHolderNoTo" placeholder="Share Holder No To" data-bind="value: ShareHolderNoTo">
                                     </div>
                                 </div>
                                 <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                    <div class="col-12 ">
+                                    <label class="col-form-label">Holder Name</label>
+                                    <div class="input-group">
                                         <input class="form-control form-control-sm " type="text" id="shareHolderName" placeholder="Share Holder Name" data-bind="value: ShareHolderName">
                                     </div>
                                 </div>
                                 <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                    <div class="col-12 ">
+                                    <label class="col-form-label">Address</label>
+                                    <div class="input-group">
                                         <input class="form-control form-control-sm " type="text" id="shareHolderAddress" placeholder="Share Holder Address" data-bind="value: ShareHolderAddress">
                                     </div>
                                 </div>
+
+                            </div>
+                            <div class="row">
                                 <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                    <div class="col-12 ">
+                                    <label class="col-form-label">Kitta Form</label>
+                                    <div class="input-group">
                                         <input class="form-control form-control-sm " onkeypress="return isNumberKey(event)" type="text" id="shareKittaFrom" placeholder="Share Kitta From" data-bind="value: ShareKittaFrom">
                                     </div>
                                 </div>
                                 <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                     <div class="col-12 ">
+                                    <label class="col-form-label">Kitta To</label>
+                                     <div class="input-group">
                                         <input class="form-control form-control-sm " onkeypress="return isNumberKey(event)" type="text" id="shareKittaTo" placeholder="Share Kitta To" data-bind="value: ShareKittaTo">
                                     </div>
                                 </div>
                                 <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                    <div class="col-12">
+                                    <label class="col-form-label">Select District</label>
+                                    <div class="input-group">
                                         <select class="form-control form-control-sm" id="DistrictSelect2" data-bind='options: Districts,optionsText: "DistCodeName",optionsValue:"DistCode",value:SelectedDistrict, optionsCaption:"---District---"'>
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                    <div class=" col-12">
-                                        <select class="form-control form-control-sm" id="HolderTypeSelect2" data-bind='options: HolderTypes,optionsText: "HolderTypeName",optionsValue:"HolderTypeId",value:SelectedHolderType, optionsCaption:"---Holder Type---"'>
+                                    <label class="col-form-label">Holder Category</label>
+                                    <div class="input-group">
+                                        <select class="form-control form-control-sm" id="HolderTypeSelect2" data-bind='options: HolderTypes,optionsText: "HolderTypeName",optionsValue:"HolderTypeId",value:SelectedHolderType, optionsCaption:"---Category---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-form-label">Holder Type</label>
+                                    <div class="input-group">
+                                        <select class="form-control form-control-sm" id="ShOwnerTypeSelect2" data-bind='options: ShOwnerTypes,optionsText: "ShOwnerTypeName",optionsValue:"ShOwnerType",value:SelectedShOwnerType, optionsCaption:"---Holder Type---"'>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                    <div class=" col-12">
-                                        <select class="form-control form-control-sm" id="ShOwnerTypeSelect2" data-bind='options: ShOwnerTypes,optionsText: "ShOwnerTypeName",optionsValue:"ShOwnerType",value:SelectedShOwnerType, optionsCaption:"---Occupation---"'>
+                                    <label class="col-form-label">Sub Type</label>
+                                    <div class="input-group">
+                                        <select class="form-control form-control-sm" id="ShOwnerSubTypeSelect2" data-bind='options: FilteredShOwnerSubTypes,optionsText: "ShOwnerSubTypeAndName",optionsValue:"ShOwnerSubType",value:SelectedShOwnerSubType, optionsCaption:"Sub Type"'>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                    <div class=" col-12">
-                                        <select class="form-control form-control-sm" id="ShOwnerSubTypeSelect2" data-bind='options: FilteredShOwnerSubTypes,optionsText: "ShOwnerSubTypeAndName",optionsValue:"ShOwnerSubType",value:SelectedShOwnerSubType, optionsCaption:"Occupation SubType"'>
-                                        </select>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-form-label">Excel Report</label>
+                                    <div class="input-group">
+                                        <input type="button" class="btn btn-success col-12 " id="btnExcel" value="Download" data-bind="click:GenerateReport.bind($data, 'E')">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-form-label">Pdf Report</label>
+                                    <div class="input-group">
+                                        <input type="button" class="btn btn-info col-12" id="btnPDF" value="View" data-bind="click:GenerateReport.bind($data, 'P') ">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12 ">
+                                    <label class="col-form-label">Clear Form</label>
+                                    <div class="input-group">
+                                        <input type="button" class="btn btn-secondary col-12" id="Cancel" value="Clear" data-bind="click: ClearControl">
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <hr class="my-1">
-                        <div class="row ">
-                            <div class="form-group row col-xl-3 col-md-4 col-sm-12 col-12 ">
-                                <label class="col-sm-12 col-md-12 col-form-label">Excel Report</label>
-                                <div class="input-group date col-sm-12 col-md-12">
-                                    <div class="input-group-prepend">
-                                    </div>
-                                    <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " id="btnExcel" value="Excel" data-bind="click:GenerateReport.bind($data, 'E')">
-                                </div>
-                            </div>
-                            <div class="form-group row col-xl-3 col-md-4 col-sm-12 col-12 ">
-                                <label class="col-sm-12 col-md-12 col-form-label">Pdf Report</label>
-                                <div class="input-group date col-sm-12 col-md-12">
-                                    <div class="input-group-prepend">
-                                    </div>
-                                    <input type="button" class="btn btn-danger mr-2 mt-1 col-12" id="btnPDF" value="PDF" data-bind="click:GenerateReport.bind($data, 'P') ">
-                                </div>
-                            </div>
-                            <div class="form-group row col-xl-3 col-md-4 col-sm-12 col-12 ">
-                                <label class="col-sm-12 col-md-12 col-form-label">Pdf Report</label>
-                                <div class="input-group date col-sm-12 col-md-12">
-                                    <div class="input-group-prepend">
-                                    </div>
-                                    <input type="button" class="btn btn-secondary mr-2 mt-1 col-12" id="Cancel" value="Clear" data-bind="click: ClearControl">
-                                </div>
-                            </div>
-                        </div>
-
-
+                        
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 
