@@ -1,25 +1,23 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Holder Management - ShareHolder Information";
     Layout = "~/Areas/Views/Shared/_Layout.cshtml";
 }
 <style>
     .btn-success {
-    color: #fff;
-    background-color: #66bb6a;
-    border-color: #66bb6a;
-    -webkit-box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2)!important;
-    box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2)!important;
-    border-radius: 1.25rem!important;
-}
+        color: #fff;
+        background-color: #66bb6a;
+        border-color: #66bb6a;
+        -webkit-box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2) !important;
+        box-shadow: 0 .125rem .25rem 0 rgba(58,59,69,.2) !important;
+        border-radius: 1.25rem !important;
+    }
 </style>
 <div class="container-fluid">
     <div class="pd-ltr-20 xs-pd-20-10">
         <div class="min-height-200px">
-             <div class="page-header">
+            <div class="page-header">
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
-
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">Holder Management</li>
@@ -34,33 +32,22 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Share Holder Information </h6>
                 </div>
-
                 <div class="card-body">
                     <div class="pd-20 card-box mb-30">
-
                         <form>
                             <div class="row">
-
-                            <div class=" col-8 p-2 justify-content-center row">
-                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
-                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="AddButton" value="Add" data-bind="click: chooseOptions.bind($data,'A')">
+                                <div class=" col-8 p-2 justify-content-center row">
+                                    <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                        <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="AddButton" value="Add" data-bind="click: chooseOptions.bind($data,'A')">
+                                    </div>
+                                    <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
+                                        <button type="button" class="btn btn-success mr-2 mt-1 col-12 " id="SearchButton" data-toggle="modal" data-target="#searchQueryModalTheme">Search</button>
+                                    </div>
                                 </div>
-                               @* <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
-                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " hidden="hidden" id="UpdateButton" value="Edit" data-bind="click: chooseOptions.bind($data,'U')">
-                                </div>*@
-                                @*<div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
-                <input type="button" class="btn btn-danger mr-2 mt-1 col-12 " id="DeleteButton" value="Delete" data-bind="click: chooseOptions.bind($data,'D')">
-            </div>*@
-                                <div class="col-xl-3 col-md-3 col-sm-4 col-6 ">
-                                    <button type="button" class="btn btn-success mr-2 mt-1 col-12 " id="SearchButton" data-toggle="modal" data-target="#searchQueryModalTheme">Search</button>
+                                <div id="holderlock" class="col-4 p-2 justify-content-center " style="display:none;">
+                                    <i class="fa fa-lock fa-4" aria-hidden="true" style="color:red" data-bind="text:LockMessage"> </i>
                                 </div>
                             </div>
-                            <div id="holderlock" class="col-4 p-2 justify-content-center "  >
-                                <i class="fa fa-lock fa-4" aria-hidden="true" style="color:red" data-bind="text:LockMessage"> </i>
-                                </div>
-                            </div>
-
-
                             <div class="row">
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-sm-10 col-md-8 col-form-label">Company <span class="mandatory"> *</span></label>
@@ -69,30 +56,27 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-8" >
-                                    <div class="row">
-                                         <div class="form-group col-4 mt-6 ">
-                                    <button type="button" class="btn btn-primary mt-3" data-toggle="modal" id="showCertificate" data-bind="click :LoadCertDet">Show Certificate</button>
-                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-10 col-md-8 col-form-label" style="color:transparent;">l</label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <button type="button" class="btn btn-primary col-12" data-toggle="modal" id="showCertificate" data-bind="click :LoadCertDet">Show Certificate</button>
 
-                                <div class="form-group col-4 mt-6 ">
-                                    <button type="button" class="btn btn-primary mt-3" name="" id="showSignature" data-toggle="modal" data-bind="click :GetSignature">
-                                        Show
-                                        Signature
-                                    </button>
-                                </div>
-
-                                <div class="form-group col-3 pt-4">
-                                   
-                                       <p id="shkitta" data-bind='text:TotalKitta' ></p>
-
-                                     <p id="tfrackitta" data-bind='text:Tfrackitta'></p>
-                                   
-                                </div>
                                     </div>
-                                   
                                 </div>
-                                
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-10 col-md-8 col-form-label" style="color:transparent;">l</label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <button type="button" class="btn btn-primary col-12" name="" id="showSignature" data-toggle="modal" data-bind="click :GetSignature">Show Signature</button>
+
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-sm-10 col-md-8 col-form-label" style="color:transparent;">l</label>
+                                    <div class="col-sm-12 col-md-12">
+                                        <p id="shkitta" data-bind='text:TotalKitta'></p>
+                                        <p id="tfrackitta" data-bind='text:Tfrackitta'></p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
@@ -139,7 +123,6 @@
                                 </div>
 
                             </div>
-
                             <div class="row">
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
                                     <label class="col-12 col-form-label">First Name <span class="mandatory">*</span></label>
@@ -158,7 +141,6 @@
                                         Nepali Title <span class="mandatory">*</span>
                                     </label>
                                     <div class="col-sm-12 col-md-12">
-
                                         <select class="select2-single-placeholder form-control form-control-sm titleSelect2" name="state" id="nepTitle" data-bind='options: HolderNepaliTitle,optionsText: "HolderNepaliTitleName",
                                                                     optionsValue:"HolderNepaliName",value:SelectedHolderNepaliTitle,
                                                                     optionsCaption:"---Holder Nepali Title---"'>
@@ -241,10 +223,8 @@
                                         <input class="form-control form-control-sm " type="text" id="mobileNo" onkeypress="return isNumberKey(event)" data-bind="value:MobileNo" placeholder="Enter Mobile No. ">
                                     </div>
                                 </div>
-
                             </div>
                             <div class="row ">
-
                                 <div class="form-group row col-xl-6 col-md-12 col-sm-12 col-12 " style="margin-right: -40px;">
                                     <label class="col-12 col-form-label ">Bank Name </label>
                                     <div class="col-sm-12 col-md-11 ">
@@ -285,7 +265,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
                             <hr class="my-4 ">
                             <div class="row ">
@@ -294,7 +273,6 @@
                                         <input type="checkbox" class="custom-control-input" data-bind="checked:Nomiee" id="checkNominee">
                                         <label class="custom-control-label" for="checkNominee">Nominee</label>
                                     </div>
-
                                 </div>
                                 <div id="ifNominee" class="row col-12">
                                     <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 ">
@@ -310,17 +288,14 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <hr class="my-4 ">
-
                             <div class="row ">
                                 <div class="form-group col-12">
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" data-bind="checked: Minor" id="checkMinor">
                                         <label class="custom-control-label" for="checkMinor">Minor </label>
                                     </div>
-
                                 </div>
                                 <div id="ifMinor" class="row col-12">
                                     <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 ">
@@ -339,17 +314,13 @@
                                         <label class="col-12 col-form-label" for="dateOfBirth">DOB <span class="mandatory">*</span></label>
                                         <div class="input-group date col-sm-12 col-md-10">
                                             <div class="input-group-prepend">
-
                                             </div>
                                             <input type="date" class="form-control form-control-sm" placeholder="Select a Date" data-bind="value: DOB , text:DOB" id="dateOfBirth">
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <hr class="my-4 ">
-                          
-
                             <div id="ifUpdateRemarks">
                                 <div class="row col-12">
                                     <div class="form-group row col-xl-12 col-md-12 col-sm-12 col-12 ">
@@ -358,13 +329,9 @@
                                             <input class="form-control form-control-sm " type="text" data-bind="value: UpdateRemarks" placeholder="Remarks For Updating">
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
-
-
                             <div class="row col-12 p-4 justify-content-center ">
-
                                 <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
                                     <input type="button" class="btn btn-success mr-2 mt-1 col-12 " id="saveShholder" value="Save" data-bind="click: SaveShHolder">
                                 </div>
@@ -372,14 +339,10 @@
                                     <input type="button" class="btn btn-secondary mr-2 mt-1 col-12" id="refresh" value="Refresh" data-bind="click: refresh">
                                 </div>
                                 <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
-                                    <input type="button" class="btn btn-secondary mr-2 mt-1 col-12 " id="report" value="Report">
+                                    <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " id="viewHolderDetails" value="View Details" data-toggle="modal" data-target="#ViewHolderDetail" style="display:none;">
                                 </div>
-
                             </div>
-
-
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -438,8 +401,6 @@
                     </div>
                 </div>
             </div>
-
-
             <!-- Modal Scrollable -->
             <div class="modal fade" id="certificateModalTheme" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
@@ -454,7 +415,6 @@
                             <div class="col-12">
                                 <div class="card mb-4">
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-
                                     </div>
                                     <div class="table-responsive p-3">
                                         <div class="table-responsive p-3">
@@ -489,7 +449,6 @@
                                                         <td data-bind="text: CertDistDt"></td>
                                                         <td data-bind="text: pslno"></td>
                                                     </tr>
-
                                                 </tbody>
                                             </table>
                                         </div>
@@ -499,7 +458,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-                           </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -536,7 +495,6 @@
                             <div class="col-12">
                                 <div class="card mb-4">
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-
                                     </div>
                                     <div class="table-responsive p-3">
                                         <div class="table-responsive p-3">
@@ -576,7 +534,6 @@
                                                             <i class="fas fa-check"> </i>
                                                         </td>
                                                     </tr>
-
                                                 </tbody>
                                             </table>
                                         </div>
@@ -586,7 +543,198 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            @* Modal to vide holder details *@
+            <div class="modal fade" id="ViewHolderDetail" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                <div class="modal-dialog modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="font-weight-bold text-center col-11 text-secondary">Shareholder Details</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container mt-4" style="margin-top:0rem !important;">
+                                <div class="row col-12">
+                                    <div class="col-md-12">
+                                        <div clas="row">
+                                            <h4 class="font-weight-bold text-primary">General Information</h4>
+                                        </div>
+                                        <hr class="my-1">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label><strong>Company: </strong></label>
+                                                <label data-bind="text:CompanyDetails().find(x=>x.CompCode()==SelectedCompany())?.CompEnName() "></label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label><strong>Kitta: </strong></label>
+                                                <label data-bind="text: TotalKitta2()">0</label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label><strong>Fraction: </strong></label>
+                                                <label data-bind="text: Tfrackitta2()">0</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label><strong>Name: </strong></label>
+                                                <label data-bind="text: Title()"></label>
+                                                <label data-bind="text: FName()"></label>
+                                                <label data-bind="text: LName()"></label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label><strong>Holder No: </strong></label>
+                                                <label data-bind="text:ShholderNo() "></label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label><strong>Citizen No: </strong></label>
+                                                <label data-bind="text: Validate.empty(CitizenshipNo()) ? 'N/A' : CitizenshipNo()"></label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label><strong>Address: </strong></label>
+                                                <label data-bind="text: Validate.empty(Address()) ? 'N/A' : Address()"></label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label><strong>District: </strong></label>
+                                                <label data-bind="text: Districts().find(x=>x.DistCode()==SelectedDistrict())?.EnDistName()"></label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label><strong>Tell No: </strong></label>
+                                                <label data-bind="text: Validate.empty(TelNo()) ? 'N/A' : TelNo()">N/A</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label><strong>Holder Type: </strong></label>
+                                                <label data-bind="text: ShOwnerTypes().find(x=>x.ShOwnerType()==SelectedShOwnerType())?.ShOwnerTypeName()"></label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label><strong>Sub Type: </strong></label>
+                                                <label data-bind="text:ShOwnerSubTypes().find(x=>x.ShOwnerSubType()==SelectedShOwnerSubType())?.ShOwnerSubTypeName()"></label>
+                                            </div>
+                                            <div class="col-6">
+                                                <label><strong>Email: </strong></label>
+                                                <label data-bind="text: Validate.empty(EmailAdd()) ? 'N/A' : EmailAdd()"></label>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label><strong>Occupation: </strong></label>
+                                                <label data-bind="text: Occupations().find(x=>x.OccupationId()==SelectedOccupation())?.OccupationN()"></label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label><strong>Status: </strong></label>
+                                                <label data-bind="text:HolderLock()=='N'?'Normal': 'Holder Locked'"></label>
+                                            </div>
+                                            <div class="col-3">
+                                                <label><strong>Moblie No: </strong></label>
+                                                <label data-bind="text:Validate.empty(MobileNo()) ? 'N/A' : MobileNo() ">N/A</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="row col-12">
+                                    <div class="col-md-6">
+                                        <hr class="my-1">
+                                        <div clas="row">
+                                            <h4 class="font-weight-bold text-primary">Family Details</h4>
+                                        </div>
+                                        <hr class="my-1">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label><strong>Father: </strong></label>
+                                                <label data-bind="text: Validate.empty(FaName()) ? 'N/A' : FaName()"></label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label><strong>Grand Father: </strong></label>
+                                                <label data-bind="text:Validate.empty(GrFaName()) ? 'N/A' : GrFaName()"></label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label><strong>Spouse: </strong></label>
+                                                <label data-bind="text:Validate.empty(HusbandName()) ? 'N/A' : HusbandName() "></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <hr class="my-1">
+                                        <div clas="row">
+                                            <h4 class="font-weight-bold text-primary">Nominee Details</h4>
+                                        </div>
+                                        <hr class="my-1">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label><strong>Nominee: </strong></label>
+                                                <label data-bind="text: Validate.empty(NomineeName()) ? 'N/A' : NomineeName()"></label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label><strong>Relation: </strong></label>
+                                                <label data-bind="text: Validate.empty(Relation()) ? 'N/A' : Relation()"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row col-12">
+                                    <div class="col-md-6">
+                                        <hr class="my-1">
+                                        <div clas="row">
+                                            <h4 class="font-weight-bold text-primary">Minor Details</h4>
+                                        </div>
+                                        <hr class="my-1">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label><strong>Gardian: </strong></label>
+                                                <label data-bind="text: Validate.empty(GEnName()) ? 'N/A' : GEnName()"></label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label><strong>Relation: </strong></label>
+                                                <label data-bind="text: Validate.empty(GRelation()) ? 'N/A' : GRelation()"></label>
+                                            </div>
+                                            <div class="col-6">
+                                                <label><strong>Dob: </strong></label>
+                                                <label data-bind="text: Validate.empty(DOB()) ? 'N/A' : DOB()"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <hr class="my-1">
+                                        <div clas="row">
+                                            <h4 class="font-weight-bold text-primary">Bank Details</h4>
+                                        </div>
+                                        <hr class="my-1">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label><strong>Bank Name: </strong></label>
+                                                <label data-bind="text:Validate.empty(BankName()) ? 'N/A' : BankName() "></label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <label><strong>Account No: </strong></label>
+                                                <label data-bind="text:Validate.empty(AccountNo()) ? 'N/A' : AccountNo() "></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
