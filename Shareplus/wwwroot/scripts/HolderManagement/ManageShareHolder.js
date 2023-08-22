@@ -327,6 +327,10 @@ var ManageShareHolder = function () {
     self.Minor = ko.observable();
     self.TotalKitta = ko.observable();
     self.Tfrackitta = ko.observable();
+
+    self.TotalKitta2 = ko.observable();
+    self.Tfrackitta2 = ko.observable();
+
     self.UserName = ko.observable();
     self.Entrydate = ko.observable();
     self.ActionType = ko.observable();
@@ -430,6 +434,10 @@ var ManageShareHolder = function () {
         self.Minor('');
         self.TotalKitta('');
         self.Tfrackitta('');
+
+        self.TotalKitta2('');
+        self.Tfrackitta2('');
+
         self.UserName('');
         self.Entrydate('');
         self.ActionType('');
@@ -466,8 +474,9 @@ var ManageShareHolder = function () {
         document.getElementById("showCertificate").style.display = "none";
         document.getElementById("showSignature").style.display = "none";
         document.getElementById("saveShholder").disabled = "disabled";
-        document.getElementById("report").style.visibility = "hidden";
+        //document.getElementById("report").style.visibility = "hidden";
     }
+
 
 
     //Validation 
@@ -846,10 +855,7 @@ var ManageShareHolder = function () {
                 success: function (result) {
 
                     if (result.isSuccess) {
-                        
-                        $('#holderlock').modal('hide');
-  
-                        //self.Title(result.responseData.title);
+                        self.Title(result.responseData.title);
                         
                         self.FName(result.responseData.fName);
                         self.LName(result.responseData.lName);
@@ -880,7 +886,9 @@ var ManageShareHolder = function () {
                         
                         if (result.responseData.totalKitta != undefined) {
                             self.TotalKitta('Total Kitta: ' + result.responseData.totalKitta)
-                            self.Tfrackitta('Fraction: ' +result.responseData.tfrackitta);
+                            self.Tfrackitta('Fraction: ' + result.responseData.tfrackitta);
+                            self.TotalKitta2(result.responseData.totalKitta)
+                            self.Tfrackitta2(result.responseData.tfrackitta);
                         }
                         
 
@@ -907,11 +915,14 @@ var ManageShareHolder = function () {
                             self.Minor('');
                             self.GRelation('')
                         }
+                        self.HolderLock(result.responseData.holderLock);
                         if (result.isValid) {
                             alert('warning', result.message)
-                            $('#holderlock').attr('hidden', false);
-
+                            $('#holderlock').show();
                             self.LockMessage(result.message);
+                        }
+                        else {
+                            $('#holderlock').hide();
                         }
                     } else {
                         alert('warning', result.message)
@@ -922,7 +933,8 @@ var ManageShareHolder = function () {
                     alert('error', error.message)
                     self.refresh()
                 }, complete: () => {
-                    Closeloader()
+                    Closeloader();
+                    $("#viewHolderDetails").show();
                 }
             })
         }
@@ -1259,7 +1271,6 @@ var ManageShareHolder = function () {
     }
 
     self.DisableElements();
-    $('#holderlock').attr('hidden', true);
 
     self.EnableElements = function () {
         document.getElementById("shOwnerType").disabled = false;
@@ -1308,7 +1319,7 @@ $(document).ready(function () {
     document.getElementById("showCertificate").style.display = "none";
     document.getElementById("showSignature").style.display = "none";
     document.getElementById("saveShholder").disabled = "disabled";
-    document.getElementById("report").style.display = "none";
+    //document.getElementById("report").style.display = "none";
     //document.getElementById("ifSignature").style.display = "none";
     document.getElementById("ifMinor").style.display = "none";
     document.getElementById("ifNominee").style.display = "none";
