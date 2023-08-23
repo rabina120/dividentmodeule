@@ -13,7 +13,7 @@ function pledgeAt(data) {
         self.Pcode = ko.observable(data.pcode)
         self.Name = ko.observable(data.name);
         self.PledgeAtName = ko.observable(data.pcode + ' ' + data.name)
-    }
+    }-
 }
 
 var PSLReport = function () {
@@ -168,8 +168,6 @@ var PSLReport = function () {
 
 
     self.GenerateData = function (exportType) {
-        //$('#tbl_CashDividendReport').DataTable().clear();
-        //$('#tbl_CashDividendReport').DataTable().destroy();
         if (self.ValidateCompany()) {
             if (self.ValidateForm()) {
 
@@ -224,8 +222,6 @@ var PSLReport = function () {
     }
 
     self.GenerateDataPdf = function (exportType) {
-        //$('#tbl_CashDividendReport').DataTable().clear();
-        //$('#tbl_CashDividendReport').DataTable().destroy();
         if (self.ValidateCompany()) {
             if (self.ValidateForm()) {
 
@@ -258,15 +254,14 @@ var PSLReport = function () {
                         if (result.isSuccess) {
                             var embed = "<embed width='100%' height='100%'  type='application/pdf' src='data:application/pdf;base64," + result.responseData + "'/>"
                             var x = window.open();
-                            x.document.open();
-                            x.document.write(embed);
-                            x.document.title = result.message;
-
-                            //var fileName = result.message;
-                            //var a = document.createElement("a");
-                            //a.href = "data:application/octet-stream;base64," + result.responseData;
-                            //a.download = fileName;
-                            //a.click();
+                            if (x) {
+                                x.document.open();
+                                x.document.write(embed);
+                                x.document.title = result.message;
+                                x.document.close();
+                            } else {
+                                alert('Failed to open new window.');
+                            }
                         }
                         else {
                             alert('error', result.message);
@@ -284,6 +279,7 @@ var PSLReport = function () {
             }
         }
     }
+
 
     self.selectedValueChanged = function () {
         var dropdown = document.getElementById("pslType");
@@ -320,13 +316,7 @@ var PSLReport = function () {
 
 }
 
-
-
-
 $(document).ready(function () {
-
-
-   
     $('#simple-date1 .input-group.date').datepicker({
         todayHighlight: true,
         endDate: '+0d',
