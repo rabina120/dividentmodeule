@@ -34,21 +34,20 @@
                     <div class="pd-20 card-box mb-30 ">
                         <div class="row">
                             <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
-                                <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
-                                <div class="col-sm-12 col-md-12">
+                                <label class="col-form-label">Company <span class="mandatory"> *</span></label>
+                                <div>
                                     <select class="form-control form-control-sm" id="CompanyList" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-3">
-                                <input type="button" class="btn btn-primary mr-2 mt-1 col-12 " id="SummaryButton" value="Summary Report" data-bind="click: GenerateReport.bind($data,'S')">
+                            <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-form-label">Summary Report</label>
+                                <input type="button" class="btn btn-primary col-12" id="SummaryButton" value="Summary Report" data-bind="click: GenerateReport.bind($data,'S')">
                             </div>
-                            <div class="col-3 ">
-                                <input type="button" class="btn btn-info mr-2 mt-1 col-12 " id="KittaButton" value="Kitta Wise Report" data-bind="click: GenerateReport.bind($data,'K')">
+                            <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-form-label">Kitta Wise Report</label>
+                                <input type="button" class="btn btn-info col-12" id="KittaButton" value="Kitta Wise Report" data-bind="click: GenerateReport.bind($data,'K')">
                             </div>
-
                         </div>
                     </div>
 
