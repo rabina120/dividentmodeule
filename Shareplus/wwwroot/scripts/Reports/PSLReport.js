@@ -13,7 +13,7 @@ function pledgeAt(data) {
         self.Pcode = ko.observable(data.pcode)
         self.Name = ko.observable(data.name);
         self.PledgeAtName = ko.observable(data.pcode + ' ' + data.name)
-    }-
+    }
 }
 
 var PSLReport = function () {
