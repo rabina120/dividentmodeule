@@ -10,10 +10,9 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
-
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item">Certificate</li>
+                                <li class="breadcrumb-item">Reports</li>
                                 <li class="breadcrumb-item active" aria-current="page">PSL Report</li>
                             </ol>
                         </nav>
@@ -27,33 +26,32 @@
                 </div>
                 <hr class="my-1">
                 <div class="card-body">
-                    <form>
+                    <div class="pd-20 card-box mb-30">
                         <div class="row">
-                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                <label class="col-sm-12 col-form-label" for="reportSelect2">Report Type <span class="mandatory">*</span></label>
-                                <div class="col-sm-12 col-md-12">
+                            <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-form-label" for="reportSelect2">Report Type <span class="mandatory">*</span></label>
+                                <div class="input-group">
                                     <select class="form-control form-control-sm" name="state" id="reportSelect2" data-bind='options: ReportType,optionsText: "DataTypeName",optionsValue:"DataType",value:SelectedReportType, optionsCaption:"Select"'>
-
                                     </select>
                                 </div>
                             </div>
-                             <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                <label class="col-12 col-form-label" for="companySelect2">Company <span class="mandatory"> *</span></label>
-                                <div class="col-sm-12 col-md-12">
+                             <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-form-label" for="companySelect2">Company <span class="mandatory"> *</span></label>
+                                <div class="input-group">
                                     <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"Select"'>
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                <label class="col-sm-12 col-md-11 col-form-label">Tran Type (PSL) </label>
-                                <div class="col-sm-12 col-md-12">
+                            <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-form-label">Tran Type (PSL) </label>
+                                <div class="input-group">
                                     <select class="form-control form-control-sm" id="ShareType" data-bind='options:TranTypeList ,optionsText:"TranTypeName",optionsValue:"TranType",value:SelectedTranType, optionsCaption:"Select", event: {change: selectedValueChanged}'>
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12" id="pslType" hidden >
-                                <label class="col-12 col-form-label">Pledge At </label>
-                                <div class="col-sm-12 col-md-12">
+                            <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12" id="pslType" hidden >
+                                <label class="col-form-label">Pledge At </label>
+                                <div class="input-group">
                                     <select class="form-control form-control-sm" id="PledgeAt" data-bind='options: PledgeAtList,optionsText: "PledgeAtName",optionsValue:"Pcode",value:SelectedPledgeAt, optionsCaption:"Select"'>
                                     </select>
                                 </div>
@@ -61,92 +59,91 @@
                             
                         </div>
                         <div class="row">
-                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12" id="simple-date1">
-                                <label class="col-sm-12 col-md-11 col-form-label">App Status <span class="mandatory">*</span></label>
-                                <div class="input-group col-sm-12 col-md-12">
+                            <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12" id="simple-date1">
+                                <label class="col-form-label">App Status <span class="mandatory">*</span></label>
+                                <div class="input-group">
                                      <select class="form-control form-control-sm" id="DataType2" data-bind='options: AppStatus,optionsText:"DataTypeName",optionsValue:"DataType",value:SelectedAppStatus, optionsCaption:"Select"'>
                                     </select>   
 
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                <label class="col-12 col-form-label" id="To">Share Type <span class="mandatory">*</span> </label>
-                                <div class="col-sm-12 col-md-12">
+                            <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-form-label" id="To">Share Type <span class="mandatory">*</span> </label>
+                                <div class="input-group">
                                     <select class="form-control form-control-sm" id="DataType4" data-bind='options: ShOwnerType ,optionsText:"DataTypeName",optionsValue:"DataType",value:SelectedShOwnerType, optionsCaption:"Select"'>
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12" id="simple-date1">
-                                <label class="col-sm-12 col-md-11 col-form-label">Order By <span class="mandatory">*</span></label>
-                                <div class="input-group col-sm-12 col-md-12"> 
+                            <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12" id="simple-date1">
+                                <label class="col-form-label">Order By <span class="mandatory">*</span></label>
+                                <div class="input-group"> 
                                      <select class="form-control form-control-sm" id="DataType3" data-bind='options: OrderBy ,optionsText:"DataTypeName",optionsValue:"DataType",value:SelectedOrderBy, optionsCaption:"Select"'>
                                     </select>
                                 </div>
                             </div>
-                           
-                            
                         </div>
-                        <hr class="my-1">
+                        <hr class="my-2">
                         <div class="row">
-                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                <label class="col-12 col-form-label" id="CNofrom">Certificate no from: </label>
-                                <div class="col-sm-12 col-md-12">
+                            <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-form-label" id="CNofrom">Certificate no from: </label>
+                                <div class="input-group">
                                     <input class="form-control form-control-sm" type="text"  onkeypress="return isNumberKey(event)" data-bind="value: CertNoFrom" placeholder="From Number">
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                <label class="col-12 col-form-label" id="To">Certificate no to: </label>
-                                <div class="col-sm-12 col-md-12">
+                            <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-form-label" id="To">Certificate no to: </label>
+                                <div class="input-group">
                                     <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: CertNoTo" placeholder="To Number">
                                 </div>
                             </div> 
 
-                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                <label class="col-12 col-form-label" id="Holder">Holder no from:</label>
-                                <div class="col-sm-12 col-md-12">
+                            <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-form-label" id="Holder">Holder no from:</label>
+                                <div class="input-group">
                                     <input class="form-control form-control-sm" type="text"  onkeypress="return isNumberKey(event)" data-bind="value: HolderNoFrom" placeholder="From Number">
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
-                                <label class="col-12 col-form-label" id="To">Holder no to: </label>
-                                <div class="col-sm-12 col-md-12">
+                            <div class="form-group col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-form-label" id="To">Holder no to: </label>
+                                <div class="input-group">
                                     <input class="form-control form-control-sm" type="text" onkeypress="return isNumberKey(event)" data-bind="value: HolderNoTo" placeholder="To Number">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            
-                            
-                            
-                            <div class="form-group row col-xl-3 col-md-3 col-sm-12 col-12 " id="simple-date1">
-                                <label class="col-sm-12 col-md-12 col-form-label" for="SplitDateFrom">PSL date from: </label>
-                                <div class="input-group date col-sm-12 col-md-12">
-                                    <div class="input-group-prepend">
-                                    </div>
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12 " id="simple-date1">
+                                <label class="col-form-label" for="SplitDateFrom">PSL date from: </label>
+                                <div class="input-group">
                                     <input type="text" data-bind="value: PSLDateFrom" class="form-control form-control-sm" placeholder="Start Date" id="SDateFrom">
                                 </div>
                             </div>
-                            <div class="form-group row col-xl-3 col-md-4 col-sm-12 col-12 " id="simple-date1">
-                                <label class="col-sm-12 col-md-12 col-form-label" for="SplitDateTo">PSL date to: </label>
-                                <div class="input-group date col-sm-12 col-md-12">
-                                    <div class="input-group-prepend">
-
-                                    </div>
+                            <div class="form-group col-xl-3 col-md-4 col-sm-12 col-12 " id="simple-date1">
+                                <label class="col-form-label" for="SplitDateTo">PSL date to: </label>
+                                <div class="input-group">
                                     <input type="text" data-bind="value: PSLDateTo" class="form-control form-control-sm" placeholder="End Date" id="SDateTo">
                                 </div>
                             </div>
                         </div>
-                        
-                        <hr class="my-4 ">
-                        <div class="row col-12 p-4 justify-content-center ">
-                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
-                                <input type="button" id="ok" class="btn btn-success mr-2 mt-1 col-12 " value="Excel Report" data-bind="click: GenerateData">
+                        <hr class="my-2">
+                        <div class="row ">
+                            <div class="form-group col-xl-3 col-md-4 col-sm-12 col-12 ">
+                                <label class="col-form-label" >Excel Report</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                    </div>
+                                    <input type="button" id="ok" class="btn btn-success mr-2 mt-1 col-12 " value="Downlaod" data-bind="click: GenerateData">
+                                </div>
                             </div>
-                            <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
-                                <input type="button" id="Exit" class="btn btn-info mr-2 mt-1 col-12 " value="Pdf Report" data-bind="click: GenerateDataPdf">
+                            <div class="form-group col-xl-3 col-md-4 col-sm-12 col-12 ">
+                                <label class="col-form-label" >Pdf Report</label>
+                                <div class="input-group ">
+                                    <div class="input-group-prepend">
+                                    </div>
+                                    <input type="button" id="Exit" class="btn btn-info mr-2 mt-1 col-12 " value="View" data-bind="click: GenerateDataPdf">
+                                </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

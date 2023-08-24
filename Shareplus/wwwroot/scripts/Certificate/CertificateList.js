@@ -293,12 +293,22 @@ var CertificateListviewModel = function () {
                     },
                     success: function (result) {
                         if (result.isSuccess) {
-
-                            var fileName = result.message;
-                            var a = document.createElement("a");
-                            a.href = "data:application/octet-stream;base64," + result.responseData;
-                            a.download = fileName;
-                            a.click();
+                            var embed = "<embed width='100%' height='100%'  type='application/pdf' src='data:application/pdf;base64," + result.responseData + "'/>"
+                            var x = window.open();
+                            if (x) {
+                                x.document.open();
+                                x.document.write(embed);
+                                x.document.title = result.message;
+                                x.document.close();
+                            } else {
+                                alert('warning', 'Failed to View Report.');
+                                alert('success', 'Downloading pdf repot');
+                                var fileName = result.message;
+                                var a = document.createElement("a");
+                                a.href = "data:application/octet-stream;base64," + result.responseData;
+                                a.download = fileName;
+                                a.click();
+                            }
                         }
                         else {
                             console.log('error=>', result.message)
@@ -310,18 +320,11 @@ var CertificateListviewModel = function () {
                         alert('error', error.message)
                     },
                     complete: () => {
-
                         Closeloader()
-
                     }
                 })
-
-
             }
-           
         }
-
-
     }
 
     self.DisplayAllCertificateLists = function () {
@@ -379,16 +382,10 @@ var CertificateListviewModel = function () {
                     alert('error', error.message)
                 },
                 complete: () => {
-
                     Closeloader()
-
                 }
             })
-
-
         }
-       
-
     }
 
     self.GetALLCerticateListsPdf = function () {
@@ -425,12 +422,22 @@ var CertificateListviewModel = function () {
                 dataType: 'json',
                 success: function (result) {
                     if (result.isSuccess) {
-
-                        var fileName = result.message;
-                        var a = document.createElement("a");
-                        a.href = "data:application/octet-stream;base64," + result.responseData;
-                        a.download = fileName;
-                        a.click();
+                        var embed = "<embed width='100%' height='100%'  type='application/pdf' src='data:application/pdf;base64," + result.responseData + "'/>"
+                        var x = window.open();
+                        if (x) {
+                            x.document.open();
+                            x.document.write(embed);
+                            x.document.title = result.message;
+                            x.document.close();
+                        } else {
+                            alert('warning', 'Failed to View Report.');
+                            alert('success', 'Downloading pdf repot');
+                            var fileName = result.message;
+                            var a = document.createElement("a");
+                            a.href = "data:application/octet-stream;base64," + result.responseData;
+                            a.download = fileName;
+                            a.click();
+                        }
                     }
                     else {
                         console.log('error=>', result.message)
@@ -450,8 +457,6 @@ var CertificateListviewModel = function () {
 
 
         }
-        
-
     }
 
     self.DisplayDuplicateCerticateLists = function () {
@@ -495,34 +500,11 @@ var CertificateListviewModel = function () {
                     }
                 })
             }
-
-            
-
         }
     }
 
-   
-
     self.Validation = function (data) {
         var errMsg = ""
-
-
-
-        //if (Validate.empty(self.self.ToDate())) {
-        //    errMsg += "Please Select ToDate <br/>"
-        //}
-        //if (Validate.empty(self.FromDate)) {
-        //    errMsg += "Please Select From Date <br/>"
-        //}
-        //if (Validate.empty(self.SelectedDataType())) {
-        //    errMsg += "Please Select Cert No To <br/>"
-        //}
-        //if (Validate.empty(self.SelectedShareType())) {
-        //    errMsg += "Please Select ShareType <br/>"
-        //}
-        //if (Validate.empty(self.SelectedOrderBy)) {
-        //    errMsg += "Please Select Order By <br/>"
-        //}
         if (errMsg == "") {
             return true;
         } else {

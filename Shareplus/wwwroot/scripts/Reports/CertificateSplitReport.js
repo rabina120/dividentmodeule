@@ -98,12 +98,22 @@ var CertificateSplitReport = function () {
                     dataType: "json",
                     success: (result) => {
                         if (result.isSuccess) {
-                            alert('success', "Report Generated Successfully");
-                            var fileName = result.message;
-                            var a = document.createElement("a");
-                            a.href = "data:application/octet-stream;base64," + result.responseData;
-                            a.download = fileName;
-                            a.click();
+                            var embed = "<embed width='100%' height='100%'  type='application/pdf' src='data:application/pdf;base64," + result.responseData + "'/>"
+                            var x = window.open();
+                            if (x) {
+                                x.document.open();
+                                x.document.write(embed);
+                                x.document.title = result.message;
+                                x.document.close();
+                            } else {
+                                alert('warning', 'Failed to View Report.');
+                                alert('success', 'Downloading pdf repot');
+                                var fileName = result.message;
+                                var a = document.createElement("a");
+                                a.href = "data:application/octet-stream;base64," + result.responseData;
+                                a.download = fileName;
+                                a.click();
+                            }
                         } else {
                             alert('error', result.message)
                         }

@@ -14,7 +14,7 @@
 
                         <nav aria-label="breadcrumb" role="navigation">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item">Cash Dividend Management</li>
+                                <li class="breadcrumb-item">Reports</li>
                                 <li class="breadcrumb-item active" aria-current="page">Dividend Report</li>
                             </ol>
                         </nav>
@@ -26,21 +26,15 @@
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Cash Dividend Report</h6>
                 </div>
-
-
                 <div class="card-body">
                     <div class="pd-20 card-box mb-30">
-                        <div class="clearfix">
-
-                        </div>
                         <form>
                             <div class="row">
-                                <div class="form-group row col-md-3 col-sm-12">
-                                    <label class="col-sm-12 col-md-12 col-form-label" for="reportSelect2">Report Of <span class="mandatory">*</span></label>
-                                    <div class="col-sm-12 col-md-12">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-form-label" for="reportSelect2">Report Of <span class="mandatory">*</span></label>
+                                    <div class="">
                                         <select class="form-control form-control-sm" name="state" id="reportSelect2">
                                             <option value="">Report Type</option>
-
                                             <option value="LIDW">List Issued Dividend Warrant</option>
                                             <option value="LUDW">List UnIssued Dividend Warrant</option>
                                             <option value="LPDW">List Paid Dividend Warrant</option>
@@ -52,23 +46,23 @@
                                     </div>
                                 </div>
                                 
-                                <div class="form-group row col-md-3 col-sm-12">
-                                    <label class="col-sm-12 col-md-12 col-form-label" for="companySelect2">Company <span class="mandatory">*</span></label>
-                                    <div class="col-sm-12 col-md-12">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-form-label" for="companySelect2">Company <span class="mandatory">*</span></label>
+                                    <div class="">
                                         <select class="form-control form-control-sm" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group row col-3" id="dividendListDiv">
-                                    <label class="col-12 col-form-label" for="dividendSelect2">Dividend <span class="mandatory">*</span></label>
-                                    <div class="col-sm-12 col-md-12">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12" id="dividendListDiv">
+                                    <label class="col-form-label" for="dividendSelect2">Dividend <span class="mandatory">*</span></label>
+                                    <div class="">
                                         <select class="form-control form-control-sm" id="DividendTable" data-bind='options: DividendLists,optionsText: "ShowDividendText",optionsValue:"Divcode",value:SelectedDividend, optionsCaption:"---Dividends---"'>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group row col-md-3 col-sm-12" id="SelectUndoType">
-                                    <label class="col-sm-12 col-md-12 col-form-label" for="undoType">Undo Type </label>
-                                    <div class="col-sm-12 col-md-12">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12" id="SelectUndoType">
+                                    <label class="col-form-label" for="undoType">Undo Type </label>
+                                    <div class="">
                                         <select class="form-control form-control-sm" name="undoType" id="undoType">
                                             <option value="ALL">All</option>
                                             <option value="ISSUE">Issue</option>
@@ -77,11 +71,10 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
-                                <div class="form-group row col-md-3 col-sm-12">
-                                    <label class="col-sm-12 col-md-12 col-form-label" for="shareType">Occupation </label>
-                                    <div class="col-sm-12 col-md-12">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-form-label" for="shareType">Occupation </label>
+                                    <div class="">
                                         <select class="form-control form-control-sm" id="shareType"
                                                 data-bind='options:OccupationTypeList, optionsText:"OccupationTypeName",
                                                     optionsValue: "OccupationTypeValue", value: SelectedOccupationType,
@@ -89,150 +82,126 @@
                                         </select>
                                     </div>
                                 </div>
-                                <fieldset class="form-group row col-md-3 col-sm-12" id="ShareTypeDiv">
-                                    <div class="row col-12">
-                                        <legend class="col-12 col-form-label">Share Type<span class="mandatory">*</span></legend>
-                                        <div class="row col-12 col-md-12 col-sm-12">
-                                            <div class="custom-control custom-radio col-md-6 col-sm-12">
-                                                <input type="radio" id="customRadio6" name="shareTypeRadio" data-bind="checked: ShareTypeBasedOn" onclick="ShowHolderNo()" value="P" class="custom-control-input">
-                                                <label class="custom-control-label" for="customRadio6">Physical</label>
-                                            </div>
-                                            <div class="custom-control custom-radio col-md-6 col-sm-12">
-                                                <input type="radio" id="customRadio7" onchange="HideHolderNo()" name="shareTypeRadio" data-bind="checked: ShareTypeBasedOn" value="D" class="custom-control-input">
-                                                <label class="custom-control-label" for="customRadio7">Demate</label>
-                                            </div>
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12" id="ShareTypeDiv">
+                                    <label class="col-form-label">Share Type <span class="mandatory"> *</span></label>
+                                    <div class="input-group col-12 px-0 py-1">
+                                        <div class="custom-control custom-radio col-6">
+                                            <input type="radio" id="customRadio6" name="shareTypeRadio" data-bind="checked: ShareTypeBasedOn" onclick="ShowHolderNo()" value="P" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio6">Physical</label>
+                                        </div>
+                                        <div class="custom-control custom-radio col-6">
+                                            <input type="radio" id="customRadio7" onchange="HideHolderNo()" name="shareTypeRadio" data-bind="checked: ShareTypeBasedOn" value="D" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio7">Demate</label>
                                         </div>
                                     </div>
-                                </fieldset>
-                                <fieldset class="form-group row col-md-3 col-sm-12">
-                                    <div class="row col-12" id="StatusType">
-                                        <legend class="col-12 col-form-label">Status <span class="mandatory">*</span></legend>
-                                        <div class="row col-12 col-md-12 col-sm-12">
-                                            <div class="custom-control custom-radio col-md-6 col-sm-12">
-                                                <input type="radio" id="customRadio1" name="customRadio" data-bind="checked: BasedOn" checked value="Posted" class="custom-control-input">
-                                                <label class="custom-control-label" for="customRadio1">Posted</label>
-                                            </div>
-                                            <div class="custom-control custom-radio col-md-6 col-sm-12">
-                                                <input type="radio" id="customRadio2" name="customRadio" data-bind="checked: BasedOn" value="Unposted" class="custom-control-input">
-                                                <label class="custom-control-label" for="customRadio2">Unposted</label>
-                                            </div>
+                                </div>
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-form-label">Status<span class="mandatory"> *</span></label>
+                                    <div class="input-group col-12 px-0 py-1" id="StatusType">
+                                        <div class="custom-control custom-radio col-6">
+                                            <input type="radio" id="customRadio1" name="customRadio" data-bind="checked: BasedOn" checked value="Posted" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio1">Posted</label>
+                                        </div>
+                                        <div class="custom-control custom-radio col-6">
+                                            <input type="radio" id="customRadio2" name="customRadio" data-bind="checked: BasedOn" value="Unposted" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio2">Unposted</label>
                                         </div>
                                     </div>
-                                </fieldset>
-                                
+                                </div>
                             </div>
                             <hr class="my-1" />
-                            <div id="ShowHideSummary">
-
-
-                                <div class="row">
-                                    <div class="form-group row col-md-3 col-sm-6 seq">
-                                        <label class="col-12 col-form-label">Holder From</label>
-                                        <div class="col-sm-12 col-md-12">
-                                            <input class="form-control form-control-sm" id="seqNoFrom" data-bind="value:seqNoFrom" type="text" placeholder="From">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row col-md-3 col-sm-6 seq">
-                                        <label class="col-12 col-form-label">Holder To</label>
-                                        <div class="col-sm-12 col-md-12">
-                                            <input class="form-control form-control-sm" id="seqNoTo" data-bind="value:seqNoTo" type="text" placeholder="To">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row col-md-3 col-sm-6">
-                                        <label class="col-12 col-form-label">Kitta From</label>
-                                        <div class="col-sm-12 col-md-12">
-                                            <input class="form-control form-control-sm" id="kittaFrom" data-bind="value:kittaFrom" type="text" placeholder="Kitta From">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row col-md-3 col-sm-6">
-                                        <label class="col-12 col-form-label">Kitta To</label>
-                                        <div class="col-sm-12 col-md-12">
-                                            <input class="form-control form-control-sm" id="kittaTo" data-bind="value:kittaTo" type="text" placeholder="Kitta From">
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                <div class="row">
-                                    <div class="form-group row col-md-3 col-sm-6 " id="simple-date1">
-                                        <label class="col-12 col-form-label" for="dateFrom">Date From</label>
-                                        <div class="input-group date col-sm-12 col-md-12">
-                                            <div class="input-group-prepend">
-
-                                            </div>
-                                            <input type="text" class="form-control form-control-sm" placeholder="Select a Date" id="dateFrom" data-bind="value: dateFrom">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row col-md-3 col-sm-6 " id="simple-date2">
-                                        <label class="col-12 col-form-label" for="dateTo">Date To</label>
-                                        <div class="input-group date col-sm-12 col-md-12">
-                                            <div class="input-group-prepend">
-
-                                            </div>
-                                            <input type="text" class="form-control form-control-sm" placeholder="Select a Date" id="dateTo" data-bind="value: dateTo">
-                                        </div>
-                                    </div>
-                                    
-                                    
-
-                                </div>
-                                <div class="row">
-                                    <div class="form-group  col-6 pt-5" id="withBankDetaisDiv">
-                                        <div class="custom-control custom-checkbox ">
-                                            <input type="checkbox" class="custom-control-input" data-bind="checked:withBankDetails" id="withBankDetails">
-                                            <label class="custom-control-label" for="withBankDetails">With Bank Details</label>
-                                        </div>
-
+                            <div class="row">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-form-label">Holder From</label>
+                                    <div class="">
+                                        <input class="form-control form-control-sm" id="seqNoFrom" data-bind="value:seqNoFrom" type="text" placeholder="From">
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <fieldset class="form-group mt-3 col-md-6 col-sm-12">
-                                        <div class="row col-md-12 col-sm-12">
-                                            <legend class="col-form-label col-sm-10 pt-0">Pay Type <span class="mandatory">*</span></legend>
-                                            <div class="row col-md-12 col-sm-6 pl-4">
-                                                <div class="custom-control custom-radio col-md-3 col-sm-4">
-                                                    <input type="radio" id="customRadio3" name="payradio" data-bind="checked: payType" checked value="A" class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio3">All</label>
-                                                </div>
-                                                <div class="custom-control custom-radio col-md-3 col-sm-4">
-                                                    <input type="radio" id="customRadio4" name="payradio" data-bind="checked: payType" value="1" class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio4">Cash</label>
-                                                </div>
-                                                <div class="custom-control custom-radio col-md-3 col-sm-4">
-                                                    <input type="radio" id="customRadio5" name="payradio" data-bind="checked: payType" value="2" class="custom-control-input">
-                                                    <label class="custom-control-label" for="customRadio5">Cheque</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    
-                                </div>
-                                <div class="row">
-                                    <div class="form-group row col-3">
-                                        <label class="col-sm-12 col-md-12 col-form-label" for="payCenterSelect">Pay Center</label>
-                                        <div class="col-sm-12 col-md-12">
-                                            <select class="select2-single-placeholder form-control form-control-sm" id="payCenterSelect" data-bind='options: PaymentCenters,optionsText: "PaymentDisplayName",optionsValue:"CenterId",value:SelectedPaymentCenter, optionsCaption:"---Payment Center---"'>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row col-3">
-                                        <label class="col-12 col-form-label">Batch No</label>
-                                        <div class="col-sm-12 col-md-12">
-                                            <input class="form-control form-control-sm" id="batchNo" data-bind="value:batchNo" type="text" placeholder="Batch No">
-                                        </div>
-
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-form-label">Holder To</label>
+                                    <div class="">
+                                        <input class="form-control form-control-sm" id="seqNoTo" data-bind="value:seqNoTo" type="text" placeholder="To">
                                     </div>
                                 </div>
-
-                                <hr class="my-4 ">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-form-label">Kitta From</label>
+                                    <div class="">
+                                        <input class="form-control form-control-sm" id="kittaFrom" data-bind="value:kittaFrom" type="text" placeholder="Kitta From">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-form-label">Kitta To</label>
+                                    <div class="">
+                                        <input class="form-control form-control-sm " id="kittaTo" data-bind="value:kittaTo" type="text" placeholder="Kitta To">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row justify-content-end">
-                                <div class="col-3 ">
-                                    <input type="button" class="btn btn-success mr-2 mt-1 col-12 " value="Export To Excel" data-bind="click: GenerateData.bind($data,'E')">
+                            <div class="row">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12" id="simple-date1">
+                                    <label class="col-form-label" for="dateFrom">Date From</label>
+                                    <div class="">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Select a Date" id="dateFrom" data-bind="value: dateFrom">
+                                    </div>
                                 </div>
-                                <div class="col-3 ">
-                                    <input type="button" class="btn btn-info mr-2 mt-1 col-12 " value="Export To PDF" data-bind="click: GenerateData.bind($data,'P')">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12" id="simple-date2">
+                                    <label class="col-form-label" for="dateTo">Date To</label>
+                                    <div class="">
+                                        <div class="input-group-prepend">
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm" placeholder="Select a Date" id="dateTo" data-bind="value: dateTo">
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-form-label" for="payCenterSelect">Pay Center</label>
+                                    <div class="">
+                                        <select class="select2-single-placeholder form-control form-control-sm" id="payCenterSelect" data-bind='options: PaymentCenters,optionsText: "PaymentDisplayName",optionsValue:"CenterId",value:SelectedPaymentCenter, optionsCaption:"---Payment Center---"'>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-form-label">Batch No</label>
+                                    <div class="">
+                                        <input class="form-control form-control-sm" id="batchNo" data-bind="value:batchNo" type="text" placeholder="Batch No">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-xl-6 col-md-12 col-sm-12" id="withBankDetaisDiv">
+                                    <label class="col-form-label" for="dateTo">Generate Report</label>
+                                    <div class="custom-control custom-checkbox ">
+                                        <input type="checkbox" class="custom-control-input" data-bind="checked:withBankDetails" id="withBankDetails">
+                                        <label class="custom-control-label" for="withBankDetails">With Bank Details</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xl-6 col-md-12 col-sm-12">
+                                    <label class="col-form-label">Pay Center<span class="mandatory"> *</span></label>
+                                    <div class="input-group col-12 px-0 py-1">
+                                        <div class="custom-control custom-radio col-3">
+                                            <input type="radio" id="customRadio3" name="payradio" data-bind="checked: payType" checked value="A" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio3">All</label>
+                                        </div>
+                                        <div class="custom-control custom-radio col-3">
+                                            <input type="radio" id="customRadio4" name="payradio" data-bind="checked: payType" value="1" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio4">Cash</label>
+                                        </div>
+                                        <div class="custom-control custom-radio col-3">
+                                            <input type="radio" id="customRadio5" name="payradio" data-bind="checked: payType" value="2" class="custom-control-input">
+                                            <label class="custom-control-label" for="customRadio5">Cheque</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-1" />
+                            <div class="row">
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-form-label">Excel Report</label>
+                                    <input type="button" class="btn btn-success col-12 " value="Download" data-bind="click: GenerateData.bind($data,'E')">
+                                </div>
+                                <div class="form-group col-xl-3 col-md-6 col-sm-12">
+                                    <label class="col-form-label">Pdf Report</label>
+                                    <input type="button" class="btn btn-info col-12 " value="View" data-bind="click: GenerateData.bind($data,'P')">
                                 </div>
                             </div>
 
