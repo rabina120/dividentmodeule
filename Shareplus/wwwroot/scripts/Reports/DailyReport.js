@@ -16,21 +16,16 @@
                     },
                     success: (result) => {
                         if (result.isSuccess) {
-                            var embed = "<embed width='100%' height='100%'  type='application/pdf' src='data:application/pdf;base64," + result.responseData + "'/>"
+                            var byteArray = Uint8Array.from(atob(result.responseData), c => c.charCodeAt(0)); // Decode base64 data
+                            var pdfBlob = new Blob([byteArray], { type: 'application/pdf' });
                             var x = window.open();
                             if (x) {
                                 x.document.open();
-                                x.document.write(embed);
+                                x.document.write('<iframe width="100%" height="100%" src="' + URL.createObjectURL(pdfBlob) + '"></iframe>');
                                 x.document.title = result.message;
                                 x.document.close();
                             } else {
-                                alert('warning', 'Failed to View Report.');
-                                alert('success', 'Downloading pdf repot');
-                                var fileName = result.message;
-                                var a = document.createElement("a");
-                                a.href = "data:application/octet-stream;base64," + result.responseData;
-                                a.download = fileName;
-                                a.click();
+                                alert('warning', 'Failed to open file.');
                             }
                         }
                         else {
