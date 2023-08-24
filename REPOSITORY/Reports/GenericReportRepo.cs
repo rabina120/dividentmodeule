@@ -318,7 +318,6 @@ namespace Repository.Reports
                 aTTTableHeaders.Add(new ATTGenericReport(1f, "Telephone No", "telno"));
                 aTTTableHeaders.Add(new ATTGenericReport(0.75f, "No of Shares", "totalkitta"));
                 aTTTableHeaders.Add(new ATTGenericReport(0.5f, "Fraction", "fraction"));
-                aTTTableHeaders.Add(new ATTGenericReport(0.7f, "Occupation", "occupation"));
             }
             if (name == ReportName.ShareHolderShareHoldersDetailsList)
             {

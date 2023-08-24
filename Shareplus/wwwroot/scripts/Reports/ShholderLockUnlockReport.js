@@ -98,7 +98,13 @@ var ShholderLockUnlockReport = function ()
                                     x.document.title = result.message;
                                     x.document.close();
                                 } else {
-                                    alert('Failed to open new window.');
+                                    alert('warning', 'Failed to View Report.');
+                                    alert('success', 'Downloading pdf repot');
+                                    var fileName = result.message;
+                                    var a = document.createElement("a");
+                                    a.href = "data:application/octet-stream;base64," + result.responseData;
+                                    a.download = fileName;
+                                    a.click();
                                 }
                             }
                             
