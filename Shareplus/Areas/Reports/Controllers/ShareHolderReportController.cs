@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Repository.Reports;
 using System;
 using System.Collections.Generic;
+using JsonResponse = Entity.Common.JsonResponse;
 
 namespace CDSMODULE.Areas.Reports.Controllers
 {
@@ -139,6 +140,7 @@ namespace CDSMODULE.Areas.Reports.Controllers
                             case "ATL":
                                 ReportNameToDatabase = ATTGenericReport.ReportName.ShareHolderAddressTableListReport;
                                 response = _genericReport.GenerateReport(ReportNameToDatabase, response, reportTitles);
+                                response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                                 break;
                             case "SHL":
                                 ReportNameToDatabase = ATTGenericReport.ReportName.ShareHolderShareHolderListInEnglish;
@@ -148,18 +150,22 @@ namespace CDSMODULE.Areas.Reports.Controllers
                                     
                                 });
                                 response = _genericReport.GenerateReport(ReportNameToDatabase, response, reportTitles, isNepali: false, isTotal: true, aTTTotalBasedOns);
+                                response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                                 break;
                             case "SHLN":
                                 ReportNameToDatabase = ATTGenericReport.ReportName.ShareHolderShareHolderListInNepali;
                                 response = _genericReport.GenerateReport(ReportNameToDatabase, response, reportTitles, isNepali: true);
+                                response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                                 break;
                             case "HAL":
                                 ReportNameToDatabase = ATTGenericReport.ReportName.ShareHolderShareHolderAttendanceList;
                                 response = _genericReport.GenerateReport(ReportNameToDatabase, response, reportTitles);
+                                response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                                 break;
                             case "SHDL":
                                 ReportNameToDatabase = ATTGenericReport.ReportName.ShareHolderShareHoldersDetailsList;
                                 response = _genericReport.GenerateReport(ReportNameToDatabase, response, reportTitles);
+                                response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                                 break;
                             case "SHLZK":
                                 ReportNameToDatabase = ATTGenericReport.ReportName.ShareHolderShareHolderslistInEnglishZeroKitta;
@@ -169,6 +175,7 @@ namespace CDSMODULE.Areas.Reports.Controllers
                                    
                                 });
                                 response = _genericReport.GenerateReport(ReportNameToDatabase, response, reportTitles, isNepali: false, isTotal: true, aTTTotalBasedOns);
+                                response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                                 break;
                             case "FL":
                                 ReportNameToDatabase = ATTGenericReport.ReportName.ShareHolderFractionList;
@@ -183,6 +190,7 @@ namespace CDSMODULE.Areas.Reports.Controllers
                                     Location = "7"
                                 });
                                 response = _genericReport.GenerateReport(ReportNameToDatabase, response, reportTitles, isNepali: false, isTotal: true, aTTTotalBasedOns);
+                                response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                                 break;
                             case "AFL":
                                 ReportNameToDatabase = ATTGenericReport.ReportName.AllShareHolderFractionList;
@@ -197,7 +205,9 @@ namespace CDSMODULE.Areas.Reports.Controllers
                                     Location = "7"
                                 });
                                 response = _genericReport.GenerateReport(ReportNameToDatabase, response, reportTitles, isNepali: false, isTotal: true, aTTTotalBasedOns);
+                                response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                                 break;
+
                         }
                     }
                     else

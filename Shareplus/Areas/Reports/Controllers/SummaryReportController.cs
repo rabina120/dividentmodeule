@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+
 namespace CDSMODULE.Areas.Reports.Controllers
 {
     [Area("Reports")]
@@ -26,15 +27,17 @@ namespace CDSMODULE.Areas.Reports.Controllers
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly ICheckUserAccess _checkUserAccess;
         private readonly IAudit _audit;
+        private readonly ICommon _common;
 
         public SummaryReportController(ILoggedinUser _loggedInUser, IGenerateReport generateReport,
-            IWebHostEnvironment hostingEnvironment, ICheckUserAccess checkUserAccess, IAudit audit)
+            IWebHostEnvironment hostingEnvironment, ICheckUserAccess checkUserAccess, IAudit audit, ICommon common)
         {
             this._loggedInUser = _loggedInUser;
             _generateReport = generateReport;
             _hostingEnvironment = hostingEnvironment;
             this._checkUserAccess = checkUserAccess;
             _audit = audit;
+            _common = common;
         }
         public IActionResult Index()
         {
@@ -448,9 +451,9 @@ namespace CDSMODULE.Areas.Reports.Controllers
                             fs.Dispose();
                         }
 
-
-
-                        return jsonResponseToReturn;
+                        jsonResponse.ResponseData = _common.SaveGetPdfReport(jsonResponseToReturn.ResponseData);
+                        jsonResponse.Message = jsonResponseToReturn.Message;
+                        return jsonResponse;
                     }
                 }
                 else

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Reports;
 using System;
+
 namespace Shareplus.Areas.Reports.Controllers
 {
     [Authorize]
@@ -22,9 +23,10 @@ namespace Shareplus.Areas.Reports.Controllers
         private readonly IAudit _audit;
         private readonly IShareHolderReport _shareHolderReport;
         private readonly IGenericReport _genericReport;
+        private readonly ICommon _common;
 
         public ShholderLockUnlockReportController(ILoggedinUser _loggedInUser, IWebHostEnvironment hostingEnvironment
-            , ICheckUserAccess checkUserAccess, IAudit audit, IShareHolderReport shareHolderReport, IGenericReport genericReport)
+            , ICheckUserAccess checkUserAccess, IAudit audit, IShareHolderReport shareHolderReport, IGenericReport genericReport, ICommon common)
         {
 
             this._loggedInUser = _loggedInUser;
@@ -33,6 +35,7 @@ namespace Shareplus.Areas.Reports.Controllers
             _audit = audit;
             this._shareHolderReport = shareHolderReport;
             this._genericReport = genericReport;
+            _common = common;
         }
         public IActionResult Index()
         {
@@ -52,7 +55,7 @@ namespace Shareplus.Areas.Reports.Controllers
 
 
         }
-        public Entity.Common.JsonResponse ExportExcel(string CompCode,string CompEnName, string DataType,string StatusType,string DateFrom,string DateTo,string HolderNoFrom,string HolderNoTo,string ReportType)
+        public JsonResponse ExportExcel(string CompCode,string CompEnName, string DataType,string StatusType,string DateFrom,string DateTo,string HolderNoFrom,string HolderNoTo,string ReportType)
         {
         JsonResponse response = new JsonResponse();
          response = _shareHolderReport.ShholderLockUnlock( CompCode,  DataType,StatusType,  DateFrom,  DateTo,  HolderNoFrom, HolderNoTo,ReportType,_loggedInUser.GetUserName(),_loggedInUser.GetUserIPAddress());
@@ -96,7 +99,10 @@ namespace Shareplus.Areas.Reports.Controllers
 
                     response = _genericReport.GenerateReport(Title, response, reportTitles);
                     if (response.IsSuccess)
+                    {
+                        response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                         response.Message = CompCode + "_" + Enum.GetName(Title.GetType(), Title) + "_" + DateTime.Now.ToString("yyyy_mm_dd") + ".pdf";
+                    }
 
                 }
                 else
@@ -114,7 +120,9 @@ namespace Shareplus.Areas.Reports.Controllers
                     GenericExcelReport report = new GenericExcelReport();
                     response = report.GenerateExcelReport(response, "ShareHolderReport"+  type+ " " + StatusType, StatusType, CompEnName, CompCode, type);
                     if (response.IsSuccess)
+                    {
                         response.Message = CompCode + "_" + "Lock_Unlock_Report" + "_" + DateTime.Now.ToString("yyyy-MM-dd") + ".xlsx";
+                    } 
                 }
 
             

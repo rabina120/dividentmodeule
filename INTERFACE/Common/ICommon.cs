@@ -18,6 +18,7 @@ namespace Interface.Common
         JsonResponse GetCertificateStatus(string DependOn);
         JsonResponse GetAllShareTypes();
 
+        JsonResponse SaveGetPdfReport(object json);
 
     }
 }

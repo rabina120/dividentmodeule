@@ -3,11 +3,13 @@
 using Dapper;
 using Entity.Common;
 using Interface.Common;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 
 namespace Repository.Common
@@ -15,9 +17,13 @@ namespace Repository.Common
     public class CommonRepo : ICommon, IShareType
     {
         IOptions<ReadConfig> connectionString;
-        public CommonRepo(IOptions<ReadConfig> connectionString)
+
+        private readonly IHostingEnvironment _webHostEnvironment;
+
+        public CommonRepo(IOptions<ReadConfig> connectionString, IHostingEnvironment webHostEnvironment)
         {
             this.connectionString = connectionString;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public JsonResponse GetAllShareTypes()
@@ -412,6 +418,45 @@ namespace Repository.Common
                 }
                 return response;
             }
+        }
+
+        public JsonResponse SaveGetPdfReport(object data)
+        {
+            JsonResponse response = new JsonResponse();
+
+            string folderName = "PDFReports";
+            string webRootPath = _webHostEnvironment.WebRootPath;
+            string newPath = Path.Combine(webRootPath, folderName);
+
+            if (!Directory.Exists(newPath))
+            {
+                Directory.CreateDirectory(newPath);
+            }
+            else
+            {
+                try
+                {
+                    Directory.Delete(newPath, true);
+                    Directory.CreateDirectory(newPath);
+                }
+                catch
+                {
+
+                }
+            }
+            byte[] pdfBytes = Convert.FromBase64String((string)data);
+
+            string pdfFilePath = Path.Combine(newPath, DateTime.Now.ToString("dd-MM-yyyy hh_mm_s_tt") + "Report.pdf");
+
+            using (FileStream fs = new FileStream(pdfFilePath, FileMode.Create, FileAccess.Write))
+            {
+                fs.Write(pdfBytes, 0, pdfBytes.Length);
+            }
+
+            response.IsSuccess = true;
+            response.Message = "/PDFReports/" + Path.GetFileName(pdfFilePath);
+
+            return response;
         }
     }
 }

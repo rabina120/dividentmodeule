@@ -1,5 +1,5 @@
 ﻿using CDSMODULE.Helper;
-using Entity.Common;
+
 using Entity.Reports;
 using Interface.Common;
 using Interface.Reports;
@@ -11,6 +11,7 @@ using Repository.Reports;
 using System;
 using System.Collections.Generic;
 using static Entity.Reports.ATTGenericReport;
+using JsonResponse = Entity.Common.JsonResponse;
 
 namespace CDSMODULE.Areas.Reports.Controllers
 {
@@ -26,9 +27,10 @@ namespace CDSMODULE.Areas.Reports.Controllers
         private readonly ICheckUserAccess _checkUserAccess;
 
         private readonly IGenericReport _genericReport;
+        private readonly ICommon _common;
 
 
-        public CashDividendReportController(ILoggedinUser _loggedInUser, ICashDividendReport cashDividendReport, IWebHostEnvironment hostingEnvironment, ICheckUserAccess checkUserAccess, IAudit audit, IGenericReport genericReport)
+        public CashDividendReportController(ILoggedinUser _loggedInUser, ICashDividendReport cashDividendReport, IWebHostEnvironment hostingEnvironment, ICheckUserAccess checkUserAccess, IAudit audit, IGenericReport genericReport, ICommon common)
         {
             this._loggedInUser = _loggedInUser;
             _cashDividendReport = cashDividendReport;
@@ -36,6 +38,7 @@ namespace CDSMODULE.Areas.Reports.Controllers
             _checkUserAccess = checkUserAccess;
             _audit = audit;
             _genericReport = genericReport;
+            _common = common;
         }
         public IActionResult Index()
         {
@@ -142,7 +145,10 @@ namespace CDSMODULE.Areas.Reports.Controllers
                             });
                             response = _genericReport.GenerateReport((ReportName)Enum.Parse(typeof(ReportName), SelectedReportName), response, reportTitles,false,true, reportTotals);
                             if (response.IsSuccess)
+                            {
+                                response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                                 response.Message = CompCode + "_" + SelectedReportName + "_" + DateTime.Now.ToString("yyyy-MM-dd") + ".pdf";
+                            }
 
                         }
                     }

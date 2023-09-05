@@ -98,16 +98,20 @@ var CertificateSplitReport = function () {
                     dataType: "json",
                     success: (result) => {
                         if (result.isSuccess) {
-                            var byteArray = Uint8Array.from(atob(result.responseData), c => c.charCodeAt(0)); // Decode base64 data
-                            var pdfBlob = new Blob([byteArray], { type: 'application/pdf' });
                             var x = window.open();
                             if (x) {
                                 x.document.open();
-                                x.document.write('<iframe width="100%" height="100%" src="' + URL.createObjectURL(pdfBlob) + '"></iframe>');
+                                x.document.write('<iframe width="100%" height="100%" src="' + result.responseData.message + '"></iframe>');
                                 x.document.title = result.message;
                                 x.document.close();
                             } else {
-                                alert('warning', 'Failed to open file.');
+                                alert('warning', 'Failed to Open Pdf File.');
+                                alert('success', 'Downloading Pdf File.');
+                                var fileName = result.message;
+                                var a = document.createElement("a");
+                                a.href = result.responseData.message;
+                                a.download = fileName;
+                                a.click();
                             }
                         } else {
                             alert('error', result.message)

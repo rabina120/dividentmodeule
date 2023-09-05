@@ -23,15 +23,16 @@ namespace CDSMODULE.Areas.Certificate.Controllers
         private readonly ICheckUserAccess _checkUserAccess;
         private readonly IAudit _audit;
         private readonly IGenericReport _genericReport;
+        private readonly ICommon _common;
 
-
-        public CertificateListController(ILoggedinUser _loggedInUser, ICertificateList listC, IAudit audit, ICheckUserAccess checkUserAccess, IGenericReport genericReport)
+        public CertificateListController(ILoggedinUser _loggedInUser, ICertificateList listC, IAudit audit, ICheckUserAccess checkUserAccess, IGenericReport genericReport, ICommon common)
         {
             this._loggedInUser = _loggedInUser;
             _listCertificate = listC;
             _audit = audit;
             _checkUserAccess = checkUserAccess;
             _genericReport = genericReport;
+            _common = common;
         }
         public IActionResult Index()
         {
@@ -113,7 +114,10 @@ namespace CDSMODULE.Areas.Certificate.Controllers
                     response = _genericReport.GenerateReport(ReportName.AllCertificateList, response, reportTitles, false, true, aTTTotalBasedOns,true);
 
                     if (response.IsSuccess)
+                    {
+                        response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                         response.Message = ReportDataForAllCertificate.CompCode + "_" + "AllCertificateList" + "_" + DateTime.Now.ToString("yyyy-MM-dd") + ".pdf";
+                    }
 
                 }
             }
@@ -178,8 +182,10 @@ namespace CDSMODULE.Areas.Certificate.Controllers
                     response = _genericReport.GenerateReport(ReportName.DistributedUndistributedCertificateList, response, reportTitles, false, true, totalcolumn);
 
                     if (response.IsSuccess)
+                    {
+                        response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                         response.Message = ReportDataDistributedCertificatesList.CompEnName + "_" + SelectedAction == "D" ? "DistributedCertificateList" : "UnDistributedCertificateList" + "_" + DateTime.Now.ToString("yyyy-MM-dd") + ".pdf";
-
+                    }
                 }
             }
             else
