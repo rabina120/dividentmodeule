@@ -1,5 +1,4 @@
 ﻿using CDSMODULE.Helper;
-using Entity.Common;
 using Entity.Reports;
 using Interface.Common;
 using Interface.Parameter;
@@ -9,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Reports;
 using System;
+using JsonResponse = Entity.Common.JsonResponse;
 
 namespace CDSMODULE.Areas.Reports.Controllers
 {
@@ -23,8 +23,9 @@ namespace CDSMODULE.Areas.Reports.Controllers
         private readonly IDPSetup _dPSetup;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IGenericReport _genericReport;
+        private readonly ICommon _common;
 
-        public PSLReportController(ILoggedinUser _loggedInUser, IPSLReport pSLReport, IGenericReport genericReport, ICheckUserAccess checkUserAccess, IDPSetup dPSetup, IWebHostEnvironment webHostEnvironment)
+        public PSLReportController(ILoggedinUser _loggedInUser, IPSLReport pSLReport, IGenericReport genericReport, ICheckUserAccess checkUserAccess, IDPSetup dPSetup, IWebHostEnvironment webHostEnvironment, ICommon common)
         {
 
             this._loggedInUser = _loggedInUser;
@@ -33,7 +34,7 @@ namespace CDSMODULE.Areas.Reports.Controllers
             this._webHostEnvironment = webHostEnvironment;
             this._checkUserAccess = checkUserAccess;
             _genericReport = genericReport;
-
+            _common = common;
         }
         public IActionResult Index()
         {
@@ -164,9 +165,12 @@ namespace CDSMODULE.Areas.Reports.Controllers
                 {
                     response = _genericReport.GenerateReport(Title, response, reportTitles);
                     if (response.IsSuccess)
+                    {
                         response.Message = CompCode + "_" + type + Enum.GetName(Title.GetType(), Title) + "_" + DateTime.Now.ToString("yyyy_mm_dd") + ".pdf";
+                    }
                 }
             }
+            response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
 
             return response;
         }

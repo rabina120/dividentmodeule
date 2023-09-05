@@ -29,8 +29,9 @@ namespace Shareplus.Areas.Reports.Controllers
         //private readonly GenericExcelReport _excelReport;
         private readonly IGenericReport _genericReport;
         private readonly IDakhilManyToOneTransferEntry _dakhilTran;
+        private readonly ICommon _common;
         public DakhilTransferController(ILoggedinUser _loggedInUser, IAudit audit, IGenericReport genericReport,
-           IWebHostEnvironment hostingEnvironment, IDakhilTransferReport generateReport, ICheckUserAccess checkUserAccess, IDakhilManyToOneTransferEntry dakhilTran)
+           IWebHostEnvironment hostingEnvironment, IDakhilTransferReport generateReport, ICheckUserAccess checkUserAccess, IDakhilManyToOneTransferEntry dakhilTran, ICommon common)
         {
             this._loggedInUser = _loggedInUser;
             _hostingEnvironment = hostingEnvironment;
@@ -39,7 +40,7 @@ namespace Shareplus.Areas.Reports.Controllers
             _audit = audit;
             _genericReport = genericReport;
             _dakhilTran = dakhilTran;
-
+            _common = common;
         }
         public IActionResult Index()
         {
@@ -88,7 +89,10 @@ namespace Shareplus.Areas.Reports.Controllers
             {
                 response = _genericReport.GenerateReport(Title, response, reportTitles);
                 if (response.IsSuccess)
-                    response.Message = Compcode+"_"+type + Enum.GetName(Title.GetType(), Title) +"_"+ DateTime.Now.ToString("yyyy_mm_dd") + ".pdf";
+                {
+                    response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
+                    response.Message = Compcode + "_" + type + Enum.GetName(Title.GetType(), Title) + "_" + DateTime.Now.ToString("yyyy_mm_dd") + ".pdf";
+                }
             }
         
             return response;

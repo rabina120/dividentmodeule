@@ -23,8 +23,9 @@ namespace CDSMODULE.Areas.Reports.Controllers
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly ICheckUserAccess _checkUserAccess;
         private readonly IAudit _audit;
+        private readonly ICommon _common;
         public CertificateSplitReportController(ILoggedinUser _loggedInUser, IWebHostEnvironment hostingEnvironment
-            , ICertificateSplitReport certificateSplitReport, ICheckUserAccess checkUserAccess, IAudit audit, ICertificateReports certificateReports)
+            , ICertificateSplitReport certificateSplitReport, ICheckUserAccess checkUserAccess, IAudit audit, ICertificateReports certificateReports, ICommon common)
         {
 
             this._loggedInUser = _loggedInUser;
@@ -33,6 +34,7 @@ namespace CDSMODULE.Areas.Reports.Controllers
             this._checkUserAccess = checkUserAccess;
             _audit = audit;
             _certificateReport = certificateReports;
+            _common = common;
         }
         public IActionResult Index()
         {
@@ -63,6 +65,8 @@ namespace CDSMODULE.Areas.Reports.Controllers
             if (jsonResponse.IsSuccess)
             {
                 jsonResponseToReturn = _certificateReport.CertificateSplitReport(ReportData,jsonResponse, _hostingEnvironment.WebRootPath);
+                
+                jsonResponseToReturn.ResponseData = _common.SaveGetPdfReport(jsonResponseToReturn.ResponseData);
             }
 
             else

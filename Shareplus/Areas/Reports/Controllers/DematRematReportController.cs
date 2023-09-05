@@ -25,11 +25,12 @@ namespace CDSMODULE.Areas.Reports.Controllers
         private readonly IDemateRemateReport _demateRemateReport;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IAudit _audit;
+        private readonly ICommon _common;
         private readonly IGenericReport _genericReport;
 
 
         public DematRematReportController(ILoggedinUser _loggedInUser, IDemateRemateReport demateRemateReport, ICheckUserAccess checkUserAccess,
-            IDPSetup dPSetup, IWebHostEnvironment webHostEnvironment, IAudit audit, IGenericReport genericReport)
+            IDPSetup dPSetup, IWebHostEnvironment webHostEnvironment, IAudit audit, ICommon common, IGenericReport genericReport)
         {
             this._loggedInUser = _loggedInUser;
             this._checkUserAccess = checkUserAccess;
@@ -37,6 +38,7 @@ namespace CDSMODULE.Areas.Reports.Controllers
             this._demateRemateReport = demateRemateReport;
             this._webHostEnvironment = webHostEnvironment;
             _audit = audit;
+            _common = common;
             _genericReport = genericReport;
         }
         public IActionResult Index()
@@ -153,7 +155,11 @@ namespace CDSMODULE.Areas.Reports.Controllers
                 {
                     jsonResponse = _genericReport.GenerateReport(Title , jsonResponse, reportTitles);
                     if (jsonResponse.IsSuccess)
-                        jsonResponse.Message =  Enum.GetName(Title.GetType(), Title) + DateTime.Now.ToString("yyyy_mm_dd") + ".pdf";
+                    {
+                        jsonResponse.ResponseData = _common.SaveGetPdfReport(jsonResponse.ResponseData);
+                        jsonResponse.Message = Enum.GetName(Title.GetType(), Title) + DateTime.Now.ToString("yyyy_mm_dd") + ".pdf";
+                    }
+                        
                 }
             }
             else //for excel report
