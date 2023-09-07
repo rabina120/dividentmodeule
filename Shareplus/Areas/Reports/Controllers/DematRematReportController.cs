@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Repository.Reports;
 using System;
-
+using System.Collections.Generic;
 
 namespace CDSMODULE.Areas.Reports.Controllers
 {
@@ -147,13 +147,18 @@ namespace CDSMODULE.Areas.Reports.Controllers
                 }
 
                 string[] reportTitles = { ReportData.CompCode, ReportData.CompEnName, Enum.GetName(Title.GetType(), Title  ) + " : " + status};
+                List<ATTShareHolderReportTotalBasedOn> reportTotals = new List<ATTShareHolderReportTotalBasedOn>();
+                reportTotals.Add(new ATTShareHolderReportTotalBasedOn()
+                {
+                    TotalBasedOn = "kitta"
 
+                });
                 jsonResponse = _demateRemateReport.GenerateReport(ReportData, ExportReportType, _loggedInUser.GetUserNameToDisplay());
                 if (jsonResponse.HasError)
                     jsonResponse = _audit.errorSave(_loggedInUser.GetUserNameToDisplay(), this.ControllerContext.RouteData.Values["controller"].ToString(), _loggedInUser.GetUserIPAddress(), (Exception)jsonResponse.ResponseData);
                 else
                 {
-                    jsonResponse = _genericReport.GenerateReport(Title , jsonResponse, reportTitles);
+                    jsonResponse = _genericReport.GenerateReport(Title , jsonResponse, reportTitles, false, true, reportTotals);
                     if (jsonResponse.IsSuccess)
                     {
                         jsonResponse.ResponseData = _common.SaveGetPdfReport(jsonResponse.ResponseData);
