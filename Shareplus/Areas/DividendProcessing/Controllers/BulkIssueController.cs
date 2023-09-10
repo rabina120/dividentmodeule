@@ -75,6 +75,7 @@ namespace CDSMODULE.Areas.DividendProcessing.Controllers
                 switch (DivBasedOn)
                 {
                     case "01":
+                        fileName = "DummyExcel BulkIssue Physical.xlsx";
                         worksheet.Cell(1, 1).Value = "SHHOLDERNO";
                         worksheet.Cell(1, 2).Value = "WARRANTNO";
                         worksheet.Cell(1, 3).Value = "BANKACCNO";
@@ -83,6 +84,7 @@ namespace CDSMODULE.Areas.DividendProcessing.Controllers
                         worksheet.Cell(1, 6).Value = "CREDITEDDT";
                         break;
                     default:
+                        fileName = "DummyExcel BulkIssue Demat.xlsx";
                         worksheet.Cell(1, 1).Value = "BOID";
                         worksheet.Cell(1, 2).Value = "WARRANTNO";
                         worksheet.Cell(1, 3).Value = "BANKACCNO";

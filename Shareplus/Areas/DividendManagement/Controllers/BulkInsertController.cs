@@ -162,6 +162,8 @@ namespace CDSMODULE.Areas.DividendManagement.Controllers
                 switch (DivBasedOn)
                 {
                     case "01":
+                        fileName = "DummyExcel BulkInsert Dividend Physical.xlsx";
+                        
                         worksheet.Cell(1, 1).Value = "shholderno";
                         worksheet.Cell(1, 2).Value = "fname";
                         worksheet.Cell(1, 3).Value = "lname";
@@ -182,6 +184,8 @@ namespace CDSMODULE.Areas.DividendManagement.Controllers
                         worksheet.Cell(1, 18).Value = "warrantno";
                         break;
                     case "02":
+                        fileName = "DummyExcel BulkInsert Dividend Demat.xlsx";
+
                         worksheet.Cell(1, 1).Value = "warrantno";
                         worksheet.Cell(1, 2).Value = "BO_idno";
                         worksheet.Cell(1, 3).Value = "fullname";
@@ -198,6 +202,8 @@ namespace CDSMODULE.Areas.DividendManagement.Controllers
                         worksheet.Cell(1, 14).Value = "payableamt"; 
                         break;
                     case "03":
+                        fileName = "DummyExcel BulkInsert Bonus Physical.xlsx";
+
                         worksheet.Cell(1, 1).Value = "shholderno";
                         worksheet.Cell(1, 2).Value = "fname";
                         worksheet.Cell(1, 3).Value = "lname";
@@ -216,6 +222,8 @@ namespace CDSMODULE.Areas.DividendManagement.Controllers
                         worksheet.Cell(1, 16).Value = "srnoto";
                         break;
                     default:
+                        fileName = "DummyExcel BulkInsert Bonus Demat.xlsx";
+
                         worksheet.Cell(1, 1).Value = "boid";
                         worksheet.Cell(1, 2).Value = "name";
                         worksheet.Cell(1, 3).Value = "address";
