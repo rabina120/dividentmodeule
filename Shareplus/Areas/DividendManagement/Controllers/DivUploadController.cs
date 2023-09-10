@@ -74,7 +74,7 @@ namespace Shareplus.Areas.DividendManagement.Controllers
         {
             string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             //string contentType = "application/vnd.ms-excel";
-            string fileName = "FileUploadFormat.xlsx";
+            string fileName = "DummyExcel DividendUpload.xlsx";
             using (var workbook = new XLWorkbook())
             {
                 IXLWorksheet worksheet = workbook.Worksheets.Add("DataFormat");

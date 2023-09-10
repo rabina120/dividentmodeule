@@ -168,7 +168,7 @@ namespace CDSMODULE.Areas.CDS.Controllers
         public ActionResult DownloadExcelDocument()
         {
             string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-            string fileName = "DummyDataBulkCA.xls";
+            string fileName = "DummyExcel BulkCA.xls";
             using (var workbook = new XLWorkbook())
             {
                 IXLWorksheet worksheet =

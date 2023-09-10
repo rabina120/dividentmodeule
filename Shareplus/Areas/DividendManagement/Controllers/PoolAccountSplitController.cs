@@ -87,7 +87,7 @@ namespace Shareplus.Areas.DividendManagement.Controllers
         public ActionResult DownloadExcelDocument()
         {
             string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-            string fileName = "DataFormat.xlsx";
+            string fileName = "DummyExcel PoolAccountSplit.xlsx";
             using (var workbook = new XLWorkbook())
             {
                 IXLWorksheet worksheet = workbook.Worksheets.Add("DataFormat");

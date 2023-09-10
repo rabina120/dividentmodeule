@@ -79,7 +79,7 @@ namespace Shareplus.Areas.DividendManagement.Controllers
         {
             string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             //string contentType = "application/vnd.ms-excel";
-            string fileName = "Pledge/ReleaseExcelFormat.xlsx";
+            string fileName = "DummyExcel PledgeRelease.xlsx";
             using (var workbook = new XLWorkbook())
             {
                 IXLWorksheet worksheet = workbook.Worksheets.Add("DataFormat");
