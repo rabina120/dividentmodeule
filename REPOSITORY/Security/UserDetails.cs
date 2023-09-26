@@ -58,7 +58,7 @@ namespace Repository.Security
                 {
                     connection.Open();
                     DynamicParameters param = new DynamicParameters();
-                    param.Add("USER_ID", Convert.ToInt32(UserId));
+                    param.Add("USER_ID", UserId);
                     param.Add("enable",enable);
 
                     jsonResponse = connection.Query<Entity.Common.JsonResponse>("EnableDisableUserById", param, commandType: CommandType.StoredProcedure)?.FirstOrDefault();
@@ -90,7 +90,7 @@ namespace Repository.Security
                 {
                     connection.Open();
                     DynamicParameters param = new DynamicParameters();
-                    param.Add("USER_ID", Convert.ToInt32(UserId));
+                    param.Add("USER_ID", UserId);
                     ATTUserProfile aTTUserProfile = connection.Query<ATTUserProfile>("GetUserDetailsById", param, commandType: CommandType.StoredProcedure)?.FirstOrDefault();
 
                     if (aTTUserProfile != null)
@@ -123,7 +123,7 @@ namespace Repository.Security
                     connection.Open();
                     DynamicParameters param = new DynamicParameters();
                     int roleId = Convert.ToInt32(aTTUser.UserRole);
-                    param.Add("USER_ID", Convert.ToInt32(UserId));
+                    param.Add("USER_ID", UserId);
                     if (aTTUser.Password != null) param.Add("PASSWORD", aTTUser.Password.Trim());
                     param.Add("VALID_DATE", aTTUser.Validdate);
                     param.Add("User_Name", aTTUser.UserName.Trim());
@@ -154,7 +154,7 @@ namespace Repository.Security
                 {
                     connection.Open();
                     DynamicParameters param = new DynamicParameters();
-                    param.Add("USER_ID", Convert.ToInt32(UserId));
+                    param.Add("USER_ID", UserId);
                     param.Add("PASSWORD", aTTUser.Password.Trim());
                     param.Add("VALID_DATE", aTTUser.Validdate);
                     param.Add("User_Name", aTTUser.UserName.Trim());

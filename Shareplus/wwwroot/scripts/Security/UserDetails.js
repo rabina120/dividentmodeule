@@ -81,6 +81,8 @@ var UserDetails = function () {
     self.RightsList = ko.observableArray([])
     self.fromDate = ko.observable();
     self.toDate = ko.observable();
+    self.isLDAP = ko.observable(false);
+
     loadDataTable = function () {
         dataTable = $('#DT_load').dataTable({
             "ajax": {
@@ -91,6 +93,7 @@ var UserDetails = function () {
                 },
                 "datatype": "json"
             },
+            "paging": false,
             "columns": [
                 { "data": "UserId", "width": "5%" },
                 { "data": "UserName", "width": "15%" },
@@ -118,7 +121,7 @@ var UserDetails = function () {
                     "data": "UserId",
                     "render": function (data) {
                         return `<div class="text-center">
-                        <a  onclick=ShowRightsModal(${data}) class='btn btn-danger text-white' style='cursor:pointer;'>
+                        <a  onclick=ShowRightsModal('${data}') class='btn btn-danger text-white' style='cursor:pointer;'>
                             Rights
                         </a>
                         </div>`;
@@ -275,10 +278,13 @@ var UserDetails = function () {
                     self.UserName(data.responseData.userName)
                     self.LockUnlock(data.responseData.lockUnlock)
                     self.SelectedRole(ko.toJS(self.RoleList()).find(x=> x.RoleId==data.responseData.userRole)?.RoleId);
-                    self.ValidUpto(data.responseData.validdate.substring(0,10))
+                    if (data.responseData.validdate != null) {
+                        self.ValidUpto(data.responseData.validdate.substring(0, 10))
+                    }
                     
                     if (data.isValid) {
                         $('.password').hide();
+                        self.isLDAP = true;
                     }
                    
                 }
@@ -334,8 +340,10 @@ var UserDetails = function () {
             }
         }
 
-        if (Validate.empty(self.ValidUpto())) {
-            errMsg += "Valid Date Cannot be Empty.<br/>"
+        if (self.isLDAP = false) {
+            if (Validate.empty(self.ValidUpto())) {
+                errMsg += "Valid Date Cannot be Empty.<br/>"
+            }
         }
         else {
             var getDate = ko.toJS(self.ValidUpto);

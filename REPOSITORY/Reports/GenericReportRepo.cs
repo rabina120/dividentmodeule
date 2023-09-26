@@ -578,6 +578,7 @@ namespace Repository.Reports
                 aTTTableHeaders.Add(new ATTGenericReport(0.6f, "PSL Kitta", "PLEDGEKITTA"));
                 aTTTableHeaders.Add(new ATTGenericReport(0.6f, "PSL Status.", "PSL Status"));
                 aTTTableHeaders.Add(new ATTGenericReport(1.0f, "PSL At", "pledge_at"));
+                aTTTableHeaders.Add(new ATTGenericReport(1.0f, "PSL Date", "PSL_Date"));
 
 
 
@@ -607,7 +608,7 @@ namespace Repository.Reports
                 aTTTableHeaders.Add(new ATTGenericReport(1.0f, "SRN From", "SRNOFROM"));
                 aTTTableHeaders.Add(new ATTGenericReport(1.0f, "SRN To.", "SRNOTO"));
                 aTTTableHeaders.Add(new ATTGenericReport(1.0f, "PSL Status", "PSL Status"));
-                aTTTableHeaders.Add(new ATTGenericReport(0.6f, "PSL Kitta", "PLEDGEKITTA"));
+                aTTTableHeaders.Add(new ATTGenericReport(1.0f, "PSL Kitta", "PLEDGEKITTA"));
                 if (name == ReportName.PSLReportClearUnposted)
                 {
                     aTTTableHeaders.Add(new ATTGenericReport(1.0f, "App Status", "appstatus_clear"));

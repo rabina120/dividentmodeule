@@ -140,7 +140,7 @@ namespace Repository.Security
 
                         foreach (var menu in menuList)
                         {
-                            dt.Rows.Add(Convert.ToInt32(userId), Convert.ToInt32(menu), "true");
+                            dt.Rows.Add(userId, Convert.ToInt32(menu), "true");
                         }
                         SqlCommand cmd = new SqlCommand("ADD_USER_RIGHTS", connectionU);
                         cmd.CommandType = CommandType.StoredProcedure;
