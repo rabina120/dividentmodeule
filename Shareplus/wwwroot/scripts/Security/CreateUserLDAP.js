@@ -145,25 +145,8 @@ var CreateUserViewModel = function () {
         } if (Validate.empty(self.UserID())) {
             errMsg += "User ID Cannot Be Empty.!!<br/>"
         }
-        if (Validate.empty(self.Password())) {
-            errMsg += "Password Field Cannot Be Empty.!!<br/>"
-        }
-        
-        
         if (Validate.empty(self.SelectedRole())) {
             errMsg += "Select Your User Role.!!<br/>"
-        }
-        if (Validate.empty(self.Validdate())) {
-            errMsg += "Valid Upto Cannot be Empty.!!<br/>"
-        }
-        else {
-            var getDate = ko.toJS(self.Validdate());
-            getDate = new Date(getDate).setHours(0, 0, 0, 0);
-            var todayDate = new Date().setHours(0, 0, 0, 0);
-            if (getDate < todayDate) {
-                errMsg += "Valid Upto Cannot Be A Past Date. <br/>";
-            }
-
         }
 
         if (errMsg !== "") {
@@ -197,7 +180,7 @@ var CreateUserViewModel = function () {
                 'UserId': self.UserID(),
                 'Password': self.Password(),
                 'UserRole': self.SelectedRole(),
-                'Validdate': self.Validdate(),
+                'Validdate': futureDate,
                 'LockUnlock': 0,
                 'CreatedDate': todayDate,
                 'Pw_Change_Alert_Dt': futureDate

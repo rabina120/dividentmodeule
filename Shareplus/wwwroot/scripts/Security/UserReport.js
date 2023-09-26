@@ -110,41 +110,39 @@ var UserRerportViewModel = function () {
 
 //Update Menu Rights to user
 self.Report = function (data) {
-    if (self.Validation()) {
-        Openloader()
-        $.ajax({
-            type: "POST",
-            url: '/Security/UserReport/GenerateReport',
-            data: {
-                'UserName': isSuperAdmin ? self.SelectedUser() : null,
-                'FromDate': self.FromDate(),
-                'ToDate': self.ToDate(),
-                'ReportType' : data
-            }, beforeSend: function (xhr) {
-                xhr.setRequestHeader("XSRF-TOKEN",
-                    $('input:hidden[name="__RequestVerificationToken"]').val());
-            },
-            datatype: "json",
-            success: function (result) {
-                if (result.isSuccess) {
-                    var fileName = result.message;
-                    var a = document.createElement("a");
-                    a.href = "data:application/octet-stream;base64," + result.responseData;
-                    a.download = fileName;
-                    a.click();
-                }
-                else {
-                    alert('error', result.message);
-                }
-            },
-            error: function (error) {
-                alert('error', error.message)
-            },
-            complete: () => {
-                Closeloader()
+    Openloader()
+    $.ajax({
+        type: "POST",
+        url: '/Security/UserReport/GenerateReport',
+        data: {
+            'UserName': isSuperAdmin ? self.SelectedUser() : null,
+            'FromDate': self.FromDate(),
+            'ToDate': self.ToDate(),
+            'ReportType': data
+        }, beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+                $('input:hidden[name="__RequestVerificationToken"]').val());
+        },
+        datatype: "json",
+        success: function (result) {
+            if (result.isSuccess) {
+                var fileName = result.message;
+                var a = document.createElement("a");
+                a.href = "data:application/octet-stream;base64," + result.responseData;
+                a.download = fileName;
+                a.click();
             }
-        });
-    }
+            else {
+                alert('error', result.message);
+            }
+        },
+        error: function (error) {
+            alert('error', error.message)
+        },
+        complete: () => {
+            Closeloader()
+        }
+    });
 }
 }
 $(document).ready(function () {

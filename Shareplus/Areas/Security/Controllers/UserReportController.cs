@@ -56,7 +56,7 @@ namespace CDSMODULE.Areas.Security.Controllers
             JsonResponse response = new JsonResponse();
             if (UserName == null)
                 UserName = _IloggedinUser.GetUserNameToDisplay();
-            string[] reportTitles = { "001", "Standard Chartered Bank", UserName.ToUpper() + "'s Audit Report" };
+            string[] reportTitles = { " ", "PSMS ", (UserName.ToUpper() ?? "All User") + "'s Audit Report" };
             response = _userReport.GenerateReport(UserName, FromDate, ToDate, _IloggedinUser.GetUserIPAddress(), _IloggedinUser.GetUserNameToDisplay(), ReportType);
 
             if (response.HasError)

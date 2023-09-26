@@ -113,7 +113,7 @@ namespace CDSMODULE.Areas.Security.Controllers
                                         claims.Add(new Claim(ClaimTypes.Name, user.UserName.ToUpper(), ClaimValueTypes.String));
                                         claims.Add(new Claim("userType", user.UserType, ClaimValueTypes.String));
                                         claims.Add(new Claim("userRole", user.UserRole, ClaimValueTypes.Integer));
-                                        claims.Add(new Claim("userId", Convert.ToString(user.UserId), ClaimValueTypes.String));
+                                        claims.Add(new Claim("userId", user.UserId, ClaimValueTypes.String));
                                         claims.Add(new Claim("userIpAddress", Request.HttpContext.Connection.RemoteIpAddress.ToString(), ClaimValueTypes.String));
                                         jsonResponse.Token = "login identity";
                                         //new
