@@ -270,38 +270,36 @@ var UserRightsViewModel = function () {
         self.ShowReport('excel')
     }
     self.ShowReport = (type) => {
-        if (self.SelectedRole != undefined || self.SelectedRole != '') {
-            $.ajax({
-                url: '/Security/UserRight/RoleReport', beforeSend: function (xhr) {
-                    xhr.setRequestHeader("XSRF-TOKEN",
-                        $('input:hidden[name="__RequestVerificationToken"]').val());
-                }, data: { 'RoleID': self.SelectedRole(), 'actionType': type },
-                type: 'post',
-                success: function (result) {
-                    if (result.hasError) {
-                        alert('error', result.message)
-                    } else {
-                        if (result.isSuccess) {
-                            var fileName = result.message;
-                            var a = document.createElement("a");
-                            a.href = "data:application/octet-stream;base64," + result.responseData;
-                            a.download = fileName;
-                            a.click();
-                        }
-                        else {
-                            alert('error', result.message);
-                        }
-
-
+        $.ajax({
+            url: '/Security/UserRight/RoleReport', beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            }, data: { 'RoleID': self.SelectedRole(), 'actionType': type },
+            type: 'post',
+            success: function (result) {
+                if (result.hasError) {
+                    alert('error', result.message)
+                } else {
+                    if (result.isSuccess) {
+                        var fileName = result.message;
+                        var a = document.createElement("a");
+                        a.href = "data:application/octet-stream;base64," + result.responseData;
+                        a.download = fileName;
+                        a.click();
+                    }
+                    else {
+                        alert('error', result.message);
                     }
 
 
-                },
-                error: function (error) {
-                   
                 }
-            });
-        }
+
+
+            },
+            error: function (error) {
+
+            }
+        });
     }
 
     self.SelectedUser.subscribe(function () {
