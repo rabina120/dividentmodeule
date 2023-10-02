@@ -53,10 +53,19 @@ namespace CDSMODULE.Areas.Security.Controllers
         [HttpPost]
         public JsonResponse GenerateReport(string FromDate, string ToDate, string ReportType, string UserName = null)
         {
+            string UserNameR;
             JsonResponse response = new JsonResponse();
             if (UserName == null)
-                UserName = _IloggedinUser.GetUserNameToDisplay();
-            string[] reportTitles = { " ", "PSMS ", (UserName.ToUpper() ?? "All User") + "'s Audit Report" };
+            {
+                UserNameR = "All User";
+            }
+            else
+            {
+                UserNameR = UserName;
+            }
+                
+
+            string[] reportTitles = { " ", "PSMS ", UserNameR + "'s Audit Report" };
             response = _userReport.GenerateReport(UserName, FromDate, ToDate, _IloggedinUser.GetUserIPAddress(), _IloggedinUser.GetUserNameToDisplay(), ReportType);
 
             if (response.HasError)
@@ -69,14 +78,14 @@ namespace CDSMODULE.Areas.Security.Controllers
                 {
                     response = _aTTGenericReport.GenerateReport(ATTGenericReport.ReportName.UserAuditReport, response, reportTitles);
                     if (response.IsSuccess)
-                        response.Message = UserName.ToUpper() + "-AuditReport-" + DateTime.Now.ToString("yyyy-MM-dd") + ".pdf";
+                        response.Message = UserNameR + "-AuditReport-" + DateTime.Now.ToString("yyyy-MM-dd") + ".pdf";
 
                 }
                 else
                 {
                     GenericExcelReport report = new GenericExcelReport();
-                    response = report.GenerateExcelReport(response, UserName.ToUpper() + " - AuditReport - " + DateTime.Now.ToString("yyyy - MM - dd"), "", "SCB", "001", null);
-                    response.Message = UserName.ToUpper() + "-AuditReport-" + DateTime.Now.ToString("yyyy-MM-dd") + ".xlsx";
+                    response = report.GenerateExcelReport(response, UserNameR + " - AuditReport - " + DateTime.Now.ToString("yyyy - MM - dd"), "", "SCB", "001", null);
+                    response.Message = UserNameR + "-AuditReport-" + DateTime.Now.ToString("yyyy-MM-dd") + ".xlsx";
                 }
             }
             return response;

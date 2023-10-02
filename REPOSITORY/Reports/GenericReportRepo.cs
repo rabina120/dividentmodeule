@@ -36,19 +36,12 @@ namespace Repository.Reports
             aTTTableHeaders.Add(new ATTGenericReport(0.6f, "SN", "sn"));
             if (name == ReportName.UserAuditReport || name == ReportName.DailyReport)
             {
+                aTTTableHeaders.Add(new ATTGenericReport(1f, "USER Name", "USERNAME"));
                 aTTTableHeaders.Add(new ATTGenericReport(1f, "Form Name", "REFFILE"));
                 aTTTableHeaders.Add(new ATTGenericReport(1f, "Entry Date", "ACTIONDATE"));
                 aTTTableHeaders.Add(new ATTGenericReport(1f, "Entry Time", "ENTRYTIME"));
-                aTTTableHeaders.Add(new ATTGenericReport(1f, "Remarks", "REMARKS"));
-            }
-            if (name == ReportName.DailyReport)
-            {
-                aTTTableHeaders.Add(new ATTGenericReport(1f, "User Name", "username"));
-                aTTTableHeaders.Add(new ATTGenericReport(1f, "Form Name", "reffile"));
-                aTTTableHeaders.Add(new ATTGenericReport(1f, "Entry Date", "actiondate"));
-                aTTTableHeaders.Add(new ATTGenericReport(1f, "Entry Time", "entrytime"));
                 aTTTableHeaders.Add(new ATTGenericReport(1f, "IPAddress", "ipaddress"));
-                aTTTableHeaders.Add(new ATTGenericReport(1f, "Remarks", "remarks"));
+                aTTTableHeaders.Add(new ATTGenericReport(1f, "Remarks", "REMARKS"));
             }
             if (name == ReportName.ListUnPaidDividendWarrantPhysicalPosted
                 || name == ReportName.ListUnPaidDividendWarrantPhysicalUnposted
