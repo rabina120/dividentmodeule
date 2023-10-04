@@ -329,7 +329,7 @@ namespace Repository.CDS
                                     {
                                         jsonResponse.IsSuccess = true;
                                         jsonResponse.ResponseData = reader.GetInt32(1);
-                                        jsonResponse.Message = ATTMessages.CERTIFICATE.DEMATE_ENTRY + "\n with Demate Reg No : " + reader.GetInt32(1);
+                                        jsonResponse.Message = ATTMessages.CERTIFICATE.DEMATE_ENTRY + "\n with Reg No : " + reader.GetInt32(1);
                                     }
                                     else
                                     {

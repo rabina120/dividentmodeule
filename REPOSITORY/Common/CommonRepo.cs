@@ -434,15 +434,32 @@ namespace Repository.Common
             }
             else
             {
-                try
-                {
-                    Directory.Delete(newPath, true);
-                    Directory.CreateDirectory(newPath);
-                }
-                catch
-                {
+                // Get a list of all files in the directory
+                string[] files = Directory.GetFiles(newPath);
 
+                foreach (string file in files)
+                {
+                    try
+                    {
+                        
+                        File.Delete(file);
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
                 }
+
+
+                //try
+                //{
+                //    Directory.Delete(newPath, true);
+                //    Directory.CreateDirectory(newPath);
+                //}
+                //catch
+                //{
+
+                //}
             }
             byte[] pdfBytes = Convert.FromBase64String((string)data);
 

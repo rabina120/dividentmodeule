@@ -679,6 +679,7 @@ namespace Repository.Reports
                     aTTTableHeaders.Add(new ATTGenericReport(0.6f, "DRN", "drn"));
                     aTTTableHeaders.Add(new ATTGenericReport(0.6f, "Entry By", "entryBy"));
                     aTTTableHeaders.Add(new ATTGenericReport(0.6f, "Entry Date", "entryDate"));
+                    aTTTableHeaders.Add(new ATTGenericReport(0.6f, "Request Date", "tranDate"));
                     aTTTableHeaders.Add(new ATTGenericReport(0.6f, "BOID", "boid"));
                     aTTTableHeaders.Add(new ATTGenericReport(0.6f, "ISIN", "isin"));
                     aTTTableHeaders.Add(new ATTGenericReport(0.6f, "DP", "dp"));
