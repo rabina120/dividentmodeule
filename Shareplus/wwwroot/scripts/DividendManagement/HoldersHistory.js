@@ -279,6 +279,11 @@ var HoldersHistory = function () {
 
                         });
 
+                    }, exportOptions: {
+                        columns: self.ShareTypeBasedOn() === 'D' ?
+                            [0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] :
+                            [0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
                     }, messageTop: function () {
                         return "Name: " + self.Name() + " || Address: " + self.Address();
                     }
@@ -311,41 +316,41 @@ var HoldersHistory = function () {
                         return "Name: " + self.Name() + " || Address: " + self.Address() + holderBoid + self.ShholderNo();
                     }
                 }
-                //, {
-                //    extend: 'pdfHtml5', pageSize: 'letter',
-                //    text: 'PDF', orientation: 'landscape',
-                //    customize: function (doc) {
-                //        doc.content.splice(0, 0, {
-                //            margin: [0, 0, 0, 0],
-                //            alignment: 'left',
-                //            image: LogoForPDF,
-                //            fit: [80, 80]
-                //        });
-                //        doc.content.splice(1, 0, {
-                //            margin: [0, 0, 0, 0],
-                //            alignment: 'center',
-                //            text: "Dividend History"
+                , {
+                    extend: 'pdfHtml5', pageSize: 'letter',
+                    text: 'PDF', orientation: 'landscape',
+                    customize: function (doc) {
+                        doc.content.splice(0, 0, {
+                            margin: [0, 0, 0, 0],
+                            alignment: 'left',
+                            image: LogoForPDF,
+                            fit: [80, 80]
+                        });
+                        doc.content.splice(1, 0, {
+                            margin: [0, 0, 0, 0],
+                            alignment: 'center',
+                            text: "Dividend History"
 
-                //        });
+                        });
                         
-                //    }, exportOptions: {
-                //        columns: [0, 1, 2, 3,  7,14, 15, 16]
+                    }, exportOptions: {
+                        columns: self.ShareTypeBasedOn() === 'D' ?
+                            [0, 1, 2, 3, 5, 6, 12, 15, 16, 17] :
+                            [0, 1, 2, 3, 4, 6, 12, 15, 16, 17]
                  
-                //    }, messageTop: function () {
-                //        var holderBoid;
-                //        if (self.ShareTypeBasedOn() == 'D') { holderBoid = " || BOID : " }
-                //        else { holderBoid = " || HolderNo: " }
-                //        return "Name: " + self.Name() + " || Address: " + self.Address() + holderBoid + self.ShholderNo();
-                //    }
-                //}
-            ], lengthMenu: [
-                [10, 25, 50, -1],
-                [10, 25, 50, 'All'],
+                    }, messageTop: function () {
+                        var holderBoid;
+                        if (self.ShareTypeBasedOn() == 'D') { holderBoid = " || BOID : " }
+                        else { holderBoid = " || HolderNo: " }
+                        return "Name: " + self.Name() + " || Address: " + self.Address() + holderBoid + self.ShholderNo();
+                    }
+                }
             ]
         })
     }
     self.LoadBonusTable()
     self.LoadDividendTable()
+
 }
 
 

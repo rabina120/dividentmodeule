@@ -424,54 +424,57 @@ namespace Repository.Common
         {
             JsonResponse response = new JsonResponse();
 
-            string folderName = "PDFReports";
-            string webRootPath = _webHostEnvironment.WebRootPath;
-            string newPath = Path.Combine(webRootPath, folderName);
-
-            if (!Directory.Exists(newPath))
+            if(data != null)
             {
-                Directory.CreateDirectory(newPath);
-            }
-            else
-            {
-                // Get a list of all files in the directory
-                string[] files = Directory.GetFiles(newPath);
+                string folderName = "PDFReports";
+                string webRootPath = _webHostEnvironment.WebRootPath;
+                string newPath = Path.Combine(webRootPath, folderName);
 
-                foreach (string file in files)
+                if (!Directory.Exists(newPath))
                 {
-                    try
+                    Directory.CreateDirectory(newPath);
+                }
+                else
+                {
+                    // Get a list of all files in the directory
+                    string[] files = Directory.GetFiles(newPath);
+
+                    foreach (string file in files)
                     {
-                        
-                        File.Delete(file);
+                        try
+                        {
+
+                            File.Delete(file);
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        
-                    }
+
+
+                    //try
+                    //{
+                    //    Directory.Delete(newPath, true);
+                    //    Directory.CreateDirectory(newPath);
+                    //}
+                    //catch
+                    //{
+
+                    //}
+                }
+                byte[] pdfBytes = Convert.FromBase64String((string)data);
+
+                string pdfFilePath = Path.Combine(newPath, DateTime.Now.ToString("dd-MM-yyyy hh_mm_s_tt") + "Report.pdf");
+
+                using (FileStream fs = new FileStream(pdfFilePath, FileMode.Create, FileAccess.Write))
+                {
+                    fs.Write(pdfBytes, 0, pdfBytes.Length);
                 }
 
-
-                //try
-                //{
-                //    Directory.Delete(newPath, true);
-                //    Directory.CreateDirectory(newPath);
-                //}
-                //catch
-                //{
-
-                //}
+                response.IsSuccess = true;
+                response.Message = "/PDFReports/" + Path.GetFileName(pdfFilePath);
             }
-            byte[] pdfBytes = Convert.FromBase64String((string)data);
-
-            string pdfFilePath = Path.Combine(newPath, DateTime.Now.ToString("dd-MM-yyyy hh_mm_s_tt") + "Report.pdf");
-
-            using (FileStream fs = new FileStream(pdfFilePath, FileMode.Create, FileAccess.Write))
-            {
-                fs.Write(pdfBytes, 0, pdfBytes.Length);
-            }
-
-            response.IsSuccess = true;
-            response.Message = "/PDFReports/" + Path.GetFileName(pdfFilePath);
 
             return response;
         }
