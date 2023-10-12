@@ -66,7 +66,7 @@ namespace CDSMODULE.Areas.Reports.Controllers
             {
                 jsonResponseToReturn = _certificateReport.CertificateSplitReport(ReportData,jsonResponse, _hostingEnvironment.WebRootPath);
                 
-                jsonResponseToReturn.ResponseData = _common.SaveGetPdfReport(jsonResponseToReturn.ResponseData);
+                //jsonResponseToReturn.ResponseData = _common.SaveGetPdfReport(jsonResponseToReturn.ResponseData);
             }
 
             else

@@ -471,7 +471,7 @@ namespace Repository.Common
                 {
                     fs.Write(pdfBytes, 0, pdfBytes.Length);
                 }
-
+                response.ResponseData = data;
                 response.IsSuccess = true;
                 response.Message = "/PDFReports/" + Path.GetFileName(pdfFilePath);
             }

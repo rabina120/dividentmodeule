@@ -146,7 +146,7 @@ namespace CDSMODULE.Areas.Reports.Controllers
                             response = _genericReport.GenerateReport((ReportName)Enum.Parse(typeof(ReportName), SelectedReportName), response, reportTitles,false,true, reportTotals);
                             if (response.IsSuccess)
                             {
-                                response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
+                                //response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                                 response.Message = CompCode + "_" + SelectedReportName + "_" + DateTime.Now.ToString("yyyy-MM-dd") + ".pdf";
                             }
 

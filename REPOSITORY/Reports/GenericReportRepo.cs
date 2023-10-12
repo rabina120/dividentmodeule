@@ -280,8 +280,6 @@ namespace Repository.Reports
                 aTTTableHeaders.Add(new ATTGenericReport(1.25f, "Grand Father's Name", "grandfathername"));
                 aTTTableHeaders.Add(new ATTGenericReport(1f, "Telephone No", "telno"));
                 aTTTableHeaders.Add(new ATTGenericReport(1f, "No of Shares", "totalkitta"));
-                aTTTableHeaders.Add(new ATTGenericReport(1.5f, "Account No", "AccountNo"));
-                aTTTableHeaders.Add(new ATTGenericReport(1.5f, "Bank Name", "BankName"));
             }
             if (name == ReportName.ShareHolderShareHolderListInNepali)
             {

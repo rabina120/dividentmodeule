@@ -161,7 +161,7 @@ namespace CDSMODULE.Areas.Reports.Controllers
                     jsonResponse = _genericReport.GenerateReport(Title , jsonResponse, reportTitles, false, true, reportTotals);
                     if (jsonResponse.IsSuccess)
                     {
-                        jsonResponse.ResponseData = _common.SaveGetPdfReport(jsonResponse.ResponseData);
+                        //jsonResponse.ResponseData = _common.SaveGetPdfReport(jsonResponse.ResponseData);
                         jsonResponse.Message = Enum.GetName(Title.GetType(), Title) + DateTime.Now.ToString("yyyy_mm_dd") + ".pdf";
                     }
                         

@@ -64,7 +64,7 @@ namespace CDSMODULE.Areas.Reports.Controllers
                 response = _genericReport.GenerateReport(ATTGenericReport.ReportName.DailyReport, response, reportTitles);
                 if (response.IsSuccess)
                 {
-                    response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
+                    //response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                     response.Message = "AuditReport-" + DailyReportDate + ".pdf";
                 }
                     

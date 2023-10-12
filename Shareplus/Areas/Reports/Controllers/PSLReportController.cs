@@ -170,7 +170,7 @@ namespace CDSMODULE.Areas.Reports.Controllers
                     }
                 }
             }
-            response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
+            //response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
 
             return response;
         }

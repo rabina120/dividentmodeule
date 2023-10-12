@@ -90,7 +90,7 @@ namespace Shareplus.Areas.Reports.Controllers
                 response = _genericReport.GenerateReport(Title, response, reportTitles);
                 if (response.IsSuccess)
                 {
-                    response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
+                    //response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                     response.Message = Compcode + "_" + type + Enum.GetName(Title.GetType(), Title) + "_" + DateTime.Now.ToString("yyyy_mm_dd") + ".pdf";
                 }
             }

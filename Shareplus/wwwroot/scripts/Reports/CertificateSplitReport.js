@@ -73,7 +73,7 @@ var CertificateSplitReport = function () {
                 Openloader()
                 var ReportData = {
                     "CompCode": self.SelectedCompany(),
-                    "CompEnName": localStorage.getItem('company-name'),
+                    "CompEnName": self.CompanyDetails().find(x => x.CompCode() == self.SelectedCompany()).CompEnName(),
                     "DataType": self.SelectedDataType(),
                     "SplitDateFrom": self.SplitDateFrom(),
                     "SplitDateTo": self.SplitDateTo(),
@@ -98,21 +98,26 @@ var CertificateSplitReport = function () {
                     dataType: "json",
                     success: (result) => {
                         if (result.isSuccess) {
-                            var x = window.open();
-                            if (x) {
-                                x.document.open();
-                                x.document.write('<iframe width="100%" height="100%" src="' + result.responseData.message + '"></iframe>');
-                                x.document.title = result.message;
-                                x.document.close();
-                            } else {
-                                alert('warning', 'Failed to Open Pdf File.');
-                                alert('success', 'Downloading Pdf File.');
-                                var fileName = result.message;
-                                var a = document.createElement("a");
-                                a.href = result.responseData.message;
-                                a.download = fileName;
-                                a.click();
-                            }
+                            var fileName = result.message;
+                            var a = document.createElement("a");
+                            a.href = "data:application/octet-stream;base64," + result.responseData;
+                            a.download = fileName;
+                            a.click();
+                            //var x = window.open();
+                            //if (x) {
+                            //    x.document.open();
+                            //    x.document.write('<iframe width="100%" height="100%" src="' + result.responseData.message + '"></iframe>');
+                            //    x.document.title = result.message;
+                            //    x.document.close();
+                            //} else {
+                            //    alert('warning', 'Failed to Open Pdf File.');
+                            //    alert('success', 'Downloading Pdf File.');
+                            //    var fileName = result.message;
+                            //    var a = document.createElement("a");
+                            //    a.href = result.responseData.message;
+                            //    a.download = fileName;
+                            //    a.click();
+                            //}
                         } else {
                             alert('error', result.message)
                         }
@@ -148,12 +153,12 @@ self.Validation = function (data) {
     if (Validate.empty(self.FromSystem())) {
         errMsg += "Please Select A System. <br/>";
     }
-    if (Validate.empty(self.SplitDateFrom())) {
-        errMsg += "Please Enter Split Date From. <br/>";
-    }
-    if (Validate.empty(self.SplitDateTo())) {
-        errMsg += "Please Enter Split Date To. <br/>";
-    }
+    //if (Validate.empty(self.SplitDateFrom())) {
+    //    errMsg += "Please Enter Split Date From. <br/>";
+    //}
+    //if (Validate.empty(self.SplitDateTo())) {
+    //    errMsg += "Please Enter Split Date To. <br/>";
+    //}
     if (errMsg == "") {
         return true;
     } else {

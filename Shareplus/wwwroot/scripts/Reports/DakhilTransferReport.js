@@ -154,13 +154,18 @@ function DakhilTransferReportViewModel() {
                             x.document.title = result.message;
                             x.document.close();
                         } else {
-                            alert('warning', 'Failed to Open Pdf File.');
-                            alert('success', 'Downloading Pdf File.');
                             var fileName = result.message;
                             var a = document.createElement("a");
-                            a.href = result.responseData.message;
+                            a.href = "data:application/octet-stream;base64," + result.responseData;
                             a.download = fileName;
                             a.click();
+                        //    alert('warning', 'Failed to Open Pdf File.');
+                        //    alert('success', 'Downloading Pdf File.');
+                        //    var fileName = result.message;
+                        //    var a = document.createElement("a");
+                        //    a.href = result.responseData.message;
+                        //    a.download = fileName;
+                        //    a.click();
                         }
                     }
                     else {

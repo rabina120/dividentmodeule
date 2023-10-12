@@ -7,8 +7,8 @@
         public string CompEnName { get; set; }
         public string SelectedAction { get; set; }
         public string DataType { get; set; }
-        public string SplitDateFrom { get; set; }
-        public string SplitDateTo { get; set; }
+        public string? SplitDateFrom { get; set; }
+        public string? SplitDateTo { get; set; }
         public int? HolderNoFrom { get; set; }
         public int? HolderNoTo { get; set; }
         public string Split_NO { get; set; }
