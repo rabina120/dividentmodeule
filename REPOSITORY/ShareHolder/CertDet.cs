@@ -43,10 +43,14 @@ namespace Repository.ShareHolder
 
                             var sql2 = "SELECT PSLNo,TranDt,EntryUser,remark as remarks FROM CERTSPL where certno = " + aTTCertDet.CertNo + "and status = 'A' and compcode = " + compcode;
                             ATTCertDet aTTCertDetPSL = connection.Query<ATTCertDet>(sql: sql2, param: null, null, commandType: null)?.FirstOrDefault();
-                            aTTCertDet.pslno = aTTCertDetPSL.pslno;
-                            aTTCertDet.TranDt = aTTCertDetPSL.TranDt;
-                            aTTCertDet.entryuser = aTTCertDetPSL.entryuser;
-                            aTTCertDet.Remarks = aTTCertDetPSL.Remarks;
+                            if(aTTCertDetPSL != null)
+                            {
+                                aTTCertDet.pslno = aTTCertDetPSL.pslno;
+                                aTTCertDet.TranDt = aTTCertDetPSL.TranDt;
+                                aTTCertDet.entryuser = aTTCertDetPSL.entryuser;
+                                aTTCertDet.Remarks = aTTCertDetPSL.Remarks;
+                            }
+                            
                         }
 
                         if (aTTCertDet.DupliNo > 0)

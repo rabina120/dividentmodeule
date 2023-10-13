@@ -115,7 +115,7 @@ namespace CDSMODULE.Areas.Certificate.Controllers
 
                     if (response.IsSuccess)
                     {
-                        response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
+                        //response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                         response.Message = ReportDataForAllCertificate.CompCode + "_" + "AllCertificateList" + "_" + DateTime.Now.ToString("yyyy-MM-dd") + ".pdf";
                     }
 
@@ -183,7 +183,7 @@ namespace CDSMODULE.Areas.Certificate.Controllers
 
                     if (response.IsSuccess)
                     {
-                        response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
+                        //response.ResponseData = _common.SaveGetPdfReport(response.ResponseData);
                         response.Message = ReportDataDistributedCertificatesList.CompEnName + "_" + SelectedAction == "D" ? "DistributedCertificateList" : "UnDistributedCertificateList" + "_" + DateTime.Now.ToString("yyyy-MM-dd") + ".pdf";
                     }
                 }
