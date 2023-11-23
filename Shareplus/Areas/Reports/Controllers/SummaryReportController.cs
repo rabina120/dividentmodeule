@@ -451,9 +451,9 @@ namespace CDSMODULE.Areas.Reports.Controllers
                             fs.Dispose();
                         }
 
-                        jsonResponse.ResponseData = _common.SaveGetPdfReport(jsonResponseToReturn.ResponseData);
-                        jsonResponse.Message = jsonResponseToReturn.Message;
-                        return jsonResponse;
+                        //jsonResponse.ResponseData = _common.SaveGetPdfReport(jsonResponseToReturn.ResponseData);
+                        //jsonResponse.Message = jsonResponseToReturn.Message;
+                        return jsonResponseToReturn;
                     }
                 }
                 else
