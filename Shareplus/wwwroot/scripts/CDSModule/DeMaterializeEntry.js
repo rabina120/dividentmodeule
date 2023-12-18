@@ -446,7 +446,7 @@ var DeMaterializeEntry = function () {
     self.SelectedCompany.subscribe(function () {
         
         self.GetAllParacompChild();
-       
+        self.GetBonusIssueList();
 
     })
     self.SelectedISINNO.subscribe(function () {

@@ -19,6 +19,7 @@ namespace Entity.Dividend
         public double? bonustax { get; set; }
         public double? bonusadj { get; set; }
         public double? prevadj { get; set; }
+        public double NetAmount { get; set; }
         public float? TotShKitta { get; set; }
         public bool? WIssued { get; set; }
         public string WIssuedDt { get; set; }

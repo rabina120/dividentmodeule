@@ -31,6 +31,8 @@ function CashDividend(data) {
         self.Taxdamt = ko.observable(data.taxDamt)
         self.Bonustax = ko.observable(data.bonustax)
         self.Bonusadj = ko.observable(data.bonusadj)
+        self.Prevadj = ko.observable(data.prevadj)
+        self.NetAmount = ko.observable(data.netAmount)
         self.Totshkitta = ko.observable(data.totShKitta)
         self.Dwiby = ko.observable(data.dwiby)
         self.Wissueddt = ko.observable(convertDate(data.wIssuedDt))
@@ -63,23 +65,25 @@ var CashDividendIssuePosting = function () {
     //CashDividend Request
     self.compcode = ko.observable();
     self.Divcode = ko.observable();
-    self.Wissue_Approved = ko.observable()
-    self.Shholderno = ko.observable()
-    self.AgmNo = ko.observable()
-    self.WarrantNo = ko.observable()
-    self.WarrantAmt = ko.observable()
-    self.Taxdamt = ko.observable()
-    self.Bonustax = ko.observable()
-    self.Bonusadj = ko.observable()
-    self.Totshkitta = ko.observable()
-    self.Dwiby = ko.observable()
-    self.Wissueddt = ko.observable()
-    self.Bonusadj = ko.observable()
-    self.Totshkitta = ko.observable()     
-    self.FName = ko.observable()
-    self.LName = ko.observable()
+    self.Wissue_Approved = ko.observable();
+    self.Shholderno = ko.observable();
+    self.AgmNo = ko.observable();
+    self.WarrantNo = ko.observable();
+    self.WarrantAmt = ko.observable();
+    self.Taxdamt = ko.observable();
+    self.Bonustax = ko.observable();
+    self.Bonusadj = ko.observable();
+    self.Prevadj = ko.observable();
+    self.NetAmount = ko.observable();
+    self.Totshkitta = ko.observable();
+    self.Dwiby = ko.observable();
+    self.Wissueddt = ko.observable();
+    self.Bonusadj = ko.observable();
+    self.Totshkitta = ko.observable();
+    self.FName = ko.observable();
+    self.LName = ko.observable();
 
-    self.CashDividendList = ko.observable([])
+    self.CashDividendList = ko.observable([]);
 
     //posting
     self.dateFrom = ko.observable();
