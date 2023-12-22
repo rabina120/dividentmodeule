@@ -20,6 +20,7 @@
         public double? bonustax { get; set; }
         public double? bonusadj { get; set; }
         public decimal? prevadj { get; set; }
+        public double NetAmount { get; set; }
         public double? totshkitta { get; set; }
         public bool WIssued { get; set; }
 

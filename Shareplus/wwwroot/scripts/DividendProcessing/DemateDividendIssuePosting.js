@@ -34,9 +34,16 @@ function CashDividendCDS(data) {
         self.Bonustax = ko.observable(data.bonustax)
         self.Bonusadj = ko.observable(data.bonusadj)
         self.Prevadj = ko.observable(data.prevadj)
+        self.NetAmount = ko.observable(data.netAmount)
         self.Totshkitta = ko.observable(data.totshkitta)
         self.Dwiby = ko.observable(data.dwiby)
-        self.Wissueddt = ko.observable(convertDate(data.wIssuedDt))
+        if (data.wIssuedDt == null || data.wIssuedDt == '') {
+            self.Wissueddt = ko.observable('')
+        }
+        else {
+
+            self.Wissueddt = ko.observable(convertDate(data.wIssuedDt))
+        }
         self.wissue_status = ko.observable(data.wissue_status)
         self.FullName = ko.observable(data.fullname)
         self.FName = ko.observable(data.fName)

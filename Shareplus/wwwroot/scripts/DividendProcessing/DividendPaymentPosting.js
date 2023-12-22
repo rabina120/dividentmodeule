@@ -30,11 +30,19 @@ function CashDividend(data) {
         self.WarrantAmt = ko.observable(data.warrantAmt)
         self.Taxdamt = ko.observable(data.taxDamt)
         self.Bonustax = ko.observable(data.bonustax)
+        self.NetAmount = ko.observable(data.netAmount)
         self.Bonusadj = ko.observable(data.bonusadj)
+        self.Prevadj = ko.observable(data.prevadj)
         self.Totshkitta = ko.observable(data.totShKitta)
         self.Dwiby = ko.observable(data.dwiby)
-        self.Wissueddt = ko.observable(convertDate(data.wIssuedDt))
-        self.Bonusadj = ko.observable(data.bonusadj)
+        //self.Wissueddt = ko.observable(convertDate(data.wIssuedDt))
+        if (data.wIssuedDt == null || data.wIssuedDt == '') {
+            self.Wissueddt = ko.observable('')
+        }
+        else {
+
+            self.Wissueddt = ko.observable(convertDate(data.wIssuedDt))
+        }
         self.Wissue_approvedby = ko.observable(data.wissue_approvedby)
         self.FName = ko.observable(data.attShholder.fName)
         self.LName = ko.observable(data.attShholder.lName)

@@ -21,8 +21,8 @@
         public double? bonusadj { get; set; }
         public decimal? prevadj { get; set; }
         public double? totshkitta { get; set; }
+        public double NetAmount { get; set; }
         public bool WIssued { get; set; }
-
         public string WIssuedDt { get; set; }
         public string dwiby { get; set; }
         public string CenterId { get; set; }

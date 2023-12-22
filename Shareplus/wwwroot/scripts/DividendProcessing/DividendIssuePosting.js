@@ -35,7 +35,14 @@ function CashDividend(data) {
         self.NetAmount = ko.observable(data.netAmount)
         self.Totshkitta = ko.observable(data.totShKitta)
         self.Dwiby = ko.observable(data.dwiby)
-        self.Wissueddt = ko.observable(convertDate(data.wIssuedDt))
+        // self.Wissueddt = ko.observable(convertDate(data.wIssuedDt))
+        if (data.wIssuedDt == null || data.wIssuedDt == '') {
+            self.Wissueddt = ko.observable('')
+        }
+        else {
+
+            self.Wissueddt = ko.observable(convertDate(data.wIssuedDt))
+        }
         self.Bonusadj = ko.observable(data.bonusadj)
         
         self.FName = ko.observable(data.attShholder.fName)

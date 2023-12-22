@@ -22,10 +22,20 @@ function DemateDividendCDS(data) {
         self.WarrantNo = ko.observable(data.warrantno)
         self.WarrantAmt = ko.observable(data.warrantamt)
         self.Taxdamt = ko.observable(convertToFixTwo(data.taxdamt))
-        self.Bonustax = ko.observable(data.bonustax)           
+        self.Bonustax = ko.observable(data.bonustax)
+        self.Bonusadj = ko.observable(data.bonusadj)
+        self.Prevadj = ko.observable(data.prevadj)
+        self.NetAmount = ko.observable(data.netAmount)
         self.Totshkitta = ko.observable(data.totshkitta)
         self.Dwiby = ko.observable(data.dwiby)
-        self.Wissueddt = ko.observable(convertDate(data.wIssuedDt))
+        if (data.wIssuedDt == null || data.wIssuedDt == '') {
+            self.Wissueddt = ko.observable('')
+        }
+        else {
+
+            self.Wissueddt = ko.observable(convertDate(data.wIssuedDt))
+        }
+
         self.wpaid_status = ko.observable(data.wpaid_status)
         self.FullName = ko.observable(data.fullname)
         self.FName = ko.observable(data.fName)
