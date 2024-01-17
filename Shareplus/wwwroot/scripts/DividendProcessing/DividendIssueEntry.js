@@ -509,9 +509,9 @@ var CashCashDividendIssueEntryEntry = function () {
                         var something = parseInt(result.responseData.centerid);
 
                         self.SelectedPaymentCenter(self.PaymentCenters().find(x => x.CenterId() == result.responseData.centerid));
-                        if (self.SelectedPaymentCenter() != null) {
-                            document.getElementById("select2-payCenterSelect-container").innerHTML = ko.toJS(self.SelectedPaymentCenter().PaymentDisplayName)
-                        }
+                        //if (self.SelectedPaymentCenter() != null) {
+                        //    document.getElementById("select2-payCenterSelect-container").innerHTML = ko.toJS(self.SelectedPaymentCenter.PaymentDisplayName)
+                        //}
                         //var paidBy = result.responseData.cashOrTran == '1' ? "Cash" : "Cheque";
                         self.PaidBy(result.responseData.cashOrTran);
                         self.IsPaidBy(result.responseData.wPaid == null ? false : result.responseData.wPaid)

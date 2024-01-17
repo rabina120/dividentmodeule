@@ -311,7 +311,7 @@ var DemateDividendPaymentEntry = function () {
                             'CompCode': self.SelectedCompany(),
                             'bankName': self.bankName(),
                             'accountNo': self.accountNo(),
-                            'centerid': self.SelectedPaymentCenter().CenterId,
+                            'centerid': self.SelectedPaymentCenter(),
                             'remarks': self.remarks(),
                             'Payment': self.Payment(),
                             'PayUser': self.PayUser(),
@@ -493,18 +493,20 @@ var DemateDividendPaymentEntry = function () {
     self.validateBeforeSave = function () {
         var errMsg = "";
 
-        if (Validate.empty(self.SelectedPaymentCenter())) {
-            errMsg += "Please Select Payment Center !!!</br>";
+        if (self.SelectedAction() == "A") {
+            if (Validate.empty(self.SelectedPaymentCenter())) {
+                errMsg += "Please Select Payment Center !!!</br>";
 
-        }
-        if (Validate.empty(self.remarks())) {
-            errMsg += "Please Enter Remarks !!!</br>";
+            }
+            if (Validate.empty(self.remarks())) {
+                errMsg += "Please Enter Remarks !!!</br>";
 
-        }
-        if (Validate.empty(self.bankName())) {
-            errMsg += "Please Add Bank Name !!!</br>";
-        } if (Validate.empty(self.accountNo())) {
-            errMsg += "Please Add Account No !!!</br>";
+            }
+            if (Validate.empty(self.bankName())) {
+                errMsg += "Please Add Bank Name !!!</br>";
+            } if (Validate.empty(self.accountNo())) {
+                errMsg += "Please Add Account No !!!</br>";
+            }
         }
         if (errMsg !== "") {
             alert('error', errMsg);
