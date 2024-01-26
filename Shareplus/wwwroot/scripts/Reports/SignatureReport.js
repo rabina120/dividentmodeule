@@ -108,7 +108,7 @@ var SignatureReport = function () {
             var companyCode = self.SelectedCompany()
             $.ajax({
                 type: "post",
-                url: '/SignatureHandling/SignatureReport/GenerateReport',
+                url: '/Reports/SignatureReport/GenerateReport',
                 data: {
                     'CompCode': companyCode,
                     'DateFrom': self.DateFrom(),

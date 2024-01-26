@@ -38,7 +38,7 @@
                                 <div class="form-group row col-md-4">
                                     <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
                                     <div class="col-sm-12 col-md-11">
-                                        <select class="form-control form-control-sm" disabled="disabled" id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                        <select class="form-control form-control-sm"  id="Company" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
                                         </select>
                                     </div>
                                 </div>
@@ -126,5 +126,5 @@
 
 @section Footer{
 <script src="~/vendor/sweetalert/sweet-alert.js"></script>
-<script src="~/scripts/SignatureHandling/SignatureReport.js"></script>
+<script src="~/scripts/Reports/SignatureReport.js"></script>
 }
