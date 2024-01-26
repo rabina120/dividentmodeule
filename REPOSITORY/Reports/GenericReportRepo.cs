@@ -1116,7 +1116,7 @@ namespace Repository.Reports
                                     var totVal = ReportTotalBasedOn.Find(x => x.TotalIndex == j);
                                     if (totVal != null)
                                     {
-                                        totVal.CalculateTotal = totVal.CalculateTotal + float.Parse(dataListValue[headings[index]].ToString());
+                                        totVal.CalculateTotal = totVal.CalculateTotal + decimal.Parse(dataListValue[headings[index]].ToString());
                                     }
                                 }
                                 ReportsCellConfig.CreateCell(table, dataListValue[headings[index]] == null ? "---" : dataListValue[headings[index]].ToString(), fontNormalNew, horizontalAlignment: PdfPCell.ALIGN_CENTER, verticalAllignment: PdfPCell.ALIGN_CENTER);

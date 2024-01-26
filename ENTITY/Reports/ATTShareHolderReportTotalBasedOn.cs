@@ -4,7 +4,7 @@
     {
         public string TotalBasedOn { get; set; }
         public string Location { get; set; }
-        public float CalculateTotal { get; set; }
+        public decimal CalculateTotal { get; set; }
         public int TotalIndex { get; set; }
 
     }
