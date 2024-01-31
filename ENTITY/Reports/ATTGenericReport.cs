@@ -92,7 +92,8 @@
             DematDrnReport,
             RematSummaryReport,
             RematDetailReport,
-            RematDrnReport
+            RematDrnReport,
+            SignatureReport
 
 
 

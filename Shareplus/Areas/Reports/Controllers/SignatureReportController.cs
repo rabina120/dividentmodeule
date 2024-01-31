@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Repository.Reports;
+using System;
 
 namespace CDSMODULE.Areas.Reports.Controllers
 {
@@ -51,7 +53,29 @@ namespace CDSMODULE.Areas.Reports.Controllers
         [HttpPost]
         public JsonResponse GenerateReport(string CompCode, string SelectedAction, string DateFrom = null, string DateTo = null, string HolderFrom = null, string HolderTo = null)
         {
-            return _signatureReport.GenerateReport(CompCode, _loggedInUser.GetUserNameToDisplay(), SelectedAction, _loggedInUser.GetUserIPAddress(), DateFrom, DateTo, HolderFrom, HolderTo);
+            JsonResponse response= new JsonResponse();
+            var dataResponse= _signatureReport.GenerateReport(CompCode, _loggedInUser.GetUserNameToDisplay(), SelectedAction, _loggedInUser.GetUserIPAddress(), DateFrom, DateTo, HolderFrom, HolderTo);
+            if (SelectedAction=="E")
+            {
+                GenericExcelReport report = new GenericExcelReport();
+                response = report.GenerateExcelReport(response, "DuplicateCertificateList", "DCL", CompEnName, CompCode, "");
+
+                if (response.IsSuccess)
+                    response.Message = CompCode + "_" + "DuplicateCertificateList" + "_" + DateTime.Now.ToString("yyyy-MM-dd") + ".xlsx";
+            }
+            else
+            {
+                string[] reportTitles = { CompCode, CompEnName, type + Enum.GetName(Title.GetType(), Title) };
+
+                
+                    response = _genericReport.GenerateReport(Title, response, reportTitles);
+                    if (response.IsSuccess)
+                    {
+                        response.Message = CompCode + "_" + type + Enum.GetName(Title.GetType(), Title) + "_" + DateTime.Now.ToString("yyyy_mm_dd") + ".pdf";
+                    }
+                
+            }
+            return response;
         }
     }
 }

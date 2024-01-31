@@ -726,6 +726,11 @@ namespace Repository.Reports
                 }
                 
             }
+            if(name==ReportName.SignatureReport)
+            {
+                aTTTableHeaders.Add(new ATTGenericReport(0.4f, "Rev No", "reversalNo"));
+
+            }
 
             return aTTTableHeaders;
         }
