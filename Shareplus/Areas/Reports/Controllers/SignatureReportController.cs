@@ -55,26 +55,26 @@ namespace CDSMODULE.Areas.Reports.Controllers
         {
             JsonResponse response= new JsonResponse();
             var dataResponse= _signatureReport.GenerateReport(CompCode, _loggedInUser.GetUserNameToDisplay(), SelectedAction, _loggedInUser.GetUserIPAddress(), DateFrom, DateTo, HolderFrom, HolderTo);
-            if (SelectedAction=="E")
-            {
-                GenericExcelReport report = new GenericExcelReport();
-                response = report.GenerateExcelReport(response, "DuplicateCertificateList", "DCL", CompEnName, CompCode, "");
+            //if (SelectedAction=="E")
+            //{
+            //    GenericExcelReport report = new GenericExcelReport();
+            //    response = report.GenerateExcelReport(response, "DuplicateCertificateList", "DCL", CompEnName, CompCode, "");
 
-                if (response.IsSuccess)
-                    response.Message = CompCode + "_" + "DuplicateCertificateList" + "_" + DateTime.Now.ToString("yyyy-MM-dd") + ".xlsx";
-            }
-            else
-            {
-                string[] reportTitles = { CompCode, CompEnName, type + Enum.GetName(Title.GetType(), Title) };
+            //    if (response.IsSuccess)
+            //        response.Message = CompCode + "_" + "DuplicateCertificateList" + "_" + DateTime.Now.ToString("yyyy-MM-dd") + ".xlsx";
+            //}
+            //else
+            //{
+            //    string[] reportTitles = { CompCode, CompEnName, type + Enum.GetName(Title.GetType(), Title) };
 
                 
-                    response = _genericReport.GenerateReport(Title, response, reportTitles);
-                    if (response.IsSuccess)
-                    {
-                        response.Message = CompCode + "_" + type + Enum.GetName(Title.GetType(), Title) + "_" + DateTime.Now.ToString("yyyy_mm_dd") + ".pdf";
-                    }
+            //        response = _genericReport.GenerateReport(Title, response, reportTitles);
+            //        if (response.IsSuccess)
+            //        {
+            //            response.Message = CompCode + "_" + type + Enum.GetName(Title.GetType(), Title) + "_" + DateTime.Now.ToString("yyyy_mm_dd") + ".pdf";
+            //        }
                 
-            }
+            //}
             return response;
         }
     }
