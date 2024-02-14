@@ -105,12 +105,14 @@ var SignatureReport = function () {
     self.Report = (data) => {
         if (self.ValidateCompany()) {
             Openloader()
-            var companyCode = self.SelectedCompany()
+            var companyCode = self.SelectedCompany();
+            CompEnName = self.CompanyDetails().find(x => x.CompCode() == self.SelectedCompany()).CompEnName();
             $.ajax({
                 type: "post",
                 url: '/Reports/SignatureReport/GenerateReport',
                 data: {
                     'CompCode': companyCode,
+                    "CompEnName": CompEnName,
                     'DateFrom': self.DateFrom(),
                     'DateTo':self.DateTo(),
                     'HolderFrom':self.HolderFrom(),

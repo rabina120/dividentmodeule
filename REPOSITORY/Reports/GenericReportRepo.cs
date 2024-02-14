@@ -726,10 +726,23 @@ namespace Repository.Reports
                 }
                 
             }
-            if(name==ReportName.SignatureReport)
+            if(name==ReportName.SignatureReportApproved || name==ReportName.SignatureReportUnApproved)
             {
-                aTTTableHeaders.Add(new ATTGenericReport(0.4f, "Rev No", "reversalNo"));
+                aTTTableHeaders.Add(new ATTGenericReport(0.4f, "HOLDER NO", "shholderno"));
+                aTTTableHeaders.Add(new ATTGenericReport(0.4f, "Name", "Name"));
+                aTTTableHeaders.Add(new ATTGenericReport(0.4f, "Address", "address"));
+                aTTTableHeaders.Add(new ATTGenericReport(0.4f, "Approved", "approved"));
+                aTTTableHeaders.Add(new ATTGenericReport(0.4f, "Approved by", "approvedby"));
+                aTTTableHeaders.Add(new ATTGenericReport(0.4f, "Scanned by", "ScanedBy"));
+                aTTTableHeaders.Add(new ATTGenericReport(0.4f, "Entry date", "entrydate"));
 
+            }
+            if (name == ReportName.NoSignReport)
+            {
+                aTTTableHeaders.Add(new ATTGenericReport(1.0f, "HOLDER NO", "shholderno"));
+                aTTTableHeaders.Add(new ATTGenericReport(0.4f, "Name", "Name"));
+                aTTTableHeaders.Add(new ATTGenericReport(0.4f, "Address", "address"));
+            
             }
 
             return aTTTableHeaders;

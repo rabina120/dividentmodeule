@@ -93,7 +93,9 @@
             RematSummaryReport,
             RematDetailReport,
             RematDrnReport,
-            SignatureReport
+            SignatureReportApproved,
+            SignatureReportUnApproved,
+            NoSignReport
 
 
 
