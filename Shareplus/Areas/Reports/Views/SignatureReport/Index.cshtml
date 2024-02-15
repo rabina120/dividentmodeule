@@ -77,7 +77,7 @@
                                     <div class="input-group date col-sm-12 col-md-10 mt-1">
                                         <div class="input-group-prepend">
                                         </div>
-                                        <input type="text" class="form-control form-control-sm" data-bind="value: DateFrom , text:DateTo" id="DateFrom">
+                                        <input type="text" class="form-control form-control-sm" placeholder="Date From" data-bind="value: DateFrom" id="DateFrom">
                                     </div>
                                 </div>
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12 " id="simple-date2">
@@ -86,7 +86,7 @@
                                     <div class="input-group date col-sm-12 col-md-10 mt-1">
                                         <div class="input-group-prepend">
                                         </div>
-                                        <input type="text" class="form-control form-control-sm"  data-bind="value: DateTo , text:DateTo" id="DateTo">
+                                        <input type="text" class="form-control form-control-sm" placeholder="Date To" data-bind="value: DateTo" id="DateTo">
                                     </div>
                                 </div>
                                 <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
@@ -104,12 +104,15 @@
                                
 
                             </div>
-                           
-                                
+                           @*  btn btn-info mr-2 mt-1 col-12
+                            btn btn-success col-12 *@
                             <div class="row col-12 p-4 justify-content-center ">
+                                <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
+                                    <input type="button" class="btn btn-info mr-2 mt-1 col-12 " id="ReportExcel" value="Report Excel" data-bind="click: ReportExcel">
+                                </div>
 
                                 <div class="col-xl-2 col-md-3 col-sm-4 col-6 ">
-                                    <input type="button" class="btn btn-info mr-2 mt-1 col-12 " id="Report" value="Report" data-bind="click: Report">
+                                    <input type="button" class="btn btn-info mr-2 mt-1 col-12 " id="Report" value="Report PDF" data-bind="click: Report">
                                 </div>
                             </div>
                         </form>

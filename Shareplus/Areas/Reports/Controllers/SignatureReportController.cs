@@ -9,8 +9,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-
+using Org.BouncyCastle.Asn1.X509;
+using Repository.Reports;
 using System;
+using System.Reflection.Emit;
 
 namespace CDSMODULE.Areas.Reports.Controllers
 {
@@ -103,6 +105,40 @@ namespace CDSMODULE.Areas.Reports.Controllers
                 if (response.IsSuccess)
                     response.Message = CompCode + "_" + type + Enum.GetName(Title.GetType(), Title) + "_" + DateTime.Now.ToString("yyyy_mm_dd") + ".pdf";
             }
+            return response;
+        }
+
+        [HttpPost]
+        public JsonResponse GenerateReportExcel(string CompCode, string CompEnName, string SelectedAction, string DateFrom = null, string DateTo = null, string HolderFrom = null, string HolderTo = null)
+        {
+            JsonResponse response = new JsonResponse();
+            
+
+            response = _signatureReport.GenerateReportExcel(CompCode, _loggedInUser.GetUserNameToDisplay(), SelectedAction, _loggedInUser.GetUserIPAddress(), DateFrom, DateTo, HolderFrom, HolderTo);
+
+            GenericExcelReport _excelReport = new GenericExcelReport();
+            var Title = "SignatureReport  ";
+            if (SelectedAction == "C")
+            { Title = "No Sign Report  "; }
+            
+            string selectedAction = string.Empty;
+            //if (ReportType == "U") type = "UnClearPSL";
+            //if (ReportType == "C") type = "ClearPSL";
+            if (SelectedAction == "A") selectedAction = "Approved";
+            if (SelectedAction == "U") selectedAction = "UnApproved";
+            //if (SelectedAction == "R") selectedAction = "Rejected";
+
+            if (response.HasError)
+            {
+                //_audit.errorSave(_loggedInUser.GetUserNameToDisplay(), this.ControllerContext.RouteData.Values["controller"].ToString(), _loggedInUser.GetUserIPAddress(), (Exception)response.ResponseData);
+            }
+            else
+            {
+                response = _excelReport.GenerateExcelReport(response, Title +  " - " + selectedAction, null, CompEnName, CompCode, null);
+                if (response.IsSuccess)
+                    response.Message = CompCode + "_" + Title + selectedAction + "_" + DateTime.Now.ToString("yyyy-MM-dd") + ".xlsx";
+            }
+
             return response;
         }
     }

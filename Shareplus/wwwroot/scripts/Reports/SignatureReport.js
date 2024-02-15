@@ -38,8 +38,8 @@ var SignatureReport = function () {
 
         return [year, month, day].join('-');
     }
-    self.DateFrom(formatDate(new Date))
-    self.DateTo(formatDate(new Date))
+    //self.DateFrom(formatDate(new Date))
+    //self.DateTo(formatDate(new Date))
 
 
 
@@ -144,12 +144,58 @@ var SignatureReport = function () {
             })
         }
     }
+    self.ReportExcel = function (data) {
+       
+            if (self.ValidateCompany()) {
 
+                Openloader()
+                var companyCode = self.SelectedCompany();
+                CompEnName = self.CompanyDetails().find(x => x.CompCode() == self.SelectedCompany()).CompEnName();
+                $.ajax({
+                    type: 'POST', beforeSend: function (xhr) {
+                        xhr.setRequestHeader("XSRF-TOKEN",
+                            $('input:hidden[name="__RequestVerificationToken"]').val());
+                    },
+                    url: '/Reports/SignatureReport/GenerateReportExcel',
+                    data: {
+                        'CompCode': companyCode,
+                        "CompEnName": CompEnName,
+                        'DateFrom': self.DateFrom(),
+                        'DateTo': self.DateTo(),
+                        'HolderFrom': self.HolderFrom(),
+                        'HolderTo': self.HolderTo(),
+                        'SelectedAction': self.SignatureApprovedUnapproved()
+                    },
+                    dataType: "json",
+                    success: (result) => {
+                        if (result.isSuccess) {
+                            var fileName = result.message;
+                            var a = document.createElement("a");
+                            a.href = "data:application/octet-stream;base64," + result.responseData;
+                            a.download = fileName;
+                            a.click();
+                        }
+                        else {
+                            alert('error', result.message);
+                        }
+
+                    }, error: function (error) {
+                        alert('error', error.message)
+                    },
+                    complete: () => {
+
+                        Closeloader()
+                    }
+                })
+
+            }
+       
+    }
 
 }
 
 $(document).ready(function () {
-    ko.applyBindings(new SignatureReport());
+   
     $('#simple-date1 .input-group.date').datepicker({
         todayHighlight: true,
         endDate: '+0d',
@@ -160,4 +206,5 @@ $(document).ready(function () {
         endDate: '+0d',
         format: 'yyyy-mm-dd',
     });
+    ko.applyBindings(new SignatureReport());
 });
