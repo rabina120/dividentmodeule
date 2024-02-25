@@ -36,6 +36,14 @@ function DemateDividendCDS(data) {
             self.Wissueddt = ko.observable(convertDate(data.wIssuedDt))
         }
 
+        if (data.wAmtPaidDt == null || data.wAmtPaidDt == '') {
+            self.WAmtPaidDt = ko.observable('')
+        }
+        else {
+
+            self.WAmtPaidDt = ko.observable(convertDate(data.wAmtPaidDt))
+        }
+
         self.wpaid_status = ko.observable(data.wpaid_status)
         self.FullName = ko.observable(data.fullname)
         self.FName = ko.observable(data.fName)
@@ -79,6 +87,7 @@ var DemateDividentPaymentPosting = function ()
     self.Totshkitta = ko.observable()
     self.Dwiby = ko.observable()
     self.Wissueddt = ko.observable()
+    self.WAmtPaidDt = ko.observable()
     //Companykolagi
     self.CompanyDetails = ko.observableArray([]);
     self.SelectedCompany = ko.observable();

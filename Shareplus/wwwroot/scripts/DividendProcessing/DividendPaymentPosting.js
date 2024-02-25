@@ -43,6 +43,13 @@ function CashDividend(data) {
 
             self.Wissueddt = ko.observable(convertDate(data.wIssuedDt))
         }
+        if (data.wAmtPaidDt == null || data.wAmtPaidDt == '') {
+            self.WAmtPaidDt = ko.observable('')
+        }
+        else {
+
+            self.WAmtPaidDt = ko.observable(convertDate(data.wAmtPaidDt))
+        }
         self.Wissue_approvedby = ko.observable(data.wissue_approvedby)
         self.FName = ko.observable(data.attShholder.fName)
         self.LName = ko.observable(data.attShholder.lName)
@@ -83,6 +90,7 @@ var DividentpaymentPosting = function () {
     self.Totshkitta = ko.observable()
     self.Dwiby = ko.observable()
     self.Wissueddt = ko.observable()
+    self.WAmtPaidDt = ko.observable()
     self.Bonusadj = ko.observable()
     self.Totshkitta = ko.observable()
     self.Wissue_approvedby = ko.observable()
