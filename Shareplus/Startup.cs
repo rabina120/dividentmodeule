@@ -56,6 +56,7 @@ using REPOSITORY.Parameter;
 using REPOSITORY.Reports;
 using System;
 using System.IO;
+using REPOSITORY.ShareHolder;
 
 namespace Shareplus
 {
@@ -119,6 +120,8 @@ namespace Shareplus
             services.AddTransient<IHolderMergeEntry, HolderMergeEntryRepo>();
             //holdermergeposting
             services.AddTransient<IHolderMergePosting, HolderMergePostingRepo>();
+            //Demat holder record
+            services.AddTransient<IUpdateDemateHolder, UpdateDemateHolder>();
             //Individual DakhilTransfer
             services.AddTransient<IDakhilIndividualTransferEntry, DakhilIndividualTransferEntryRepo>();
             //Many to One Dakhiltransfer

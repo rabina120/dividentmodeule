@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "Holder Management - Update Demate Holder";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+
+                    <nav aria-label="breadcrumb" role="navigation">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">Holder Management</li>
+                            <li class="breadcrumb-item active" aria-current="page">UpdateDemateHolderDetails</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Default Basic Forms Start -->
+        <div class="card mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Update Demate Holder Details</h6>
+            </div>
+
+            <div class="card-body">
+                <div class="pd-20 card-box mb-30">
+                    <form>
+                        <div class="row">
+                            <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Upload a .csv file to update Demate Holder Details (RT-02 file)</label>
+                                <div class="col-12">
+                                    <input type="file" id="fileupload" name="csvFile" class="form-control col" data-bind="value:SelectedFile" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" style="color:transparent">l</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="button" name="UploadFile" value="Upload" id="UploadFile" class="btn btn-primary col" data-bind="click:UploadFile" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Total Records</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input class="form-control form-control-sm" id="TotalRecords" data-bind="value:TotalRecords" type="text" placeholder="Total Records" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Invalid Records</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input class="form-control form-control-sm" id="InvalidRecords" data-bind="value:InvalidRecords" type="text" placeholder="Invalid Records" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                    <label class="col-12 col-form-label">New Records</label>
+                                    <div class="col-sm-12 col-md-12">
+                                    <input class="form-control form-control-sm" id="NewRecords" data-bind="value:NewRecords" type="text" placeholder="New Records" disabled>
+                                    </div>
+                                </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label">Existing Records</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input class="form-control form-control-sm" id="ExistingRecords" data-bind="value:ExistingRecords" type="text" placeholder="Existing Records" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12" id="dwnldListDiv" style="display: none;">
+                                <label class="col-12 col-form-label" >Invalid Record List</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="button" name="DownldInvalidRecords" value="Download" id="DownldInvalidRecords" class="btn btn-primary col" data-bind="click:DownldInvalidRecords" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12 col-12">
+                                <label class="col-12 col-form-label" style="color:transparent">I</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <input type="button" name="saveRecord" value="Save" id="saveRecord" class="btn btn-success col" data-bind="click:saveRecord" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+@section Footer{
+    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/scripts/HolderManagement/UpdateDemateHolder.js"></script>
+}
