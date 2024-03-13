@@ -262,7 +262,31 @@ var HoldersHistory = function () {
 
             dom: 'Bfrtip',
             buttons: [
-                'excel', {
+                {
+                    extend: 'excel',
+                    // customizeDatta: function (data) {
+                    //for (var i = 0; i < data.body.length; i++) {
+                    //    for (var j = 0; j < data.body[i].length; j++) {
+                    //        if (j == 6) {
+                    //            data.body[i][j] = '\u200C' + data.body[i][j];
+                    //        }
+                    //    }
+                    //}
+                    customizeData: function (data) {
+                        for (var i = 0; i < data.body.length; i++) {
+                            data.body[i][2] = '\u200C' + data.body[i][2];
+                            //data.body[i][2] = '\u200C' + data.body[i][2];
+                        }
+                    },
+                     exportOptions: {
+                    }, messageTop: function () {
+                        var holderBoid;
+                        if (self.ShareTypeBasedOn() == 'D') { holderBoid = " || BOID : " }
+                        else { holderBoid = " || HolderNo: " }
+                        return "Name: " + self.Name() + " || Address: " + self.Address() + holderBoid + self.ShholderNo();
+                    }
+                }
+                , {
                     extend: 'pdfHtml5',
                     text: 'PDF', orientation: 'landscape',
                     customize: function (doc) {
@@ -285,7 +309,10 @@ var HoldersHistory = function () {
                             [0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 
                     }, messageTop: function () {
-                        return "Name: " + self.Name() + " || Address: " + self.Address();
+                        var holderBoid;
+                        if (self.ShareTypeBasedOn() == 'D') { holderBoid = " || BOID : " }
+                        else { holderBoid = " || HolderNo: " }
+                        return "Name: " + self.Name() + " || Address: " + self.Address() + holderBoid + self.ShholderNo();
                     }
                 }
             ], lengthMenu: [
@@ -308,6 +335,12 @@ var HoldersHistory = function () {
             buttons: [
                 {
                     extend: 'excel'
+                    , customizeData: function (data) {
+                        for (var i = 0; i < data.body.length; i++) {
+                            data.body[i][5] = '\u200C' + data.body[i][5];
+                            //data.body[i][2] = '\u200C' + data.body[i][2];
+                        }
+                    }
                     , exportOptions: {
                     }, messageTop: function () {
                         var holderBoid;
