@@ -11,5 +11,7 @@ namespace INTERFACE.Parameter
 
         public JsonResponse SaveOwnerCategory(List<ATTOwnerCategory> ShownerType,string username,string ipaddress);
         JsonResponse GetOwnerCategory(string v1, string v2);
+
+        public JsonResponse DeleteOwnerCategory(ATTOwnerCategory ShownerType, string username, string ipaddress);
     }
 }

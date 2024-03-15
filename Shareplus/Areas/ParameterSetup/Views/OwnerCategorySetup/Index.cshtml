@@ -1,4 +1,5 @@
-﻿@{
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
     ViewData["Title"] = "OwnerCategory";
     Layout = "~/Areas/Views/Shared/_Layout.cshtml";
 }
@@ -10,7 +11,7 @@
             <!-- Default Basic Forms Start -->
             <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Pledge/Release</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Owner Category</h6>
                 </div>
 
                 <hr class="my-1">
@@ -97,6 +98,6 @@
 </div>
 
 @section Footer{
-    <script src="~/scripts/ParameterSetup/OwnerCategorySetup.js"></script>
-    <script src="~/vendor/sweetalert/sweet-alert.js"></script>
+    <script src="~/scripts/ParameterSetup/OwnerCategorySetup.js" asp-append-version="true"></script>
+    <script src="~/vendor/sweetalert/sweet-alert.js" asp-append-version="true"></script>
 }

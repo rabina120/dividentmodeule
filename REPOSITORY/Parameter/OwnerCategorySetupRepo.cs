@@ -1,10 +1,12 @@
 ﻿using Dapper;
 using Entity.Common;
+using Entity.Security;
 using ENTITY.Parameter;
 using INTERFACE.Parameter;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
@@ -109,6 +111,42 @@ namespace REPOSITORY.Parameter
                 }
                 return response;
             }
+        }
+
+        public JsonResponse DeleteOwnerCategory(ATTOwnerCategory ShownerType, string username, string ipaddress)
+        {
+            var response = new JsonResponse();
+            using (SqlConnection connection = new SqlConnection(Crypto.Decrypt(_connectionString.Value.DefaultConnection))) 
+            {
+                connection.Open();
+                using (SqlTransaction trans = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        DynamicParameters param = new DynamicParameters();
+                        param.Add("@Shownersubtypeid", ShownerType.ShownerSubTypeId);
+                        param.Add("@Shownertypeid", ShownerType.ShownerTypeId);
+                        param.Add("@@Shownersubtype", ShownerType.ShownerSubType);
+
+                        response = connection.Query<JsonResponse>("DeleteOwnerCategory", param, trans, commandType: System.Data.CommandType.StoredProcedure).FirstOrDefault();
+
+                        //response = connection.Query<JsonResponse>("CREATE_SHHOLDER_NO_SIGNATURERK", param, tran, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                        if (response.IsSuccess)
+                        {
+                            trans.Commit();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        response.IsSuccess = false;
+                        response.HasError = true;
+                        response.Message = ex.Message;
+                    }
+                }
+
+                return response;
+            }
+                
         }
     }
 }

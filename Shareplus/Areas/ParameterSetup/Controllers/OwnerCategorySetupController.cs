@@ -52,6 +52,16 @@ namespace Shareplus.Areas.ParameterSetup.Controllers
 
             return JsonConvert.SerializeObject(response);
         }
+
+        public object DeleteOwnerCategory(ATTOwnerCategory ShownerType)
+        {
+
+            JsonResponse response = new JsonResponse();
+            response = _ownerCategorySetup.DeleteOwnerCategory(ShownerType, _loggedinUser.GetUserNameToDisplay(), _loggedinUser.GetUserIPAddress());
+
+            //return response;
+         return JsonConvert.SerializeObject(response);
+        }
     }
 
 }

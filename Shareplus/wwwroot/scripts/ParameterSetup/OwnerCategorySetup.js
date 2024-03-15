@@ -23,13 +23,14 @@ self.OwnerCategorySetup = function () {
     self.ShOwnerType = ko.observable();
     self.ShOwnerTypeName = ko.observable();
     self.SelectedShOwnerType = ko.observable();
+    //self.ShownerTypeId = ko.observable();
     self.ShownerSubTypeId = ko.observable();
 
 
 
 
     self.LoadShOwnerType = function () {
-
+        self.ShOwnerTypes([]);
         $.ajax({
             type: "post",
             url: '/HolderManagement/ShareHolder/GetAllShOwnerType',
@@ -61,14 +62,46 @@ self.OwnerCategorySetup = function () {
         console.log(data);
         self.SelectedShOwnerType(data.ShownerTypeId);
         self.ShownerSubType(data.ShownerSubType);
-
+        self.ShownerSubTypeId(data.ShownerSubTypeId);
         self.OwnerList.remove(data);
 
     }
+
     self.DeletePR = function (data) {
-        self.OwnerList.remove(data);
+        var Shownertype = {
+            "ShownerSubType": data.ShownerSubType,
+            "ShownerTypeId": data.ShownerTypeId,
+            "ShownerSubTypeId": data.ShownerSubTypeId
+        }
+
+        $.ajax({
+            type: "post",
+            url: '/ParameterSetup/ownercategorysetup/DeleteOwnerCategory',
+            data: { 'Shownertype': Shownertype },
+            dataType: "json",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (result) {
+               // console.log(result); // Log the response
+               // if (result.Message === "Record Deleted!!")
+                if(result.IsSuccess){
+                    self.GetShownerCategory();
+                    alert('success', result.Message);
+                } else {
+                    alert('warning', result.Message);
+                }
+            },
+            error: function (error) {
+               // console.error('Error:', error); // Log the error
+                alert('error', 'An error occurred while processing your request.');
+            }
+        });
     }
 
+
+    
     self.Save = function () {
         var errMsg = "";
         if (self.OwnerList().length == 0) errMsg += "OwnerType Cannot be empty!!<br>";
@@ -94,6 +127,7 @@ self.OwnerCategorySetup = function () {
     }
 
     self.GetShownerCategory = function () {
+        self.OwnerList([]);
         postReqMsg(
             '/ParameterSetup/ownercategorysetup/GetOwnerCategory',
             null,

@@ -1,4 +1,5 @@
-﻿@{
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
     ViewData["Title"] = "Holder's History";
     Layout = "~/Areas/Views/Shared/_Layout.cshtml";
 }
@@ -255,7 +256,7 @@
         @section footer{
 
         <script src="~/vendor/sweetalert/sweet-alert.js"></script>
-        <script src="~/scripts/DividendManagement/HoldersHistory.js"></script>
+        <script src="~/scripts/DividendManagement/HoldersHistory.js" asp-append-version="true"></script>
 
     }
 
