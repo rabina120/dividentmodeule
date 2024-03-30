@@ -24,12 +24,13 @@ steps:
     restoreSolution: '$(solution)'
     feedsToUse: 'select'
 
-- task: VSBuild@1
+- task: DotNetCoreCLI@2
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:OutputPath=$(publishPath)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '-o $(publishPath)'
+    zipAfterPublish: false
+    modifyOutputPath: false
 
 - task: PublishBuildArtifacts@1
   inputs:
