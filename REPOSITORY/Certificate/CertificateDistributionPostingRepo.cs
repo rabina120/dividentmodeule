@@ -38,8 +38,8 @@ namespace Repository.Certificate
                     connection.Open();
                     DynamicParameters param = new DynamicParameters();
                     param.Add("@COMPCODE", CompCode);
-                    param.Add("@STARTDATE", startdate == null ? " " : fixdate);
-                    param.Add("@ENDDATE", enddate == null ? " " : DateTime.Now.ToString("yyyy-MM-dd"));
+                    param.Add("@STARTDATE", startdate == null ? fixdate : startdate);
+                    param.Add("@ENDDATE", enddate == null ? DateTime.Now.ToString("yyyy-MM-dd"): enddate);
                     param.Add("@P_IP_ADDRESS", IP);
                     param.Add("@P_USERNAME", UserName);
                     param.Add("@P_DATE_NOW", DateTime.Now);
