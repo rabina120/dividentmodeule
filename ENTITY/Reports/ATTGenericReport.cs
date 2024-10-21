@@ -61,7 +61,7 @@
             ValidAccount,
             InValidAccount,
             TransactionFailedToProcess,
-            TranasctionProcessed,
+            TransactionProcessed,
             TransactionStatusProcessing,
             TransactionStatusSuccess,
             TransactionStatusFailed,

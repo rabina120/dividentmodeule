@@ -506,7 +506,7 @@ namespace Repository.Reports
             }
             if (name == ReportName.ValidAccount
                 || name == ReportName.InValidAccount
-                || name == ReportName.TranasctionProcessed
+                || name == ReportName.TransactionProcessed
                 || name == ReportName.TransactionFailedToProcess
                 || name == ReportName.TransactionStatusFailed
                 || name == ReportName.TransactionStatusProcessing
@@ -533,7 +533,7 @@ namespace Repository.Reports
                     aTTTableHeaders.Add(new ATTGenericReport(1.0f, "Remarks.", "validatemessage"));//
 
                 }
-                else if (name == ReportName.TranasctionProcessed
+                else if (name == ReportName.TransactionProcessed
                     || name == ReportName.TransactionFailedToProcess)
                 {
                     aTTTableHeaders.Add(new ATTGenericReport(1.0f, "TransactionMessage.", "transactionmessage"));//

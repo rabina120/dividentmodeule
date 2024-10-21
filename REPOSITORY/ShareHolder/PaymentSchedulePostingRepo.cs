@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Entity.Common;
 using Entity.Esewa;
+using ENTITY.FundTransfer;
 using Interface.ShareHolder;
 using Microsoft.Extensions.Options;
 using System;

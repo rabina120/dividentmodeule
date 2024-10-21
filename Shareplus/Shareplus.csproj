@@ -80,8 +80,8 @@
     <Folder Include="Areas\DakhilTransfer\Models\" />
     <Folder Include="Areas\DividendManagement\Data\" />
     <Folder Include="Areas\DividendManagement\Models\" />
-    <Folder Include="Areas\ESewaTransaction\Data\" />
-    <Folder Include="Areas\ESewaTransaction\Models\" />
+    <Folder Include="Areas\FundTransfer\Data\" />
+    <Folder Include="Areas\FundTransfer\Models\" />
     <Folder Include="Areas\HolderManagement\Data\" />
     <Folder Include="Areas\HolderManagement\Models\" />
     <Folder Include="Areas\ParameterSetup\Data\" />

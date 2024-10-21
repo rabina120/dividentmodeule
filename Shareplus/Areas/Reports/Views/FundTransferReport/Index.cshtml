@@ -1,0 +1,123 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Fund Transfer Report";
+    Layout = "~/Areas/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+
+            <!-- Default Basic Forms Start -->
+            <div class="card mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Batch Processing</h6>
+                </div>
+                <hr class="my-1">
+                <div class="card-body">
+                    <div class="pd-20 card-box mb-30">
+                        <div class="row">
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Company <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select class="form-control form-control-sm" id="CompanyList" data-bind='options: CompanyDetails,optionsText: "CompEnName",optionsValue:"CompCode",value:SelectedCompany, optionsCaption:"---Company---"'>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Dividend <span class="mandatory"> *</span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select class="form-control form-control-sm" id="DividendList" data-bind='options: DividendLists,optionsText: "ShowDividendText",optionsValue:"Divcode",value:SelectedDividend, optionsCaption:"---Dividends---"'>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-3 col-sm-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Batch Request<span class="mandatory">*</span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select class="form-control form-control-sm" id="BatchList" data-bind='options: BatchLists,optionsText: "BatchText",optionsValue:"BatchId",value:CurrentBatch, optionsCaption:"--- Batch ---"'>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class ="row">
+                              <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">Report Type<span class="mandatory">*</span></label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select class="form-control form-control-sm" id="ReportList" data-bind='options: ReportLists,optionsText: "ReportText",optionsValue:"ReportId",value:SelectedReportId, optionsCaption:"--- Report Type ---"'>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
+                                <label class="col-sm-12 col-md-11 col-form-label">SubReport Type</label>
+                                <div class="col-sm-12 col-md-12">
+                                    <select class="form-control form-control-sm" id="SubReportList" data-bind='options: SubReportLists,optionsText: "SubReportText",optionsValue:"SubReportId",value:SelectedSubReportId, optionsCaption:"---Sub Report Type ---"'>
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="form-group col-xl-1 col-md-2 col-sm-6 col-6">
+                                 <label class="col-sm-12 col-md-11 col-form-label"></label>
+                                <div class="col-sm-12 col-md-11 mt-2">
+                                    <button class="btn btn-primary" id="GeneratePDF" data-bind='click: GeneratePDF'>
+                                        PDF
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-1 col-md-2 col-sm-6 col-6">
+                                 <label class="col-sm-12 col-md-11 col-form-label"></label>
+                                <div class="col-sm-12 col-md-11 mt-2">
+                                    <button class="btn btn-success" id="GenerateExcel" data-bind='click: GenerateExcel'>
+                                        Excel
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group col-xl-1 col-md-2 col-sm-6 col-6">
+                                 <label class="col-sm-12 col-md-11 col-form-label"></label>
+                                <div class="col-sm-12 col-md-11 mt-2">
+                                    <button class="btn btn-info" id="ViewData" data-bind='click: ViewData'>
+                                        View
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-4"  >
+                            <p >
+                                <span>
+
+                            Total Records Found: 
+                            </span>
+                                <span data-bind="text: TotalRecords">
+
+                            </span>
+                            </p>
+                            <div class="table-responsive" id="reportViewDiv" >
+                                <table id="FundTransferStatusTable" class="table table-striped table-bordered"  style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>FullName</th>
+                                            <th>WarrantNo</th>
+                                            <th>BankNo</th>
+                                            <th>BankName</th>
+                                            <th>WarrantAmt</th>
+                                            @*<th>SubToken</th>*@
+                                            <th>TxnMessage</th>
+                                            <th>TxnDescription</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+@section Footer{
+<script src="~/vendor/sweetalert/sweet-alert.js"></script>
+<script src="~/scripts/FundTransfer/StatusReport.js" asp-append-version="true" ></script>
+}
+

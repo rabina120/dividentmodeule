@@ -622,14 +622,12 @@ a:focus {
             .sidebar .nav-item .nav-link i {
                 font-size: .85rem;
                 margin-right: 10px;
-                color: #000!important;
             }
             .sidebar .nav-item .nav-link span {
                 font-size: 12px;
                 display: inline;
-                color: #000!important;
                 font-weight: bold;
-                font-family: 'Poppins';
+                
                 letter-spacing:1.2px;
             }
 

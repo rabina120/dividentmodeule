@@ -2,6 +2,7 @@
 using Entity.Common;
 using Entity.Dividend;
 using Entity.Esewa;
+using ENTITY.FundTransfer;
 using Interface.Reports;
 using Microsoft.Extensions.Options;
 using System;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Repository.Reports
 {
@@ -42,7 +44,7 @@ namespace Repository.Reports
                         param.Add("@p_username", username);
                         param.Add("@p_ipaddress", IPAddress);
                         param.Add("@p_entry_date", DateTime.Now);
-                        List<dynamic> aTTData = connection.Query<dynamic>(sql: "ESEWASTATUSREPORT_GETREPORTDATA", param: param, null, commandType: CommandType.StoredProcedure).ToList();
+                        List<dynamic> aTTData = connection.Query<dynamic>(sql: "FT_STATUSREPORT_GETREPORTDATA", param: param, null, commandType: CommandType.StoredProcedure).ToList();
                         if (aTTData.Count != 0)
                         {
                             response.ResponseData = aTTData;
@@ -55,7 +57,7 @@ namespace Repository.Reports
                     }
                     else
                     {
-                        SqlCommand cmd = new SqlCommand("ESEWASTATUSREPORT_GETREPORTDATA", connection);
+                        SqlCommand cmd = new SqlCommand("FT_STATUSREPORT_GETREPORTDATA", connection);
                         cmd.CommandType = CommandType.StoredProcedure;
                         SqlParameter excelParam = new SqlParameter();
                         excelParam = cmd.Parameters.AddWithValue("@P_CompCode", CompCode);
@@ -109,7 +111,7 @@ namespace Repository.Reports
                     DynamicParameters param = new DynamicParameters();
                     param.Add("@P_CompCode", CompCode);
                     param.Add("@p_divcode", DivCode);
-                    List<ATTBatchDetail> aTTDividendTables = connection.Query<ATTBatchDetail>(sql: "ESEWASTATUSREPORT_GETALLBATCH", param: param, null, commandType: CommandType.StoredProcedure).ToList();
+                    List<ATTBatchDetail> aTTDividendTables = connection.Query<ATTBatchDetail>(sql: "FT_STATUSREPORT_GETALLBATCH", param: param, null, commandType: CommandType.StoredProcedure).ToList();
                     if (aTTDividendTables.Count != 0)
                     {
                         response.ResponseData = aTTDividendTables;
@@ -142,7 +144,7 @@ namespace Repository.Reports
 
                     DynamicParameters param = new DynamicParameters();
                     param.Add("@P_CompCode", CompCode);
-                    List<ATTDividend> aTTDividendTables = connection.Query<ATTDividend>(sql: "ESEWASTATUSREPORT_GETALLDIVIDENDS", param: param, null, commandType: CommandType.StoredProcedure).ToList();
+                    List<ATTDividend> aTTDividendTables = connection.Query<ATTDividend>(sql: "FT_STATUSREPORT_GETALLDIVIDENDS", param: param, null, commandType: CommandType.StoredProcedure).ToList();
                     if (aTTDividendTables.Count > 0)
                     {
                         response.ResponseData = aTTDividendTables;
@@ -163,5 +165,39 @@ namespace Repository.Reports
                 return response;
             }
         }
+
+        public async Task<List<ATTBatchProcessing>> GetBatchReportData(ATTDataListRequest request, string CompCode, string DivCode, string BatchID, string ReportType,string ReportSubType)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(Crypto.Decrypt(_connectionString.Value.DefaultConnection)))
+                {
+                    connection.Open();
+                    var parameters = new DynamicParameters();
+                    parameters.Add("SearchValue", request.SearchValue.Trim(), DbType.String);
+                    parameters.Add("PageNo", request.PageNo, DbType.Int32);
+                    parameters.Add("PageSize", request.PageSize, DbType.Int32);
+                    parameters.Add("SortColumn", request.SortColumn, DbType.Int32);
+                    //parameters.Add("SortColumnName", request.SortColumnName, DbType.String);
+                    parameters.Add("SortDirection", request.SortDirection, DbType.String);
+                    parameters.Add("CompCode", CompCode.Trim(), DbType.String);
+                    parameters.Add("DivCode", DivCode);
+                    parameters.Add("BatchNo", BatchID.Trim(), DbType.String);
+                    parameters.Add("ReportType", ReportType.Trim(), DbType.String);
+                    parameters.Add("ReportSubType", ReportSubType, DbType.String);
+
+
+                    List<ATTBatchProcessing> batchProcessings = (await connection.QueryAsync<ATTBatchProcessing>("FT_STATUSREPORT_GETDATA", parameters, commandType: CommandType.StoredProcedure)).ToList();
+                    return batchProcessings;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+
+        }
+
     }
 }

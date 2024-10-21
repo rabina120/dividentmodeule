@@ -2,6 +2,7 @@
 using Entity.Common;
 using Entity.Esewa;
 using Entity.Reports;
+using ENTITY.FundTransfer;
 using Interface.Reports;
 using Microsoft.Extensions.Options;
 using System;

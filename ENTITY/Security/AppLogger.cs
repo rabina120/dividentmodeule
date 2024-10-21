@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.IO;
+using Newtonsoft.Json;
 
 
 namespace Entity.Common
@@ -119,7 +120,10 @@ namespace Entity.Common
                 throw e;
             }
         }
-
+        public static void LogData(this object data, string dataFor = null, string refId = null)
+        {
+            LogData(JsonConvert.SerializeObject(data), dataFor, refId); 
+        }
         public static void LogData(this string data, string dataFor = null, string refId = null)
         {
             try

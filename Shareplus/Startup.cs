@@ -7,11 +7,9 @@ using Interface.Common;
 using Interface.DakhilTransfer;
 using Interface.DividendManagement;
 using Interface.DividendProcessing;
-using Interface.Esewa;
 using Interface.Parameter;
 using Interface.Reports;
 using Interface.Security;
-using Interface.Services;
 using Interface.ShareHolder;
 using Interface.Signature;
 using INTERFACE.DividendManagement;
@@ -27,7 +25,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,24 +36,26 @@ using Repository.Common;
 using Repository.DakhilTransfer;
 using Repository.DividendManagement;
 using Repository.DividendProcessing;
-using Repository.Esewa;
 using Repository.Parameter;
 using Repository.Reports;
 using Repository.Security;
-using Repository.Services;
 using Repository.ShareHolder;
 using Repository.Signature;
 
 using REPOSITORY.DividendManagement;
 
 using REPOSITORY.Certificate;
-using REPOSITORY.DividendManagement;
 using REPOSITORY.Parameter;
 
 using REPOSITORY.Reports;
 using System;
 using System.IO;
+
+using REPOSITORY.FundTransfer;
+using INTERFACE.FundTransfer;
+
 using REPOSITORY.ShareHolder;
+
 
 namespace Shareplus
 {
@@ -178,7 +177,6 @@ namespace Shareplus
             services.AddTransient<ICertificateReports, CertificateReports>();
             services.AddTransient<IPaymentScheduleEntry, PaymentScheduleEntryRepo>();
             services.AddTransient<IPaymentSchedulePosting, PaymentSchedulePostingRepo>();
-            services.AddTransient<IHolderDemateServices, HolderDemateServiesRepo>();
             services.AddTransient<IDPSetup, DPSetupRepo>();
             services.AddTransient<ICompanySetup, CompanySetupRepo>();
             services.AddTransient<ICompanyCharge, CompanyChargeRepo>();
@@ -225,7 +223,7 @@ namespace Shareplus
             // batch processing
             services.AddTransient<IBatchProcessing, BatchProcessingRepo>();
             services.AddTransient<ITransactionStatus, TransactionStatusRepo>();
-            services.AddTransient<IEsewaTransactionProcessing, EsewaTransactionProcessingRepo>();
+            services.AddTransient<ITransactionProcessing, TransactionProcessingRepo>();
             services.AddTransient<IEsewaStatusReport, EsewaStatusReportsRepo>();
             services.AddTransient<IEService, EServiceRepo>();
             //services.AddTransient<>();
@@ -236,10 +234,6 @@ namespace Shareplus
             services.AddTransient<IPSLEntryPosting, PSLEntryPostingRepo>();
 
             services.AddTransient<ILogDetails, LogDetailRepo>();
-            services.AddTransient<IAccountValidation, AccountValidationRepo>();
-            services.AddTransient<ITransctionProcessing, TransctionProcessingRepo>();
-            services.AddTransient<ITransactionStatusQuery, TransactionStatusQueryRepo>();
-            services.AddTransient<ITransactionStatusNotification, TransactionStatusNotificationRepo>();
             services.AddTransient<IGenerateReport, GenerateReportRepo>();
             services.AddTransient<IEsewaReports, EsewaReportsRepo>();
             services.AddTransient<ICommon, CommonRepo>();
