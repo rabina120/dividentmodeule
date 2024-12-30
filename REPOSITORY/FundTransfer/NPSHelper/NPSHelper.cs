@@ -15,6 +15,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
+
 namespace REPOSITORY.FundTransfer
 {
 
@@ -24,7 +25,7 @@ namespace REPOSITORY.FundTransfer
         public static class StatusCode
         {
             public const string SUCCESS = "100";
-            public const string FAILURE = "500";
+            public const string FAILURE = "400";
             public const string INVALID_ACCOUNT = "000";
             public const string PARTIAL_VALID_ACCOUNT = "200";
             public const string VALID_ACCOUNT = "100";
@@ -100,18 +101,18 @@ namespace REPOSITORY.FundTransfer
             return accDetail;
         }
 
-        public static List<ATTEBatchProcessing> TransactionProcessing(List<ATTEBatchProcessing> aTTEBatchProcessings, string SourceBank, string SourceAccountNum, string sourceAccountName)
+        public static List<ATTEBatchProcessing> TransactionProcessing(List<ATTEBatchProcessing> aTTEBatchProcessings, string SourceBank, string SourceAccountNum, string sourceAccountName, string processID)
         {
             JsonResponse jsonResponse = new JsonResponse();
             List<ATTEBatchProcessing> allResponses = new List<ATTEBatchProcessing>();
             var data = string.Empty;
 
-            string processID = Guid.NewGuid().ToString();
-            aTTEBatchProcessings.ForEach(x =>
-            {
-                x.Token = processID;
-                x.sub_token = x.sub_token + processID;
-            });
+            //string processID = Guid.NewGuid().ToString();
+            //aTTEBatchProcessings.ForEach(x =>
+            //{
+            //    x.Token = processID;
+            //    x.sub_token = x.sub_token;
+            //});
             List<ATTEBatchProcessing> batchResponse = new List<ATTEBatchProcessing>();
 
             List<ATTNPSBulkTransactionDetails> batchToProcess = new List<ATTNPSBulkTransactionDetails>();
@@ -121,10 +122,10 @@ namespace REPOSITORY.FundTransfer
                 batchToProcess.Add(new ATTNPSBulkTransactionDetails()
                 {
                     Amount = string.Format("{0:0.00}", aTTEBatchProcessings[item].TotalAmt.ToString()),
-                    DestinationAccName = aTTEBatchProcessings[item].FullName,
-                    DestinationAccNo = aTTEBatchProcessings[item].BankNo,
-                    DestinationBank = aTTEBatchProcessings[item].SwiftCode,
-                    MerchantTxnId = aTTEBatchProcessings[item].sub_token,
+                    DestinationAccName = aTTEBatchProcessings[item].FullName.Trim(),
+                    DestinationAccNo = aTTEBatchProcessings[item].BankNo.Trim(),
+                    DestinationBank = aTTEBatchProcessings[item].SwiftCode.Trim(),
+                    MerchantTxnId = aTTEBatchProcessings[item].sub_token.Trim(),
                     DestinationCurrency = "NPR",
                     IsDestinationMobile = "n",
                     TransactionRemarks = aTTEBatchProcessings[item].TransactionRemarks,
@@ -137,8 +138,8 @@ namespace REPOSITORY.FundTransfer
             if (batchToProcess.Count > 0)
             {
 
-                var apiResponse = BulkFundTranferRequest(batchToProcess, SourceBank,
-                    SourceAccountNum, sourceAccountName, processID);
+                var apiResponse = BulkFundTranferRequest(batchToProcess, SourceBank.Trim(),
+                    SourceAccountNum.Trim(), sourceAccountName.Trim(), processID);
                 if (apiResponse.code!="0")
                 {
                     batchResponse.ForEach(x =>
@@ -180,17 +181,69 @@ namespace REPOSITORY.FundTransfer
 
             return batchResponse;
         }
+        public static JsonResponse TransactionStatus(List<ATTEBatchProcessing> aTTEBatchProcessings)
+        {
+            JsonResponse jsonResponse = new JsonResponse();
+            List<ATTNPSBulkCheckStatusResponse> allResponses = new List<ATTNPSBulkCheckStatusResponse>();
 
+            try
+            {
+                string accessToken = Login();
+                var tokenlist = aTTEBatchProcessings.Select(x => x.Token).Distinct().ToList();
+                foreach (var batch in tokenlist)
+                {
+                    var resp = CheckBulkStatus(batch);
+                    if (resp.code == "0")
+                    {
+
+                    aTTEBatchProcessings.ForEach(batchItem => {
+                        var batchdata = resp.data.Find(x => x.MerchantTxnId == batchItem.sub_token);
+                        if (batchdata != null)
+                        {
+                            batchItem.UpdatedTransactionMessage = batchdata.TransactionStatus;
+                            batchItem.UpdatedTransactionCode = GetReturnStatusFromTransactionStatus(batchdata.TransactionStatus);
+                            batchItem.UpdatedTransactionDetail = "Transaction Status Updated with Status: " + batchdata.TransactionStatus + " on " + DateTime.Now.ToString();
+                        }
+                    });
+                    }
+                    else
+                    {
+                        aTTEBatchProcessings.ForEach(batchItem =>
+                        {
+                            batchItem.UpdatedTransactionMessage = "Failed to Fetch Data From Api";
+                            batchItem.UpdatedTransactionCode = StatusCode.FAILURE;
+                            batchItem.UpdatedTransactionDetail = "Status Fetch Failed with error: " + resp.errors.ToString() + " on " + DateTime.Now.ToString();
+                            
+                        });
+                    }
+                }
+
+                jsonResponse.IsSuccess = true;
+                jsonResponse.Message = "Transaction statuses fetched and updated successfully.";
+                jsonResponse.ResponseData = aTTEBatchProcessings;
+            }
+            catch (Exception ex)
+            {
+                jsonResponse.IsSuccess = false;
+                jsonResponse.Message = $"An error occurred: {ex.Message}";
+                jsonResponse.ResponseData = null;
+            }
+
+            return jsonResponse;
+        }
         private static string GetReturnStatusFromTransactionStatus(string transactionStatus)
         {
             string status = StatusCode.TRANSACTION_INCOMPLETE;
-            string normalizedStatus = transactionStatus.Normalize();
+            string normalizedStatus = transactionStatus.ToUpper();
             switch (normalizedStatus)
             {
                 case "SUCCESS":
                     status = StatusCode.TRANSACTION_SUCESS;
                     break;
                 case "FAILURE":
+                    status = StatusCode.TRANSACTION_FAILED;
+                    break;
+                case "FAILED":
                     status = StatusCode.TRANSACTION_FAILED;
                     break;
                 default:
@@ -331,15 +384,15 @@ namespace REPOSITORY.FundTransfer
 
 
         //validate bank  (working fine) 
-        private static ATTNPSBankValidationResponse ValidateBank(string AccountName = "Diwakar Baskota", string AccountNumber = "1900000000000076", string BankCode = "FTTESTBANK")
+        private static ATTNPSBankValidationResponse ValidateBank(string AccountName = "Steve Rogers", string AccountNumber = "1845000000017", string BankCode = "LXBLNPKA")
         {
             string AccessToken = Login();
             ATTNPSAccountValidateReq nps = new ATTNPSAccountValidateReq()
             {
-                AccountName = AccountName,
-                AccountNumber = AccountNumber,
+                AccountName = AccountName.Trim(),
+                AccountNumber = AccountNumber.Trim(),
                 ApiUserName = ReadConfig().ApiUserName,
-                BankCode = BankCode,
+                BankCode = BankCode.Trim(),
                 MerchantId = ReadConfig().MerchantId,
                 timestamp = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff"),
             };
@@ -529,8 +582,7 @@ namespace REPOSITORY.FundTransfer
             return response;
         }
 
-
-        //this methods are for signature generation using pkcs1 sha256
+   
 
         private static string signData(object obj)
         {

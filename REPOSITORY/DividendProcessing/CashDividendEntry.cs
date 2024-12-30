@@ -84,6 +84,66 @@ namespace Repository.DividendProcessing
             }
             return jsonResponse;
         }
+        public JsonResponse BulkPayment(string CompCode, string DivCode, string DivType, string IssueDate, bool isIssue, bool isPay, string IssueRemarks, DataTable dataTable, string UserName, string IPAddress)
+        {
+            JsonResponse jsonResponse = new JsonResponse();
+            using (SqlConnection connection = new SqlConnection(Crypto.Decrypt(_connectionString.Value.DefaultConnection)))
+            {
+                try
+                {
+                    connection.Open();
+                    using (SqlTransaction trans = connection.BeginTransaction())
+                    {
+
+                        DataTable tableToSend = new DataTable();
+                        tableToSend.Columns.Add("shholderno", type: typeof(String));
+                        tableToSend.Columns.Add("warrantno", type: typeof(String));
+                        tableToSend.Columns.Add("bankname", type: typeof(String));
+                        tableToSend.Columns.Add("bankadd", type: typeof(String));
+                        tableToSend.Columns.Add("bankaccno", type: typeof(String));
+                        tableToSend.Columns.Add("crediteddt", type: typeof(DateTime));
+                        CultureInfo datetimeprovider = CultureInfo.InvariantCulture;
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            var id = DivType == "01" ? row["shholderno"] : row["boid"];
+                            tableToSend.Rows.Add(id == null ? "" : id.ToString(),
+                                row["warrantno"].ToString(), row["bankname"].ToString(), row["bankadd"] == null ? "" : row["bankadd"].ToString(), row["bankaccno"].ToString()
+                                , row["crediteddt"].ToString());
+                        }
+                        jsonResponse = BulkCopy(connection, trans, tableToSend);
+                        if (jsonResponse.IsSuccess)
+                        {
+
+                            DynamicParameters param = new DynamicParameters();
+                            param.Add("@Compcode", CompCode);
+                            param.Add("@DivCode", DivCode);
+                            param.Add("@DivType", DivType);
+                            param.Add("@IsIssue", isIssue);
+                            param.Add("@IsPay", isPay);
+                            param.Add("@IssueDate", IssueDate);
+                            param.Add("@Issueremarks", IssueRemarks);
+                            param.Add("@Username", UserName);
+                            param.Add("@IPaddress", IPAddress);
+
+
+                            jsonResponse = connection.Query<JsonResponse>(sql: "Dividend_BulkPayment", param: param, transaction: trans, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                            if (jsonResponse.IsSuccess)
+                            {
+                                trans.Commit();
+                            }
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    jsonResponse.HasError = true;
+                    jsonResponse.Message = ex.Message;
+                    jsonResponse.ResponseData = ex;
+                }
+            }
+            return jsonResponse;
+        }
 
         public JsonResponse GetDividendInformation(string CompCode, string DivCode, string shholderno, string a, string action, string UserName, string IP)
         {

@@ -24,6 +24,8 @@ namespace Entity.Security
         public bool isLoginSucess { get; set; }
         public bool IsDeleted { get; set; }
         public string AccountType { get; set; }
+        public string Email { get; set; }
+        public string Pin { get; set; }
         public ATTUserProfile()
         {
             this.isLoginSucess = false;

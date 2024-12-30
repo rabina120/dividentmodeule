@@ -1,5 +1,4 @@
 ﻿using Entity.Common;
-using Entity.Esewa;
 using Entity.Security;
 using RestSharp;
 using System;

@@ -2,14 +2,13 @@
 using Entity.Common;
 using ENTITY.Dividend;
 using INTERFACE.DividendManagement;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Threading.Tasks;
+ 
 
 namespace REPOSITORY.DividendManagement
 {

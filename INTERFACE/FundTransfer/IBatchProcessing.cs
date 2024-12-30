@@ -37,5 +37,7 @@ namespace INTERFACE.FundTransfer
         //batch closed on no data/error
         JsonResponse CloseBatch(string DivCode, string CompCode, string BatchID, string UserName, string IPAddress, string Remarks);
 
+        JsonResponse GetDataForAccountValidation1(string CompCode, string DivCode, string BatchID, string UserName, string IPAddress);
+
     }
 }

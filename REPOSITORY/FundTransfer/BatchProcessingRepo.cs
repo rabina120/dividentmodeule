@@ -9,10 +9,14 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
+using System.Linq; 
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using ClosedXML.Excel;
+using System.IO;
+
+
 
 namespace REPOSITORY.FundTransfer
 {
@@ -69,6 +73,93 @@ namespace REPOSITORY.FundTransfer
                 return response;
             }
         }
+        public JsonResponse GetDataForAccountValidation1(string CompCode, string DivCode, string BatchID, string UserName, string IPAddress)
+        {
+            JsonResponse response = new JsonResponse();
+            using (SqlConnection connection = new SqlConnection(Crypto.Decrypt(_connectionString.Value.DefaultConnection)))
+            {
+                try
+                {
+                    connection.Open();
+
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add("@P_COMPCODE", CompCode);
+                    parameters.Add("@P_DIVCODE", DivCode);
+                    parameters.Add("@P_BATCHID", BatchID);
+                    parameters.Add("@P_USERNAME", UserName);
+                    parameters.Add("@P_IPADdress", IPAddress);
+                    parameters.Add("@P_ENTRY_DATE", DateTime.Now);
+
+                    List<ATTEBatchProcessing> aTTEBatchProcessings = connection.Query<ATTEBatchProcessing>(
+                        sql: "FT_BATCH_Excel_DATA",
+                        param: parameters,
+                        commandType: CommandType.StoredProcedure
+                    ).ToList();
+                    //var sql = "SELECT * from BatchProcessing where DivCode = @P_DIVCODE and CompCode = @P_COMPCODE and BatchID=@P_BATCHID and UserName= @P_USERNAME and IPAddress=@P_IP_ADDRESS  ";
+                    //List<ATTEBatchProcessing> aTTEBatchProcessings = connection.Query<ATTEBatchProcessing>(sql, parameters)?.ToList();
+
+                    if (aTTEBatchProcessings != null && aTTEBatchProcessings.Count > 0)
+                    {
+                        var excelFile = GenerateExcelReport(aTTEBatchProcessings);
+                        response.IsSuccess = true;
+                        response.FileData = excelFile;
+                        response.FileName = "DividendDetails.xlsx";
+                        response.MimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    }
+                    else
+                    {
+                        response.IsSuccess = false;
+                        response.ResponseData = "No data found for the given parameters.";
+                        response.HasError = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    response.IsSuccess = false;
+                    response.ResponseData = ex.Message;
+                    response.HasError = true;
+                }
+            }
+            return response;
+        }
+
+        private byte[] GenerateExcelReport(List<ATTEBatchProcessing> aTTEBatchProcessings)
+        {
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("CertDetails");
+                // Header row
+                worksheet.Cell(1, 1).Value = "FullName";
+                worksheet.Cell(1, 2).Value = "WarrantNo";
+                worksheet.Cell(1, 3).Value = "BankNo";
+                worksheet.Cell(1, 4).Value = "BankName";
+                worksheet.Cell(1, 5).Value = "WarrantAmount";
+
+                // Populate rows
+                for (int i = 0; i < aTTEBatchProcessings.Count; i++)
+                {
+                    var row = i + 2;
+                    var certDet = aTTEBatchProcessings[i];
+                    worksheet.Cell(row, 1).Value = certDet.FullName ?? "";
+                    worksheet.Cell(row, 2).Value = certDet.WarrantNo ?? "";
+                    worksheet.Cell(row, 3).Value = certDet.BankNo ?? "";
+                    worksheet.Cell(row, 4).Value = certDet.BankName ?? "";
+                    worksheet.Cell(row, 5).Value = certDet.WarrantAmt;
+
+                   
+                }
+
+                worksheet.Columns().AdjustToContents();
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    return stream.ToArray();
+                }
+            }
+        }
+
+         
+
         public JsonResponse CheckBatchStatus(string CompCode, string DivCode, string BatchID, string UserName, string IPAddress)
         {
             JsonResponse response = new JsonResponse();
@@ -585,7 +676,17 @@ namespace REPOSITORY.FundTransfer
                         parameters.Add("@P_ENTRY_DATE", DateTime.Now);
 
 
-                        aTTEBatchProcessings = connection.Query<ATTEBatchProcessing>(sql: "FT_ACCOUNT_VALIDATION_GET_BATCHPROCESSING_DATA", parameters, transaction, commandType: CommandType.StoredProcedure).ToList();
+                      //  aTTEBatchProcessings = connection.Query<ATTEBatchProcessing>(sql: "FT_ACCOUNT_VALIDATION_GET_BATCHPROCESSING_DATA", parameters, transaction, commandType: CommandType.StoredProcedure).ToList();
+                        aTTEBatchProcessings = connection.Query<ATTEBatchProcessing>(sql: "FT_ACCOUNT_VALIDATION_GET_BATCHPROCESSING_DATA", parameters, transaction, commandType: CommandType.StoredProcedure)
+
+                        .Select(x =>
+                         {
+                             x.FullName = x.FullName?.Trim();
+                             x.BankNo = x.BankNo?.Trim();
+                             return x;
+                         })
+                        .ToList();
+
                         transaction.Commit();
                     }
 
@@ -667,7 +768,7 @@ namespace REPOSITORY.FundTransfer
         }
 
         private JsonResponse UpdateBatchAfterAccountValidation(string DivCode, string CompCode, string BatchID, string UserName, string IPAddress)
-        {
+       {
             JsonResponse response = new JsonResponse();
             using (SqlConnection connection = new SqlConnection(Crypto.Decrypt(_connectionString.Value.DefaultConnection)))
             {
@@ -867,7 +968,17 @@ namespace REPOSITORY.FundTransfer
                     parameters.Add("@P_USERNAME", UserName);
                     parameters.Add("@P_IP_ADDRESS", IPAddress);
                     parameters.Add("@P_ENTRY_DATE", DateTime.Now);
-                    aTTEBatchProcessings = connection.Query<ATTEBatchProcessing>(sql: "FT_TRANSACTIONPROCESSING_GET_DATA_FOR_TRANSACTION", parameters, null, commandType: CommandType.StoredProcedure).ToList();
+                    aTTEBatchProcessings = connection.Query<ATTEBatchProcessing>(sql: "FT_TRANSACTIONPROCESSING_GET_DATA_FOR_TRANSACTION", parameters, null, commandType: CommandType.StoredProcedure)
+                        .Select(x =>
+                        {
+                            x.BankName = x.BankName?.Trim();
+                            x.FullName = x.FullName?.Trim();
+                            x.BankNo = x.BankNo?.Trim();
+                            return x;
+                        }).ToList();
+
+
+
                     jsonResponse.IsSuccess = aTTEBatchProcessings.Count > 0;
                     if (jsonResponse.IsSuccess)
                         jsonResponse.ResponseData = aTTEBatchProcessings;
@@ -995,7 +1106,13 @@ namespace REPOSITORY.FundTransfer
                 int remainingCount = transactionData.Count - currentIndex;
                 int currentBatchSize = Math.Min(batchSize, remainingCount);
                 List<ATTEBatchProcessing> batch = transactionData.Skip(currentIndex).Take(currentBatchSize).ToList();
-                var thisBatchResponse = NPSHelper.TransactionProcessing(batch, SourceBankName, SourceBankNumber, sourceAccountName);
+                string processID = Guid.NewGuid().ToString();
+                batch.ForEach(x =>
+                {
+                    x.Token = processID;
+                    x.sub_token = x.sub_token;
+                });
+                var thisBatchResponse = NPSHelper.TransactionProcessing(batch, SourceBankName, SourceBankNumber, sourceAccountName, processID);
                 SaveTransactionProcessingData(thisBatchResponse, DivCode, CompCode, BatchID, UserName, IPAddress);
                 allTransctionresponse.AddRange(thisBatchResponse);
                 currentIndex += currentBatchSize;
@@ -1004,6 +1121,9 @@ namespace REPOSITORY.FundTransfer
         }
         public JsonResponse TransactionProcessing(string DivCode, string CompCode, string BatchID, string SourceBankName, string SourceBankNumber, string sourceAccountName, string UserName, string IPAddress)
         {
+            SourceBankName = SourceBankName?.Trim();
+            SourceBankNumber = SourceBankNumber?.Trim();
+            sourceAccountName = sourceAccountName?.Trim();
             JsonResponse jsonResponse = new JsonResponse();
             List<ATTEBatchProcessing> transactionData = new List<ATTEBatchProcessing>();
             JsonResponse transactionDataReq = GetDataForTransactionProcessing(DivCode, CompCode, BatchID, UserName, IPAddress);

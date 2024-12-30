@@ -26,6 +26,51 @@
             <div class="card-body">
                 <div class="pd-20 card-box mb-30">
                     <form>
+                        <div class="row" id="uploadExceldemate">
+                            <div class="form-group row col-xl-6 col-md-6 col-sm-12">
+                                <label class="col-12 col-form-label">Upload Excel File</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="file" id="fileupload1" name="files" class="form-control" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                <label class="col-12 col-form-label">Select Sheet</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select class="form-control form-control-sm" id="SheetNameList" data-bind='options: SheetLists,optionsText: "SheetName",value:SelectedSheet, optionsCaption:"---Excel Sheet Name---"'>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                <label class="col-12 col-form-label" style="color:transparent">l</label>
+
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="button" value="UploadExcel" id="btnUploadExcel" class="btn btn-primary col" data-bind="click:UploadExcel" />
+                                </div>
+                            </div>
+
+                        </div>
+                        @* <div class="row" id="uploadExceldemate">
+                            <div class="form-group row col-xl-6 col-md-6 col-sm-12">
+                                <label class="col-12 col-form-label">Upload Excel File</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="file" id="fileupload1" name="files" class="form-control" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                <label class="col-12 col-form-label">Select Sheet</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <select class="form-control form-control-sm" id="SheetNameList" data-bind='options: SheetLists,optionsText: "SheetName",value:SelectedSheet, optionsCaption:"---Excel Sheet Name---"'>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row col-xl-3 col-md-6 col-sm-12">
+                                <label class="col-12 col-form-label" style="color:transparent">l</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input type="button" value="Upload1" id="btnUploadExcel" class="btn btn-primary col" data-bind="click:UploadExcel" />
+                                </div>
+                            </div>
+
+                        </div> *@
                         <div class="row">
                             <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12">
                                 <label class="col-12 col-form-label">Upload a .csv file to update Demate Holder Details (RT-02 file)</label>

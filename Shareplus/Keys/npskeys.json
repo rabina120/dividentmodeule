@@ -1,3 +1,20 @@
+//{
+//  "FundTransferBatchSize": 500,
+//  "loginUrl": "https://fundtransfer.nepalpayment.com:6001/v1/SignIn/",
+//  "fundTransferUrl": "https://fundtransfer.nepalpayment.com:6001/v1/FundTransferRequest/",
+//  "merchantId": "384",
+//  "apiusername": "pcsftapiuser",
+//  "bulkFundTransferUrl": "https://fundtransfer.nepalpayment.com:6001/v1/BulkFundTransferRequest/",
+//  "authorizationPayload": "pcsftapiuser:T@8jF^bP5w*Yq1Zz",
+//  "accountValidationUrl": "https://fundtransfer.nepalpayment.com:6001/v1/AccountValidation/",
+//  "bankUrl": "https://fundtransfer.nepalpayment.com:6001/v1/GetBankList/",
+//  "transactionStatusUrl": "https://fundtransfer.nepalpayment.com:6001/v1/CheckTransactionStatus/",
+//  "bulkTransactionStatusUrl": "https://fundtransfer.nepalpayment.com:6001/v1/CheckBatchTransactionStatus/",
+//  "privateKey": "-----BEGIN RSA PRIVATE KEY-----\r\nMIIEpQIBAAKCAQEAmiS4U9dJn9KFH1XVS+BKJaHAKPReXbcpeYjfeRLY+oo5W63+\r\nPkf0xNDiup5boUTPj6tuV147Kv1ZWxCNHbt+lQVeYPrEs05oghrvOQM/ivLgwbz2\r\nFWYFIe+NZw6cWve8hHUibozE6a9P1JEjcmj0k+eFQbjTCZpllprD3ZFKMeo0WtBl\r\nPHw1c7xfe5XtLOjXIVd6seLvTthfyyjELHdROJa3Z1yFBEEe3tbWKjP1Q2rvs7tS\r\nuQdJLNtR7HRQDDLzRD6HBy2yRsUXb4K6JXDdIK+mobEPyYbUKfduBpRm3eYgV+9y\r\nV16Opczh5Xz+DtLzbye4qH4SyuP0kQfIptgMTQIDAQABAoIBAQCSWerpL68nn6nl\r\nZolt0TaVJE5elCZEtHMcgWgsfEinGDX9ZeXPHGK5u9qJdXFqXPr1Xb8WFNH4rzL3\r\n028om6xDsSU6zt2ToQ54+TnI19ytAI2FZPQAvSyCW//VqXmqpSzIVq6qZ91OQrV5\r\nDZSqPBx7kYZkMCevJnjt1WPCKwBXAp4TfEdTXJ6FFclB0R3j00dFyOfKCFPfoHv+\r\nslezihsdT+T09eaxmCWC0rf8Etp1+ZbSWj1kYz3GohwNE8F1SainXk5u+MhCs3xR\r\n98L0eYcUYRs6hoetlWl2e3nmXwpbqv8+muBQf8bHM20yWBgxMG/rEfeJtqSuqA6i\r\nQdUxNdvBAoGBAMQbu7ucJrOpDuAtm9tVtWphZGdUzFi+s2UvVWzbErPcyRQdlpPA\r\n+bRvIxeA83WvJxixj+1Td2O0IP2rOoQ/HRKal2NNXRHvLefSwhQygsBv4oxL7b7B\r\nsdlJZiWS7ZMJcLv/3YfojPjBCV40nrTeiezMOomeHvtQEfMJEUkZkO6bAoGBAMk4\r\nD3vP+e8wS+IURR0Cxfmlv/AzONOeFO9r6Rp4Sga3dF4VmANmb2i+25deGV7TtIxg\r\nsTkJAdVeh3/3kQXB2WQuIiVRHu4q+kJZuWMVoqCM031bOCZbpCxlUdMTPp7tUatE\r\nBFwidZh/evSPVztkhCI8fg68xO6lOeRC+X7hjms3AoGAXQsjeRHPMvKFAkvhZKE3\r\nn69xqa0L/xcLmnhouWr/ZqLcLFUVeijW0IriRWaDHFTr4cVtGha90GpINNKmwtQH\r\nASqjpROxkq6+Qv0148tLSe5LuHDV7emMbiFq+2zIlzilai0teCwXpnY/8ZhZrErh\r\neZ40L9L7tBT7TyoAL4SXxP0CgYEAhrNgqiGvzs8l/VJUcfdJULYEp2eiwwcwPJag\r\nlXexFo34+IK8IIqSSix6E/qKQVC3rMGN4gCFmbCORLwV+SSrwsSfVxvW+NkMbx5h\r\nXFM/avrbGS/XhtYSMSYigIqBgSKdaWk/Ae6PimbMiKrsWnYPflvAh10W+Crjdkrf\r\nenDERkECgYEAhP8ViRjxlPQCZjLa8gXKsZNBw5y4Vb2aI0NJkFN8imEcWvK3EB+c\r\nho+xXZGrvdlYb6Gw1xeCIb5mLtkewBn0v61IZ59VYwCqbyBgfoPz8Z5rwPWRzcCM\r\nGVlt79c1i/8ux6B10oWKiyqiUODYyeshpm9MR0/CIgtSKZTd5fW1JNo=\r\n-----END RSA PRIVATE KEY-----"
+
+//  //"privateKey": "-----BEGIN RSA PRIVATE KEY-----\r\nMIIEpAIBAAKCAQEAuXmpMrmLI2SoK57GDl6gEgS679CUib4n516cuGIDSaUL8ptA\r\n8PBS7YinBlWs2bzQPCqe6P7EWDk9glcsn3SVsR5vfuwHV3lEVq6xLg7QhuajVHfa\r\n7j1XNPD0M3SSFr9rt0hJ1GKJr4QUv8zfndUQD1Sx2KG/ZbZxWGq+zNtTFHX8+Xml\r\nsObJ79FuXe5oo3/Sg9CKKclFjURQYc+idARFP2b6WyAUcd9xUpCypT08oX60iFm/\r\nw8ZduIUZBSlwbAA3g1RYxpoTXeaXvemMwJL2hHdxpPRu3z/TFv2FT5kLrr3M5Ljz\r\nZSxnhBrx7F3BgyjQhUCQ8dCEB9qieSYSOdr4qQIDAQABAoIBAQCpdyfJWQ5wQEAH\r\n2wJLjtninL/Q7ltJn50GIcRAFA289Dh+aqxjeLHMptc1SoKsT4BT+P1JFb6AfYxd\r\n0xjKeNNtCcoFxdLPcdWm/eaVlqOhHoqNWxWGKDXOAXqeqRvx/OSGil4q1/3FiIEM\r\n3jxTEaGi4Fe+/8rJPHFDwASlWKAISFVYjGE1ztukqlSrSR4umXlOmYKn3+M2xfVY\r\n7EuPqaraAGY+pwzfQBZAAYZmRWxDQygNgaRjQY69YvqsZyWoNXg2bHjbIIJR8Vk0\r\n8kPuMEoY/J2eE2fPbuoQbNmgbl5xlxoGFBkKRtydxe0bz3+G7Aa0j6koeV9wVWKs\r\ngP+UQTwhAoGBAMN6SR8643jr8wgnaMzefqHDp8QGCWCCGtQ/3NtkB+yVQF8hXL6a\r\nIBpG3PiBu6tFD0XfK7WaLsVVJLsGFImWq81S/iFAFZDgbftiAdXPLyoDRGbcNguH\r\nClI4Z/ZrmtMjGB/WruX93ltaXgrVVTCWSl2A1vnLrXudQx56lBy53bQnAoGBAPLm\r\nkvNIFGk/w8Aa9vsgDRfRNsHTBcozclnmxbb4gEBvI4+0Jf4FHKcuE2Vr/1nZRiu5\r\nqGfJL66OMI2KGprFeyEeBNHhLjrK9OLsqo7kCHqeyhU9BnXNJnK/OdIBixpG8kW+\r\nUrNbeLOp0AJXYaW6B6wqc6fN/Pd6riTwkOGbNd6vAoGBAL7xp5Wy/1oyGM8BN/TO\r\n7aF0Ll9jiitUS4LC8yj3GGp4DE4gl6izguJIEDdK+pe9OMMG0XpuJnupxNxPfyY7\r\nIIzLIeQ25hoDsEsbHDHPVQHT+TAEsWInQeS4pozl5XGS2VDYczXD+zz/E9e/NZzl\r\nYbTeUp/k3gxevJ58HEvHHxKHAoGALOQQJIYdv5XZR5e0LZUu1kgEJq4pU8VOTO8p\r\nezdR/JaNq/FPVDL9qKgLTaM3/hL5tPsK9KNp/Iiq0H3FjPUSXHx/x4omURdRSt8S\r\nZnYeWwsdre8pUnwnru1Icld2rdSO0fTqs9sj45BusQAVO9u1r0vpNAoNxm8V4B3V\r\nqNxWiGECgYB8K0w12cwvDHQTYAkGYAvSG5OOVhuF55xCMYVd3QYrZG/a12zPFEXm\r\nlvPQV4t/YftZJSvRLRzKXHoRie9A5htZ+lb2T0H2XjSk9hkYjS24Hy/U4GgYEtxp\r\nl66MuNkdIDbBkprpsIZTpiAMBrqCy0BJ7yGt2U9QFDLu8/v9p0krTg==\r\n-----END RSA PRIVATE KEY-----"
+//}
+
 {
   "FundTransferBatchSize": 500,
   "loginUrl": "https://fundtransferapisandbox.nepalpayment.com/v1/SignIn/",
@@ -5,7 +22,7 @@
   "merchantId": "3219",
   "apiusername": "pcsftapi",
   "bulkFundTransferUrl": "https://fundtransferapisandbox.nepalpayment.com/v1/BulkFundTransferRequest/",
-  "authorizationPayload": "pcsftapi:Pcs@FtU5er",
+  "authorizationPayload": "pcsftapi:Pcs@2024",
   "accountValidationUrl": "https://fundtransferapisandbox.nepalpayment.com/v1/AccountValidation/",
   "bankUrl": "https://fundtransferapisandbox.nepalpayment.com/v1/GetBankList/",
   "transactionStatusUrl": "https://fundtransferapisandbox.nepalpayment.com/v1/CheckTransactionStatus/",

@@ -6,8 +6,6 @@ using Entity.Security;
 using Interface.Security;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-
-
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -108,6 +106,8 @@ namespace Repository.Security
                         param.Add("P_ENTRYDATE", DateTime.Now);
                         param.Add("P_LoggedUserName", UserName);
                         param.Add("P_IPAddress", IPAddress);
+                        param.Add("P_EMAIL", aTTUserProfile.Email);
+                        param.Add("P_PIN", aTTUserProfile.Pin);
                         response = connection.Query<JsonResponse>(sql, param, tran, commandType: CommandType.StoredProcedure).FirstOrDefault();
 
                         if (response.IsSuccess)
@@ -182,7 +182,53 @@ namespace Repository.Security
             }
         }
         #endregion
+        #region LoginForSpecialPurpose
+        public Entity.Common.JsonResponse LoginForSpecialPurpose(string UserName, string Password, string Pin,string IP)
+        {
+            ATTUserProfile user = new ATTUserProfile();
+            Entity.Common.JsonResponse response = new Entity.Common.JsonResponse();
+            using (SqlConnection connection = new SqlConnection(Crypto.Decrypt(connectionString.Value.DefaultConnection)))
+            {
 
+
+                string sql = _congifuration.GetSection("LDAPAuthentication").GetSection("Enabled").Value.ToLower() == "true" ? "GetLogin" : "GetLogin_NOLDAP";
+                try
+                {
+                    connection.Open();
+                    DynamicParameters param = new DynamicParameters();
+                    param.Add("P_UserName", UserName.Trim());
+                    param.Add("P_PASSWORD", Password.Trim());
+                    param.Add("P_IP_ADDRESS", IP);
+                    param.Add("Cookie_Expire_Date_Now", DateTime.Now);
+
+                    user = connection.Query<ATTUserProfile>(sql, param, commandType: CommandType.StoredProcedure)?.FirstOrDefault();
+                    if (user.UserName == null)
+                    {
+                        if (user.Password != null) throw new Exception(user.Password);
+                        throw new Exception(ATTMessages.USER.LOGIN_FAILURE);
+                    }
+                    else
+                    {
+
+                        response.IsSuccess = true;
+                        user.isLoginSucess = true;
+                        response.ResponseData = user;
+
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    response.Message = ex.Message;
+
+
+                }
+                return response;
+            }
+        }
+        #endregion
         #region Logout
         public Entity.Common.JsonResponse Logout(string Username, string IP)
         {

@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group row col-xl-6 col-md-12 col-sm-12 col-12" id="user_role_div">
+                            @*     <div class="form-group row col-xl-6 col-md-12 col-sm-12 col-12" id="user_role_div">
                                     <label class="col-sm-12 col-md-3 col-form-label" for="userRoleSelect2">User Role <span class="mandatory">*</span></label>
                                     <div class="col-sm-12 col-md-10">
                                         <select class="select2-single-placeholder form-control form-control-sm userSelect2" name="state"
@@ -68,8 +68,20 @@
                                         </select>
                                     </div>
 
+                                </div> *@
+                                <div class="form-group row col-xl-6 col-md-12 col-sm-12 col-12" id="user_role_div">
+                                    <label class="col-sm-12 col-md-4 col-form-label" for="userRoleSelect2">User Role <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                <select class="form-control"
+                                        id="userSelect2"
+                                                            data-bind="options: RoleList,
+                                       optionsText: 'RoleName',
+                                       optionsValue: 'RoleId',
+                                       value: selectedUserRole,
+                                      event: { change: function() { console.log('Selected Role:', $root.SelectedRole()); } }">
+                                </select>
                                 </div>
-
+                                </div>
                                 <div class="form-group row col-xl-6 col-md-6 col-sm-12 col-12" id="simple-date1">
                                     <label class="col-12 col-form-label" for="dateValidUpto">Valid Upto<span class="mandatory"> *</span></label>
                                     <div class="input-group date col-sm-12 col-md-10">
@@ -80,6 +92,21 @@
                                     </div>
                                 </div>
 
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group row col-xl-6 col-md-12 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-md-3 col-form-label">Email <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" type="text" id="Email" placeholder="Email" data-bind="value: Email, valueUpdate: 'input'">
+                                    </div>
+                                </div>
+                                <div class="form-group row col-xl-6 col-md-12 col-sm-12 col-12">
+                                    <label class="col-sm-12 col-md-3 col-form-label">Pin <span class="mandatory">*</span></label>
+                                    <div class="col-sm-12 col-md-10">
+                                        <input class="form-control form-control-sm" type="text" id="Pin" placeholder="Pin" data-bind="value: Pin, valueUpdate: 'input'">
+                                    </div>
+                                </div>
                             </div>
                             <hr class="my-4">
                             <div class="row col-12 p-4 justify-content-center">

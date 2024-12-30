@@ -245,8 +245,8 @@ var TransctionStatusViewModal = function () {
 
 
     self.CheckUpdatedStatus  = () => {
-            if (self.TotalRecords() > 0) {
-                alert('warning','Fetching Status from Esewa!!')
+            //if (self.TotalRecords() > 0) {
+            //    alert('warning','Fetching Status from Esewa!!')
                 $.ajax({
                     type: 'POST',
                     url: '/FundTransfer/TransactionStatus/UpdateTransactionStatus',
@@ -273,9 +273,9 @@ var TransctionStatusViewModal = function () {
                     }
 
                 })
-            } else {
-                alert('error', 'No Record in Table For Transaction')
-            }
+            //} else {
+            //    alert('error', 'No Record in Table For Transaction')
+            //}
         
     }
 

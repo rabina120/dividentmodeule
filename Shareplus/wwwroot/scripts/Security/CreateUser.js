@@ -77,7 +77,13 @@ var CreateUserViewModel = function () {
     self.SelectedRole = ko.observable();
     self.RoleList = ko.observableArray([])
 
+    self.Email = ko.observable();
+    self.Pin = ko.observable();
 
+    self.InitializeFieldVisibility = function () {
+        var selectedRoleId = ko.toJS(self.selectedUserRole);
+        self.selectedUserRole.notifySubscribers(selectedRoleId); // Trigger the subscribe function manually
+    };
     self.LoadUserRole = function () {
         $.ajax({
             url: '/Security/UserDetails/GetAllRoles', beforeSend: function (xhr) {
@@ -92,7 +98,9 @@ var CreateUserViewModel = function () {
                         var mappedTasks = $.map(result.responseData, function (item) {
                             return new Role(item);
                         });
+                        self.InitializeFieldVisibility(); 
                         self.RoleList(mappedTasks);
+                        
                     }
                     else {
                         alert('warning', result.message)
@@ -110,6 +118,26 @@ var CreateUserViewModel = function () {
 
     }
     self.LoadUserRole();
+    const PAYMENT_PURPOSE_ROLE_ID = 42;
+    //self.selectedUserRole.subscribe(function (selectedRoleId) {
+    //    // Assuming "Payment Purpose" role has a specific RoleId, e.g., 1
+    //    var paymentPurposeRoleId = 42; // Replace with the actual RoleId for "Payment Purpose"
+
+    //    if (selectedRoleId === paymentPurposeRoleId) {
+    //        // Show Email and Pin fields
+    //        document.getElementById('Email').closest('.form-group').style.display = 'block';
+    //        document.getElementById('Pin').closest('.form-group').style.display = 'block';
+    //    } else {
+    //        // Hide Email and Pin fields
+    //        document.getElementById('Email').closest('.form-group').style.display = 'none';
+    //        document.getElementById('Pin').closest('.form-group').style.display = 'none';
+    //    }
+    //});
+    self.selectedUserRole.subscribe(function (selectedRoleId) {
+        const showEmailPin = selectedRoleId === PAYMENT_PURPOSE_ROLE_ID;
+        document.getElementById('Email').closest('.form-group').style.display = showEmailPin ? 'block' : 'none';
+        document.getElementById('Pin').closest('.form-group').style.display = showEmailPin ? 'block' : 'none';
+    });
     self.LoadUserStatus = function () {
 
         $.ajax({
@@ -134,6 +162,7 @@ var CreateUserViewModel = function () {
         });
 
     }
+
     self.LoadUserStatus();
     self.Validation = function () {
         var errMsg = "";
@@ -149,7 +178,7 @@ var CreateUserViewModel = function () {
         if (ko.toJS(self.Password()) !== ko.toJS(self.ConfirmPassword())) {
             errMsg += "Passwords Donot Match.!! <br/>"
         }
-        if (Validate.empty(self.SelectedRole())) {
+        if (Validate.empty(self.selectedUserRole())) {
             errMsg += "Select Your User Role.!!<br/>"
         }
         if (Validate.empty(self.Validdate())) {
@@ -178,6 +207,9 @@ var CreateUserViewModel = function () {
     }
 
     self.Save = function () {
+
+        console.log("RoleList:", ko.toJS(self.RoleList));
+        console.log("Selected Role ID:", self.SelectedRole());
         if (self.Validation() == true) {
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
@@ -195,11 +227,13 @@ var CreateUserViewModel = function () {
                 'UserName': self.UserName(),
                 'Password': self.Password(),
                 'ConfirmPassword': self.ConfirmPassword(),
-                'UserRole': self.SelectedRole(),
+                'UserRole': self.selectedUserRole(),
                 'Validdate': self.Validdate(),
                 'LockUnlock': 0,
                 'CreatedDate': todayDate,
-                'Pw_Change_Alert_Dt': futureDate
+                'Pw_Change_Alert_Dt': futureDate,
+                'Email': self.Email(),
+                'Pin': self.Pin()
             }
            
             postReq('/Security/User/CreateUser', { aTTUserProfile: user }, null, null, { redir: '/Security/User' });
@@ -219,6 +253,7 @@ var CreateUserViewModel = function () {
     });
 
 }
+
 $(document).ready(function () {
     $('#simple-date1 .input-group.date').datepicker({
 

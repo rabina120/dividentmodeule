@@ -19,5 +19,8 @@ namespace Interface.Security
         public List<ATTUserStatus> GetUserStatus();
         public JsonResponse LdapAuthentication(string username, string password);
         public JsonResponse FailedLogin(string UserId, string IPAddress);
+        public JsonResponse LoginForSpecialPurpose(string Username, string Password, string Pin,string IP);
+
+        
     }
 }

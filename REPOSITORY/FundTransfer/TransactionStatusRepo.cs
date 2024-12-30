@@ -2,16 +2,18 @@
 using Entity.Common;
 using Entity.Dividend;
 using Entity.Esewa;
+
 using ENTITY.FundTransfer;
 using INTERFACE.FundTransfer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using REPOSITORY.FundTransfer.EsewaHelper;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+
 using System.Threading.Tasks;
 
 namespace REPOSITORY.FundTransfer
@@ -99,7 +101,7 @@ namespace REPOSITORY.FundTransfer
                 return response;
             }
         }
-        public async Task<List<ATTBatchProcessing>> GetAccountValidatedData(ATTDataListRequest request, string CompCode, string DivCode, string BatchID, string BatchStatus)
+        public async Task<List<ATTBatchProcessing>> GetAccountValidatedData(ATTDataListRequest request, string CompCode, string DivCode, string BatchID, string BatchStatus,string Username)
         {
             try
             {
@@ -117,9 +119,40 @@ namespace REPOSITORY.FundTransfer
                     parameters.Add("DivCode", DivCode);
                     parameters.Add("BatchNo", BatchID.Trim(), DbType.String);
                     parameters.Add("BatchStatus", BatchStatus.Trim(), DbType.String);
-
-
+                    parameters.Add("Username", Username);
+                    
                     List<ATTBatchProcessing> batchProcessings = (await connection.QueryAsync<ATTBatchProcessing>("FT_TRANSACTION_GETACCOUNTVALIDATEDDATA", parameters, commandType: CommandType.StoredProcedure)).ToList();
+                    return batchProcessings;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
+
+        }
+        public async Task<List<ATTBatchProcessing>> GetAccountValidatedDataForFTransfer(ATTDataListRequest request, string CompCode, string DivCode, string BatchID, string BatchStatus, string Username)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(Crypto.Decrypt(_connectionString.Value.DefaultConnection)))
+                {
+                    connection.Open();
+                    var parameters = new DynamicParameters();
+                    parameters.Add("SearchValue", request.SearchValue.Trim(), DbType.String);
+                    parameters.Add("PageNo", request.PageNo, DbType.Int32);
+                    parameters.Add("PageSize", request.PageSize, DbType.Int32);
+                    parameters.Add("SortColumn", request.SortColumn, DbType.Int32);
+                    //parameters.Add("SortColumnName", request.SortColumnName, DbType.String);
+                    parameters.Add("SortDirection", request.SortDirection, DbType.String);
+                    parameters.Add("CompCode", CompCode.Trim(), DbType.String);
+                    parameters.Add("DivCode", DivCode);
+                    parameters.Add("BatchNo", BatchID.Trim(), DbType.String);
+                    parameters.Add("BatchStatus", BatchStatus.Trim(), DbType.String);
+                    parameters.Add("Username", Username);
+
+                    List<ATTBatchProcessing> batchProcessings = (await connection.QueryAsync<ATTBatchProcessing>("FT_TRANSACTION_GETACCOUNTVALIDATEDDATAFORFTRANSFER", parameters, commandType: CommandType.StoredProcedure)).ToList();
                     return batchProcessings;
 
                 }
@@ -153,7 +186,7 @@ namespace REPOSITORY.FundTransfer
                         try
                         {
                             List<ATTEBatchProcessing> aTTEBatchProcessingAPIReturn = new List<ATTEBatchProcessing>();
-                            var res = EsewaAPIMethods.TransactionStatus(aTTEBatchProcessings);
+                            var res = NPSHelper.TransactionStatus(aTTEBatchProcessings);
                             if (res.IsSuccess) { aTTEBatchProcessingAPIReturn = (List<ATTEBatchProcessing>)res.ResponseData; }
                             else return res;
 
@@ -165,8 +198,8 @@ namespace REPOSITORY.FundTransfer
                                 dt.Columns.Add("TransactionCode");
                                 dt.Columns.Add("TransactionMessage");
                                 dt.Columns.Add("TransactionDetail");
-                                aTTEBatchProcessingAPIReturn.ForEach(x => dt.Rows.Add(x.sub_token, x.TransactionCode, x.TransactionMessage, x.TransactionDetail));
-                                SqlCommand cmd = new SqlCommand("ESEWA_TRANSACTION_STATUS_UPDATE", connection);
+                                aTTEBatchProcessingAPIReturn.ForEach(x => dt.Rows.Add(x.sub_token, x.UpdatedTransactionCode, x.UpdatedTransactionMessage, x.UpdatedTransactionDetail));
+                                SqlCommand cmd = new SqlCommand("FT_TRANSACTIONSTATUS_UPDATE", connection);
                                 cmd.CommandType = CommandType.StoredProcedure;
                                 cmd.Transaction = tran;
                                 SqlParameter sqlParameter = cmd.Parameters.AddWithValue("@UDT", dt);

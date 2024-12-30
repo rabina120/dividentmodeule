@@ -42,7 +42,12 @@ var AccountValidationViewModal = function () {
     self.CompEnName = ko.observable()
     self.CompEnAdd1 = ko.observable()
     self.MaxKitta = ko.observable()
+    self.LoginUserName = ko.observable('');
+    self.LoginPassword = ko.observable('');
+    self.LoginPin = ko.observable('');
 
+    // Flag to track login verification
+    self.IsLoginVerified = ko.observable(false);
     //Dividend ko table list lai
     self.DividendLists = ko.observableArray([]);
     self.SelectedDividend = ko.observable();
@@ -98,7 +103,41 @@ var AccountValidationViewModal = function () {
         }
     }
 
-   
+    self.VerifyLogin = function () {
+        if (!self.LoginUserName() || !self.LoginPassword() || !self.LoginPin()) {
+            alert("Please enter Username, Password, and PIN.");
+            return;
+        }
+
+        // Simulated AJAX call for login verification
+        $.ajax({
+            url: '/FundTransfer/FundTransferProcessing/VerifyLogin',
+           /* url: "/FundTransfer/FundTransferProcessing/VerifyLogin", // Replace with your endpoint*/
+            type: "POST",
+            data: {
+                username: self.LoginUserName(),
+                password: self.LoginPassword(),
+                pin: self.LoginPin()
+            },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            success: function (response) {
+                if (response.isSuccess) {
+                    alert("Login Successful!");
+                    self.IsLoginVerified(true);
+                    $('#loginModalBeforeTransaction').modal('hide'); // Hide login modal
+                    $('#loginModalTransactionProcessing').modal('show'); // Show Transaction Processing modal
+                } else {
+                    alert("Invalid credentials. Please try again.");
+                }
+            },
+            error: function () {
+                alert("Error verifying login.");
+            }
+        });
+    };
 
     //Loading company select options
     self.LoadCompany = function () {
@@ -251,43 +290,49 @@ var AccountValidationViewModal = function () {
         CheckStatus();
     })
     //transaction processing
-    self.TransactionProcessing  = function () {
-        if (self.Validation() && self.TransactionProcessingValidation()) {
-            if (!Validate.empty(self.CurrentBatch())) {
-                $('#loginModalTransactionProcessing').modal('hide');
-                alert('warning', "Transaction Processing Started <br/> This May Take Some Time!!")
-                ShowMessage();
-                $.ajax({
-                    type: 'POST', beforeSend: function (xhr) {
-                        xhr.setRequestHeader("XSRF-TOKEN",
-                            $('input:hidden[name="__RequestVerificationToken"]').val());
-                    },
-                    url: '/FundTransfer/FundTransferProcessing/TransactionProcessing',
-                    data: { 'CompCode': self.SelectedCompany(), 'DivCode': self.SelectedDividend(), 'BatchID': self.CurrentBatch(), 'BankID':self.SelectedBank() },
-                    dataType: 'json',
-                    success: (result) => {
-                        if (result.isSuccess) {
-                            alert('success', result.message);
-                        }
-                        else {
-                            alert('error', result.message);
+    self.TransactionProcessing = function () {
+        if (self.IsLoginVerified()) {
+            alert("Transaction Processing Started...");
+            if (self.Validation() && self.TransactionProcessingValidation()) {
+                if (!Validate.empty(self.CurrentBatch())) {
+                    $('#loginModalTransactionProcessing').modal('hide');
+                    alert('warning', "Transaction Processing Started <br/> This May Take Some Time!!")
+                    ShowMessage();
+                    $.ajax({
+                        type: 'POST', beforeSend: function (xhr) {
+                            xhr.setRequestHeader("XSRF-TOKEN",
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+                        },
+                        url: '/FundTransfer/FundTransferProcessing/TransactionProcessing',
+                        data: { 'CompCode': self.SelectedCompany(), 'DivCode': self.SelectedDividend(), 'BatchID': self.CurrentBatch(), 'BankID': self.SelectedBank() },
+                        dataType: 'json',
+                        success: (result) => {
+                            if (result.isSuccess) {
+                                alert('success', result.message);
+                            }
+                            else {
+                                alert('error', result.message);
+                                self.ClearControl()
+                            }
+                        },
+                        error: (error) => {
+                            alert('error', error.message);
                             self.ClearControl()
-                        }
-                    },
-                    error: (error) => {
-                        alert('error', error.message);
-                        self.ClearControl()
-                    },
-                    complete: function () {
-                        self.CheckStatus()
-                        
-                        
-                    }
+                        },
+                        complete: function () {
+                            self.CheckStatus()
 
-                })
+
+                        }
+
+                    })
+                }
+                else {
+                    alert('warning', 'Please Check The Status.')
+                }
             }
             else {
-                alert('warning','Please Check The Status.')
+                alert('warning', 'Please verify The login.')
             }
         }
     }

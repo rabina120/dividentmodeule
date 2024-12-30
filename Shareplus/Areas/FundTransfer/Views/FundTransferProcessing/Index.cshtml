@@ -26,26 +26,21 @@
                             </div>
 
                             <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
-
                                 <label class="col-sm-12 col-md-11 col-form-label">Dividend <span class="mandatory"> *</span></label>
                                 <div class="col-sm-12 col-md-12">
                                     <select class="form-control form-control-sm" id="DividendList" data-bind='options: DividendLists,optionsText: "ShowDividendText",optionsValue:"Divcode",value:SelectedDividend, optionsCaption:"---Dividends---"'>
                                     </select>
                                 </div>
-
                             </div>
 
-
                             <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
-
                                 <label class="col-sm-12 col-md-11 col-form-label">Current Batch </label>
                                 <div class="col-sm-12 col-md-12">
-
                                     <select class="form-control form-control-sm" id="BatchList" data-bind='options: BatchList,optionsText: "BatchText",optionsValue:"BatchId",value:CurrentBatch, optionsCaption:"--- Batch ---"'>
                                     </select>
                                 </div>
-
                             </div>
+
                             <div class="form-group col-xl-3 col-md-3 col-sm-12 col-12">
                                 <label class="col-sm-12 col-md-11 col-form-label"></label>
                                 <div class="col-sm-12 col-md-11 mt-2">
@@ -57,19 +52,21 @@
                         </div>
                         <br />
 
-
-                        @*for transcation processing*@
-                        <div class="row justify-content-center" id="divTP">
+                        <!-- For transaction processing -->
+@*                         <div class="row justify-content-center" id="divTP">
                             <div class="card mb-4 mt-4">
                                 <div class="card-body">
                                     <div class="pd-20 card-box mb-30">
-                                        <button class="btn btn-primary col-12" data-toggle="modal" data-target="#loginModalTransactionProcessing" id="btnTP">Transaction Processing</button>
+                                        <button class="btn btn-primary col-12" data-toggle="modal" data-target="#loginModalBeforeTransaction">
+                                            Transaction Processing
+                                        </button>
                                         <p id="msgTP"></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @*completion*@
+ *@
+                        <!-- Completion -->
                         <div class="row" id="divCO">
                             <div class="card mb-4 mt-4">
                                 <div class="card-body">
@@ -82,6 +79,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row pt-4">
                             <div class="table-responsive" id="StatusTableDiv">
                                 <table id="TransactionProcessingStatusTable" class="table table-striped table-bordered" style="width:100%">
@@ -92,7 +90,6 @@
                                             <th>BankNo</th>
                                             <th>BankName</th>
                                             <th>WarrantAmt</th>
-                                            @*<th>SubToken</th>*@
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -102,7 +99,42 @@
                     </div>
                 </div>
 
-                @*logn modal*@
+            @*     <!-- Login Modal Before Transaction -->
+                <div class="modal fade" id="loginModalBeforeTransaction" tabindex="-1" role="dialog" aria-labelledby="loginModalBeforeTransactionLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-primary">Login Verification</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label>Username <span class="mandatory">*</span></label>
+                                        <input type="text" class="form-control" placeholder="Enter Username" data-bind="value: LoginUserName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password <span class="mandatory">*</span></label>
+                                        <input type="password" class="form-control" placeholder="Enter Password" data-bind="value: LoginPassword">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>PIN <span class="mandatory">*</span></label>
+                                        <input type="password" class="form-control" placeholder="Enter PIN" data-bind="value: LoginPin">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" class="btn btn-primary col-8" data-bind="click: VerifyLogin">
+                                    Login
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Existing Transaction Processing Modal -->
                 <div class="modal fade" id="loginModalTransactionProcessing" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -114,40 +146,30 @@
                             </div>
                             <div class="modal-body">
                                 <form class="col-12">
-                                    <div class="card col-12">
-                                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                            @* <h6 class="m-0 font-weight-bold text-primary">Login</h6> *@
-                                        </div>
-                                        <hr class="my-1">
-                                        <div class="card-body">
-                                            <div class="form-group row col-12">
-                                                <label class="col-sm-12 col-md-11 col-form-label">Source Bank <span class="mandatory"> *</span></label>
-                                                <div class="col-sm-12 col-md-11">
-                                                    <select class="form-control form-control-sm" id="BankList" data-bind='options: SourceBankList,optionsText: "BankText",optionsValue:"BankID",value:SelectedBank, optionsCaption:"---Bank---"'>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                    <div class="form-group row">
+                                        <label>Source Bank <span class="mandatory">*</span></label>
+                                        <div class="col-sm-12">
+                                            <select class="form-control form-control-sm" id="BankList" data-bind='options: SourceBankList, optionsText: "BankText", optionsValue: "BankID", value: SelectedBank, optionsCaption: "---Bank---"'></select>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer justify-content-center">
-                                <button type="button" class="btn btn-primary mr-2 mt-4 col-8" data-bind='click: TransactionProcessing'>
-                                    Login
+                                <button type="button" class="btn btn-primary col-8" data-bind="click: TransactionProcessing">
+                                    Proceed
                                 </button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> *@
+
             </div>
 
         </div>
     </div>
 </div>
 
-
-@section Footer{
+@section Footer {
     <script src="~/vendor/sweetalert/sweet-alert.js"></script>
-    <script src="/scripts/FundTransfer/FundTransferProcessing.js" asp-append-version="true" ></script>
+    <script src="/scripts/FundTransfer/FundTransferProcessing.js" asp-append-version="true"></script>
 }
-

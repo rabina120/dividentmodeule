@@ -158,7 +158,16 @@ namespace REPOSITORY.FundTransfer
                     param.Add("@P_UserName", UserName);
                     param.Add("@P_IPAddress", IPAddress);
                     param.Add("@P_Entry_Date", DateTime.Now);
-                    List<ATTSourceBank> aTTDividends = connection.Query<ATTSourceBank>(sql: "FT_TRANSACTIONPROCESSING_GETSOURCEBANK", param: param, null, commandType: CommandType.StoredProcedure).ToList();
+                    List<ATTSourceBank> aTTDividends = connection.Query<ATTSourceBank>(sql: "FT_TRANSACTIONPROCESSING_GETSOURCEBANK", param: param, null, commandType: CommandType.StoredProcedure)
+
+                        .Select(x =>
+                        {
+                            x.BankName = x.BankName?.Trim();
+                            x.AccountName = x.AccountName?.Trim();
+                            x.AccountNo = x.AccountNo?.Trim();
+                            return x;
+                        })
+                        .ToList();
                     if (aTTDividends.Count > 0)
                     {
                         response.IsSuccess = true;
@@ -227,9 +236,6 @@ namespace REPOSITORY.FundTransfer
                 }
                 return response;
             }
-        }
-
-
-       
+        }       
     }
 }

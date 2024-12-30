@@ -25,7 +25,11 @@
         public bool ErrorTrap { get; set; }
         public object ResponseData2 { get; set; }
         public bool withBankDetails { get; set; } = false;
-
+        public byte[] FileData { get; set; }
+        public string FileName { get; set; }
+        public string MimeType { get; set; }
+        public string NetAmount { get; set; }
+        public string TaxAmount { get; set; }
 
     }
 

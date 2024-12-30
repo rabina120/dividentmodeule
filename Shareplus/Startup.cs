@@ -41,21 +41,15 @@ using Repository.Reports;
 using Repository.Security;
 using Repository.ShareHolder;
 using Repository.Signature;
-
 using REPOSITORY.DividendManagement;
-
 using REPOSITORY.Certificate;
 using REPOSITORY.Parameter;
-
 using REPOSITORY.Reports;
 using System;
 using System.IO;
-
 using REPOSITORY.FundTransfer;
 using INTERFACE.FundTransfer;
-
 using REPOSITORY.ShareHolder;
-
 
 namespace Shareplus
 {
@@ -255,10 +249,17 @@ namespace Shareplus
             //print certificates
             services.AddTransient<IPrint, PrintRepo>();
 
+            //changepin
+            services.AddTransient<IChangePin, ChangePinRepo>();
+
             //pool account split
             services.AddTransient<IPoolAccountSplit, PoolAccountSplitRepo>();
 
+            //services.AddHostedService<TransactionStatusScheduler>();
 
+            // Register the transaction service
+            //services.AddScoped<ITransactionStatusService, TransactionStatusService>();
+            //services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.Configure<ReadConfig>(Configuration.GetSection("ConnectionStrings"));
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();

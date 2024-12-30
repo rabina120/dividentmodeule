@@ -18,7 +18,7 @@ namespace REPOSITORY.FundTransfer
             _StatusReport = esewaStatusReport;
         }
 
-        public async Task<ATTDataTableResponse<ATTBatchProcessing>> GetBatchProcessingAsync(ATTDataTableRequest request, string CompCode, string DivCode, string BatchNo, string BatchStatus)
+        public async Task<ATTDataTableResponse<ATTBatchProcessing>> GetBatchProcessingAsync(ATTDataTableRequest request, string CompCode, string DivCode, string BatchNo, string BatchStatus,string Username)
         {
             var req = new ATTDataListRequest()
             {
@@ -30,7 +30,29 @@ namespace REPOSITORY.FundTransfer
                 SearchValue = request.Search != null ? request.Search.Value.Trim() : ""
             };
 
-            var batchProcessings = await _transactionStatus.GetAccountValidatedData(req, CompCode, DivCode, BatchNo, BatchStatus);
+            var batchProcessings = await _transactionStatus.GetAccountValidatedData(req, CompCode, DivCode, BatchNo, BatchStatus,Username);
+            return new ATTDataTableResponse<ATTBatchProcessing>()
+            {
+                Draw = request.Draw,
+                RecordsTotal = batchProcessings.Count > 0 ? batchProcessings[0].TotalCount : 0,
+                RecordsFiltered = batchProcessings.Count > 0 ? batchProcessings[0].FilteredCount : 0,
+                Data = batchProcessings.ToArray(),
+
+            };
+        }
+        public async Task<ATTDataTableResponse<ATTBatchProcessing>> GetBatchProcessingForFTransferAsync(ATTDataTableRequest request, string CompCode, string DivCode, string BatchNo, string BatchStatus, string Username)
+        {
+            var req = new ATTDataListRequest()
+            {
+                PageNo = request.Start,
+                PageSize = request.Length,
+                SortColumn = request.Order[0].Column,
+                SortColumnName = request.Order[0].ColumnName,
+                SortDirection = request.Order[0].Dir,
+                SearchValue = request.Search != null ? request.Search.Value.Trim() : ""
+            };
+
+            var batchProcessings = await _transactionStatus.GetAccountValidatedDataForFTransfer(req, CompCode, DivCode, BatchNo, BatchStatus, Username);
             return new ATTDataTableResponse<ATTBatchProcessing>()
             {
                 Draw = request.Draw,

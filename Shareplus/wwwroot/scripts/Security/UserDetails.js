@@ -82,6 +82,7 @@ var UserDetails = function () {
     self.fromDate = ko.observable();
     self.toDate = ko.observable();
     self.isLDAP = ko.observable(false);
+   
 
     loadDataTable = function () {
         dataTable = $('#DT_load').dataTable({

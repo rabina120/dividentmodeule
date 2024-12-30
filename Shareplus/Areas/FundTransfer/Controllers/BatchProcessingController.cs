@@ -354,7 +354,23 @@ namespace CDSMODULE.Areas.FundTransfer.Controllers
         }
 
 
-        
+        [HttpPost]
+        public IActionResult GetDataForAccountValidation1( string CompCode, string DivCode, string BatchID)
+        {
+            JsonResponse response = _batchProcessing.GetDataForAccountValidation1(CompCode, DivCode, BatchID, _loggedInUser.GetUserName(), _loggedInUser.GetUserIPAddress());
+
+            if (response.IsSuccess && response.FileData != null)
+            {
+
+                return File(response.FileData, response.MimeType, response.FileName);
+            }
+            if (response.HasError)
+            {
+                response = _audit.errorSave(_loggedInUser.GetUserNameToDisplay(), this.ControllerContext.RouteData.Values["controller"].ToString(), _loggedInUser.GetUserIPAddress(), (Exception)response.ResponseData);
+            }
+
+            return Json(response);
+        }
 
         [HttpPost]
         public async Task<IActionResult> GetData(string CompCode, string DivCode, string BatchID, string BatchStatus)
@@ -379,7 +395,7 @@ namespace CDSMODULE.Areas.FundTransfer.Controllers
                 };
             ATTDataTableResponse<ATTBatchProcessing> returnData = new ATTDataTableResponse<ATTBatchProcessing>();
 
-            returnData = await _eService.GetBatchProcessingAsync(request, CompCode, DivCode, BatchID, BatchStatus);
+            returnData = await _eService.GetBatchProcessingAsync(request, CompCode, DivCode, BatchID, BatchStatus, _loggedInUser.GetUserName());
             var jsonData = new { draw = returnData.Draw, recordsFiltered = returnData.RecordsFiltered, recordsTotal = returnData.RecordsTotal, data = returnData.Data };
             return Ok(jsonData);
         }

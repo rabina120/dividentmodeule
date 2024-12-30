@@ -69,6 +69,10 @@ namespace CDSMODULE.Areas.FundTransfer.Controllers
                 _audit.errorSave(_loggedInUser.GetUserName(), this.ControllerContext.RouteData.Values["controller"].ToString(), _loggedInUser.GetUserIPAddress(), (Exception)response.ResponseData);
             return response;
         }
+
+
+
+
         [HttpPost]
         public async Task<IActionResult> GetAccountValidatedData(string CompCode, string DivCode, string BatchID, string BatchStatus)
         {
@@ -92,7 +96,7 @@ namespace CDSMODULE.Areas.FundTransfer.Controllers
                 };
             ATTDataTableResponse<ATTBatchProcessing> returnData = new ATTDataTableResponse<ATTBatchProcessing>();
 
-            returnData = await _eService.GetBatchProcessingAsync(request, CompCode, DivCode, BatchID, BatchStatus);
+            returnData = await _eService.GetBatchProcessingAsync(request, CompCode, DivCode, BatchID, BatchStatus, _loggedInUser.GetUserName());
             var jsonData = new { draw = returnData.Draw, recordsFiltered = returnData.RecordsFiltered, recordsTotal = returnData.RecordsTotal, data = returnData.Data };
             return Ok(jsonData);
         }

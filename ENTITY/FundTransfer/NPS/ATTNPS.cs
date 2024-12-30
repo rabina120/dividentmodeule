@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
 namespace ENTITY.FundTransfer.NPS
 {
     public class ATTNPSLoginReq
@@ -10,7 +11,6 @@ namespace ENTITY.FundTransfer.NPS
         public string timestamp { get; set; } = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fff");
 
     }
-
 
 
 
